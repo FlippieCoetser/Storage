@@ -4,7 +4,7 @@ This R Package is used to perform common data operations on various data stores 
 Typical operations perform on a Data Stores, for example a SQL Database, includes `Insert`, `Select`, `Update` and `Delete`.
 This `Storage` package provides a simple function for each of these operations while hiding all unnessecary details.
 
-Current data providers includes an ODBC Data Source and Mock with Structual Validation and Exceptions Handing.
+Current data providers includes an ODBC Data Source and Mock Data Source with Structual Validation and Exceptions Handing.
 
 > Note: This is an experimental package which use a simple Todo App as example.
 
