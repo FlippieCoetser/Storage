@@ -16,16 +16,16 @@ Current data providers includes an ODBC Data Source and Mock Data Source with St
 library(Storage)
 ```
 
-2. Create Data Store Specific Configuration
+2. Create Data Store Specific Configuration  
 Some data stores require a `configuration` to establish a connection. For example, an ODBC Data Source requires a `configuration` with `DSN`, `Username` and `Password`.
-These configuration details are considered sensitive information and typically stored as Environment Variables on the local machine. (refer to [Environment](https://github.com/FlippieCoetser/Environment) for an overview how to define the needed configuration parameters.). This `Storage` package includes a configurator used to retrieve the needed enrivonment variable and add them to a data frame configuration. 
+These configuration details are considered sensitive information and typically stored as Environment Variables on the local machine. (refer to [Environment](https://github.com/FlippieCoetser/Environment) for an overview how to define the needed configuration parameters.). This `Storage` package includes a configurator used to retrieve the variables and add them to a configuration data frame. 
 
 ```r
 configurator <- Configuration.Service()
 configuration <- configurator[["GetODBCConfiguration"]]()
 ```
 
-3. Get Data Operations
+3. Get Data Operations  
 Get a list of Data Operations by using the previously generated configuration 
 
 ```r
