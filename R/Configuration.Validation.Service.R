@@ -31,8 +31,12 @@ Configuration.Validation.Service <- \() {
 
         return(configuration)
     }
-    validate[["IsEmpty"]] <- \(parameter) parameter |> (\(x){ x == "" })()
-    validate[["IsNull"]]  <- \(parameter) parameter |> is.null()
+    validate[["IsEmpty"]] <- \(parameter) {
+        parameter |> (\(x){ x == "" })()
+    } 
+    validate[["IsNull"]]  <- \(parameter) {
+        parameter |> is.null()
+    } 
 
   return(validate)
 }
