@@ -25,8 +25,9 @@ ODBC.Storage.Broker <- \(configuration){
         error = exception[["QueryExceptions"]]
     )
 
-    connection |>
-      DBI::dbDisconnect()
+    # Use new environment for connections
+    # Close based on usage: Little use close quickly. Lots of use close slowly.
+    connection |> DBI::dbDisconnect()
 
     return(output)
   }
