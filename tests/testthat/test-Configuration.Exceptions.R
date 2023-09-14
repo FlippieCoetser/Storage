@@ -1,110 +1,111 @@
-test_that("Configuration.Exceptions() should not throw an error",{
-    Configuration.Exceptions() |>
-        expect_no_error()
+describe("Configuration.Exceptions", {
+  it("Exist", {
+    Configuration.Exceptions |> expect.exist()
+  })
 })
 
-test_that("Configuration.Exceptions() should return a list of exceptions",{
+describe("When exceptions <- Configuration.Exceptions()", {
+  it("then exceptions is a list", {
     # Given
     exceptions <- Configuration.Exceptions()
 
     # Then
-    exceptions    |> 
-        is.list() |> 
-            expect_equal(TRUE)
+    exceptions |> expect.list()
+  })
+  it("then exceptions contains DSNIsNull", {
+    # Given
+    exceptions <- Configuration.Exceptions()
+
+    # Then
+    exceptions[["DSNIsNull"]] |> expect.exist()
+  })
+  it("then exceptions contains UIDIsNull", {
+    # Given
+    exceptions <- Configuration.Exceptions()
+
+    # Then
+    exceptions[["UIDIsNull"]] |> expect.exist()
+  })
+  it("then exceptions contains PWDIsNull", {
+    # Given
+    exceptions <- Configuration.Exceptions()
+
+    # Then
+    exceptions[["PWDIsNull"]] |> expect.exist()
+  })
 })
 
-test_that("List of exceptions return from Configuration.Exceptions() should include DSNIsNull exceptions",{
+describe("When input |> exception[['DSNIsNull']]()", {
+  it("then no exception is thrown if input is FALSE", {
     # Given
     exception <- Configuration.Exceptions()
 
-    # Then
-    exception[["DSNIsNull"]]  |>
-        is.null()             |>
-            expect_equal(FALSE)
-})
+    # When
+    input <- FALSE
 
-test_that("FALSE |> exception[['DSNIsNull']]() should not throw error",{
+    # Then
+    input |> exception[["DSNIsNull"]]() |> expect.no.error()
+  })
+  it("then an exception is thrown if input is TRUE",{
     # Given
     exception <- Configuration.Exceptions()
 
+    expected.error <- "Configuration has no DSN"
+
+    # When
+    input <- TRUE
+
     # Then
-    FALSE |>
-        exception[["DSNIsNull"]]() |>
-            expect_no_error()
+    input |> exception[["DSNIsNull"]]() |> expect.error(expected.error)
+  })
 })
 
-test_that("TRUE |> exception[['DSNIsNull']]() should throw DSNIsNull error",{
+describe("When input |> exception[['UIDIsNull']]()", {
+  it("then no exception is thrown if input is FALSE", {
     # Given
     exception <- Configuration.Exceptions()
 
-    error <- 'Configuration has no DSN'
+    # When
+    input <- FALSE
 
     # Then
-    TRUE |>
-        exception[["DSNIsNull"]]() |>
-            expect_error(error)
-})
-
-test_that("List of exceptions return from Configuration.Exceptions() should include UsernameIsNull exceptions",{
+    input |> exception[["UIDIsNull"]]() |> expect.no.error()
+  })
+  it("then an exception is thrown if input is TRUE",{
     # Given
     exception <- Configuration.Exceptions()
 
+    expected.error <- 'Configuration has no UID'
+
+    # When
+    input <- TRUE
+
     # Then
-    exception[["UsernameIsNull"]]  |>
-        is.null()             |>
-            expect_equal(FALSE)
+    input |> exception[["UIDIsNull"]]() |> expect.error(expected.error)
+  })
 })
 
-test_that("FALSE |> exception[['UsernameIsNull']]() should not throw error",{
+describe("When input |> exception[['PWDIsNull']]()", {
+  it("then no exception is thrown if input is FALSE", {
     # Given
     exception <- Configuration.Exceptions()
 
-    # Then
-    FALSE |>
-        exception[["UsernameIsNull"]]() |>
-            expect_no_error()
-})
+    # When
+    input <- FALSE
 
-test_that("TRUE |> exception[['UsernameIsNull']]() should throw UsernameIsNull error",{
+    # Then
+    input |> exception[["PWDIsNull"]]() |> expect.no.error()
+  })
+  it("then an exception is thrown if input is TRUE",{
     # Given
     exception <- Configuration.Exceptions()
 
-    error <- 'Configuration has no Username'
+    expected.error <- 'Configuration has no PWD'
+
+    # When
+    input <- TRUE
 
     # Then
-    TRUE |>
-        exception[["UsernameIsNull"]]() |>
-            expect_error(error)
-})
-
-test_that("List of exceptions return from Configuration.Exceptions() should include PasswordIsNull exceptions",{
-    # Given
-    exception <- Configuration.Exceptions()
-
-    # Then
-    exception[["PasswordIsNull"]]  |>
-        is.null()             |>
-            expect_equal(FALSE)
-})
-
-test_that("FALSE |> exception[['PasswordIsNull']]() should not throw error",{
-    # Given
-    exception <- Configuration.Exceptions()
-
-    # Then
-    FALSE |>
-        exception[["PasswordIsNull"]]() |>
-            expect_no_error()
-})
-
-test_that("TRUE |> exception[['PasswordIsNull']]() should throw PasswordIsNull error",{
-    # Given
-    exception <- Configuration.Exceptions()
-
-    error <- 'Configuration has no Password'
-
-    # Then
-    TRUE |>
-        exception[["PasswordIsNull"]]() |>
-            expect_error(error)
+    input |> exception[["PWDIsNull"]]() |> expect.error(expected.error)
+  })
 })

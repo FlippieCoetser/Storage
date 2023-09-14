@@ -1,6 +1,6 @@
 Package: Storage
 Title: Data Access Layer
-Version: 0.0.0.9000
+Version: 0.0.0.9001
 Authors@R: 
     person(given = "Philippus",
            family = "Coetser",
@@ -12,17 +12,17 @@ License: file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.1
+RoxygenNote: 7.2.3
 Author: Philippus Coetser [aut, cre] (<https://orcid.org/0000-0003-0549-9245>)
 Maintainer: Philippus Coetser <flippie.coetser@gmail.com>
 Imports: 
     Environment,
-    dplyr,
+    Query,
     DBI,
-    stringr,
     odbc
 Remotes: 
-    FlippieCoetser/Environment
+    FlippieCoetser/Environment,
+    FlippieCoetser/Query
 Suggests: 
     testthat (>= 3.0.0),
     uuid

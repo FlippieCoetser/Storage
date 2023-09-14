@@ -1,19 +1,16 @@
 Configuration.Broker <- \() {
-  service <- Environment::Utility.Service()
+  utility <- Environment::Environment()
 
-    broker <- list()
-    broker[["GetODBCConfiguration"]]  <- \() {
-      configuration <- list()
-      
-      configuration[["DSN"]]      <- "DSN"      |> service[["GetVariableByName"]]()
-      configuration[["Username"]] <- "Username" |> service[["GetVariableByName"]]()
-      configuration[["Password"]] <- "Password" |> service[["GetVariableByName"]]()
-
+  operations <- list()
+  operations[["OpenConfigFile"]]  <- \() {
+    utility[["OpenConfigFile"]]()
+  }
+  operations[["GetPresetConfig"]] <- \() {
+    configuration <- list()
+    configuration[["DSN"]] <- "DSN" |> utility[["GetEnvVariable"]]()
+    configuration[["UID"]] <- "UID" |> utility[["GetEnvVariable"]]()
+    configuration[["PWD"]] <- "PWD" |> utility[["GetEnvVariable"]]()
     return(configuration)
-    }
-    broker[["OpenConfigurationFile"]] <- \() {
-      service[["OpenConfigurationFile"]]()
-    }
-
-  return(broker)
+  }
+  return(operations)
 }

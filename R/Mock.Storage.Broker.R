@@ -1,41 +1,49 @@
-Mock.Storage.Broker <- \(configuration){
-    broker <- list()
-    
-    broker[["Todo"]] <- list()
-    broker[["Todo"]][["Todos"]] <- data.frame(
-        Id     = c('7ab3df6f-2e8f-44b4-87bf-3004cf1c16ae',
-               '7bfef861-6fe9-46da-9ad2-6a58779ccdcd',
-               'd3b59bf0-14f0-4444-9ec9-1913e7256ee4'),
-        Task   = c('Task.1','Task.2','Task.3'),
-        Status = c('New','New','Done')
-    )
-    broker[["Todo"]][["Insert"]]        <- \(todo) {        
-        broker[["Todo"]][["Todos"]] <<-
-            broker[["Todo"]][["Todos"]] |>
-            dplyr::rows_insert(todo, by = "Id")
+#' Mock Storage Broker
+#'
+#' @description
+#' Provide a mock data store with basic CRUD Operations.
+#' 
+#' @usage NULL
+#' @returns A `list` of functions: 
+#' * `Insert(entity, table)`
+#' * `Select(fields, table)`
+#' * `SelectWhereId(fields, table, id)`
+#' * `Update(entity, table)`
+#' * `Delete(id, table)`
+#' @export
+Mock.Storage.Broker <- \(configuration = NULL, data = NULL) {
+  exception <- Storage.Exceptions()
 
-        return(data.frame())
-    }
-    broker[["Todo"]][["Select"]]        <- \(...)  {
-        broker[["Todo"]][["Todos"]]
-    }
-    broker[["Todo"]][["SelectWhereId"]] <- \(id)   {
-        broker[["Todo"]][["Todos"]] |>
-            dplyr::filter(Id == id)
-    }
-    broker[["Todo"]][["Update"]]        <- \(todo) {
-        broker[["Todo"]][["Todos"]] <<-
-            broker[["Todo"]][["Todos"]] |>
-            dplyr::rows_update(todo, by = "Id")
+  operations <- list()
+  operations[['CreateConnection']] <- \() {
+    TRUE |> exception[['NoCreateConnection']]()
+  }
+  operations[['ExecuteQuery']]     <- \(query) {
+    TRUE |> exception[['NoExecuteQuery']]()
+  }
 
-        return(data.frame())
+  operations[['Insert']]           <- \(entity, table) {
+    match.count <- (data[[table]][['Id']] == entity[['Id']]) |> sum()
+    (match.count != 0) |> exception[['DuplicateKey']]()
+    data[[table]] <<- data[[table]] |> rbind(entity)
+    return(data.frame())
+  }
+  operations[['Select']]           <- \(fields, table) {
+    data[[table]]
+  }
+  operations[['SelectWhereId']]    <- \(fields, table, id) {
+    data[[table]][data[[table]][['Id']] == id,]
+  }
+  operations[['Update']]           <- \(entity, table) { 
+    match.index <- entity[['Id']] |> match(data[[table]][['Id']])
+    if(match.index |> is.na() |> isFALSE()) {
+      data[[table]][match.index,] <<- entity
     }
-    broker[["Todo"]][["Delete"]]        <- \(id)   {
-        broker[["Todo"]][["Todos"]] <<-
-            broker[["Todo"]][["Todos"]] |>
-                dplyr::filter(Id != id)
-
-        return(data.frame())
-    }
-    return(broker)  
+    return(data.frame())      
+  }
+  operations[['Delete']]           <- \(id, table) {
+    data[[table]] <<- data[[table]][data[[table]][['Id']] != id,]
+    return(data.frame())
+  }
+  return(operations)  
 }

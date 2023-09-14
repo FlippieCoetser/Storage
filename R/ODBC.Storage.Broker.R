@@ -1,28 +1,44 @@
+#' ODBC Storage Broker
+#'
+#' @description
+#' Provide a ODBC based storage interface with basic CRUD Operations.
+#' 
+#' @usage NULL
+#' @returns A `list` of functions: 
+#' * `ExecuteQuery(query)`
+#' * `Insert(entity, table)`
+#' * `Select(fields, table)`
+#' * `SelectWhereId(fields, table, id)`
+#' * `Update(entity, table)`
+#' * `Delete(id, table)`
+#' @export
 ODBC.Storage.Broker <- \(configuration){
-  storage.validate <- ODBC.Storage.Validation.Service()
-  configuration |>  storage.validate[["Configuration"]]()
+  validate <- Configuration.Validator()
+  configuration |> validate[['PresetConfig']]()
+    
+  sql <- Query::SQL()
 
-  exception  <- ODBC.Storage.Exceptions()
-
-  service <- list()
-  service[["CreateConnection"]] <- \() {
+  operations <- list()
+  operations[['CreateConnection']]  <- \() {
+    exception  <- Storage.Exceptions()
+    config <- list(
+      drv = odbc::odbc(),
+      dsn = configuration[['DSN']],
+      uid = configuration[['UID']],
+      pwd = configuration[['PWD']]
+    )
     tryCatch(
-      DBI::dbConnect(
-        odbc::odbc(),
-        dsn = configuration[["DSN"]],
-        uid = configuration[["Username"]],
-        pwd = configuration[["Password"]]
-      ),
-      error=exception[["ConnectionExceptions"]]
+      DBI::dbConnect |> do.call(config),
+      error=exception[['Connection']]
     )
   }
-  service[["ExecuteQuery"]] <- \(query) {
-    connection <- service[["CreateConnection"]]()
+  operations[['ExecuteQuery']]      <- \(query) {
+    connection <- operations[['CreateConnection']]()
+    exception  <- Storage.Exceptions()
 
-    output <- NULL
     output <- tryCatch(
         connection |> DBI::dbGetQuery(query),
-        error = exception[["QueryExceptions"]]
+        error = exception[['Query']]
     )
 
     # Use new environment for connections
@@ -31,72 +47,37 @@ ODBC.Storage.Broker <- \(configuration){
 
     return(output)
   }
-
-  service[["Todo"]] <- list()
-
-  service[["Todo"]][["Insert"]]        <- \(todo) {
-    hasId <- todo[["Id"]] |> is.null() |> isFALSE()
-    hasTask <- todo[["Task"]] |> is.null() |> isFALSE()
-    hasStatus <- todo[["Status"]] |> is.null() |> isFALSE()
-
-    if (hasId & hasTask & hasStatus) {
-        stringr::str_glue(
-            "INSERT INTO [dbo].[Todo] ",
-            "(Id, Task, Status) ",
-            "VALUES ('{todo[['Id']]}', '{todo[['Task']]}', '{todo[['Status']]}')") |>
-            service[["ExecuteQuery"]]()
-    }
-
-    return(data.frame())
+  operations[['Insert']]            <- \(entity, table) {
+    table |>
+    sql[['INSERT']](entity) |>
+    sql[['VALUES']](entity) |>
+    operations[['ExecuteQuery']]()
   }
-  service[["Todo"]][["Select"]]        <- \()     {
-    stringr::str_glue(
-      "SELECT LOWER([Id]) as Id ,[Task],[Status] ",
-      "FROM [dbo].[Todo]") |>
-      service[["ExecuteQuery"]]()
+  operations[['Select']]            <- \(fields, table) {
+    fields |>
+    sql[['SELECT']]()    |>
+    sql[['FROM']](table) |>
+    operations[['ExecuteQuery']]()
   }
-  service[["Todo"]][["SelectWhereId"]] <- \(id)   {
-    idExist <- id |> is.null() |> isFALSE()
-
-    todo <- NULL
-    if (idExist) {
-        todo <- stringr::str_glue(
-            "SELECT LOWER([Id]) as Id ,[Task],[Status] ",
-            "FROM [dbo].[Todo]",
-            "WHERE Id = '{id}'") |>
-                service[["ExecuteQuery"]]()
-    }
-
-    return(todo)
+  operations[['SelectWhereId']]     <- \(fields, table, id) {
+    fields |>
+      sql[['SELECT']]()        |>
+      sql[['FROM']](table)     |>
+      sql[['WHERE']]('Id', id) |>
+      operations[['ExecuteQuery']]()
   }
-  service[["Todo"]][["Update"]]        <- \(todo) {
-      hasId <- todo[["Id"]] |> is.null() |> isFALSE()
-      hasTask <- todo[["Task"]] |> is.null() |> isFALSE()
-      hasStatus <- todo[["Status"]] |> is.null() |> isFALSE()
-
-      if (hasId & hasTask & hasStatus) {
-          stringr::str_glue(
-            "UPDATE [dbo].[ToDo] ",
-            "SET Task = '{todo[['Task']]}', Status = '{todo[['Status']]}' ",
-            "WHERE Id = '{todo[['Id']]}'") |>
-                service[["ExecuteQuery"]]()
-      }
-
-      return(data.frame())
+  operations[['Update']]            <- \(entity, table) {       
+    table |>
+    sql[['UPDATE']]()     |>
+    sql[['SET']](entity)    |>
+    sql[['WHERE']]('Id', entity[['Id']]) |>
+    operations[['ExecuteQuery']]()
   }
-  service[["Todo"]][["Delete"]]        <- \(id)   {
-      idExist <- id |> is.null() |> isFALSE()
-
-    if (idExist) {
-        stringr::str_glue(
-            "DELETE ",
-            "FROM [dbo].[ToDo] ",
-            "WHERE Id = '{id}'") |>
-            service[["ExecuteQuery"]]()
-    }
-
-    return(data.frame())
+  operations[['Delete']]            <- \(id, table) {
+    sql[['DELETE']]()        |>
+    sql[['FROM']](table)     |>
+    sql[['WHERE']]('Id', id) |>
+    operations[['ExecuteQuery']]()
   }
-  return(service)
-
+  return(operations)
 }
