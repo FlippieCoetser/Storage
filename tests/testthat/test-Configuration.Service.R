@@ -1,22 +1,90 @@
-test_that("Configuration.Utility.Service() should not throw an error.",{
-    # Then
-    Configuration.Service() |>
-        expect_no_error()
+describe("Configuration.Service",{
+  it("Exist",{
+    Configuration.Service |> expect.exist()
+  })
 })
-test_that("configurator[['GetODBCConfiguration']]() should return configuration.",{
-    # Given
-    configurator <- Configuration.Service()
 
+describe("When services <- Configuration.Service()",{
+  it("then services is a list",{
+    # Given
+    services <- Configuration.Service()
+    
     # Then
-    configurator[["GetODBCConfiguration"]]() |>
-        is.null() |>
-            expect_equal(FALSE)
+    services |> expect.list()
+  })
+  it("then services contains OpenConfigFile service",{
+    # Given
+    services <- Configuration.Service()
+    
+    # Then
+    services[["OpenConfigFile"]] |> expect.exist()
+  })
 })
-test_that("configurator[['OpenConfigurationFile']]() should not throw error.",{
-    # Given
-    configurator <- Configuration.Service()
 
+describe("When service[['GetPresetConfig']]()",{
+  it("then a list of parameters is returned",{
+    # Given
+    broker  <- Configuration.Broker()
+    service <- broker |> Configuration.Service()
+    
     # Then
-    configurator[["OpenConfigurationFile"]]() |>
-        expect_no_error()
+    service[["GetPresetConfig"]]() |> expect.list()
+  })
+  it("then an exception if thrown if no DSN is found",{
+    # Given
+    configuration <- list()
+    configuration[["DSN"]] <- NULL
+    configuration[["UID"]] <- "UID"
+    configuration[["PWD"]] <- "PWD"
+
+    broker  <- Configuration.Broker()
+    broker[["GetPresetConfig"]] <- \() {
+      configuration
+    }
+
+    service <- broker |> Configuration.Service()
+    
+    expected.error <- "Configuration has no DSN"
+    
+    # Then
+    service[["GetPresetConfig"]]() |> expect.error(expected.error)
+  })
+  it("then an exception if thrown if no UID is found",{
+    # Given
+    configuration <- list()
+    configuration[["DSN"]] <- "DSN"
+    configuration[["UID"]] <- NULL
+    configuration[["PWD"]] <- "PWD"
+
+    broker  <- Configuration.Broker()
+    broker[["GetPresetConfig"]] <- \() {
+      configuration
+    }
+    
+    service <- broker |> Configuration.Service()
+    
+    expected.error <- "Configuration has no UID"
+    
+    # Then
+    service[["GetPresetConfig"]]() |> expect.error(expected.error)
+  })
+  it("then an exception if thrown if no PWD is found",{
+    # Given
+    configuration <- list()
+    configuration[["DSN"]] <- "DSN"
+    configuration[["UID"]] <- "UID"
+    configuration[["PWD"]] <- NULL
+
+    broker  <- Configuration.Broker()
+    broker[["GetPresetConfig"]] <- \() {
+      configuration
+    }
+    
+    service <- broker |> Configuration.Service()
+    
+    expected.error <- "Configuration has no PWD"
+    
+    # Then
+    service[["GetPresetConfig"]]() |> expect.error(expected.error)
+  })
 })

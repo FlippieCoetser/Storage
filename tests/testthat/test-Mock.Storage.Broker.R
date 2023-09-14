@@ -1,101 +1,113 @@
-test_that("Mock.Storage.Broker exist",{
-    Mock.Storage.Broker |>
-        is.null() |>
-            expect_equal(FALSE)
+describe("Mock.Storage.Broker",{
+  it("Exist",{
+    Mock.Storage.Broker |> expect.exist()
+  })
 })
 
-test_that("Mock.Storage.Broker() return list of bokers",{
-    Mock.Storage.Broker() |>
-        is.list() |>
-            expect_equal(TRUE)
+describe("When operations <- configuration |> Mock.Storage.Broker()",{
+  it("then operations is a list",{
+    # When
+    operations <- Mock.Storage.Broker()
+
+    # Then
+    operations |> expect.list()
+  })
+  it("then operations contains CreateConnection operation",{
+    # When
+    operations <- Mock.Storage.Broker()
+
+    # Then
+    operations[['CreateConnection']] |> expect.exist()
+  })
+  it("then operations contains ExecuteQuery operation",{
+    # When
+    operations <- Mock.Storage.Broker()
+
+    # Then
+    operations[['ExecuteQuery']] |> expect.exist()
+  })
+  it("then operations contains Insert operation",{
+    # When
+    operations <- Mock.Storage.Broker()
+
+    # Then
+    operations[['Insert']] |> expect.exist()
+  })
+  it("then operations contains Select operation",{
+    # When
+    operations <- Mock.Storage.Broker()
+
+    # Then
+    operations[['Select']] |> expect.exist()
+  })
+  it("then operations contains SelectWhereId operation",{
+    # When
+    operations <- Mock.Storage.Broker()
+
+    # Then
+    operations[['SelectWhereId']] |> expect.exist()
+  })
+  it("then operations contains Update operation",{
+    # When
+    operations <- Mock.Storage.Broker()
+
+    # Then
+    operations[['Update']] |> expect.exist()
+  })
+  it("then operations contains Delete operation",{
+    # When
+    operations <- Mock.Storage.Broker()
+
+    # Then
+    operations[['Delete']] |> expect.exist()
+  })
 })
 
-test_that("Todo |> broker[['Todo']][['Insert']]() should add todo to storage ",{
-  # Given
-  broker <- Mock.Storage.Broker()
+describe("when operation[['CreateConnection']]()",{
+  it("then an exceptions is thrown",{
+    # When
+    operation <- Mock.Storage.Broker()
 
-  todo <- data.frame(
-    Id = uuid::UUIDgenerate(),
-    Task = 'Task',
-    Status = 'New'
-  )
+    expected.error <- "Mock.Storage: CreateConnection operation not implemented"
 
-  # When
-  todo |>
-    broker[['Todo']][['Insert']]()
-
-  # Then
-  todo[["Id"]] |>
-    broker[['Todo']][['SelectWhereId']]() |>
-      expect_equal(todo)
+    # Then
+    operation[['CreateConnection']]() |> expect.error(expected.error)
+  })
 })
 
-test_that("Id |> broker[['Todo']][['Select']]() should return list of todos", {
-  # Given
-  broker  <- Mock.Storage.Broker()
+describe("when operation[['ExecuteQuery']]()",{
+  it("then an exceptions is thrown",{
+    # When
+    operation <- Mock.Storage.Broker()
 
-  # When
-  todos <- broker[['Todo']][['Select']]()
+    expected.error <- "Mock.Storage: ExecuteQuery operation not implemented"
 
-  # Then
-  todos |>
-    is.list() |>
-     expect_equal(TRUE)
-
+    # Then
+    operation[['ExecuteQuery']]() |> expect.error(expected.error)
+  })
 })
 
-test_that("Id |> broker[['Todo']][['SelectWhereId']]() should return todo with matching Id", {
-  # Given
-  broker  <- Mock.Storage.Broker()
+describe("when todo |> operation[['Insert']]('Todo')",{
+  it("then todo is inserted into mock data",{
+    # Given
+    operation <- configuration |> Mock.Storage.Broker(data)
 
-  todo    <- broker[['Todo']][['Select']]() |> head(1)
-  id      <- todo[["Id"]]
+    new.todo <- list(
+      Id     = uuid::UUIDgenerate(),
+      Task   = 'Task',
+      Status = 'New'
+    )
+    id <- new.todo[['Id']]
 
-  # When
-  retrieved.todo <- id |> broker[['Todo']][['SelectWhereId']]()
+    expected.todo <- new.todo |> as.data.frame()
 
-  # Then
-  retrieved.todo[["Id"]] |>
-    expect_equal(id)
+    # When
+    new.todo |> operation[['Insert']]('Todo')
 
-})
+    # Then
+    actual.todo <- fields |> operation[['SelectWhereId']]('Todo', id)
+    actual.todo |> expect.equal.data(expected.todo)
 
-test_that("Todo |> broker[['Todo']][['Update']]() should update matching todo in storage",{
-  # Given
-  broker  <- Mock.Storage.Broker()
-
-  todos   <- broker[['Todo']][['Select']]()
-  todo    <- todos |> head(1)
-
-  updated.todo <- todo
-  updated.todo[['Status']] <- 'Complete'
-
-  # When
-  updated.todo |>
-      broker[['Todo']][['Update']]()
-
-  # Then
-  todo[['Id']] |>
-    broker[['Todo']][['SelectWhereId']]() |>
-      expect_equal(updated.todo)
-})
-
-test_that("Id |> broker[['Todo']][['Delete']]() should delete todo with matching Id from storage",{
-  # Given
-  broker  <- Mock.Storage.Broker()
-
-  todos   <- broker[['Todo']][['Select']]()
-  todo    <- todos |> tail(1)
-
-  deleted.todo <- todo
-
-  # When
-  deleted.todo[['Id']] |>
-    broker[['Todo']][['Delete']]()
-
-  # Then
-  deleted.todo[['Id']] |>
-    broker[['Todo']][['SelectWhereId']]() |>
-      nrow() |>
-      expect_equal(0)
+    id |> operation[['Delete']]('Todo')
+  })
 })

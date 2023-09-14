@@ -1,19 +1,72 @@
-test_that("broker[['GetODBCConfiguration']]() should return configuration",{
-    # Given
-    broker <- Configuration.Broker()
-
-    configuration <- broker[['GetODBCConfiguration']]()
-
-    # Then
-    configuration |>
-        is.null() |>
-            expect_equal(FALSE)
+describe("Configuration.Broker",{
+  it("Exist",{
+    Configuration.Broker() |> expect.exist()
+  })
 })
-test_that("broker[['OpenConfigurationFile']]() should not throw an error.",{
-    # Given
-    broker <- Configuration.Broker()
+
+describe("When operations |> Configurations.Broker()",{
+  it("then operations is a list",{
+    # When
+    operations <- Configuration.Broker()
 
     # Then
-    broker[['OpenConfigurationFile']]() |>
-        expect_no_error()
+    operations |> expect.list()
+  })
+  it("then operations contains OpenConfigFile operation",{
+    # When
+    operations <- Configuration.Broker()
+
+    # Then
+    operations[['OpenConfigFile']] |> expect.exist()
+  })
+  it("then operations contains GetPresetConfig operation",{
+    # When
+    operations <- Configuration.Broker()
+
+    # Then
+    operations[['GetPresetConfig']] |> expect.exist()
+  })
+})
+
+describe("When operation[['GetPresetConfig']]()",{
+  it("then a configuration is returned",{
+    # Given
+    operations <- Configuration.Broker()
+
+    # When
+    configuration <- operations[['GetPresetConfig']]()
+
+    # Then
+    configuration |> expect.exist()
+  })
+  it("then the configuration contains a DSN value",{
+    # Given
+    operations <- Configuration.Broker()
+
+    # When
+    configuration <- operations[['GetPresetConfig']]()
+
+    # Then
+    configuration[['DSN']] |> expect.exist()
+  })
+  it("then the configuration contains a UID value",{
+    # Given
+    operations <- Configuration.Broker()
+
+    # When
+    configuration <- operations[['GetPresetConfig']]()
+
+    # Then
+    configuration[['UID']] |> expect.exist()
+  })
+  it("then the configuration contains a PWD value",{
+    # Given
+    operations <- Configuration.Broker()
+
+    # When
+    configuration <- operations[['GetPresetConfig']]()
+
+    # Then
+    configuration[['PWD']] |> expect.exist()
+  })
 })

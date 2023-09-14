@@ -1,21 +1,19 @@
 Configuration.Exceptions <- \() {
-    exception <- list()
-
-    exception[["DSNIsNull"]] <- \(invoke) {
-        if (invoke) {
-            stop('Configuration has no DSN')
-        }
+  exception <- list()
+  exception[["DSNIsNull"]] <- \(invoke) {
+    if (invoke) {
+      stop('Configuration has no DSN', call. = FALSE)
     }
-    exception[["UsernameIsNull"]] <- \(invoke) {
-        if (invoke) {
-            stop('Configuration has no Username')
-        }
+  }
+  exception[["UIDIsNull"]] <- \(invoke) {
+    if (invoke) {
+      stop('Configuration has no UID', call. = FALSE)
     }
-    exception[["PasswordIsNull"]] <- \(invoke) {
-        if (invoke) {
-            stop('Configuration has no Password')
-        }
+  }
+  exception[["PWDIsNull"]] <- \(invoke) {
+    if (invoke) {
+      stop('Configuration has no PWD', call. = FALSE)
     }
-
-    return(exception)
+  }
+  return(exception)
 }
