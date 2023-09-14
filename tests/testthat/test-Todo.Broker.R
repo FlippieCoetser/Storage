@@ -257,7 +257,7 @@ describe("When id |> operations[['Delete']]()",{
   })
   it("then todo with is are removed from mock.storage",{
     # Given
-    storage    <- configuration |> ODBC.Storage.Broker() |> Storage.Service()
+    storage    <- configuration |> Mock.Storage.Broker(data) |> Storage.Service()
     operations <- storage |> Todo.Broker()
 
     new.todo <- list(
