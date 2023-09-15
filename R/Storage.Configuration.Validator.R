@@ -21,9 +21,13 @@ Storage.Configuration.Validator <- \() {
     exception[['driverIsNull']]()
     return(configuration)
   }
-  validations[['HasDATABASE']]  <- \() {
-  }
   validations[['HasSERVER']]    <- \(configuration) {
+    configuration[['server']] |>
+    validations[["IsNull"]]() |>
+    exception[['serverIsNull']]()
+    return(configuration)
+  }
+  validations[['HasDATABASE']]  <- \() {
   }
   validations[["HasUID"]]       <- \(configuration) {
     configuration[['uid']]    |>
