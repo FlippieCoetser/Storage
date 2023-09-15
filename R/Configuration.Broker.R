@@ -12,5 +12,6 @@ Configuration.Broker <- \() {
     configuration[["PWD"]] <- "PWD" |> utility[["GetEnvVariable"]]()
     return(configuration)
   }
+  operations[['GetManualConfig']] <- \() {}
   return(operations)
 }
