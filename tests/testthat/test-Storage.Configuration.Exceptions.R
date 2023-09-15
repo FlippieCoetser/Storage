@@ -131,6 +131,31 @@ describe("When input |> exception[['serverIsNull']]()", {
   })
 })
 
+describe("When input |> exception[['databaseIsNull']]()", {
+  it("then no exception is thrown if input is FALSE", {
+    # Given
+    exception <- Storage.Configuration.Exceptions()
+
+    # When
+    input <- FALSE
+
+    # Then
+    input |> exception[['databaseIsNull']]() |> expect.no.error()
+  })
+  it("then an exception is thrown if input is TRUE",{
+    # Given
+    exception <- Storage.Configuration.Exceptions()
+
+    expected.error <- "Configuration has no database."
+
+    # When
+    input <- TRUE
+
+    # Then
+    input |> exception[['databaseIsNull']]() |> expect.error(expected.error)
+  })
+})
+
 describe("When input |> exception[['uidIsNull']]()", {
   it("then no exception is thrown if input is FALSE", {
     # Given
