@@ -28,7 +28,8 @@ Storage.Configuration.Service <- \(broker) {
     validate[['PresetConfig']]()
   }
   services[['GetManualConfig']] <- \() { 
-    broker[['GetManualConfig']]()
+    broker[['GetManualConfig']]() |>
+    validate[['ManualConfig']]()
   }
   return(services)
 }
