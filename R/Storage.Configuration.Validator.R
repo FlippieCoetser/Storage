@@ -9,7 +9,15 @@ Storage.Configuration.Validator <- \() {
     validations[["HasPWD"]]()
     return(configuration)
   }
-  validations[['ManualConfig']] <- \() {}
+  validations[['ManualConfig']] <- \(configuration) {
+    configuration |>
+    validations[["HasDRIVER"]]() |>
+    validations[["HasSERVER"]]() |>
+    validations[["HasDATABASE"]]() |>
+    validations[["HasUID"]]() |>
+    validations[["HasPWD"]]()
+    return(configuration)
+  }
   validations[["HasDSN"]]       <- \(configuration) {
     configuration[['dsn']]    |> 
     validations[["IsNull"]]() |>
