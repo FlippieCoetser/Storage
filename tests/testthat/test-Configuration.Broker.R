@@ -119,7 +119,7 @@ describe("When operation[['GetManualConfig']]()",{
     # Then
     configuration[['DATABASE']] |> expect.exist()
   })
-  it("then the configuration contains a USER value",{
+  it("then the configuration contains a UID value",{
     # Given
     operations <- Configuration.Broker()
 
@@ -127,9 +127,9 @@ describe("When operation[['GetManualConfig']]()",{
     configuration <- operations[['GetManualConfig']]()
 
     # Then
-    configuration[['USER']] |> expect.exist()
+    configuration[['UID']] |> expect.exist()
   })
-  it("then the configuration contains a PASSWORD value",{
+  it("then the configuration contains a PWD value",{
     # Given
     operations <- Configuration.Broker()
 
@@ -137,6 +137,6 @@ describe("When operation[['GetManualConfig']]()",{
     configuration <- operations[['GetManualConfig']]()
 
     # Then
-    configuration[['PASSWORD']] |> expect.exist()
+    configuration[['PWD']] |> expect.exist()
   })
 })
