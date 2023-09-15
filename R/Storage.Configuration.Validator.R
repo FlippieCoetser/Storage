@@ -17,6 +17,8 @@ Storage.Configuration.Validator <- \() {
   }
   validations[['HasDRIVER']]    <- \() {
   }
+  validations[['HasDATABASE']]  <- \() {
+  }
   validations[['HasSERVER']]    <- \(configuration) {
   }
   validations[["HasUID"]]       <- \(configuration) {
