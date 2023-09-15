@@ -15,7 +15,11 @@ Storage.Configuration.Validator <- \() {
     exception[['dsnIsNull']]()
     return(configuration)
   }
-  validations[['HasDRIVER']]    <- \() {
+  validations[['HasDRIVER']]    <- \(configuration) {
+    configuration[['driver']] |>
+    validations[["IsNull"]]() |>
+    exception[['driverIsNull']]()
+    return(configuration)
   }
   validations[['HasDATABASE']]  <- \() {
   }
