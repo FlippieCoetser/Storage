@@ -50,7 +50,7 @@ describe("When input |> exception[['DSNIsNull']]()", {
     # Given
     exception <- Configuration.Exceptions()
 
-    expected.error <- "Configuration has no DSN"
+    expected.error <- "Configuration has no dsn"
 
     # When
     input <- TRUE
@@ -75,7 +75,7 @@ describe("When input |> exception[['UIDIsNull']]()", {
     # Given
     exception <- Configuration.Exceptions()
 
-    expected.error <- 'Configuration has no UID'
+    expected.error <- 'Configuration has no uid'
 
     # When
     input <- TRUE
@@ -100,7 +100,7 @@ describe("When input |> exception[['PWDIsNull']]()", {
     # Given
     exception <- Configuration.Exceptions()
 
-    expected.error <- 'Configuration has no PWD'
+    expected.error <- 'Configuration has no pwd'
 
     # When
     input <- TRUE

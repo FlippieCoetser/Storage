@@ -30,7 +30,7 @@ describe("When service[['GetPresetConfig']]()",{
     # Then
     service[["GetPresetConfig"]]() |> expect.list()
   })
-  it("then an exception if thrown if no DSN is found",{
+  it("then an exception if thrown if no dsn is found",{
     # Given
     configuration <- list()
     configuration[['dsn']] <- NULL
@@ -44,12 +44,12 @@ describe("When service[['GetPresetConfig']]()",{
 
     service <- broker |> Configuration.Service()
     
-    expected.error <- "Configuration has no DSN"
+    expected.error <- "Configuration has no dsn"
     
     # Then
     service[["GetPresetConfig"]]() |> expect.error(expected.error)
   })
-  it("then an exception if thrown if no UID is found",{
+  it("then an exception if thrown if no uid is found",{
     # Given
     configuration <- list()
     configuration[['dsn']] <- "DSN"
@@ -63,12 +63,12 @@ describe("When service[['GetPresetConfig']]()",{
     
     service <- broker |> Configuration.Service()
     
-    expected.error <- "Configuration has no UID"
+    expected.error <- "Configuration has no uid"
     
     # Then
     service[["GetPresetConfig"]]() |> expect.error(expected.error)
   })
-  it("then an exception if thrown if no PWD is found",{
+  it("then an exception if thrown if no pwd is found",{
     # Given
     configuration <- list()
     configuration[['dsn']] <- "DSN"
@@ -82,7 +82,7 @@ describe("When service[['GetPresetConfig']]()",{
     
     service <- broker |> Configuration.Service()
     
-    expected.error <- "Configuration has no PWD"
+    expected.error <- "Configuration has no pwd"
     
     # Then
     service[["GetPresetConfig"]]() |> expect.error(expected.error)

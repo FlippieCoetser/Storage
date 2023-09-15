@@ -103,7 +103,7 @@ describe("When value |> validate[['IsEmpty']]()",{
 })
 
 describe("When configuration |> validate[['HasDSN']]()",{
-  it("then configuration is returned if configuration has DSN",{
+  it("then configuration is returned if configuration has dsn",{
     # Given
     validate <- Configuration.Validator()
 
@@ -118,7 +118,7 @@ describe("When configuration |> validate[['HasDSN']]()",{
     # Then
     actual.configuration |> expect.equal(expected.configuration)
   })
-  it("then no exception is thrown if configuration has DSN",{
+  it("then no exception is thrown if configuration has dsn",{
     # Given
     validate <- Configuration.Validator()
 
@@ -128,13 +128,13 @@ describe("When configuration |> validate[['HasDSN']]()",{
     # Then
     configuration |> validate[["HasDSN"]]() |> expect.no.error()
   })
-  it("then an exception is thrown if configuration has no DSN",{
+  it("then an exception is thrown if configuration has no dsn",{
     # Given
     validate <- Configuration.Validator()
 
     configuration <- list()
 
-    expected.error <- "Configuration has no DSN"
+    expected.error <- "Configuration has no dsn"
 
     # Then
     configuration |> validate[["HasDSN"]]() |> expect.error(expected.error)
@@ -142,7 +142,7 @@ describe("When configuration |> validate[['HasDSN']]()",{
 })
 
 describe("When configuration |> validate[['HasUID']]()",{
-  it("then configuration is returned if configuration has UID",{
+  it("then configuration is returned if configuration has uid",{
     # Given
     validate <- Configuration.Validator()
 
@@ -157,7 +157,7 @@ describe("When configuration |> validate[['HasUID']]()",{
     # Then
     actual.configuration |> expect.equal(expected.configuration)
   })
-  it("then no exception is thrown if configuration has UID",{
+  it("then no exception is thrown if configuration has uid",{
     # Given
     validate <- Configuration.Validator()
 
@@ -167,13 +167,13 @@ describe("When configuration |> validate[['HasUID']]()",{
     # Then
     configuration |> validate[["HasUID"]]() |> expect.no.error()
   })
-  it("then an exception is thrown if configuration has no UID",{
+  it("then an exception is thrown if configuration has no uid",{
     # Given
     validate <- Configuration.Validator()
 
     configuration <- list()
 
-    expected.error <- "Configuration has no UID"
+    expected.error <- "Configuration has no uid"
 
     # Then
     configuration |> validate[["HasUID"]]() |> expect.error(expected.error)
@@ -181,7 +181,7 @@ describe("When configuration |> validate[['HasUID']]()",{
 })
 
 describe("When configuration |> validate[['HasPWD']]()",{
-  it("then configuration is returned if configuration has PWD",{
+  it("then configuration is returned if configuration has pwd",{
     # Given
     validate <- Configuration.Validator()
 
@@ -196,7 +196,7 @@ describe("When configuration |> validate[['HasPWD']]()",{
     # Then
     actual.configuration |> expect.equal(expected.configuration)
   })
-  it("then no exception is thrown if configuration has PWD",{
+  it("then no exception is thrown if configuration has pwd",{
     # Given
     validate <- Configuration.Validator()
 
@@ -206,13 +206,13 @@ describe("When configuration |> validate[['HasPWD']]()",{
     # Then
     configuration |> validate[["HasPWD"]]() |> expect.no.error()
   })
-  it("then an exception is thrown if configuration has no PWD",{
+  it("then an exception is thrown if configuration has no pwd",{
     # Given
     validate <- Configuration.Validator()
 
     configuration <- list()
 
-    expected.error <- "Configuration has no PWD"
+    expected.error <- "Configuration has no pwd"
 
     # Then
     configuration |> validate[["HasPWD"]]() |> expect.error(expected.error)
@@ -249,7 +249,7 @@ describe("When configuration |> validate[['PresetConfig']]()",{
     # Then
     configuration |> validate[["PresetConfig"]]() |> expect.no.error()
   })
-  it("then an exception is thrown if configuration has no DSN",{
+  it("then an exception is thrown if configuration has no dsn",{
     # Given
     validate <- Configuration.Validator()
 
@@ -257,12 +257,12 @@ describe("When configuration |> validate[['PresetConfig']]()",{
     configuration[['uid']] <- "UID"
     configuration[['pwd']] <- "PWD"
 
-    expected.error <- "Configuration has no DSN"
+    expected.error <- "Configuration has no dsn"
 
     # Then
     configuration |> validate[["PresetConfig"]]() |> expect.error(expected.error)
   })
-  it("then an exception is thrown if configuration has no UID",{
+  it("then an exception is thrown if configuration has no uid",{
     # Given
     validate <- Configuration.Validator()
 
@@ -270,12 +270,12 @@ describe("When configuration |> validate[['PresetConfig']]()",{
     configuration[['dsn']] <- "DSN"
     configuration[['pwd']] <- "PWD"
 
-    expected.error <- "Configuration has no UID"
+    expected.error <- "Configuration has no uid"
 
     # Then
     configuration |> validate[["PresetConfig"]]() |> expect.error(expected.error)
   })
-  it("then an exception is thrown if configuration has no PWD",{
+  it("then an exception is thrown if configuration has no pwd",{
     # Given
     validate <- Configuration.Validator()
 
@@ -283,7 +283,7 @@ describe("When configuration |> validate[['PresetConfig']]()",{
     configuration[['dsn']] <- "DSN"
     configuration[['uid']] <- "UID"
 
-    expected.error <- "Configuration has no PWD"
+    expected.error <- "Configuration has no pwd"
 
     # Then
     configuration |> validate[["PresetConfig"]]() |> expect.error(expected.error)
