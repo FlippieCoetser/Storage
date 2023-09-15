@@ -76,6 +76,45 @@ describe("When operation[['GetPresetConfig']]()",{
     # Then
     configuration[['pwd']] |> expect.exist()
   })
+  it("then an exception is thrown when DSN is not set",{
+    # Given
+    utility <- Environment::Environment()
+    operation <- Configuration.Broker()
+
+    expected.error <- "No value found for provided environment variable:DSN. Please check .Renviron configuration file."
+   
+    # When
+    "DSN" |> utility[['ClearEnvVariable']]()
+
+    # Then
+    operation[['GetPresetConfig']]() |> expect.error(expected.error)
+  })
+  it("then an exception is thrown when UID is not set",{
+    # Given
+    utility <- Environment::Environment()
+    operation <- Configuration.Broker()
+
+    expected.error <- "No value found for provided environment variable:UID. Please check .Renviron configuration file."
+   
+    # When
+    "UID" |> utility[['ClearEnvVariable']]()
+
+    # Then
+    operation[['GetPresetConfig']]() |> expect.error(expected.error)
+  })
+  it("then an exception is thrown when PWD is not set",{
+    # Given
+    utility <- Environment::Environment()
+    operation <- Configuration.Broker()
+
+    expected.error <- "No value found for provided environment variable:PWD. Please check .Renviron configuration file."
+   
+    # When
+    "PWD" |> utility[['ClearEnvVariable']]()
+
+    # Then
+    operation[['GetPresetConfig']]() |> expect.error(expected.error)
+  })
 })
 
 describe("When operation[['GetManualConfig']]()",{
@@ -138,5 +177,70 @@ describe("When operation[['GetManualConfig']]()",{
 
     # Then
     configuration[['pwd']] |> expect.exist()
+  })
+  it("then an exception is thrown when DRIVER is not set",{
+    # Given
+    utility <- Environment::Environment()
+    operation <- Configuration.Broker()
+
+    expected.error <- "No value found for provided environment variable:DRIVER. Please check .Renviron configuration file."
+   
+    # When
+    "DRIVER" |> utility[['ClearEnvVariable']]()
+
+    # Then
+    operation[['GetManualConfig']]() |> expect.error(expected.error)
+  })
+  it("then an exception is thrown when SERVER is not set",{
+    # Given
+    utility <- Environment::Environment()
+    operation <- Configuration.Broker()
+
+    expected.error <- "No value found for provided environment variable:SERVER. Please check .Renviron configuration file."
+   
+    # When
+    "SERVER" |> utility[['ClearEnvVariable']]()
+
+    # Then
+    operation[['GetManualConfig']]() |> expect.error(expected.error)
+  })
+  it("then an exception is thrown when DATABASE is not set",{
+    # Given
+    utility <- Environment::Environment()
+    operation <- Configuration.Broker()
+
+    expected.error <- "No value found for provided environment variable:DATABASE. Please check .Renviron configuration file."
+   
+    # When
+    "DATABASE" |> utility[['ClearEnvVariable']]()
+
+    # Then
+    operation[['GetManualConfig']]() |> expect.error(expected.error)
+  })
+  it("then an exception is thrown when UID is not set",{
+    # Given
+    utility <- Environment::Environment()
+    operation <- Configuration.Broker()
+
+    expected.error <- "No value found for provided environment variable:UID. Please check .Renviron configuration file."
+   
+    # When
+    "UID" |> utility[['ClearEnvVariable']]()
+
+    # Then
+    operation[['GetManualConfig']]() |> expect.error(expected.error)
+  })
+  it("then an exception is thrown when PWD is not set",{
+    # Given
+    utility <- Environment::Environment()
+    operation <- Configuration.Broker()
+
+    expected.error <- "No value found for provided environment variable:PWD. Please check .Renviron configuration file."
+   
+    # When
+    "PWD" |> utility[['ClearEnvVariable']]()
+
+    # Then
+    operation[['GetManualConfig']]() |> expect.error(expected.error)
   })
 })
