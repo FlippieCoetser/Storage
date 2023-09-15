@@ -112,4 +112,109 @@ describe("When service[['GetManualConfig']]()",{
     # Then
     service[["GetManualConfig"]]() |> expect.list()
   })
+  it("then an exception is thrown if no driver is found",{
+    # Given
+    configuration <- list()
+    configuration[['driver']] <- NULL
+    configuration[['server']] <- "SERVER"
+    configuration[['database']] <- "DATABASE"
+    configuration[['uid']] <- "UID"
+    configuration[['pwd']] <- "PWD"
+
+    broker  <- Storage.Configuration.Broker()
+    broker[["GetManualConfig"]] <- \() {
+      configuration
+    }
+    
+    service <- broker |> Storage.Configuration.Service()
+    
+    expected.error <- "Configuration has no driver."
+    
+    # Then
+    service[["GetManualConfig"]]() |> expect.error(expected.error)
+  })
+  it("then an exception is thrown if no server is found",{
+    # Given
+    configuration <- list()
+    configuration[['driver']] <- "DRIVER"
+    configuration[['server']] <- NULL
+    configuration[['database']] <- "DATABASE"
+    configuration[['uid']] <- "UID"
+    configuration[['pwd']] <- "PWD"
+
+    broker  <- Storage.Configuration.Broker()
+    broker[["GetManualConfig"]] <- \() {
+      configuration
+    }
+    
+    service <- broker |> Storage.Configuration.Service()
+    
+    expected.error <- "Configuration has no server."
+    
+    # Then
+    service[["GetManualConfig"]]() |> expect.error(expected.error)
+  })
+  it("then an exception is thrown if no database is found",{
+    # Given
+    configuration <- list()
+    configuration[['driver']] <- "DRIVER"
+    configuration[['server']] <- "SERVER"
+    configuration[['database']] <- NULL
+    configuration[['uid']] <- "UID"
+    configuration[['pwd']] <- "PWD"
+
+    broker  <- Storage.Configuration.Broker()
+    broker[["GetManualConfig"]] <- \() {
+      configuration
+    }
+    
+    service <- broker |> Storage.Configuration.Service()
+    
+    expected.error <- "Configuration has no database."
+    
+    # Then
+    service[["GetManualConfig"]]() |> expect.error(expected.error)
+  })
+  it("then an exception is thrown if no uid is found",{
+    # Given
+    configuration <- list()
+    configuration[['driver']] <- "DRIVER"
+    configuration[['server']] <- "SERVER"
+    configuration[['database']] <- "DATABASE"
+    configuration[['uid']] <- NULL
+    configuration[['pwd']] <- "PWD"
+
+    broker  <- Storage.Configuration.Broker()
+    broker[["GetManualConfig"]] <- \() {
+      configuration
+    }
+    
+    service <- broker |> Storage.Configuration.Service()
+    
+    expected.error <- "Configuration has no uid"
+    
+    # Then
+    service[["GetManualConfig"]]() |> expect.error(expected.error)
+  })
+  it("then an exception is thrown if no pwd is found",{
+    # Given
+    configuration <- list()
+    configuration[['driver']] <- "DRIVER"
+    configuration[['server']] <- "SERVER"
+    configuration[['database']] <- "DATABASE"
+    configuration[['uid']] <- "UID"
+    configuration[['pwd']] <- NULL
+
+    broker  <- Storage.Configuration.Broker()
+    broker[["GetManualConfig"]] <- \() {
+      configuration
+    }
+    
+    service <- broker |> Storage.Configuration.Service()
+    
+    expected.error <- "Configuration has no pwd"
+    
+    # Then
+    service[["GetManualConfig"]]() |> expect.error(expected.error)
+  })
 })
