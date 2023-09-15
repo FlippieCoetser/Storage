@@ -50,7 +50,7 @@ describe("when connection <- operate[['CreateConnection']]()",{
   it("then connection is not NA is valid configuration",{
     skip_if_not(environment == 'local')
     # Given
-    configurator  <- Configuration.Broker() |> Configuration.Service()
+    configurator  <- Storage.Configuration.Broker() |> Storage.Configuration.Service()
     configuration <- configurator[["GetPresetConfig"]]()
 
     operate <- configuration |> ODBC.Storage.Broker()
@@ -65,7 +65,7 @@ describe("when connection <- operate[['CreateConnection']]()",{
   it("then an exception is thrown if configuration has invalid DSN",{
     skip_if_not(environment == 'local')
     # Given
-    configurator  <- Configuration.Broker() |> Configuration.Service()
+    configurator  <- Storage.Configuration.Broker() |> Storage.Configuration.Service()
     configuration <- configurator[["GetPresetConfig"]]()
 
     configuration[['dsn']] <- "Invalid"
@@ -80,7 +80,7 @@ describe("when connection <- operate[['CreateConnection']]()",{
   it("then an exception is thrown if configuration has invalid UID",{
     skip_if_not(environment == 'local')
     # Given
-    configurator  <- Configuration.Broker() |> Configuration.Service()
+    configurator  <- Storage.Configuration.Broker() |> Storage.Configuration.Service()
     configuration <- configurator[["GetPresetConfig"]]()
 
     configuration[['uid']] <- "Invalid"
@@ -95,7 +95,7 @@ describe("when connection <- operate[['CreateConnection']]()",{
   it("then an exception is thrown if configuration has invalid PWD",{
     skip_if_not(environment == 'local')
     # Given
-    configurator  <- Configuration.Broker() |> Configuration.Service()
+    configurator  <- Storage.Configuration.Broker() |> Storage.Configuration.Service()
     configuration <- configurator[["GetPresetConfig"]]()
 
     configuration[['pwd']] <- "Invalid"

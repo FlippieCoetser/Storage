@@ -1,4 +1,4 @@
-Configuration.Broker <- \() {
+Storage.Configuration.Broker <- \() {
   utility <- Environment::Environment()
 
   operations <- list()

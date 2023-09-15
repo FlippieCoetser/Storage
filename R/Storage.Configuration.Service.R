@@ -2,9 +2,9 @@
 #'
 #' @description
 #' Different data store providers: ODBC, SQL, File System, requires different configuration parameters.
-#' `Configuration.Service()` helps retrieve and validate data store specific configuration sets.
+#' `Storage.Configuration.Service()` helps retrieve and validate data store specific configuration sets.
 #'  
-#' `Configuration.Service()` returns a set of functions that can be used to define and retrieve configuration sets:
+#' `Storage.Configuration.Service()` returns a set of functions that can be used to define and retrieve configuration sets:
 #' * The first function: `OpenConfigurationFile`, will open an existing or a new empty `.Renviron` configuration file.
 #' If missing, users can then add environment variables required by a specific data store provider.
 #' * The second function: `GetPresetConfig`, will return a data store configuration: list of environment variables.
@@ -16,8 +16,8 @@
 #' * `OpenConfigurationFile()`
 #' * `GetPresetConfig()`
 #' @export
-Configuration.Service <- \(broker) {
-  validate <- Configuration.Validator()
+Storage.Configuration.Service <- \(broker) {
+  validate <- Storage.Configuration.Validator()
     
   services <- list()
   services[["OpenConfigFile"]]  <- \() {

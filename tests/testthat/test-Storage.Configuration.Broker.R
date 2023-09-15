@@ -1,34 +1,34 @@
-describe("Configuration.Broker",{
+describe("Storage.Configuration.Broker",{
   it("Exist",{
-    Configuration.Broker() |> expect.exist()
+    Storage.Configuration.Broker() |> expect.exist()
   })
 })
 
 describe("When operations |> Configurations.Broker()",{
   it("then operations is a list",{
     # When
-    operations <- Configuration.Broker()
+    operations <- Storage.Configuration.Broker()
 
     # Then
     operations |> expect.list()
   })
   it("then operations contains OpenConfigFile operation",{
     # When
-    operations <- Configuration.Broker()
+    operations <- Storage.Configuration.Broker()
 
     # Then
     operations[['OpenConfigFile']] |> expect.exist()
   })
   it("then operations contains GetPresetConfig operation",{
     # When
-    operations <- Configuration.Broker()
+    operations <- Storage.Configuration.Broker()
 
     # Then
     operations[['GetPresetConfig']] |> expect.exist()
   })
   it("then operations contains GetManualConfig operation",{
     # When
-    operations <- Configuration.Broker()
+    operations <- Storage.Configuration.Broker()
 
     # Then
     operations[['GetManualConfig']] |> expect.exist()
@@ -38,7 +38,7 @@ describe("When operations |> Configurations.Broker()",{
 describe("When operation[['GetPresetConfig']]()",{
   it("then a configuration is returned",{
     # Given
-    operations <- Configuration.Broker()
+    operations <- Storage.Configuration.Broker()
 
     # When
     configuration <- operations[['GetPresetConfig']]()
@@ -48,7 +48,7 @@ describe("When operation[['GetPresetConfig']]()",{
   })
   it("then the configuration contains a dsn value",{
     # Given
-    operations <- Configuration.Broker()
+    operations <- Storage.Configuration.Broker()
 
     # When
     configuration <- operations[['GetPresetConfig']]()
@@ -58,7 +58,7 @@ describe("When operation[['GetPresetConfig']]()",{
   })
   it("then the configuration contains a uid value",{
     # Given
-    operations <- Configuration.Broker()
+    operations <- Storage.Configuration.Broker()
 
     # When
     configuration <- operations[['GetPresetConfig']]()
@@ -68,7 +68,7 @@ describe("When operation[['GetPresetConfig']]()",{
   })
   it("then the configuration contains a pwd value",{
     # Given
-    operations <- Configuration.Broker()
+    operations <- Storage.Configuration.Broker()
 
     # When
     configuration <- operations[['GetPresetConfig']]()
@@ -79,7 +79,7 @@ describe("When operation[['GetPresetConfig']]()",{
   it("then an exception is thrown when DSN is not set",{
     # Given
     utility <- Environment::Environment()
-    operation <- Configuration.Broker()
+    operation <- Storage.Configuration.Broker()
 
     expected.error <- "No value found for provided environment variable:DSN. Please check .Renviron configuration file."
    
@@ -94,7 +94,7 @@ describe("When operation[['GetPresetConfig']]()",{
   it("then an exception is thrown when UID is not set",{
     # Given
     utility <- Environment::Environment()
-    operation <- Configuration.Broker()
+    operation <- Storage.Configuration.Broker()
 
     expected.error <- "No value found for provided environment variable:UID. Please check .Renviron configuration file."
    
@@ -109,7 +109,7 @@ describe("When operation[['GetPresetConfig']]()",{
   it("then an exception is thrown when PWD is not set",{
     # Given
     utility <- Environment::Environment()
-    operation <- Configuration.Broker()
+    operation <- Storage.Configuration.Broker()
 
     expected.error <- "No value found for provided environment variable:PWD. Please check .Renviron configuration file."
    
@@ -126,7 +126,7 @@ describe("When operation[['GetPresetConfig']]()",{
 describe("When operation[['GetManualConfig']]()",{
   it("then a configuration is returned",{
     # Given
-    operations <- Configuration.Broker()
+    operations <- Storage.Configuration.Broker()
 
     # When
     configuration <- operations[['GetManualConfig']]()
@@ -136,7 +136,7 @@ describe("When operation[['GetManualConfig']]()",{
   })
   it("then the configuration contains a driver value",{
     # Given
-    operations <- Configuration.Broker()
+    operations <- Storage.Configuration.Broker()
 
     # When
     configuration <- operations[['GetManualConfig']]()
@@ -146,7 +146,7 @@ describe("When operation[['GetManualConfig']]()",{
   })
   it("then the configuration contains a server value",{
     # Given
-    operations <- Configuration.Broker()
+    operations <- Storage.Configuration.Broker()
 
     # When
     configuration <- operations[['GetManualConfig']]()
@@ -156,7 +156,7 @@ describe("When operation[['GetManualConfig']]()",{
   })
   it("then the configuration contains a database value",{
     # Given
-    operations <- Configuration.Broker()
+    operations <- Storage.Configuration.Broker()
 
     # When
     configuration <- operations[['GetManualConfig']]()
@@ -166,7 +166,7 @@ describe("When operation[['GetManualConfig']]()",{
   })
   it("then the configuration contains a uid value",{
     # Given
-    operations <- Configuration.Broker()
+    operations <- Storage.Configuration.Broker()
 
     # When
     configuration <- operations[['GetManualConfig']]()
@@ -176,7 +176,7 @@ describe("When operation[['GetManualConfig']]()",{
   })
   it("then the configuration contains a pwd value",{
     # Given
-    operations <- Configuration.Broker()
+    operations <- Storage.Configuration.Broker()
 
     # When
     configuration <- operations[['GetManualConfig']]()
@@ -187,7 +187,7 @@ describe("When operation[['GetManualConfig']]()",{
   it("then an exception is thrown when DRIVER is not set",{
     # Given
     utility <- Environment::Environment()
-    operation <- Configuration.Broker()
+    operation <- Storage.Configuration.Broker()
 
     expected.error <- "No value found for provided environment variable:DRIVER. Please check .Renviron configuration file."
    
@@ -202,7 +202,7 @@ describe("When operation[['GetManualConfig']]()",{
   it("then an exception is thrown when SERVER is not set",{
     # Given
     utility <- Environment::Environment()
-    operation <- Configuration.Broker()
+    operation <- Storage.Configuration.Broker()
 
     expected.error <- "No value found for provided environment variable:SERVER. Please check .Renviron configuration file."
    
@@ -217,7 +217,7 @@ describe("When operation[['GetManualConfig']]()",{
   it("then an exception is thrown when DATABASE is not set",{
     # Given
     utility <- Environment::Environment()
-    operation <- Configuration.Broker()
+    operation <- Storage.Configuration.Broker()
 
     expected.error <- "No value found for provided environment variable:DATABASE. Please check .Renviron configuration file."
    
@@ -232,7 +232,7 @@ describe("When operation[['GetManualConfig']]()",{
   it("then an exception is thrown when UID is not set",{
     # Given
     utility <- Environment::Environment()
-    operation <- Configuration.Broker()
+    operation <- Storage.Configuration.Broker()
 
     expected.error <- "No value found for provided environment variable:UID. Please check .Renviron configuration file."
    
@@ -247,7 +247,7 @@ describe("When operation[['GetManualConfig']]()",{
   it("then an exception is thrown when PWD is not set",{
     # Given
     utility <- Environment::Environment()
-    operation <- Configuration.Broker()
+    operation <- Storage.Configuration.Broker()
 
     expected.error <- "No value found for provided environment variable:PWD. Please check .Renviron configuration file."
    

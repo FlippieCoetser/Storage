@@ -1,55 +1,55 @@
-describe("Configuration.Validator",{
+describe("Storage.Configuration.Validator",{
   it("Exist",{
-    Configuration.Validator |> expect.exist()
+    Storage.Configuration.Validator |> expect.exist()
   })
 })
 
-describe("When validations <- Configuration.Validator()",{
+describe("When validations <- Storage.Configuration.Validator()",{
   it("then validations is a list",{
     # Given
-    validations <- Configuration.Validator()
+    validations <- Storage.Configuration.Validator()
     
     # Then
     validations |> expect.list()
   })
   it("then validations contains IsNull validator",{
     # Given
-    validations <- Configuration.Validator()
+    validations <- Storage.Configuration.Validator()
     
     # Then
     validations[["IsNull"]] |> expect.exist()
   })
   it("then validations contains IsEmpty validator",{
     # Given
-    validations <- Configuration.Validator()
+    validations <- Storage.Configuration.Validator()
         
     # Then
     validations[["IsEmpty"]] |> expect.exist()
   })
   it("then validations contains HasDSN validator",{
     # Given
-    validations <- Configuration.Validator()
+    validations <- Storage.Configuration.Validator()
             
     # Then
     validations[["HasDSN"]] |> expect.exist()
   })
   it("then validations contains HasUID validator",{
     # Given
-    validations <- Configuration.Validator()
+    validations <- Storage.Configuration.Validator()
        
     # Then
     validations[["HasUID"]] |> expect.exist()
   })
   it("then validations contains HasPWD validator",{
     # Given
-    validations <- Configuration.Validator()
+    validations <- Storage.Configuration.Validator()
        
     # Then
     validations[["HasPWD"]] |> expect.exist()
   })
   it("then validations contains PresetConfig validator",{
     # Given
-    validations <- Configuration.Validator()
+    validations <- Storage.Configuration.Validator()
        
     # Then
     validations[["PresetConfig"]] |> expect.exist()
@@ -59,7 +59,7 @@ describe("When validations <- Configuration.Validator()",{
 describe("When value |> validate[['IsNull']]()",{
   it("then true is returned if value is null",{
     # Given
-    validate <- Configuration.Validator()
+    validate <- Storage.Configuration.Validator()
     
     # When
     value <- NULL
@@ -69,7 +69,7 @@ describe("When value |> validate[['IsNull']]()",{
   })
   it("then false is returned if value is not null",{
     # Given
-    validate <- Configuration.Validator()
+    validate <- Storage.Configuration.Validator()
     
     # When
     value <- "value"
@@ -82,7 +82,7 @@ describe("When value |> validate[['IsNull']]()",{
 describe("When value |> validate[['IsEmpty']]()",{
   it("then true is returned if value is empty",{
     # Given
-    validate <- Configuration.Validator()
+    validate <- Storage.Configuration.Validator()
     
     # When
     value <- ""
@@ -92,7 +92,7 @@ describe("When value |> validate[['IsEmpty']]()",{
   })
   it("then false is returned if value is not empty",{
     # Given
-    validate <- Configuration.Validator()
+    validate <- Storage.Configuration.Validator()
     
     # When
     value <- "value"
@@ -105,7 +105,7 @@ describe("When value |> validate[['IsEmpty']]()",{
 describe("When configuration |> validate[['HasDSN']]()",{
   it("then configuration is returned if configuration has dsn",{
     # Given
-    validate <- Configuration.Validator()
+    validate <- Storage.Configuration.Validator()
 
     configuration <- list()
     configuration[['dsn']] <- "DSN"
@@ -120,7 +120,7 @@ describe("When configuration |> validate[['HasDSN']]()",{
   })
   it("then no exception is thrown if configuration has dsn",{
     # Given
-    validate <- Configuration.Validator()
+    validate <- Storage.Configuration.Validator()
 
     configuration <- list()
     configuration[['dsn']] <- "DSN"
@@ -130,7 +130,7 @@ describe("When configuration |> validate[['HasDSN']]()",{
   })
   it("then an exception is thrown if configuration has no dsn",{
     # Given
-    validate <- Configuration.Validator()
+    validate <- Storage.Configuration.Validator()
 
     configuration <- list()
 
@@ -144,7 +144,7 @@ describe("When configuration |> validate[['HasDSN']]()",{
 describe("When configuration |> validate[['HasUID']]()",{
   it("then configuration is returned if configuration has uid",{
     # Given
-    validate <- Configuration.Validator()
+    validate <- Storage.Configuration.Validator()
 
     configuration <- list()
     configuration[['uid']] <- "UID"
@@ -159,7 +159,7 @@ describe("When configuration |> validate[['HasUID']]()",{
   })
   it("then no exception is thrown if configuration has uid",{
     # Given
-    validate <- Configuration.Validator()
+    validate <- Storage.Configuration.Validator()
 
     configuration <- list()
     configuration[['uid']] <- "UID"
@@ -169,7 +169,7 @@ describe("When configuration |> validate[['HasUID']]()",{
   })
   it("then an exception is thrown if configuration has no uid",{
     # Given
-    validate <- Configuration.Validator()
+    validate <- Storage.Configuration.Validator()
 
     configuration <- list()
 
@@ -183,7 +183,7 @@ describe("When configuration |> validate[['HasUID']]()",{
 describe("When configuration |> validate[['HasPWD']]()",{
   it("then configuration is returned if configuration has pwd",{
     # Given
-    validate <- Configuration.Validator()
+    validate <- Storage.Configuration.Validator()
 
     configuration <- list()
     configuration[['pwd']] <- "PWD"
@@ -198,7 +198,7 @@ describe("When configuration |> validate[['HasPWD']]()",{
   })
   it("then no exception is thrown if configuration has pwd",{
     # Given
-    validate <- Configuration.Validator()
+    validate <- Storage.Configuration.Validator()
 
     configuration <- list()
     configuration[['pwd']] <- "PWD"
@@ -208,7 +208,7 @@ describe("When configuration |> validate[['HasPWD']]()",{
   })
   it("then an exception is thrown if configuration has no pwd",{
     # Given
-    validate <- Configuration.Validator()
+    validate <- Storage.Configuration.Validator()
 
     configuration <- list()
 
@@ -222,7 +222,7 @@ describe("When configuration |> validate[['HasPWD']]()",{
 describe("When configuration |> validate[['PresetConfig']]()",{
   it("then configuration is returned if configuration is valid",{
     # Given
-    validate <- Configuration.Validator()
+    validate <- Storage.Configuration.Validator()
 
     configuration <- list()
     configuration[['dsn']] <- "DSN"
@@ -239,7 +239,7 @@ describe("When configuration |> validate[['PresetConfig']]()",{
   })
   it("then no exception is thrown if configuration is valid",{
     # Given
-    validate <- Configuration.Validator()
+    validate <- Storage.Configuration.Validator()
 
     configuration <- list()
     configuration[['dsn']] <- "DSN"
@@ -251,7 +251,7 @@ describe("When configuration |> validate[['PresetConfig']]()",{
   })
   it("then an exception is thrown if configuration has no dsn",{
     # Given
-    validate <- Configuration.Validator()
+    validate <- Storage.Configuration.Validator()
 
     configuration <- list()
     configuration[['uid']] <- "UID"
@@ -264,7 +264,7 @@ describe("When configuration |> validate[['PresetConfig']]()",{
   })
   it("then an exception is thrown if configuration has no uid",{
     # Given
-    validate <- Configuration.Validator()
+    validate <- Storage.Configuration.Validator()
 
     configuration <- list()
     configuration[['dsn']] <- "DSN"
@@ -277,7 +277,7 @@ describe("When configuration |> validate[['PresetConfig']]()",{
   })
   it("then an exception is thrown if configuration has no pwd",{
     # Given
-    validate <- Configuration.Validator()
+    validate <- Storage.Configuration.Validator()
 
     configuration <- list()
     configuration[['dsn']] <- "DSN"

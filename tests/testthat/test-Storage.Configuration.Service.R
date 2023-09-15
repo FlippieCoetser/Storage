@@ -1,20 +1,20 @@
-describe("Configuration.Service",{
+describe("Storage.Configuration.Service",{
   it("Exist",{
-    Configuration.Service |> expect.exist()
+    Storage.Configuration.Service |> expect.exist()
   })
 })
 
-describe("When services <- Configuration.Service()",{
+describe("When services <- Storage.Configuration.Service()",{
   it("then services is a list",{
     # Given
-    services <- Configuration.Service()
+    services <- Storage.Configuration.Service()
     
     # Then
     services |> expect.list()
   })
   it("then services contains OpenConfigFile service",{
     # Given
-    services <- Configuration.Service()
+    services <- Storage.Configuration.Service()
     
     # Then
     services[["OpenConfigFile"]] |> expect.exist()
@@ -24,8 +24,8 @@ describe("When services <- Configuration.Service()",{
 describe("When service[['GetPresetConfig']]()",{
   it("then a list of parameters is returned",{
     # Given
-    broker  <- Configuration.Broker()
-    service <- broker |> Configuration.Service()
+    broker  <- Storage.Configuration.Broker()
+    service <- broker |> Storage.Configuration.Service()
     
     # Then
     service[["GetPresetConfig"]]() |> expect.list()
@@ -37,12 +37,12 @@ describe("When service[['GetPresetConfig']]()",{
     configuration[['uid']] <- "UID"
     configuration[['pwd']] <- "PWD"
 
-    broker  <- Configuration.Broker()
+    broker  <- Storage.Configuration.Broker()
     broker[["GetPresetConfig"]] <- \() {
       configuration
     }
 
-    service <- broker |> Configuration.Service()
+    service <- broker |> Storage.Configuration.Service()
     
     expected.error <- "Configuration has no dsn"
     
@@ -56,12 +56,12 @@ describe("When service[['GetPresetConfig']]()",{
     configuration[['uid']] <- NULL
     configuration[['pwd']] <- "PWD"
 
-    broker  <- Configuration.Broker()
+    broker  <- Storage.Configuration.Broker()
     broker[["GetPresetConfig"]] <- \() {
       configuration
     }
     
-    service <- broker |> Configuration.Service()
+    service <- broker |> Storage.Configuration.Service()
     
     expected.error <- "Configuration has no uid"
     
@@ -75,12 +75,12 @@ describe("When service[['GetPresetConfig']]()",{
     configuration[['uid']] <- "UID"
     configuration[['pwd']] <- NULL
 
-    broker  <- Configuration.Broker()
+    broker  <- Storage.Configuration.Broker()
     broker[["GetPresetConfig"]] <- \() {
       configuration
     }
     
-    service <- broker |> Configuration.Service()
+    service <- broker |> Storage.Configuration.Service()
     
     expected.error <- "Configuration has no pwd"
     

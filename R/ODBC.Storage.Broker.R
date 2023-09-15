@@ -13,7 +13,7 @@
 #' * `Delete(id, table)`
 #' @export
 ODBC.Storage.Broker <- \(configuration){
-  validate <- Configuration.Validator()
+  validate <- Storage.Configuration.Validator()
   configuration |> validate[['PresetConfig']]()
     
   sql <- Query::SQL()

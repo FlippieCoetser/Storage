@@ -1,4 +1,4 @@
-Configuration.Exceptions <- \() {
+Storage.Configuration.Exceptions <- \() {
   exception <- list()
   exception[["DSNIsNull"]] <- \(invoke) {
     if (invoke) {

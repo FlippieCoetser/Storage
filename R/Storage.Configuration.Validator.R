@@ -1,5 +1,5 @@
-Configuration.Validator <- \() {
-  exception <- Configuration.Exceptions()
+Storage.Configuration.Validator <- \() {
+  exception <- Storage.Configuration.Exceptions()
 
   validations <- list()
   validations[["PresetConfig"]] <- \(configuration) {
