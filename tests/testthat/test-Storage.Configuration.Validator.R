@@ -202,7 +202,7 @@ describe("When configuration |> validate[['HasDRIVER']]()",{
 })
 
 describe("When configuration |> validate[['HasSERVER']]()",{
-  it("then configuration is returned if configuration has driver",{
+  it("then configuration is returned if configuration has server",{
     # Given
     validate <- Storage.Configuration.Validator()
 
@@ -217,7 +217,7 @@ describe("When configuration |> validate[['HasSERVER']]()",{
     # Then
     actual.configuration |> expect.equal(expected.configuration)
   })
-  it("then no exception is thrown if configuration has driver",{
+  it("then no exception is thrown if configuration has server",{
     # Given
     validate <- Storage.Configuration.Validator()
 
@@ -227,7 +227,7 @@ describe("When configuration |> validate[['HasSERVER']]()",{
     # Then
     configuration |> validate[["HasSERVER"]]() |> expect.no.error()
   })
-  it("then an exception is thrown if configuration has no driver",{
+  it("then an exception is thrown if configuration has no server",{
     # Given
     validate <- Storage.Configuration.Validator()
 
