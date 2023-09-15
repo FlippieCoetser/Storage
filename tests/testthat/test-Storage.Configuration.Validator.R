@@ -33,6 +33,13 @@ describe("When validations <- Storage.Configuration.Validator()",{
     # Then
     validations[["HasDSN"]] |> expect.exist()
   })
+  it("then validations contains HasSERVER validator",{
+    # Given
+    validations <- Storage.Configuration.Validator()
+    
+    # Then
+    validations[["HasSERVER"]] |> expect.exist()
+  })
   it("then validations contains HasUID validator",{
     # Given
     validations <- Storage.Configuration.Validator()
