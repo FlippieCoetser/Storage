@@ -1,4 +1,4 @@
-configurator  <- Configuration.Broker() |> Configuration.Service()
+configurator  <- Storage.Configuration.Broker() |> Storage.Configuration.Service()
 configuration <- configurator[["GetPresetConfig"]]()
 
 sql           <- Query::SQL()

@@ -1,5 +1,5 @@
-Configuration.Validator <- \() {
-  exception <- Configuration.Exceptions()
+Storage.Configuration.Validator <- \() {
+  exception <- Storage.Configuration.Exceptions()
 
   validations <- list()
   validations[["PresetConfig"]] <- \(configuration) {
@@ -10,21 +10,21 @@ Configuration.Validator <- \() {
     return(configuration)
   }
   validations[["HasDSN"]]       <- \(configuration) {
-    configuration[["DSN"]]    |> 
+    configuration[['dsn']]    |> 
     validations[["IsNull"]]() |>
-    exception[["DSNIsNull"]]()
+    exception[['dsnIsNull']]()
     return(configuration)
   }
   validations[["HasUID"]]       <- \(configuration) {
-    configuration[["UID"]]    |>
+    configuration[['uid']]    |>
     validations[["IsNull"]]() |>
-    exception[["UIDIsNull"]]()
+    exception[['uidIsNull']]()
     return(configuration)
   }
   validations[["HasPWD"]]       <- \(configuration) {
-    configuration[["PWD"]]    |>
+    configuration[['pwd']]    |>
     validations[["IsNull"]]() |>
-    exception[["PWDIsNull"]]()
+    exception[['pwdIsNull']]()
     return(configuration)
   }
   validations[["IsEmpty"]]      <- \(parameter) {

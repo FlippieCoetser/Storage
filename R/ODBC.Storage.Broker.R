@@ -13,7 +13,7 @@
 #' * `Delete(id, table)`
 #' @export
 ODBC.Storage.Broker <- \(configuration){
-  validate <- Configuration.Validator()
+  validate <- Storage.Configuration.Validator()
   configuration |> validate[['PresetConfig']]()
     
   sql <- Query::SQL()
@@ -23,9 +23,9 @@ ODBC.Storage.Broker <- \(configuration){
     exception  <- Storage.Exceptions()
     config <- list(
       drv = odbc::odbc(),
-      dsn = configuration[['DSN']],
-      uid = configuration[['UID']],
-      pwd = configuration[['PWD']]
+      dsn = configuration[['dsn']],
+      uid = configuration[['uid']],
+      pwd = configuration[['pwd']]
     )
     tryCatch(
       DBI::dbConnect |> do.call(config),

@@ -26,26 +26,26 @@ describe("When exceptions <- Storage.Exceptions()",{
     # Then
     exceptions[['ConfigIsMissing']] |> expect.exist()
   })
-  it("then exceptions contains DSNIsNull exception",{
+  it("then exceptions contains dsnIsNull exception",{
     # Given
     exceptions <- Storage.Exceptions()
 
     # Then
-    exceptions[['DSNIsNull']] |> expect.exist()
+    exceptions[['dsnIsNull']] |> expect.exist()
   })
-  it("then exceptions contains UIDIsNull exception",{
+  it("then exceptions contains uidIsNull exception",{
     # Given
     exceptions <- Storage.Exceptions()
 
     # Then
-    exceptions[['UIDIsNull']] |> expect.exist()
+    exceptions[['uidIsNull']] |> expect.exist()
   })
-  it("then exceptions contains PWDIsNull exception",{
+  it("then exceptions contains pwdIsNull exception",{
     # Given
     exceptions <- Storage.Exceptions()
 
     # Then
-    exceptions[['PWDIsNull']] |> expect.exist()
+    exceptions[['pwdIsNull']] |> expect.exist()
   })
   it("then exceptions contains Connection exception",{
     # Given
@@ -185,7 +185,7 @@ describe("when input |> exception[['DSNIsNull']]()",{
     input <- FALSE
 
     # Then
-    input |> exception[["DSNIsNull"]]() |> expect_no_error()
+    input |> exception[['dsnIsNull']]() |> expect_no_error()
   })
   it('then an exception is thrown when input is TRUE',{
     # Given
@@ -197,11 +197,11 @@ describe("when input |> exception[['DSNIsNull']]()",{
     input <- TRUE
 
     # Then
-    input |> exception[["DSNIsNull"]]() |> expect_error(expected.error)
+    input |> exception[['dsnIsNull']]() |> expect_error(expected.error)
   })
 })
 
-describe("When input |> exception[['UIDIsNull']]()",{
+describe("When input |> exception[['uidIsNull']]()",{
   it('then no exception is thrown when input is FALSE',{
     # Given
     exception <- Storage.Exceptions()
@@ -210,7 +210,7 @@ describe("When input |> exception[['UIDIsNull']]()",{
     input <- FALSE
 
     # Then
-    input |> exception[["UIDIsNull"]]() |> expect_no_error()
+    input |> exception[['uidIsNull']]() |> expect_no_error()
   })
   it('then an exception is thrown when input is TRUE',{
     # Given
@@ -222,11 +222,11 @@ describe("When input |> exception[['UIDIsNull']]()",{
     input <- TRUE
 
     # Then
-    input |> exception[["UIDIsNull"]]() |> expect_error(expected.error)
+    input |> exception[['uidIsNull']]() |> expect_error(expected.error)
   })
 })
 
-describe("When input |> exception[['PWDIsNull']]()",{
+describe("When input |> exception[['pwdIsNull']]()",{
   it('then no exception is thrown when input is FALSE',{
     # Given
     exception <- Storage.Exceptions()
@@ -235,7 +235,7 @@ describe("When input |> exception[['PWDIsNull']]()",{
     input <- FALSE
 
     # Then
-    input |> exception[["PWDIsNull"]]() |> expect_no_error()
+    input |> exception[['pwdIsNull']]() |> expect_no_error()
   })
   it('then an exception is thrown when input is TRUE',{
     # Given
@@ -247,7 +247,7 @@ describe("When input |> exception[['PWDIsNull']]()",{
     input <- TRUE
 
     # Then
-    input |> exception[["PWDIsNull"]]() |> expect_error(expected.error)
+    input |> exception[['pwdIsNull']]() |> expect_error(expected.error)
   })    
 })
 

@@ -10,17 +10,17 @@ Storage.Exceptions <- \() {
       stop("No configuration provided but required. Provide configuration", call. = FALSE)
     }
   }
-  exceptions[["DSNIsNull"]]          <- \(invoke) {
+  exceptions[['dsnIsNull']]          <- \(invoke) {
     if (invoke) { 
       stop("Configuration has no DSN. Add DSN to configuration", call. = FALSE) 
     }
   }
-  exceptions[["UIDIsNull"]]          <- \(invoke) {
+  exceptions[['uidIsNull']]          <- \(invoke) {
     if (invoke) {
       stop("Configuration has no UID. Add UID to configuration", call. = FALSE)
     }
   }
-  exceptions[["PWDIsNull"]]          <- \(invoke) {
+  exceptions[['pwdIsNull']]          <- \(invoke) {
     if (invoke) {
       stop("Configuration has no PWD. Add PWD to configuration", call. = FALSE)
     }
