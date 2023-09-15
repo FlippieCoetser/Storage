@@ -11,6 +11,7 @@ Storage.Configuration.Exceptions <- \() {
     }
   }
   exception[['serverIsNull']]  <- \() {}
+  exception[['databaseIsNull']]<- \() {}
   exception[['uidIsNull']]     <- \(invoke) {
     if (invoke) {
       stop('Configuration has no uid', call. = FALSE)
