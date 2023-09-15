@@ -75,6 +75,13 @@ describe("When validations <- Storage.Configuration.Validator()",{
     # Then
     validations[["PresetConfig"]] |> expect.exist()
   })
+  it("then validations contains ManualConfig validator",{
+    # Given
+    validations <- Storage.Configuration.Validator()
+       
+    # Then
+    validations[["ManualConfig"]] |> expect.exist()
+  })
 })
 
 describe("When value |> validate[['IsNull']]()",{
