@@ -5,6 +5,9 @@ Storage.Configuration.Exceptions <- \() {
       stop('Configuration has no dsn', call. = FALSE)
     }
   }
+  exception[['driverIsNull']]  <- \(invoke) {
+
+  }
   exception[['uidIsNull']]     <- \(invoke) {
     if (invoke) {
       stop('Configuration has no uid', call. = FALSE)
