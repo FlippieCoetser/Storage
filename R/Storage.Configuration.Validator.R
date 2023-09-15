@@ -27,7 +27,11 @@ Storage.Configuration.Validator <- \() {
     exception[['serverIsNull']]()
     return(configuration)
   }
-  validations[['HasDATABASE']]  <- \() {
+  validations[['HasDATABASE']]  <- \(configuration) {
+    configuration[['database']] |>
+    validations[["IsNull"]]() |>
+    exception[['databaseIsNull']]()
+    return(configuration)
   }
   validations[["HasUID"]]       <- \(configuration) {
     configuration[['uid']]    |>
