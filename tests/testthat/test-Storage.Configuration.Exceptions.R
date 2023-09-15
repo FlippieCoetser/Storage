@@ -19,6 +19,14 @@ describe("When exceptions <- Storage.Configuration.Exceptions()", {
     # Then
     exceptions[['dsnIsNull']] |> expect.exist()
   })
+  it("then exceptions contains driverIsNull",{
+    # Given
+    exceptions <- Storage.Configuration.Exceptions()
+
+    # Then
+    exceptions[['driverIsNull']] |> expect.exist()
+  })
+  })
   it("then exceptions contains uidIsNull", {
     # Given
     exceptions <- Storage.Configuration.Exceptions()
