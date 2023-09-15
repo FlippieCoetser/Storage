@@ -162,6 +162,45 @@ describe("When configuration |> validate[['HasDSN']]()",{
   })
 })
 
+describe("When configuration |> validate[['HasDRIVER']]()",{
+  it("then configuration is returned if configuration has driver",{
+    # Given
+    validate <- Storage.Configuration.Validator()
+
+    configuration <- list()
+    configuration[['driver']] <- "DRIVER"
+
+    expected.configuration <- configuration
+    
+    # When
+    actual.configuration <- configuration |> validate[["HasDRIVER"]]()
+    
+    # Then
+    actual.configuration |> expect.equal(expected.configuration)
+  })
+  it("then no exception is thrown if configuration has driver",{
+    # Given
+    validate <- Storage.Configuration.Validator()
+
+    configuration <- list()
+    configuration[['driver']] <- "DRIVER"
+
+    # Then
+    configuration |> validate[["HasDRIVER"]]() |> expect.no.error()
+  })
+  it("then an exception is thrown if configuration has no driver",{
+    # Given
+    validate <- Storage.Configuration.Validator()
+
+    configuration <- list()
+
+    expected.error <- "Configuration has no driver."
+
+    # Then
+    configuration |> validate[["HasDRIVER"]]() |> expect.error(expected.error)
+  })
+})
+
 describe("When configuration |> validate[['HasUID']]()",{
   it("then configuration is returned if configuration has uid",{
     # Given
