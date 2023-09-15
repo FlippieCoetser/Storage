@@ -106,6 +106,31 @@ describe("When input |> exception[['driverIsNull']]()", {
   })
 })
 
+describe("When input |> exception[['serverIsNull']]()", {
+  it("then no exception is thrown if input is FALSE", {
+    # Given
+    exception <- Storage.Configuration.Exceptions()
+
+    # When
+    input <- FALSE
+
+    # Then
+    input |> exception[['serverIsNull']]() |> expect.no.error()
+  })
+  it("then an exception is thrown if input is TRUE",{
+    # Given
+    exception <- Storage.Configuration.Exceptions()
+
+    expected.error <- "Configuration has no server."
+
+    # When
+    input <- TRUE
+
+    # Then
+    input |> exception[['serverIsNull']]() |> expect.error(expected.error)
+  })
+})
+
 describe("When input |> exception[['uidIsNull']]()", {
   it("then no exception is thrown if input is FALSE", {
     # Given
