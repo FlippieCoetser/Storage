@@ -46,7 +46,7 @@ describe("When operation[['GetPresetConfig']]()",{
     # Then
     configuration |> expect.exist()
   })
-  it("then the configuration contains a DSN value",{
+  it("then the configuration contains a dsn value",{
     # Given
     operations <- Configuration.Broker()
 
@@ -56,7 +56,7 @@ describe("When operation[['GetPresetConfig']]()",{
     # Then
     configuration[['dsn']] |> expect.exist()
   })
-  it("then the configuration contains a UID value",{
+  it("then the configuration contains a uid value",{
     # Given
     operations <- Configuration.Broker()
 
@@ -66,7 +66,7 @@ describe("When operation[['GetPresetConfig']]()",{
     # Then
     configuration[['uid']] |> expect.exist()
   })
-  it("then the configuration contains a PWD value",{
+  it("then the configuration contains a pwd value",{
     # Given
     operations <- Configuration.Broker()
 
@@ -89,7 +89,7 @@ describe("When operation[['GetManualConfig']]()",{
     # Then
     configuration |> expect.exist()
   })
-  it("then the configuration contains a DRIVER value",{
+  it("then the configuration contains a driver value",{
     # Given
     operations <- Configuration.Broker()
 
@@ -97,9 +97,9 @@ describe("When operation[['GetManualConfig']]()",{
     configuration <- operations[['GetManualConfig']]()
 
     # Then
-    configuration[['DRIVER']] |> expect.exist()
+    configuration[['driver']] |> expect.exist()
   })
-  it("then the configuration contains a SERVER value",{
+  it("then the configuration contains a server value",{
     # Given
     operations <- Configuration.Broker()
 
@@ -107,9 +107,9 @@ describe("When operation[['GetManualConfig']]()",{
     configuration <- operations[['GetManualConfig']]()
 
     # Then
-    configuration[['SERVER']] |> expect.exist()
+    configuration[['server']] |> expect.exist()
   })
-  it("then the configuration contains a DATABASE value",{
+  it("then the configuration contains a database value",{
     # Given
     operations <- Configuration.Broker()
 
@@ -117,9 +117,9 @@ describe("When operation[['GetManualConfig']]()",{
     configuration <- operations[['GetManualConfig']]()
 
     # Then
-    configuration[['DATABASE']] |> expect.exist()
+    configuration[['database']] |> expect.exist()
   })
-  it("then the configuration contains a UID value",{
+  it("then the configuration contains a uid value",{
     # Given
     operations <- Configuration.Broker()
 
@@ -129,7 +129,7 @@ describe("When operation[['GetManualConfig']]()",{
     # Then
     configuration[['uid']] |> expect.exist()
   })
-  it("then the configuration contains a PWD value",{
+  it("then the configuration contains a pwd value",{
     # Given
     operations <- Configuration.Broker()
 
