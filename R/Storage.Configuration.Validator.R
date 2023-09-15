@@ -9,6 +9,7 @@ Storage.Configuration.Validator <- \() {
     validations[["HasPWD"]]()
     return(configuration)
   }
+  validations[['ManualConfig']] <- \() {}
   validations[["HasDSN"]]       <- \(configuration) {
     configuration[['dsn']]    |> 
     validations[["IsNull"]]() |>
