@@ -12,19 +12,19 @@ Storage.Configuration.Validator <- \() {
   validations[["HasDSN"]]       <- \(configuration) {
     configuration[['dsn']]    |> 
     validations[["IsNull"]]() |>
-    exception[["DSNIsNull"]]()
+    exception[['dsnIsNull']]()
     return(configuration)
   }
   validations[["HasUID"]]       <- \(configuration) {
     configuration[['uid']]    |>
     validations[["IsNull"]]() |>
-    exception[["UIDIsNull"]]()
+    exception[['uidIsNull']]()
     return(configuration)
   }
   validations[["HasPWD"]]       <- \(configuration) {
     configuration[['pwd']]    |>
     validations[["IsNull"]]() |>
-    exception[["PWDIsNull"]]()
+    exception[['pwdIsNull']]()
     return(configuration)
   }
   validations[["IsEmpty"]]      <- \(parameter) {

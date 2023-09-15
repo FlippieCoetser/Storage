@@ -1,16 +1,16 @@
 Storage.Configuration.Exceptions <- \() {
   exception <- list()
-  exception[["DSNIsNull"]] <- \(invoke) {
+  exception[['dsnIsNull']] <- \(invoke) {
     if (invoke) {
       stop('Configuration has no dsn', call. = FALSE)
     }
   }
-  exception[["UIDIsNull"]] <- \(invoke) {
+  exception[['uidIsNull']] <- \(invoke) {
     if (invoke) {
       stop('Configuration has no uid', call. = FALSE)
     }
   }
-  exception[["PWDIsNull"]] <- \(invoke) {
+  exception[['pwdIsNull']] <- \(invoke) {
     if (invoke) {
       stop('Configuration has no pwd', call. = FALSE)
     }
