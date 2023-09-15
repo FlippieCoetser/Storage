@@ -240,6 +240,45 @@ describe("When configuration |> validate[['HasSERVER']]()",{
   })
 })
 
+describe("When configuration |> validate[['HasDATABASE']]()",{
+  it("then configuration is returned if configuration has database",{
+    # Given
+    validate <- Storage.Configuration.Validator()
+
+    configuration <- list()
+    configuration[['database']] <- "database"
+
+    expected.configuration <- configuration
+    
+    # When
+    actual.configuration <- configuration |> validate[["HasDATABASE"]]()
+    
+    # Then
+    actual.configuration |> expect.equal(expected.configuration)
+  })
+  it("then no exception is thrown if configuration has database",{
+    # Given
+    validate <- Storage.Configuration.Validator()
+
+    configuration <- list()
+    configuration[['database']] <- "database"
+
+    # Then
+    configuration |> validate[["HasDATABASE"]]() |> expect.no.error()
+  })
+  it("then an exception is thrown if configuration has no database",{
+    # Given
+    validate <- Storage.Configuration.Validator()
+
+    configuration <- list()
+
+    expected.error <- "Configuration has no database."
+
+    # Then
+    configuration |> validate[["HasDATABASE"]]() |> expect.error(expected.error)
+  })
+})
+
 describe("When configuration |> validate[['HasUID']]()",{
   it("then configuration is returned if configuration has uid",{
     # Given
