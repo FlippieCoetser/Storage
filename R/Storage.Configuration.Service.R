@@ -20,12 +20,16 @@ Storage.Configuration.Service <- \(broker) {
   validate <- Storage.Configuration.Validator()
     
   services <- list()
-  services[["OpenConfigFile"]]  <- \() {
-    broker[["OpenConfigFile"]]()
+  services[['OpenConfigFile']]  <- \() {
+    broker[['OpenConfigFile']]()
   }
-  services[["GetPresetConfig"]] <- \() {
-    broker[["GetPresetConfig"]]() |>
-    validate[["PresetConfig"]]()
+  services[['GetPresetConfig']] <- \() {
+    broker[['GetPresetConfig']]() |>
+    validate[['PresetConfig']]()
+  }
+  services[['GetManualConfig']] <- \() { 
+    broker[['GetManualConfig']]() |>
+    validate[['ManualConfig']]()
   }
   return(services)
 }

@@ -19,6 +19,27 @@ describe("When exceptions <- Storage.Configuration.Exceptions()", {
     # Then
     exceptions[['dsnIsNull']] |> expect.exist()
   })
+  it("then exceptions contains driverIsNull",{
+    # Given
+    exceptions <- Storage.Configuration.Exceptions()
+
+    # Then
+    exceptions[['driverIsNull']] |> expect.exist()
+  })
+  it("then exceptions contains serverIsNull", {
+    # Given
+    exceptions <- Storage.Configuration.Exceptions()
+
+    # Then
+    exceptions[['serverIsNull']] |> expect.exist()
+  })
+  it("then exceptions contains databaseIsNull", {
+    # Given
+    exceptions <- Storage.Configuration.Exceptions()
+
+    # Then
+    exceptions[['databaseIsNull']] |> expect.exist()
+  })
   it("then exceptions contains uidIsNull", {
     # Given
     exceptions <- Storage.Configuration.Exceptions()
@@ -57,6 +78,81 @@ describe("When input |> exception[['dsnIsNull']]()", {
 
     # Then
     input |> exception[['dsnIsNull']]() |> expect.error(expected.error)
+  })
+})
+
+describe("When input |> exception[['driverIsNull']]()", {
+  it("then no exception is thrown if input is FALSE", {
+    # Given
+    exception <- Storage.Configuration.Exceptions()
+
+    # When
+    input <- FALSE
+
+    # Then
+    input |> exception[['driverIsNull']]() |> expect.no.error()
+  })
+  it("then an exception is thrown if input is TRUE",{
+    # Given
+    exception <- Storage.Configuration.Exceptions()
+
+    expected.error <- "Configuration has no driver."
+
+    # When
+    input <- TRUE
+
+    # Then
+    input |> exception[['driverIsNull']]() |> expect.error(expected.error)
+  })
+})
+
+describe("When input |> exception[['serverIsNull']]()", {
+  it("then no exception is thrown if input is FALSE", {
+    # Given
+    exception <- Storage.Configuration.Exceptions()
+
+    # When
+    input <- FALSE
+
+    # Then
+    input |> exception[['serverIsNull']]() |> expect.no.error()
+  })
+  it("then an exception is thrown if input is TRUE",{
+    # Given
+    exception <- Storage.Configuration.Exceptions()
+
+    expected.error <- "Configuration has no server."
+
+    # When
+    input <- TRUE
+
+    # Then
+    input |> exception[['serverIsNull']]() |> expect.error(expected.error)
+  })
+})
+
+describe("When input |> exception[['databaseIsNull']]()", {
+  it("then no exception is thrown if input is FALSE", {
+    # Given
+    exception <- Storage.Configuration.Exceptions()
+
+    # When
+    input <- FALSE
+
+    # Then
+    input |> exception[['databaseIsNull']]() |> expect.no.error()
+  })
+  it("then an exception is thrown if input is TRUE",{
+    # Given
+    exception <- Storage.Configuration.Exceptions()
+
+    expected.error <- "Configuration has no database."
+
+    # When
+    input <- TRUE
+
+    # Then
+    input |> exception[['databaseIsNull']]() |> expect.error(expected.error)
   })
 })
 
