@@ -26,6 +26,13 @@ describe("When operations |> Configurations.Broker()",{
     # Then
     operations[['GetPresetConfig']] |> expect.exist()
   })
+  it("then operations contains GetManualConfig operation",{
+    # When
+    operations <- Configuration.Broker()
+
+    # Then
+    operations[['GetManualConfig']] |> expect.exist()
+  })
 })
 
 describe("When operation[['GetPresetConfig']]()",{
