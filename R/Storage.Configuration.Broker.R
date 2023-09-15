@@ -1,5 +1,5 @@
 Storage.Configuration.Broker <- \() {
-  utility <- Environment::Environment()
+  utility   <- Environment::Environment()
   exception <- Storage.Configuration.Exceptions()
 
   operations <- list()
