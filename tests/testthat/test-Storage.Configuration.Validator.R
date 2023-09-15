@@ -434,3 +434,114 @@ describe("When configuration |> validate[['PresetConfig']]()",{
     configuration |> validate[["PresetConfig"]]() |> expect.error(expected.error)
   })
 })
+
+describe("When configuration |> validate[['ManualConfig']]()",{
+  it("then configuration is returned if configuration is valid",{
+    # Given
+    validate <- Storage.Configuration.Validator()
+
+    configuration <- list()
+    configuration[['driver']]   <- "DRIVER"
+    configuration[['server']]   <- "SERVER"
+    configuration[['database']] <- "DATABASE"
+    configuration[['uid']]      <- "UID"
+    configuration[['pwd']]      <- "PWD"
+
+    expected.configuration <- configuration
+    
+    # When
+    actual.configuration <- configuration |> validate[['ManualConfig']]()
+    
+    # Then
+    actual.configuration |> expect.equal(expected.configuration)
+  })
+  it("then no exception is thrown if configuration is valid",{
+    # Given
+    validate <- Storage.Configuration.Validator()
+
+    configuration <- list()
+    configuration[['driver']]   <- "DRIVER"
+    configuration[['server']]   <- "SERVER"
+    configuration[['database']] <- "DATABASE"
+    configuration[['uid']]      <- "UID"
+    configuration[['pwd']]      <- "PWD"
+
+    # Then
+    configuration |> validate[['ManualConfig']]() |> expect.no.error()
+  })
+  it("then an exception is thrown if configuration has no driver",{
+    # Given
+    validate <- Storage.Configuration.Validator()
+
+    configuration <- list()
+    configuration[['server']]   <- "SERVER"
+    configuration[['database']] <- "DATABASE"
+    configuration[['uid']]      <- "UID"
+    configuration[['pwd']]      <- "PWD"
+
+    expected.error <- "Configuration has no driver."
+
+    # Then
+    configuration |> validate[['ManualConfig']]() |> expect.error(expected.error)
+  })
+  it("then an exception is thrown if configuration has no server",{
+    # Given
+    validate <- Storage.Configuration.Validator()
+
+    configuration <- list()
+    configuration[['driver']]   <- "DRIVER"
+    configuration[['database']] <- "DATABASE"
+    configuration[['uid']]      <- "UID"
+    configuration[['pwd']]      <- "PWD"
+
+    expected.error <- "Configuration has no server."
+
+    # Then
+    configuration |> validate[['ManualConfig']]() |> expect.error(expected.error)
+  })
+  it("then an exception is thrown if configuration has no database",{
+    # Given
+    validate <- Storage.Configuration.Validator()
+
+    configuration <- list()
+    configuration[['driver']]   <- "DRIVER"
+    configuration[['server']]   <- "SERVER"
+    configuration[['uid']]      <- "UID"
+    configuration[['pwd']]      <- "PWD"
+
+    expected.error <- "Configuration has no database."
+
+    # Then
+    configuration |> validate[['ManualConfig']]() |> expect.error(expected.error)
+  })
+  it("then an exception is thrown if configuration has no uid",{
+    # Given
+    validate <- Storage.Configuration.Validator()
+
+    configuration <- list()
+    configuration[['driver']]   <- "DRIVER"
+    configuration[['server']]   <- "SERVER"
+    configuration[['database']] <- "DATABASE"
+    configuration[['pwd']]      <- "PWD"
+
+    expected.error <- "Configuration has no uid"
+
+    # Then
+    configuration |> validate[['ManualConfig']]() |> expect.error(expected.error)
+  })
+  it("then an exception is thrown if configuration has no pwd",{
+    # Given
+    validate <- Storage.Configuration.Validator()
+
+    configuration <- list()
+    configuration[['driver']]   <- "DRIVER"
+    configuration[['server']]   <- "SERVER"
+    configuration[['database']] <- "DATABASE"
+    configuration[['uid']]      <- "UID"
+
+    expected.error <- "Configuration has no pwd"
+
+    # Then
+    configuration |> validate[['ManualConfig']]() |> expect.error(expected.error)
+  })
+})
