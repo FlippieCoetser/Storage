@@ -33,6 +33,13 @@ describe("When exceptions <- Storage.Configuration.Exceptions()", {
     # Then
     exceptions[['serverIsNull']] |> expect.exist()
   })
+  it("then exceptions contains databaseIsNull", {
+    # Given
+    exceptions <- Storage.Configuration.Exceptions()
+
+    # Then
+    exceptions[['databaseIsNull']] |> expect.exist()
+  })
   it("then exceptions contains uidIsNull", {
     # Given
     exceptions <- Storage.Configuration.Exceptions()
