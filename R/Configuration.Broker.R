@@ -14,9 +14,9 @@ Configuration.Broker <- \() {
   }
   operations[['GetManualConfig']] <- \() {
     configuration <- list()
-    configuration[['DRIVER']]   <- "DRIVER" |> utility[['GetEnvVariable']]()
-    configuration[['SERVER']]   <- "SERVER" |> utility[['GetEnvVariable']]()
-    configuration[['DATABASE']] <- "DATABASE" |> utility[['GetEnvVariable']]()
+    configuration[['driver']]   <- "DRIVER" |> utility[['GetEnvVariable']]()
+    configuration[['server']]   <- "SERVER" |> utility[['GetEnvVariable']]()
+    configuration[['database']] <- "DATABASE" |> utility[['GetEnvVariable']]()
     configuration[['uid']]      <- "UID" |> utility[['GetEnvVariable']]()
     configuration[['pwd']]      <- "PWD" |> utility[['GetEnvVariable']]()
     return(configuration)
