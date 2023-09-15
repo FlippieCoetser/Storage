@@ -6,7 +6,9 @@ Storage.Configuration.Exceptions <- \() {
     }
   }
   exception[['driverIsNull']]  <- \(invoke) {
-
+    if (invoke) {
+      stop('Configuration has no driver.', call. = FALSE)
+    }
   }
   exception[['uidIsNull']]     <- \(invoke) {
     if (invoke) {
