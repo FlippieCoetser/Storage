@@ -77,3 +77,66 @@ describe("When operation[['GetPresetConfig']]()",{
     configuration[['PWD']] |> expect.exist()
   })
 })
+
+describe("When operation[['GetManualConfig']]()",{
+  it("then a configuration is returned",{
+    # Given
+    operations <- Configuration.Broker()
+
+    # When
+    configuration <- operations[['GetManualConfig']]()
+
+    # Then
+    configuration |> expect.exist()
+  })
+  it("then the configuration contains a DRIVER value",{
+    # Given
+    operations <- Configuration.Broker()
+
+    # When
+    configuration <- operations[['GetManualConfig']]()
+
+    # Then
+    configuration[['DRIVER']] |> expect.exist()
+  })
+  it("then the configuration contains a SERVER value",{
+    # Given
+    operations <- Configuration.Broker()
+
+    # When
+    configuration <- operations[['GetManualConfig']]()
+
+    # Then
+    configuration[['SERVER']] |> expect.exist()
+  })
+  it("then the configuration contains a DATABASE value",{
+    # Given
+    operations <- Configuration.Broker()
+
+    # When
+    configuration <- operations[['GetManualConfig']]()
+
+    # Then
+    configuration[['DATABASE']] |> expect.exist()
+  })
+  it("then the configuration contains a USER value",{
+    # Given
+    operations <- Configuration.Broker()
+
+    # When
+    configuration <- operations[['GetManualConfig']]()
+
+    # Then
+    configuration[['USER']] |> expect.exist()
+  })
+  it("then the configuration contains a PASSWORD value",{
+    # Given
+    operations <- Configuration.Broker()
+
+    # When
+    configuration <- operations[['GetManualConfig']]()
+
+    # Then
+    configuration[['PASSWORD']] |> expect.exist()
+  })
+})
