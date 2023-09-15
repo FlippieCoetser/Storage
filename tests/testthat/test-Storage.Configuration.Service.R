@@ -26,6 +26,13 @@ describe("When services <- Storage.Configuration.Service()",{
     # Then
     services[["GetPresetConfig"]] |> expect.exist()
   })
+  it("then services contains GetManualConfig service",{
+    # Given
+    services <- Storage.Configuration.Service()
+    
+    # Then
+    services[["GetManualConfig"]] |> expect.exist()
+  })
 })
 
 describe("When service[['GetPresetConfig']]()",{
