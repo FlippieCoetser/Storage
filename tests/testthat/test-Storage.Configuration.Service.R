@@ -44,7 +44,7 @@ describe("When service[['GetPresetConfig']]()",{
     # Then
     service[["GetPresetConfig"]]() |> expect.list()
   })
-  it("then an exception if thrown if no dsn is found",{
+  it("then an exception is thrown if no dsn is found",{
     # Given
     configuration <- list()
     configuration[['dsn']] <- NULL
@@ -63,7 +63,7 @@ describe("When service[['GetPresetConfig']]()",{
     # Then
     service[["GetPresetConfig"]]() |> expect.error(expected.error)
   })
-  it("then an exception if thrown if no uid is found",{
+  it("then an exception is thrown if no uid is found",{
     # Given
     configuration <- list()
     configuration[['dsn']] <- "DSN"
@@ -82,7 +82,7 @@ describe("When service[['GetPresetConfig']]()",{
     # Then
     service[["GetPresetConfig"]]() |> expect.error(expected.error)
   })
-  it("then an exception if thrown if no pwd is found",{
+  it("then an exception is thrown if no pwd is found",{
     # Given
     configuration <- list()
     configuration[['dsn']] <- "DSN"
