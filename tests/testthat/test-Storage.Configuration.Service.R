@@ -102,3 +102,14 @@ describe("When service[['GetPresetConfig']]()",{
     service[["GetPresetConfig"]]() |> expect.error(expected.error)
   })
 })
+
+describe("When service[['GetManualConfig']]()",{
+  it("then a list of configuration parameters is returned",{
+    # Given
+    broker  <- Storage.Configuration.Broker()
+    service <- broker |> Storage.Configuration.Service()
+    
+    # Then
+    service[["GetManualConfig"]]() |> expect.list()
+  })
+})
