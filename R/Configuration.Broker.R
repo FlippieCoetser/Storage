@@ -7,9 +7,9 @@ Configuration.Broker <- \() {
   }
   operations[["GetPresetConfig"]] <- \() {
     configuration <- list()
-    configuration[["DSN"]] <- "DSN" |> utility[["GetEnvVariable"]]()
-    configuration[["UID"]] <- "UID" |> utility[["GetEnvVariable"]]()
-    configuration[["PWD"]] <- "PWD" |> utility[["GetEnvVariable"]]()
+    configuration[['dsn']] <- "DSN" |> utility[["GetEnvVariable"]]()
+    configuration[['uid']] <- "UID" |> utility[["GetEnvVariable"]]()
+    configuration[['pwd']] <- "PWD" |> utility[["GetEnvVariable"]]()
     return(configuration)
   }
   operations[['GetManualConfig']] <- \() {
@@ -17,8 +17,8 @@ Configuration.Broker <- \() {
     configuration[['DRIVER']]   <- "DRIVER" |> utility[['GetEnvVariable']]()
     configuration[['SERVER']]   <- "SERVER" |> utility[['GetEnvVariable']]()
     configuration[['DATABASE']] <- "DATABASE" |> utility[['GetEnvVariable']]()
-    configuration[['UID']]      <- "UID" |> utility[['GetEnvVariable']]()
-    configuration[['PWD']]      <- "PWD" |> utility[['GetEnvVariable']]()
+    configuration[['uid']]      <- "UID" |> utility[['GetEnvVariable']]()
+    configuration[['pwd']]      <- "PWD" |> utility[['GetEnvVariable']]()
     return(configuration)
   }
   return(operations)

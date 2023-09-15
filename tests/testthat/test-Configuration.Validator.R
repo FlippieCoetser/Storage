@@ -108,7 +108,7 @@ describe("When configuration |> validate[['HasDSN']]()",{
     validate <- Configuration.Validator()
 
     configuration <- list()
-    configuration[["DSN"]] <- "DSN"
+    configuration[['dsn']] <- "DSN"
 
     expected.configuration <- configuration
     
@@ -123,7 +123,7 @@ describe("When configuration |> validate[['HasDSN']]()",{
     validate <- Configuration.Validator()
 
     configuration <- list()
-    configuration[["DSN"]] <- "DSN"
+    configuration[['dsn']] <- "DSN"
 
     # Then
     configuration |> validate[["HasDSN"]]() |> expect.no.error()
@@ -147,7 +147,7 @@ describe("When configuration |> validate[['HasUID']]()",{
     validate <- Configuration.Validator()
 
     configuration <- list()
-    configuration[["UID"]] <- "UID"
+    configuration[['uid']] <- "UID"
 
     expected.configuration <- configuration
     
@@ -162,7 +162,7 @@ describe("When configuration |> validate[['HasUID']]()",{
     validate <- Configuration.Validator()
 
     configuration <- list()
-    configuration[["UID"]] <- "UID"
+    configuration[['uid']] <- "UID"
 
     # Then
     configuration |> validate[["HasUID"]]() |> expect.no.error()
@@ -186,7 +186,7 @@ describe("When configuration |> validate[['HasPWD']]()",{
     validate <- Configuration.Validator()
 
     configuration <- list()
-    configuration[["PWD"]] <- "PWD"
+    configuration[['pwd']] <- "PWD"
 
     expected.configuration <- configuration
     
@@ -201,7 +201,7 @@ describe("When configuration |> validate[['HasPWD']]()",{
     validate <- Configuration.Validator()
 
     configuration <- list()
-    configuration[["PWD"]] <- "PWD"
+    configuration[['pwd']] <- "PWD"
 
     # Then
     configuration |> validate[["HasPWD"]]() |> expect.no.error()
@@ -225,9 +225,9 @@ describe("When configuration |> validate[['PresetConfig']]()",{
     validate <- Configuration.Validator()
 
     configuration <- list()
-    configuration[["DSN"]] <- "DSN"
-    configuration[["UID"]] <- "UID"
-    configuration[["PWD"]] <- "PWD"
+    configuration[['dsn']] <- "DSN"
+    configuration[['uid']] <- "UID"
+    configuration[['pwd']] <- "PWD"
 
     expected.configuration <- configuration
     
@@ -242,9 +242,9 @@ describe("When configuration |> validate[['PresetConfig']]()",{
     validate <- Configuration.Validator()
 
     configuration <- list()
-    configuration[["DSN"]] <- "DSN"
-    configuration[["UID"]] <- "UID"
-    configuration[["PWD"]] <- "PWD"
+    configuration[['dsn']] <- "DSN"
+    configuration[['uid']] <- "UID"
+    configuration[['pwd']] <- "PWD"
 
     # Then
     configuration |> validate[["PresetConfig"]]() |> expect.no.error()
@@ -254,8 +254,8 @@ describe("When configuration |> validate[['PresetConfig']]()",{
     validate <- Configuration.Validator()
 
     configuration <- list()
-    configuration[["UID"]] <- "UID"
-    configuration[["PWD"]] <- "PWD"
+    configuration[['uid']] <- "UID"
+    configuration[['pwd']] <- "PWD"
 
     expected.error <- "Configuration has no DSN"
 
@@ -267,8 +267,8 @@ describe("When configuration |> validate[['PresetConfig']]()",{
     validate <- Configuration.Validator()
 
     configuration <- list()
-    configuration[["DSN"]] <- "DSN"
-    configuration[["PWD"]] <- "PWD"
+    configuration[['dsn']] <- "DSN"
+    configuration[['pwd']] <- "PWD"
 
     expected.error <- "Configuration has no UID"
 
@@ -280,8 +280,8 @@ describe("When configuration |> validate[['PresetConfig']]()",{
     validate <- Configuration.Validator()
 
     configuration <- list()
-    configuration[["DSN"]] <- "DSN"
-    configuration[["UID"]] <- "UID"
+    configuration[['dsn']] <- "DSN"
+    configuration[['uid']] <- "UID"
 
     expected.error <- "Configuration has no PWD"
 

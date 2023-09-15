@@ -10,19 +10,19 @@ Configuration.Validator <- \() {
     return(configuration)
   }
   validations[["HasDSN"]]       <- \(configuration) {
-    configuration[["DSN"]]    |> 
+    configuration[['dsn']]    |> 
     validations[["IsNull"]]() |>
     exception[["DSNIsNull"]]()
     return(configuration)
   }
   validations[["HasUID"]]       <- \(configuration) {
-    configuration[["UID"]]    |>
+    configuration[['uid']]    |>
     validations[["IsNull"]]() |>
     exception[["UIDIsNull"]]()
     return(configuration)
   }
   validations[["HasPWD"]]       <- \(configuration) {
-    configuration[["PWD"]]    |>
+    configuration[['pwd']]    |>
     validations[["IsNull"]]() |>
     exception[["PWDIsNull"]]()
     return(configuration)

@@ -33,9 +33,9 @@ describe("When service[['GetPresetConfig']]()",{
   it("then an exception if thrown if no DSN is found",{
     # Given
     configuration <- list()
-    configuration[["DSN"]] <- NULL
-    configuration[["UID"]] <- "UID"
-    configuration[["PWD"]] <- "PWD"
+    configuration[['dsn']] <- NULL
+    configuration[['uid']] <- "UID"
+    configuration[['pwd']] <- "PWD"
 
     broker  <- Configuration.Broker()
     broker[["GetPresetConfig"]] <- \() {
@@ -52,9 +52,9 @@ describe("When service[['GetPresetConfig']]()",{
   it("then an exception if thrown if no UID is found",{
     # Given
     configuration <- list()
-    configuration[["DSN"]] <- "DSN"
-    configuration[["UID"]] <- NULL
-    configuration[["PWD"]] <- "PWD"
+    configuration[['dsn']] <- "DSN"
+    configuration[['uid']] <- NULL
+    configuration[['pwd']] <- "PWD"
 
     broker  <- Configuration.Broker()
     broker[["GetPresetConfig"]] <- \() {
@@ -71,9 +71,9 @@ describe("When service[['GetPresetConfig']]()",{
   it("then an exception if thrown if no PWD is found",{
     # Given
     configuration <- list()
-    configuration[["DSN"]] <- "DSN"
-    configuration[["UID"]] <- "UID"
-    configuration[["PWD"]] <- NULL
+    configuration[['dsn']] <- "DSN"
+    configuration[['uid']] <- "UID"
+    configuration[['pwd']] <- NULL
 
     broker  <- Configuration.Broker()
     broker[["GetPresetConfig"]] <- \() {

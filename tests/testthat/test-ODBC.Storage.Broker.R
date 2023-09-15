@@ -8,9 +8,9 @@ describe("When operations <- configuration |> ODBC.Storage.Broker()",{
   it("then operations is a list",{
     # Given
     configuration <- list()
-    configuration[["DSN"]] <- "DSN"
-    configuration[["UID"]] <- "UID"
-    configuration[["PWD"]] <- "PWD"
+    configuration[['dsn']] <- "DSN"
+    configuration[['uid']] <- "UID"
+    configuration[['pwd']] <- "PWD"
 
     # When
     operations <- configuration |> ODBC.Storage.Broker()
@@ -21,9 +21,9 @@ describe("When operations <- configuration |> ODBC.Storage.Broker()",{
   it("then operations contains CreateConnection operation",{
     # Given
     configuration <- list()
-    configuration[["DSN"]] <- "DSN"
-    configuration[["UID"]] <- "UID"
-    configuration[["PWD"]] <- "PWD"
+    configuration[['dsn']] <- "DSN"
+    configuration[['uid']] <- "UID"
+    configuration[['pwd']] <- "PWD"
 
     # When
     operations <- configuration |> ODBC.Storage.Broker()
@@ -34,9 +34,9 @@ describe("When operations <- configuration |> ODBC.Storage.Broker()",{
   it("then operations contains ExecuteQuery operation",{
     # Given
     configuration <- list()
-    configuration[["DSN"]] <- "DSN"
-    configuration[["UID"]] <- "UID"
-    configuration[["PWD"]] <- "PWD"
+    configuration[['dsn']] <- "DSN"
+    configuration[['uid']] <- "UID"
+    configuration[['pwd']] <- "PWD"
 
     # When
     operations <- configuration |> ODBC.Storage.Broker()
@@ -68,7 +68,7 @@ describe("when connection <- operate[['CreateConnection']]()",{
     configurator  <- Configuration.Broker() |> Configuration.Service()
     configuration <- configurator[["GetPresetConfig"]]()
 
-    configuration[["DSN"]] <- "Invalid"
+    configuration[['dsn']] <- "Invalid"
 
     operate <- configuration |> ODBC.Storage.Broker()
 
@@ -83,7 +83,7 @@ describe("when connection <- operate[['CreateConnection']]()",{
     configurator  <- Configuration.Broker() |> Configuration.Service()
     configuration <- configurator[["GetPresetConfig"]]()
 
-    configuration[["UID"]] <- "Invalid"
+    configuration[['uid']] <- "Invalid"
 
     operate <- configuration |> ODBC.Storage.Broker()
 
@@ -98,7 +98,7 @@ describe("when connection <- operate[['CreateConnection']]()",{
     configurator  <- Configuration.Broker() |> Configuration.Service()
     configuration <- configurator[["GetPresetConfig"]]()
 
-    configuration[["PWD"]] <- "Invalid"
+    configuration[['pwd']] <- "Invalid"
 
     operate <- configuration |> ODBC.Storage.Broker()
 

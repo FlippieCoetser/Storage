@@ -54,7 +54,7 @@ describe("When operation[['GetPresetConfig']]()",{
     configuration <- operations[['GetPresetConfig']]()
 
     # Then
-    configuration[['DSN']] |> expect.exist()
+    configuration[['dsn']] |> expect.exist()
   })
   it("then the configuration contains a UID value",{
     # Given
@@ -64,7 +64,7 @@ describe("When operation[['GetPresetConfig']]()",{
     configuration <- operations[['GetPresetConfig']]()
 
     # Then
-    configuration[['UID']] |> expect.exist()
+    configuration[['uid']] |> expect.exist()
   })
   it("then the configuration contains a PWD value",{
     # Given
@@ -74,7 +74,7 @@ describe("When operation[['GetPresetConfig']]()",{
     configuration <- operations[['GetPresetConfig']]()
 
     # Then
-    configuration[['PWD']] |> expect.exist()
+    configuration[['pwd']] |> expect.exist()
   })
 })
 
@@ -127,7 +127,7 @@ describe("When operation[['GetManualConfig']]()",{
     configuration <- operations[['GetManualConfig']]()
 
     # Then
-    configuration[['UID']] |> expect.exist()
+    configuration[['uid']] |> expect.exist()
   })
   it("then the configuration contains a PWD value",{
     # Given
@@ -137,6 +137,6 @@ describe("When operation[['GetManualConfig']]()",{
     configuration <- operations[['GetManualConfig']]()
 
     # Then
-    configuration[['PWD']] |> expect.exist()
+    configuration[['pwd']] |> expect.exist()
   })
 })
