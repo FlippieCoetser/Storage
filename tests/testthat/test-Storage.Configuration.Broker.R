@@ -81,7 +81,7 @@ describe("When operation[['GetPresetConfig']]()",{
     utility <- Environment::Environment()
     operation <- Storage.Configuration.Broker()
 
-    expected.error <- "No value found for provided environment variable:DSN. Please check .Renviron configuration file."
+    expected.error <- "No DSN environment variable defined. check .Renviron file."
    
     # When
     'DSN' |> utility[['ClearEnvVariable']]()
@@ -96,7 +96,7 @@ describe("When operation[['GetPresetConfig']]()",{
     utility <- Environment::Environment()
     operation <- Storage.Configuration.Broker()
 
-    expected.error <- "No value found for provided environment variable:UID. Please check .Renviron configuration file."
+    expected.error <- "No UID environment variable defined. check .Renviron file."
    
     # When
     'UID' |> utility[['ClearEnvVariable']]()
@@ -111,7 +111,7 @@ describe("When operation[['GetPresetConfig']]()",{
     utility <- Environment::Environment()
     operation <- Storage.Configuration.Broker()
 
-    expected.error <- "No value found for provided environment variable:PWD. Please check .Renviron configuration file."
+    expected.error <- "No PWD environment variable defined. check .Renviron file."
    
     # When
     'PWD' |> utility[['ClearEnvVariable']]()
@@ -189,7 +189,7 @@ describe("When operation[['GetManualConfig']]()",{
     utility <- Environment::Environment()
     operation <- Storage.Configuration.Broker()
 
-    expected.error <- "No value found for provided environment variable:DRIVER. Please check .Renviron configuration file."
+    expected.error <- "No DRIVER environment variable defined. check .Renviron file."
    
     # When
     'DRIVER' |> utility[['ClearEnvVariable']]()
@@ -204,7 +204,7 @@ describe("When operation[['GetManualConfig']]()",{
     utility <- Environment::Environment()
     operation <- Storage.Configuration.Broker()
 
-    expected.error <- "No value found for provided environment variable:SERVER. Please check .Renviron configuration file."
+    expected.error <- "No SERVER environment variable defined. check .Renviron file."
    
     # When
     'SERVER' |> utility[['ClearEnvVariable']]()
@@ -219,7 +219,7 @@ describe("When operation[['GetManualConfig']]()",{
     utility <- Environment::Environment()
     operation <- Storage.Configuration.Broker()
 
-    expected.error <- "No value found for provided environment variable:DATABASE. Please check .Renviron configuration file."
+    expected.error <- "No DATABASE environment variable defined. check .Renviron file."
    
     # When
     'DATABASE' |> utility[['ClearEnvVariable']]()
@@ -234,7 +234,7 @@ describe("When operation[['GetManualConfig']]()",{
     utility <- Environment::Environment()
     operation <- Storage.Configuration.Broker()
 
-    expected.error <- "No value found for provided environment variable:UID. Please check .Renviron configuration file."
+    expected.error <- "No UID environment variable defined. check .Renviron file."
    
     # When
     'UID' |> utility[['ClearEnvVariable']]()
@@ -249,7 +249,7 @@ describe("When operation[['GetManualConfig']]()",{
     utility <- Environment::Environment()
     operation <- Storage.Configuration.Broker()
 
-    expected.error <- "No value found for provided environment variable:PWD. Please check .Renviron configuration file."
+    expected.error <- "No PWD environment variable defined. check .Renviron file."
    
     # When
     'PWD' |> utility[['ClearEnvVariable']]()
