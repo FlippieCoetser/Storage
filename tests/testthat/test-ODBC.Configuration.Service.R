@@ -58,3 +58,61 @@ describe("When service[['OpenConfigFile']]()",{
     call.count |> expect.equal(after.call.count)
   })  
 })
+
+describe("When configuration <- service[['GetPresetConfig']]()",{
+  it("then configuration is a list",{
+    # Given
+    broker  <- ODBC.Configuration.Broker()
+    service <- broker |> ODBC.Configuration.Service()
+
+    # When
+    configuration <- service[['GetPresetConfig']]()
+
+    # Then
+    configuration |> expect.list()
+  })
+  it("then configuration contains drv",{
+    # Given
+    broker  <- ODBC.Configuration.Broker()
+    service <- broker |> ODBC.Configuration.Service()
+
+    # When
+    configuration <- service[['GetPresetConfig']]()
+
+    # Then
+    configuration[['drv']] |> expect.exist()
+  })
+  it("then configuration contains dsn",{
+    # Given
+    broker  <- ODBC.Configuration.Broker()
+    service <- broker |> ODBC.Configuration.Service()
+
+    # When
+    configuration <- service[['GetPresetConfig']]()
+
+    # Then
+    configuration[['dsn']] |> expect.character()
+  })
+  it("then configuration contains uid",{
+    # Given
+    broker  <- ODBC.Configuration.Broker()
+    service <- broker |> ODBC.Configuration.Service()
+
+    # When
+    configuration <- service[['GetPresetConfig']]()
+
+    # Then
+    configuration[['uid']] |> expect.character()
+  })
+  it("then configuration contains pwd",{
+    # Given
+    broker  <- ODBC.Configuration.Broker()
+    service <- broker |> ODBC.Configuration.Service()
+
+    # When
+    configuration <- service[['GetPresetConfig']]()
+
+    # Then
+    configuration[['pwd']] |> expect.character()
+  })
+})
