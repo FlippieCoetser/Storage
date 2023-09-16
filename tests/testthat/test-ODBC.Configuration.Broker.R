@@ -72,4 +72,52 @@ describe("When configuration <- operation[['GetPresetConfig']]()",{
     # Then
     configuration[['pwd']] |> expect.exist()
   })
+  it("then an exception is thrown is no DSN found in .Renviron",{
+    # Given
+    environment <- Environment::Environment()
+    operation  <- ODBC.Configuration.Broker()
+
+    expect.error <- "No DSN environment variable not found in .Renviron Configuration file."
+
+    # When
+    'DSN' |> environment[['ClearEnvVariable']]()
+
+    # Then
+    operation[['GetPresetConfig']]() |> expect.error(expect.error)
+
+    # Then
+    'DSN' |> environment[['CacheEnvVariable']]('DSN')
+  })
+  it("then an exception is thrown is no UID found in .Renviron",{
+    # Given
+    environment <- Environment::Environment()
+    operation  <- ODBC.Configuration.Broker()
+
+    expect.error <- "No UID environment variable not found in .Renviron Configuration file."
+
+    # When
+    'UID' |> environment[['ClearEnvVariable']]()
+
+    # Then
+    operation[['GetPresetConfig']]() |> expect.error(expect.error)
+
+    # Then
+    'UID' |> environment[['CacheEnvVariable']]('UID')
+  })
+  it("then an exception is thrown is no PWD found in .Renviron",{
+    # Given
+    environment <- Environment::Environment()
+    operation  <- ODBC.Configuration.Broker()
+
+    expect.error <- "No PWD environment variable not found in .Renviron Configuration file."
+
+    # When
+    'PWD' |> environment[['ClearEnvVariable']]()
+
+    # Then
+    operation[['GetPresetConfig']]() |> expect.error(expect.error)
+
+    # Then
+    'PWD' |> environment[['CacheEnvVariable']]('PWD')
+  })
 })
