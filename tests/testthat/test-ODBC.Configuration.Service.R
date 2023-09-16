@@ -34,3 +34,27 @@ describe("When services <- broker |> ODBC.Configuration.Service()",{
     services[['GetManualConfig']] |> expect.function()
   })
 })
+
+describe("When service[['OpenConfigFile']]()",{
+  it("then broker[['OpenConfigFile']]() is called once",{
+    # Given
+    call.count <- 0
+
+    broker  <- ODBC.Configuration.Broker()
+    broker[['OpenConfigFile']] <- \() {
+      call.count <<- call.count + 1
+    }
+    service <- broker |> ODBC.Configuration.Service()
+
+    before.call.count <- 0
+    after.call.count  <- before.call.count + 1
+    
+    call.count |> expect.equal(before.call.count)
+
+    # When
+    service[['OpenConfigFile']]()
+
+    # Then
+    call.count |> expect.equal(after.call.count)
+  })  
+})
