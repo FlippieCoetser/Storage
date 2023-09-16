@@ -6,6 +6,8 @@ ODBC.Configuration.Service <- \(broker) {
   services[['GetPresetConfig']] <- \() {
     broker[['GetPresetConfig']]()
   }
-  services[['GetManualConfig']] <- \() {}
+  services[['GetManualConfig']] <- \() {
+    broker[['GetManualConfig']]()
+  }
   return(services)
 }
