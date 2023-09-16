@@ -118,7 +118,7 @@ describe("When input |> exception[['pwdNotFound']]()", {
 })
 
 describe("When error |> exception[['Configuration']]()", {
-  it("then an dsnNotFound exception is thrown if error contains UID", {
+  it("then an dsnNotFound exception is thrown if error contains DSN", {
     # Given
     exception <- ODBC.Configuration.Exceptions()
 
