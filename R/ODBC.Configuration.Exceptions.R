@@ -5,6 +5,10 @@ ODBC.Configuration.Exceptions <- \() {
       stop("No DSN environment variable not found in .Renviron Configuration file.")
     }
   }
-  exceptions[['uidNotFound']] <- \() {}
+  exceptions[['uidNotFound']] <- \(invoke) {
+    if(invoke) {
+      stop("No UID environment variable not found in .Renviron Configuration file.")
+    }
+  }
   return(exceptions)
 }
