@@ -12,4 +12,11 @@ describe("When services <- broker |> ODBC.Configuration.Service()",{
     # Then
     services |> expect.list()
   })
+  it("then services contains OpenConfigFile service",{
+    # When
+    services <- ODBC.Configuration.Service()
+
+    # Then
+    services[['OpenConfigFile']] |> expect.function()
+  })
 })
