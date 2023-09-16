@@ -19,4 +19,11 @@ describe("When processes <- ODBC.Configuration.Processor()",{
     # Then
     processes[['OpenConfigFile']] |> expect.function()
   })
+  it("then processes contains GetConfiguration process",{
+    # When
+    processes <- ODBC.Configuration.Processor()
+
+    # Then
+    processes[['GetConfiguration']] |> expect.function()
+  })
 })
