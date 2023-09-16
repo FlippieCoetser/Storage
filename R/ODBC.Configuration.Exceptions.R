@@ -1,6 +1,8 @@
 ODBC.Configuration.Exceptions <- \() {
   exceptions <- list()
-  exceptions[['Configuration']] <- \() { }
+  exceptions[['Configuration']] <- \(error) {
+    'DSN' |> grepl(error) |> exceptions[['dsnNotFound']]()
+  }
   exceptions[['dsnNotFound']] <- \(invoke) {
     if(invoke) {
       stop("No DSN environment variable not found in .Renviron Configuration file.", call. = FALSE)
