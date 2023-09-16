@@ -12,6 +12,13 @@ describe("When exceptions <- ODBC.Configuration.Exceptions()",{
     # Then
     exceptions |> expect.list()
   })
+  it("then exceptions contains Configuration exception",{
+    # When
+    exceptions <- ODBC.Configuration.Exceptions()
+
+    # Then
+    exceptions[['Configuration']] |> expect.exist()
+  })
   it("then exceptions contains dsnNotFound exception",{
     # When
     exceptions <- ODBC.Configuration.Exceptions()
