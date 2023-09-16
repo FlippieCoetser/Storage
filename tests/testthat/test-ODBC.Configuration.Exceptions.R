@@ -12,4 +12,11 @@ describe("When exceptions <- ODBC.Configuration.Exceptions()",{
     # Then
     exceptions |> expect.list()
   })
+  it("then exceptions contains dsnIsNull exception",{
+    # When
+    exceptions <- ODBC.Configuration.Exceptions()
+
+    # Then
+    exceptions[['dsnIsNull']] |> expect.exist()
+  })
 })
