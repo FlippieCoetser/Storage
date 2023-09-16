@@ -130,4 +130,16 @@ describe("When error |> exception[['Configuration']]()", {
     # Then
     configuration.error |> exception[['Configuration']]() |> expect.error(expected.error)
   })
+  it("then an dsnNotFound exception is thrown if error contains UID", {
+    # Given
+    exception <- ODBC.Configuration.Exceptions()
+
+    expected.error <- "No UID environment variable not found in .Renviron Configuration file."
+
+    # When
+    configuration.error <- 'UID' 
+
+    # Then
+    configuration.error |> exception[['Configuration']]() |> expect.error(expected.error)
+  })
 })
