@@ -40,6 +40,13 @@ describe("When exceptions <- ODBC.Configuration.Exceptions()",{
     # Then
     exceptions[['serverNotFound']] |> expect.exist()
   })
+  it("then exceptions contains databaseNotFound exception",{
+    # When
+    exceptions <- ODBC.Configuration.Exceptions()
+
+    # Then
+    exceptions[['databaseNotFound']] |> expect.exist()
+  })
   it("then exceptions contains uidNotFound exception",{
     # When
     exceptions <- ODBC.Configuration.Exceptions()
