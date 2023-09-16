@@ -226,6 +226,18 @@ describe("When error |> exception[['Configuration']]()", {
     # Then
     configuration.error |> exception[['Configuration']]() |> expect.error(expected.error)
   })
+  it("then an driverNotFound exception is thrown if error contains DRIVER", {
+    # Given
+    exception <- ODBC.Configuration.Exceptions()
+
+    expected.error <- "No DRIVER environment variable not found in .Renviron Configuration file."
+
+    # When
+    configuration.error <- 'DRIVER' 
+
+    # Then
+    configuration.error |> exception[['Configuration']]() |> expect.error(expected.error)
+  })
   it("then an uidNotFound exception is thrown if error contains UID", {
     # Given
     exception <- ODBC.Configuration.Exceptions()
