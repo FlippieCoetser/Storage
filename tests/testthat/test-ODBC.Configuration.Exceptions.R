@@ -3,3 +3,13 @@ describe("ODBC.Configuration.Exceptions",{
     ODBC.Configuration.Exceptions |> expect.exist()
   })
 })
+
+describe("When exceptions <- ODBC.Configuration.Exceptions()",{
+  it("then exceptions is a list",{
+    # When
+    exceptions <- ODBC.Configuration.Exceptions()
+
+    # Then
+    exceptions |> expect.list()
+  })
+})
