@@ -3,14 +3,13 @@ ODBC.Configuration.Broker <- \(environment = Environment::Environment()) {
 
   operations <- list()
   operations[['GetPresetConfig']] <- \() {
-    tryCatch({
+    tryCatch(
       list(
         drv = odbc::odbc(),
         dsn = 'DSN' |> environment[['GetEnvVariable']](),
         uid = 'UID' |> environment[['GetEnvVariable']](),
         pwd = 'PWD' |> environment[['GetEnvVariable']]()
-      )
-    }, 
+      ), 
     error = exception[['Configuration']])
   }
   return(operations)
