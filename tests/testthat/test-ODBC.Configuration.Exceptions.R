@@ -250,6 +250,18 @@ describe("When error |> exception[['Configuration']]()", {
     # Then
     configuration.error |> exception[['Configuration']]() |> expect.error(expected.error)
   })
+  it("then an databaseNotFound exception is thrown if error contains DATABASE", {
+    # Given
+    exception <- ODBC.Configuration.Exceptions()
+
+    expected.error <- "No DATABASE environment variable not found in .Renviron Configuration file."
+
+    # When
+    configuration.error <- 'DATABASE' 
+
+    # Then
+    configuration.error |> exception[['Configuration']]() |> expect.error(expected.error)
+  })
   it("then an uidNotFound exception is thrown if error contains UID", {
     # Given
     exception <- ODBC.Configuration.Exceptions()
