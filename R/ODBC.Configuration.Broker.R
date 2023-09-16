@@ -2,6 +2,7 @@ ODBC.Configuration.Broker <- \(environment = Environment::Environment()) {
   exception <- ODBC.Configuration.Exceptions()
 
   operations <- list()
+  operations[['OpenConfigFile']]  <- \() {}
   operations[['GetPresetConfig']] <- \() {
     tryCatch(
       list(
