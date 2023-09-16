@@ -116,3 +116,83 @@ describe("When configuration <- service[['GetPresetConfig']]()",{
     configuration[['pwd']] |> expect.character()
   })
 })
+
+describe("When configuration <- service[['GetManualConfig']]()",{
+  it("then configuration is a list",{
+    # Given
+    broker  <- ODBC.Configuration.Broker()
+    service <- broker |> ODBC.Configuration.Service()
+
+    # When
+    configuration <- service[['GetManualConfig']]()
+
+    # Then
+    configuration |> expect.list()
+  })
+  it("then configuration contains drv",{
+    # Given
+    broker  <- ODBC.Configuration.Broker()
+    service <- broker |> ODBC.Configuration.Service()
+
+    # When
+    configuration <- service[['GetManualConfig']]()
+
+    # Then
+    configuration[['drv']] |> expect.exist()
+  })
+  it("then configuration contains driver",{
+    # Given
+    broker  <- ODBC.Configuration.Broker()
+    service <- broker |> ODBC.Configuration.Service()
+
+    # When
+    configuration <- service[['GetManualConfig']]()
+
+    # Then
+    configuration[['driver']] |> expect.character()
+  })
+  it("then configuration contains server",{
+    # Given
+    broker  <- ODBC.Configuration.Broker()
+    service <- broker |> ODBC.Configuration.Service()
+
+    # When
+    configuration <- service[['GetManualConfig']]()
+
+    # Then
+    configuration[['server']] |> expect.character()
+  })
+  it("then configuration contains database",{
+    # Given
+    broker  <- ODBC.Configuration.Broker()
+    service <- broker |> ODBC.Configuration.Service()
+
+    # When
+    configuration <- service[['GetManualConfig']]()
+
+    # Then
+    configuration[['database']] |> expect.character()
+  })
+  it("then configuration contains uid",{
+    # Given
+    broker  <- ODBC.Configuration.Broker()
+    service <- broker |> ODBC.Configuration.Service()
+
+    # When
+    configuration <- service[['GetManualConfig']]()
+
+    # Then
+    configuration[['uid']] |> expect.character()
+  })
+  it("then configuration contains pwd",{
+    # Given
+    broker  <- ODBC.Configuration.Broker()
+    service <- broker |> ODBC.Configuration.Service()
+
+    # When
+    configuration <- service[['GetManualConfig']]()
+
+    # Then
+    configuration[['pwd']] |> expect.character()
+  })
+})
