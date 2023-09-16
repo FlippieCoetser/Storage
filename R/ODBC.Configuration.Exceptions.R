@@ -1,1 +1,4 @@
-ODBC.Configuration.Exceptions <- \() {}
+ODBC.Configuration.Exceptions <- \() {
+  exceptions <- list()
+  return(exceptions)
+}
