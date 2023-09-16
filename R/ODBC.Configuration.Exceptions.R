@@ -10,5 +10,8 @@ ODBC.Configuration.Exceptions <- \() {
       stop("No UID environment variable not found in .Renviron Configuration file.", call. = FALSE)
     }
   }
+  exceptions[['pwdNotFound']] <- \(invoke) {
+
+  }
   return(exceptions)
 }
