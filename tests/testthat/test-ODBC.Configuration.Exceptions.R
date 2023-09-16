@@ -142,4 +142,16 @@ describe("When error |> exception[['Configuration']]()", {
     # Then
     configuration.error |> exception[['Configuration']]() |> expect.error(expected.error)
   })
+  it("then an pwdNotFound exception is thrown if error contains UID", {
+    # Given
+    exception <- ODBC.Configuration.Exceptions()
+
+    expected.error <- "No PWD environment variable not found in .Renviron Configuration file."
+
+    # When
+    configuration.error <- 'PWD' 
+
+    # Then
+    configuration.error |> exception[['Configuration']]() |> expect.error(expected.error)
+  })
 })
