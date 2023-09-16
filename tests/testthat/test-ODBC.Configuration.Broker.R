@@ -128,3 +128,76 @@ describe("When configuration <- operation[['GetPresetConfig']]()",{
     'PWD' |> environment[['CacheEnvVariable']]('PWD')
   })
 })
+
+describe("When configuration <- operation[['GetManualConfig']]()",{
+  it("then configuration is a list",{
+    # Given
+    operations <- ODBC.Configuration.Broker()
+
+    # When
+    configuration <- operations[['GetManualConfig']]()
+
+    # Then
+    configuration |> expect.list()
+  })
+  it("then configuration contains drv parameter",{
+    # Given
+    operations <- ODBC.Configuration.Broker()
+
+    # When
+    configuration <- operations[['GetManualConfig']]()
+
+    # Then
+    configuration[['drv']] |> expect.exist()
+  })
+  it("then configuration contains driver parameter",{
+    # Given
+    operations <- ODBC.Configuration.Broker()
+
+    # When
+    configuration <- operations[['GetManualConfig']]()
+
+    # Then
+    configuration[['driver']] |> expect.exist()
+  })
+  it("then configuration contains server parameter",{
+    # Given
+    operations <- ODBC.Configuration.Broker()
+
+    # When
+    configuration <- operations[['GetManualConfig']]()
+
+    # Then
+    configuration[['server']] |> expect.exist()
+  })
+  it("then configuration contains database parameter",{
+    # Given
+    operations <- ODBC.Configuration.Broker()
+
+    # When
+    configuration <- operations[['GetManualConfig']]()
+
+    # Then
+    configuration[['database']] |> expect.exist()
+  })
+  it("then configuration contains uid parameter",{
+    # Given
+    operations <- ODBC.Configuration.Broker()
+
+    # When
+    configuration <- operations[['GetManualConfig']]()
+
+    # Then
+    configuration[['uid']] |> expect.exist()
+  })
+  it("then configuration contains pwd parameter",{
+    # Given
+    operations <- ODBC.Configuration.Broker()
+
+    # When
+    configuration <- operations[['GetManualConfig']]()
+
+    # Then
+    configuration[['pwd']] |> expect.exist()
+  })
+})
