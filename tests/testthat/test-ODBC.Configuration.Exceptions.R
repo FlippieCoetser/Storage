@@ -19,6 +19,13 @@ describe("When exceptions <- ODBC.Configuration.Exceptions()",{
     # Then
     exceptions[['dsnNotFound']] |> expect.exist()
   })
+  it("then exceptions contains uidNotFound exception",{
+    # When
+    exceptions <- ODBC.Configuration.Exceptions()
+
+    # Then
+    exceptions[['uidNotFound']] |> expect.exist()
+  })
 })
 
 describe("When input |> exception[['dsnNotFound']]()", {
