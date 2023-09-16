@@ -19,6 +19,13 @@ describe("When operations <- ODBC.Configuration.Broker()",{
     # Then
     operations[['GetPresetConfig']] |> expect.exist()
   })
+  it("then operations contains GetManualConfig operation",{
+    # When
+    operations <- ODBC.Configuration.Broker()
+
+    # Then
+    operations[['GetManualConfig']] |> expect.exist()
+  })
 })
 
 describe("When configuration <- operation[['GetPresetConfig']]()",{
