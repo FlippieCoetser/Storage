@@ -113,6 +113,31 @@ describe("When input |> exception[['driverNotFound']]()", {
   })
 })
 
+describe("When input |> exception[['serverNotFound']]()", {
+  it("then no exception is thrown if input is FALSE", {
+    # Given
+    exception <- ODBC.Configuration.Exceptions()
+
+    # When
+    input <- FALSE
+
+    # Then
+    input |> exception[['serverNotFound']]() |> expect.no.error()
+  })
+  it("then an exception is thrown if input is TRUE",{
+    # Given
+    exception <- ODBC.Configuration.Exceptions()
+
+    expected.error <- "No SERVER environment variable not found in .Renviron Configuration file."
+
+    # When
+    input <- TRUE
+
+    # Then
+    input |> exception[['serverNotFound']]() |> expect.error(expected.error)
+  })
+})
+
 describe("When input |> exception[['uidNotFound']]()", {
   it("then no exception is thrown if input is FALSE", {
     # Given
