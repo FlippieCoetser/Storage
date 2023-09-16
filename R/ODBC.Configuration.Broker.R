@@ -12,6 +12,17 @@ ODBC.Configuration.Broker <- \(environment = Environment::Environment()) {
       ), 
     error = exception[['Configuration']])
   }
-  operations[['GetManualConfig']] <- \() {}
+  operations[['GetManualConfig']] <- \() {
+    tryCatch(
+      list(
+        drv      = odbc::odbc(),
+        driver   = 'DRIVER'   |> environment[['GetEnvVariable']](),
+        server   = 'SERVER'   |> environment[['GetEnvVariable']](),
+        database = 'DATABASE' |> environment[['GetEnvVariable']](),
+        uid      = 'UID'      |> environment[['GetEnvVariable']](),
+        pwd      = 'PWD'      |> environment[['GetEnvVariable']]()
+      ), 
+    error = exception[['Configuration']])
+  }
   return(operations)
 }
