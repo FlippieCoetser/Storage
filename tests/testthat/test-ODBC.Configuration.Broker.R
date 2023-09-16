@@ -200,4 +200,84 @@ describe("When configuration <- operation[['GetManualConfig']]()",{
     # Then
     configuration[['pwd']] |> expect.exist()
   })
+  it("then an exception is thrown is no DRIVER found in .Renviron",{
+    # Given
+    environment <- Environment::Environment()
+    operation  <- ODBC.Configuration.Broker()
+
+    expect.error <- "No DRIVER environment variable not found in .Renviron Configuration file."
+
+    # When
+    'DRIVER' |> environment[['ClearEnvVariable']]()
+
+    # Then
+    operation[['GetManualConfig']]() |> expect.error(expect.error)
+
+    # Then
+    'DRIVER' |> environment[['CacheEnvVariable']]('DRIVER')
+  })
+  it("then an exception is thrown is no SERVER found in .Renviron",{
+    # Given
+    environment <- Environment::Environment()
+    operation  <- ODBC.Configuration.Broker()
+
+    expect.error <- "No SERVER environment variable not found in .Renviron Configuration file."
+
+    # When
+    'SERVER' |> environment[['ClearEnvVariable']]()
+
+    # Then
+    operation[['GetManualConfig']]() |> expect.error(expect.error)
+
+    # Then
+    'SERVER' |> environment[['CacheEnvVariable']]('SERVER')
+  })
+  it("then an exception is thrown is no DATABASE found in .Renviron",{
+    # Given
+    environment <- Environment::Environment()
+    operation  <- ODBC.Configuration.Broker()
+
+    expect.error <- "No DATABASE environment variable not found in .Renviron Configuration file."
+
+    # When
+    'DATABASE' |> environment[['ClearEnvVariable']]()
+
+    # Then
+    operation[['GetManualConfig']]() |> expect.error(expect.error)
+
+    # Then
+    'DATABASE' |> environment[['CacheEnvVariable']]('DATABASE')
+  })
+  it("then an exception is thrown is no UID found in .Renviron",{
+    # Given
+    environment <- Environment::Environment()
+    operation  <- ODBC.Configuration.Broker()
+
+    expect.error <- "No UID environment variable not found in .Renviron Configuration file."
+
+    # When
+    'UID' |> environment[['ClearEnvVariable']]()
+
+    # Then
+    operation[['GetManualConfig']]() |> expect.error(expect.error)
+
+    # Then
+    'UID' |> environment[['CacheEnvVariable']]('UID')
+  })
+  it("then an exception is thrown is no PWD found in .Renviron",{
+    # Given
+    environment <- Environment::Environment()
+    operation  <- ODBC.Configuration.Broker()
+
+    expect.error <- "No PWD environment variable not found in .Renviron Configuration file."
+
+    # When
+    'PWD' |> environment[['ClearEnvVariable']]()
+
+    # Then
+    operation[['GetManualConfig']]() |> expect.error(expect.error)
+
+    # Then
+    'PWD' |> environment[['CacheEnvVariable']]('PWD')
+  })
 })
