@@ -12,6 +12,13 @@ describe("When operations <- ODBC.Configuration.Broker()",{
     # Then
     operations |> expect.list()
   })
+  it("then operations contains OpenConfigFile operation",{
+    # When
+    operations <- ODBC.Configuration.Broker()
+
+    # Then
+    operations[['OpenConfigFile']] |> expect.exist()
+  })
   it("then operations contains GetPresetConfig operation",{
     # When
     operations <- ODBC.Configuration.Broker()
