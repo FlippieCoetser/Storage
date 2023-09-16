@@ -12,5 +12,6 @@ ODBC.Configuration.Broker <- \(environment = Environment::Environment()) {
       ), 
     error = exception[['Configuration']])
   }
+  operations[['GetManualConfig']] <- \() {}
   return(operations)
 }
