@@ -3,6 +3,7 @@ ODBC.Configuration.Exceptions <- \() {
   exceptions[['Configuration']] <- \(error) {
     'DSN'    |> grepl(error) |> exceptions[['dsnNotFound']]()
     'DRIVER' |> grepl(error) |> exceptions[['driverNotFound']]()
+    'SERVER' |> grepl(error) |> exceptions[['serverNotFound']]()
     'UID'    |> grepl(error) |> exceptions[['uidNotFound']]()
     'PWD'    |> grepl(error) |> exceptions[['pwdNotFound']]()
   }
