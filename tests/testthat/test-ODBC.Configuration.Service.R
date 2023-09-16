@@ -3,3 +3,13 @@ describe("ODBC.Configuration.Service",{
     ODBC.Configuration.Service |> expect.exist()
   })
 })
+
+describe("When services <- broker |> ODBC.Configuration.Service()",{
+  it("then services is a list",{
+    # When
+    services <- ODBC.Configuration.Service()
+
+    # Then
+    services |> expect.list()
+  })
+})
