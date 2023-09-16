@@ -20,3 +20,28 @@ describe("When exceptions <- ODBC.Configuration.Exceptions()",{
     exceptions[['dsnNotFound']] |> expect.exist()
   })
 })
+
+describe("When input |> exception[['dsnNotFound']]()", {
+  it("then no exception is thrown if input is FALSE", {
+    # Given
+    exception <- ODBC.Configuration.Exceptions()
+
+    # When
+    input <- FALSE
+
+    # Then
+    input |> exception[['dsnNotFound']]() |> expect.no.error()
+  })
+  it("then an exception is thrown if input is TRUE",{
+    # Given
+    exception <- ODBC.Configuration.Exceptions()
+
+    expected.error <- "No DSN environment variable not found in .Renviron Configuration file."
+
+    # When
+    input <- TRUE
+
+    # Then
+    input |> exception[['dsnNotFound']]() |> expect.error(expected.error)
+  })
+})
