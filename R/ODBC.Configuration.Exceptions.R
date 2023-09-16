@@ -15,7 +15,11 @@ ODBC.Configuration.Exceptions <- \() {
       stop("No DRIVER environment variable not found in .Renviron Configuration file.", call. = FALSE)
     }
   }
-  exceptions[['serverNotFound']] <- \() {}
+  exceptions[['serverNotFound']] <- \(invoke) {
+    if(invoke) {
+      stop("No SERVER environment variable not found in .Renviron Configuration file.", call. = FALSE)
+    }
+  }
   exceptions[['databaseNotFound']] <- \() {}
   exceptions[['uidNotFound']] <- \(invoke) {
     if(invoke) {
