@@ -116,3 +116,18 @@ describe("When input |> exception[['pwdNotFound']]()", {
     input |> exception[['pwdNotFound']]() |> expect.error(expected.error)
   })
 })
+
+describe("When error |> exception[['Configuration']]()", {
+  it("then an dsnNotFound exception is thrown if error contains UID", {
+    # Given
+    exception <- ODBC.Configuration.Exceptions()
+
+    expected.error <- "No DSN environment variable not found in .Renviron Configuration file."
+
+    # When
+    configuration.error <- 'DSN' 
+
+    # Then
+    configuration.error |> exception[['Configuration']]() |> expect.error(expected.error)
+  })
+})
