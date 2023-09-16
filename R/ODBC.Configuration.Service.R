@@ -3,7 +3,9 @@ ODBC.Configuration.Service <- \(broker) {
   services[['OpenConfigFile']]  <- \() {
     broker[['OpenConfigFile']]()
   }
-  services[['GetPresetConfig']] <- \() {}
+  services[['GetPresetConfig']] <- \() {
+    broker[['GetPresetConfig']]()
+  }
   services[['GetManualConfig']] <- \() {}
   return(services)
 }
