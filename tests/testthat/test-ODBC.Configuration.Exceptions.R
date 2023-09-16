@@ -238,6 +238,18 @@ describe("When error |> exception[['Configuration']]()", {
     # Then
     configuration.error |> exception[['Configuration']]() |> expect.error(expected.error)
   })
+  it("then an serverNotFound exception is thrown if error contains SERVER", {
+    # Given
+    exception <- ODBC.Configuration.Exceptions()
+
+    expected.error <- "No SERVER environment variable not found in .Renviron Configuration file."
+
+    # When
+    configuration.error <- 'SERVER' 
+
+    # Then
+    configuration.error |> exception[['Configuration']]() |> expect.error(expected.error)
+  })
   it("then an uidNotFound exception is thrown if error contains UID", {
     # Given
     exception <- ODBC.Configuration.Exceptions()
