@@ -1,5 +1,5 @@
 ODBC.Configuration.Exceptions <- \() {
   exceptions <- list()
-  exceptions[['dsnIsNull']] <- \() {}
+  exceptions[['dsnNotFound']] <- \() {}
   return(exceptions)
 }
