@@ -336,3 +336,28 @@ describe("When error |> exception[['Configuration']]()", {
     configuration.error |> exception[['Configuration']]() |> expect.error(expected.error)
   })
 })
+
+describe("When input |> exception[['dsnIsNull']]()", {
+  it("then no exception is thrown if input is FALSE", {
+    # Given
+    exception <- ODBC.Configuration.Exceptions()
+
+    # When
+    input <- FALSE
+
+    # Then
+    input |> exception[['dsnIsNull']]() |> expect.no.error()
+  })
+  it("then an exception is thrown if input is TRUE",{
+    # Given
+    exception <- ODBC.Configuration.Exceptions()
+
+    expected.error <- "dsn is NULL. Valid configuration requires a dsn."
+
+    # When
+    input <- TRUE
+
+    # Then
+    input |> exception[['dsnIsNull']]() |> expect.error(expected.error)
+  })
+})
