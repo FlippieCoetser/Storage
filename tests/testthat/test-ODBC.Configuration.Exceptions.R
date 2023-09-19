@@ -385,3 +385,27 @@ describe("When input |> exception[['dsnIsNull']]()", {
     input |> exception[['dsnIsNull']]() |> expect.error(expected.error)
   })
 })
+
+describe("When input |> exception[['driverIsNull']]()", {
+  it("then no exception is thrown if input is FALSE", {
+    # Given
+    exception <- ODBC.Configuration.Exceptions()
+    
+    # When
+    input <- FALSE
+    
+    # Then
+    input |> exception[['driverIsNull']]() |> expect.no.error()
+  })
+  it("then an exception is thrown if input is TRUE", {
+    # Given
+    exception <- ODBC.Configuration.Exceptions()
+    
+    expected.error <- "driver is NULL. Valid configuration requires a driver."
+    # When
+    input <- TRUE
+    
+    # Then
+    input |> exception[['driverIsNull']]() |> expect.error(expected.error)
+  })
+})
