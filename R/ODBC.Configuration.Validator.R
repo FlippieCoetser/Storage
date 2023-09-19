@@ -2,7 +2,13 @@ ODBC.Configuration.Validator <- \() {
   exception <- ODBC.Configuration.Exceptions()
 
   validations <- list()
-  validations[['PresetConfig']] <- \() {}
+  validations[['PresetConfig']] <- \(configuration) {
+    configuration |>
+      validations[['HasDrv']]() |>
+      validations[['HasDsn']]() |>
+      validations[['HasUid']]() |>
+      validations[['HasPwd']]()       
+  }
   validations[['ManualConfig']] <- \() {}
   validations[['HasDrv']]       <- \(configuration) {
     configuration[['drv']] |> is.null() |> exception[['drvIsNull']]()
