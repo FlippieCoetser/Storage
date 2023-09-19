@@ -144,4 +144,19 @@ describe("When configuration |> validate[['HasDsn']]()",{
     # Then
     input.configuration |> validate[['HasDsn']]() |> expect.error(expected.error)
   })
+  it("then configuration is returned if configuration has dsn",{
+    # Given
+    validate <- ODBC.Configuration.Validator()
+    
+    input.configuration <- list()
+    input.configuration[['dsn']] <- 'test'
+    
+    expected.configuration <- input.configuration
+    
+    # When
+    actual.configuration <- input.configuration |> validate[['HasDsn']]()
+    
+    # Then
+    actual.configuration |> expect.equal(expected.configuration)
+  })
 })
