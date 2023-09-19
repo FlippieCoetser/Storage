@@ -20,3 +20,19 @@ describe("When orchestrations <- Storage.Orchestrator()",{
     orchestrations[['ExecuteQuery']] |> expect.exist()
   })
 })
+
+describe("when query |> orchestrate[['ExecuteQuery']]()",{
+  it("then an exception is thrown if orchestration service instantiated with type equal mock",{
+    # Given
+    type <- 'Mock'
+    orchestrate <- configuration |> Storage.Orchestrator(type)
+
+    expected.error <- "Mock Storage Provider has no ExecuteQuery implementation."
+
+    # When
+    query <- "SELECT 1"
+
+    # Then
+    query |> orchestrate[['ExecuteQuery']]() |> expect.error(expected.error)
+  })
+})
