@@ -16,7 +16,9 @@ ODBC.Configuration.Validator <- \() {
     configuration[['driver']] |> is.null() |> exception[['driverIsNull']]()
     return(configuration)
   }
-  validations[['HasServer']]    <- \() {}
+  validations[['HasServer']]    <- \(configuration) {
+    configuration[['server']] |> is.null() |> exception[['serverIsNull']]()
+  }
   validations[['HasDatabase']]  <- \() {}
   validations[['HasUid']]       <- \() {}
   validations[['HasPwd']]       <- \() {}
