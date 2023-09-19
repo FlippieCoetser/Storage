@@ -228,4 +228,19 @@ describe("When configuration |> validate[['HasServer']]()",{
     # Then
     input.configuration |> validate[['HasServer']]() |> expect.error(expected.error)
   })
+  it("then configuration is returned if configuration has server",{
+    # Given
+    validate <- ODBC.Configuration.Validator()
+    
+    input.configuration <- list()
+    input.configuration[['server']] <- 'test'
+    
+    expected.configuration <- input.configuration
+    
+    # When
+    actual.configuration <- input.configuration |> validate[['HasServer']]()
+    
+    # Then
+    actual.configuration |> expect.equal(expected.configuration)
+  })
 })
