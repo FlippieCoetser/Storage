@@ -433,3 +433,27 @@ describe("When input |> exception[['serverIsNull']]()", {
     input |> exception[['serverIsNull']]() |> expect.error(expected.error)
   })
 })
+
+describe("When input |> exception[['databaseIsNull']]()", {
+  it("then no exception is thrown if input is FALSE", {
+    # Given
+    exception <- ODBC.Configuration.Exceptions()
+    
+    # When
+    input <- FALSE
+    
+    # Then
+    input |> exception[['databaseIsNull']]() |> expect.no.error()
+  })
+  it("then an exception is thrown if input is TRUE", {
+    # Given
+    exception <- ODBC.Configuration.Exceptions()
+    
+    expected.error <- "database is NULL. Valid configuration requires a database."
+    # When
+    input <- TRUE
+    
+    # Then
+    input |> exception[['databaseIsNull']]() |> expect.error(expected.error)
+  })
+})
