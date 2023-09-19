@@ -38,5 +38,40 @@ ODBC.Configuration.Exceptions <- \() {
       stop("No PWD environment variable not found in .Renviron Configuration file.", call. = FALSE)
     }
   }
+  exceptions[['drvIsNull']]        <- \(invoke) {
+    if(invoke) {
+      stop("drv is NULL. Valid configuration requires a drv.", call. = FALSE)
+    }
+  }
+  exceptions[['dsnIsNull']]        <- \(invoke) {
+    if(invoke) {
+      stop("dsn is NULL. Valid configuration requires a dsn.", call. = FALSE)
+    }
+  }
+  exceptions[['driverIsNull']]     <- \(invoke) {
+    if(invoke) {
+      stop("driver is NULL. Valid configuration requires a driver.", call. = FALSE)
+    }
+  }
+  exceptions[['serverIsNull']]     <- \(invoke) {
+    if(invoke) {
+      stop("server is NULL. Valid configuration requires a server.", call. = FALSE)
+    }
+  }
+  exceptions[['databaseIsNull']]   <- \(invoke) {
+    if(invoke) {
+      stop("database is NULL. Valid configuration requires a database.", call. = FALSE)
+    }
+  }
+  exceptions[['uidIsNull']]        <- \(invoke) {
+    if(invoke) {
+      stop("uid is NULL. Valid configuration requires a uid.", call. = FALSE)
+    }
+  }
+  exceptions[['pwdIsNull']]        <- \(invoke) {
+    if(invoke) {
+      stop("pwd is NULL. Valid configuration requires a pwd.", call. = FALSE)
+    }
+  }
   return(exceptions)
 }

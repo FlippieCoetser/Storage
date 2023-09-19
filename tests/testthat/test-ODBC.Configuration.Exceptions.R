@@ -61,6 +61,55 @@ describe("When exceptions <- ODBC.Configuration.Exceptions()",{
     # Then
     exceptions[['pwdNotFound']] |> expect.exist()
   })
+  it("then exceptions contains drvIsNull exception",{
+    # When
+    exceptions <- ODBC.Configuration.Exceptions()
+
+    # Then
+    exceptions[['drvIsNull']] |> expect.exist()
+  })
+  it("then exceptions contains dsnIsNull exception",{
+    # When
+    exceptions <- ODBC.Configuration.Exceptions()
+
+    # Then
+    exceptions[['dsnIsNull']] |> expect.exist()
+  })
+  it("then exceptions contains driverIsNull exception",{
+    # When
+    exceptions <- ODBC.Configuration.Exceptions()
+
+    # Then
+    exceptions[['driverIsNull']] |> expect.exist()
+  })
+  it("then exceptions contains serverIsNull exception",{
+    # When
+    exceptions <- ODBC.Configuration.Exceptions()
+
+    # Then
+    exceptions[['serverIsNull']] |> expect.exist()
+  })
+  it("then exceptions contains databaseIsNull exception",{
+    # When
+    exceptions <- ODBC.Configuration.Exceptions()
+
+    # Then
+    exceptions[['databaseIsNull']] |> expect.exist()
+  })
+  it('then exceptions contains uidIsNull exception',{
+    # When
+    exceptions <- ODBC.Configuration.Exceptions()
+     
+    # Then
+    exceptions[['uidIsNull']] |> expect.exist()
+  })
+  it('then exceptions contains pwdIsNull exception',{
+    # When
+    exceptions <- ODBC.Configuration.Exceptions()
+    
+    # Then
+    exceptions[['pwdIsNull']] |> expect.exist()
+  })
 })
 
 describe("When input |> exception[['dsnNotFound']]()", {
@@ -285,5 +334,174 @@ describe("When error |> exception[['Configuration']]()", {
 
     # Then
     configuration.error |> exception[['Configuration']]() |> expect.error(expected.error)
+  })
+})
+
+describe("When input |> exception[['drvIsNull']]()", {
+  it("then no exception is thrown if input is FALSE", {
+    # Given
+    exception <- ODBC.Configuration.Exceptions()
+    
+    # When
+    input <- FALSE
+    
+    # Then
+    input |> exception[['drvIsNull']]() |> expect.no.error()
+  })
+  it("then an exception is thrown if input is TRUE", {
+    # Given
+    exception <- ODBC.Configuration.Exceptions()
+    
+    expected.error <- "drv is NULL. Valid configuration requires a drv."
+    # When
+    input <- TRUE
+    
+    # Then
+    input |> exception[['drvIsNull']]() |> expect.error(expected.error)
+  })
+})
+
+describe("When input |> exception[['dsnIsNull']]()", {
+  it("then no exception is thrown if input is FALSE", {
+    # Given
+    exception <- ODBC.Configuration.Exceptions()
+
+    # When
+    input <- FALSE
+
+    # Then
+    input |> exception[['dsnIsNull']]() |> expect.no.error()
+  })
+  it("then an exception is thrown if input is TRUE",{
+    # Given
+    exception <- ODBC.Configuration.Exceptions()
+
+    expected.error <- "dsn is NULL. Valid configuration requires a dsn."
+
+    # When
+    input <- TRUE
+
+    # Then
+    input |> exception[['dsnIsNull']]() |> expect.error(expected.error)
+  })
+})
+
+describe("When input |> exception[['driverIsNull']]()", {
+  it("then no exception is thrown if input is FALSE", {
+    # Given
+    exception <- ODBC.Configuration.Exceptions()
+    
+    # When
+    input <- FALSE
+    
+    # Then
+    input |> exception[['driverIsNull']]() |> expect.no.error()
+  })
+  it("then an exception is thrown if input is TRUE", {
+    # Given
+    exception <- ODBC.Configuration.Exceptions()
+    
+    expected.error <- "driver is NULL. Valid configuration requires a driver."
+    # When
+    input <- TRUE
+    
+    # Then
+    input |> exception[['driverIsNull']]() |> expect.error(expected.error)
+  })
+})
+
+describe("When input |> exception[['serverIsNull']]()", {
+  it("then no exception is thrown if input is FALSE", {
+    # Given
+    exception <- ODBC.Configuration.Exceptions()
+    
+    # When
+    input <- FALSE
+    
+    # Then
+    input |> exception[['serverIsNull']]() |> expect.no.error()
+  })
+  it("then an exception is thrown if input is TRUE", {
+    # Given
+    exception <- ODBC.Configuration.Exceptions()
+    
+    expected.error <- "server is NULL. Valid configuration requires a server."
+    # When
+    input <- TRUE
+    
+    # Then
+    input |> exception[['serverIsNull']]() |> expect.error(expected.error)
+  })
+})
+
+describe("When input |> exception[['databaseIsNull']]()", {
+  it("then no exception is thrown if input is FALSE", {
+    # Given
+    exception <- ODBC.Configuration.Exceptions()
+    
+    # When
+    input <- FALSE
+    
+    # Then
+    input |> exception[['databaseIsNull']]() |> expect.no.error()
+  })
+  it("then an exception is thrown if input is TRUE", {
+    # Given
+    exception <- ODBC.Configuration.Exceptions()
+    
+    expected.error <- "database is NULL. Valid configuration requires a database."
+    # When
+    input <- TRUE
+    
+    # Then
+    input |> exception[['databaseIsNull']]() |> expect.error(expected.error)
+  })
+})
+
+describe("When input |> exception[['uidIsNull']]()", {
+  it("then no exception is thrown if input is FALSE", {
+    # Given
+    exception <- ODBC.Configuration.Exceptions()
+    
+    # When
+    input <- FALSE
+    
+    # Then
+    input |> exception[['uidIsNull']]() |> expect.no.error()
+  })
+  it("then an exception is thrown if input is TRUE", {
+    # Given
+    exception <- ODBC.Configuration.Exceptions()
+    
+    expected.error <- "uid is NULL. Valid configuration requires a uid."
+    # When
+    input <- TRUE
+    
+    # Then
+    input |> exception[['uidIsNull']]() |> expect.error(expected.error)
+  })
+})
+
+describe("When input |> exception[['pwdIsNull']]()", {
+  it("then no exception is thrown if input is FALSE", {
+    # Given
+    exception <- ODBC.Configuration.Exceptions()
+    
+    # When
+    input <- FALSE
+    
+    # Then
+    input |> exception[['pwdIsNull']]() |> expect.no.error()
+  })
+  it("then an exception is thrown if input is TRUE", {
+    # Given
+    exception <- ODBC.Configuration.Exceptions()
+    
+    expected.error <- "pwd is NULL. Valid configuration requires a pwd."
+    # When
+    input <- TRUE
+    
+    # Then
+    input |> exception[['pwdIsNull']]() |> expect.error(expected.error)
   })
 })
