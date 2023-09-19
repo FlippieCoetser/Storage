@@ -5,5 +5,6 @@ ODBC.Configuration.Validator <- \() {
   validations[['HasDriver']] <- \() {}
   validations[['HasServer']] <- \() {}
   validations[['HasDatabase']] <- \() {}
+  validations[['HasUid']] <- \() {}
   return(validations)
 }
