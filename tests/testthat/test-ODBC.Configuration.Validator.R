@@ -469,3 +469,151 @@ describe("When configuration |> validate[['PresetConfig']]()",{
     actual.configuration |> expect.equal(expected.configuration)
   })
 })
+
+describe("When configuration |> validate[['ManualConfig']]()",{
+  it("then no exception is thrown if configuration is valid",{
+    # Given
+    validate <- ODBC.Configuration.Validator()
+    
+    # When
+    input.configuration <- list()
+    input.configuration[['drv']]      <- 'test'
+    input.configuration[['driver']]   <- 'test'
+    input.configuration[['server']]   <- 'test'
+    input.configuration[['database']] <- 'test'
+    input.configuration[['uid']]      <- 'test'
+    input.configuration[['pwd']]      <- 'test'
+    
+    # Then
+    input.configuration |> validate[['ManualConfig']]() |> expect.no.error()
+  })
+  it("then an exception is thrown if configuration has no drv",{
+    # Given
+    validate <- ODBC.Configuration.Validator()
+    
+    expected.error <- "drv is NULL. Valid configuration requires a drv."
+    
+    # When
+    input.configuration <- list()
+    input.configuration[['drv']]      <- NULL
+    input.configuration[['driver']]   <- 'test'
+    input.configuration[['server']]   <- 'test'
+    input.configuration[['database']] <- 'test'
+    input.configuration[['uid']]      <- 'test'
+    input.configuration[['pwd']]      <- 'test'
+    
+    # Then
+    input.configuration |> validate[['ManualConfig']]() |> expect.error(expected.error)
+  })
+  it("then an exception if thrown if configuration has no driver",{
+    # Given
+    validate <- ODBC.Configuration.Validator()
+    
+    expected.error <- "driver is NULL. Valid configuration requires a driver."
+    
+    # When
+    input.configuration <- list()
+    input.configuration[['drv']]      <- 'test'
+    input.configuration[['driver']]   <- NULL
+    input.configuration[['server']]   <- 'test'
+    input.configuration[['database']] <- 'test'
+    input.configuration[['uid']]      <- 'test'
+    input.configuration[['pwd']]      <- 'test'
+    
+    # Then
+    input.configuration |> validate[['ManualConfig']]() |> expect.error(expected.error)
+  })
+  it("then an exception if thrown if configuration has no server",{
+    # Given
+    validate <- ODBC.Configuration.Validator()
+    
+    expected.error <- "server is NULL. Valid configuration requires a server."
+    
+    # When
+    input.configuration <- list()
+    input.configuration[['drv']]      <- 'test'
+    input.configuration[['driver']]   <- 'test'
+    input.configuration[['server']]   <- NULL
+    input.configuration[['database']] <- 'test'
+    input.configuration[['uid']]      <- 'test'
+    input.configuration[['pwd']]      <- 'test'
+    
+    # Then
+    input.configuration |> validate[['ManualConfig']]() |> expect.error(expected.error)
+  })
+  it("then an exception if thrown if configuration has no database",{
+    # Given
+    validate <- ODBC.Configuration.Validator()
+    
+    expected.error <- "database is NULL. Valid configuration requires a database."
+    
+    # When
+    input.configuration <- list()
+    input.configuration[['drv']]      <- 'test'
+    input.configuration[['driver']]   <- 'test'
+    input.configuration[['server']]   <- 'test'
+    input.configuration[['database']] <- NULL
+    input.configuration[['uid']]      <- 'test'
+    input.configuration[['pwd']]      <- 'test'
+    
+    # Then
+    input.configuration |> validate[['ManualConfig']]() |> expect.error(expected.error)
+  })
+  it("then an exception if thrown if configuration has no uid",{
+    # Given
+    validate <- ODBC.Configuration.Validator()
+    
+    expected.error <- "uid is NULL. Valid configuration requires a uid."
+    
+    # When
+    input.configuration <- list()
+    input.configuration[['drv']]      <- 'test'
+    input.configuration[['driver']]   <- 'test'
+    input.configuration[['server']]   <- 'test'
+    input.configuration[['database']] <- 'test'
+    input.configuration[['uid']]      <- NULL
+    input.configuration[['pwd']]      <- 'test'
+    
+    # Then
+    input.configuration |> validate[['ManualConfig']]() |> expect.error(expected.error)
+  })
+  it("then an exception if thrown if configuration has no pwd",{
+    # Given
+    validate <- ODBC.Configuration.Validator()
+    
+    expected.error <- "pwd is NULL. Valid configuration requires a pwd."
+    
+    # When
+    input.configuration <- list()
+    input.configuration[['drv']]      <- 'test'
+    input.configuration[['driver']]   <- 'test'
+    input.configuration[['server']]   <- 'test'
+    input.configuration[['database']] <- 'test'
+    input.configuration[['uid']]      <- 'test'
+    input.configuration[['pwd']]      <- NULL
+    
+    # Then
+    input.configuration |> validate[['ManualConfig']]() |> expect.error(expected.error)
+  })
+  it("then configuration is returned if configuration is valid",{
+    # Given
+    validate <- ODBC.Configuration.Validator()
+    
+    # When
+    input.configuration <- list()
+    input.configuration[['drv']]      <- 'test'
+    input.configuration[['driver']]   <- 'test'
+    input.configuration[['server']]   <- 'test'
+    input.configuration[['database']] <- 'test'
+    input.configuration[['uid']]      <- 'test'
+    input.configuration[['pwd']]      <- 'test'
+    
+    expected.configuration <- input.configuration
+    
+    # When
+    actual.configuration <- input.configuration |> validate[['ManualConfig']]()
+    
+    # Then
+    actual.configuration |> expect.equal(expected.configuration)
+  })
+})
