@@ -12,6 +12,13 @@ describe("When validators <- ODBC.Configuration.Validator()",{
     # Then
     validators |> expect.list()
   })
+  it("then validators contains HasDrv validator",{
+    # When
+    validators <- ODBC.Configuration.Validator()
+
+    # Then
+    validators[['HasDrv']] |> expect.exist()
+  })
   it("then validators contains HasDsn validator",{
     # When
     validators <- ODBC.Configuration.Validator()
@@ -40,11 +47,11 @@ describe("When validators <- ODBC.Configuration.Validator()",{
     # Then
     validators[['HasDatabase']] |> expect.exist()
   })
-  it("then validators contains HasDrv validator",{
+  it("then validators contains HasUid validator",{
     # When
     validators <- ODBC.Configuration.Validator()
 
     # Then
-    validators[['HasDrv']] |> expect.exist()
+    validators[['HasUid']] |> expect.exist()
   })
 })
