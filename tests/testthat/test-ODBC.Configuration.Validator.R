@@ -186,4 +186,19 @@ describe("When configuration |> validate[['HasDriver']]()",{
     # Then
     input.configuration |> validate[['HasDriver']]() |> expect.error(expected.error)
   })
+  it("then configuration is returned if configuration has driver",{
+    # Given
+    validate <- ODBC.Configuration.Validator()
+    
+    input.configuration <- list()
+    input.configuration[['driver']] <- 'test'
+    
+    expected.configuration <- input.configuration
+    
+    # When
+    actual.configuration <- input.configuration |> validate[['HasDriver']]()
+    
+    # Then
+    actual.configuration |> expect.equal(expected.configuration)
+  })
 })
