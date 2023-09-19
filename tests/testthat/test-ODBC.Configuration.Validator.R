@@ -244,3 +244,30 @@ describe("When configuration |> validate[['HasServer']]()",{
     actual.configuration |> expect.equal(expected.configuration)
   })
 })
+
+describe("When configuration |> validate[['HasDatabase']]()",{
+  it("then no exception is thrown if database is not NULL",{
+    # Given
+    validate <- ODBC.Configuration.Validator()
+    
+    # When
+    input.configuration <- list()
+    input.configuration[['database']] <- 'test'  
+    
+    # Then
+    input.configuration |> validate[['HasDatabase']]() |> expect.no.error()
+  })
+  it("then an exception is thrown if database is NULL",{
+    # Given
+    validate <- ODBC.Configuration.Validator()
+    
+    expected.error <- "database is NULL. Valid configuration requires a database."
+    
+    # When
+    input.configuration <- list()
+    input.configuration[['database']] <- NULL 
+    
+    # Then
+    input.configuration |> validate[['HasDatabase']]() |> expect.error(expected.error)
+  })
+})
