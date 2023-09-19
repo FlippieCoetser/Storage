@@ -160,3 +160,30 @@ describe("When configuration |> validate[['HasDsn']]()",{
     actual.configuration |> expect.equal(expected.configuration)
   })
 })
+
+describe("When configuration |> validate[['HasDriver']]()",{
+  it("then no exception is thrown if driver is not NULL",{
+    # Given
+    validate <- ODBC.Configuration.Validator()
+    
+    # When
+    input.configuration <- list()
+    input.configuration[['driver']] <- 'test'  
+    
+    # Then
+    input.configuration |> validate[['HasDriver']]() |> expect.no.error()
+  })
+  it("then an exception is thrown if driver is NULL",{
+    # Given
+    validate <- ODBC.Configuration.Validator()
+    
+    expected.error <- "driver is NULL. Valid configuration requires a driver."
+    
+    # When
+    input.configuration <- list()
+    input.configuration[['driver']] <- NULL 
+    
+    # Then
+    input.configuration |> validate[['HasDriver']]() |> expect.error(expected.error)
+  })
+})
