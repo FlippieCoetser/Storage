@@ -102,4 +102,19 @@ describe("When configuration |> validate[['HasDrv']]()",{
     # Then
     input.configuration |> validate[['HasDrv']]() |> expect.error(expected.error)
   })
+  it("then configuration is returned if configuration has drv",{
+    # Given
+    validate <- ODBC.Configuration.Validator()
+    
+    input.configuration <- list()
+    input.configuration[['drv']] <- 'test'
+    
+    expected.configuration <- input.configuration
+    
+    # When
+    actual.configuration <- input.configuration |> validate[['HasDrv']]()
+    
+    # Then
+    actual.configuration |> expect.equal(expected.configuration)
+  })
 })
