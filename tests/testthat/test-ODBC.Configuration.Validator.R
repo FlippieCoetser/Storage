@@ -370,3 +370,102 @@ describe("When configuration |> validate[['HasPwd']]()",{
     actual.configuration |> expect.equal(expected.configuration)
   })
 })
+
+describe("When configuration |> validate[['PresetConfig']]()",{
+  it("then no exception is thrown if configuration is valid",{
+    # Given
+    validate <- ODBC.Configuration.Validator()
+    
+    # When
+    input.configuration <- list()
+    input.configuration[['drv']] <- 'test'
+    input.configuration[['dsn']] <- 'test'
+    input.configuration[['uid']] <- 'test'
+    input.configuration[['pwd']] <- 'test'
+    
+    # Then
+    input.configuration |> validate[['PresetConfig']]() |> expect.no.error()
+  })
+  it("then an exception is thrown if configuration has no drv",{
+    # Given
+    validate <- ODBC.Configuration.Validator()
+    
+    expected.error <- "drv is NULL. Valid configuration requires a drv."
+    
+    # When
+    input.configuration <- list()
+    input.configuration[['drv']] <- NULL
+    input.configuration[['dsn']] <- 'test'
+    input.configuration[['uid']] <- 'test'
+    input.configuration[['pwd']] <- 'test'
+    
+    # Then
+    input.configuration |> validate[['PresetConfig']]() |> expect.error(expected.error)
+  })
+  it("then an exception is thrown if configuration has no dsn",{
+    # Given
+    validate <- ODBC.Configuration.Validator()
+    
+    expected.error <- "dsn is NULL. Valid configuration requires a dsn."
+    
+    # When
+    input.configuration <- list()
+    input.configuration[['drv']] <- 'test'
+    input.configuration[['dsn']] <- NULL
+    input.configuration[['uid']] <- 'test'
+    input.configuration[['pwd']] <- 'test'
+    
+    # Then
+    input.configuration |> validate[['PresetConfig']]() |> expect.error(expected.error)
+  })
+  it("then an exception is thrown if configuration has no uid",{
+    # Given
+    validate <- ODBC.Configuration.Validator()
+    
+    expected.error <- "uid is NULL. Valid configuration requires a uid."
+    
+    # When
+    input.configuration <- list()
+    input.configuration[['drv']] <- 'test'
+    input.configuration[['dsn']] <- 'test'
+    input.configuration[['uid']] <- NULL
+    input.configuration[['pwd']] <- 'test'
+    
+    # Then
+    input.configuration |> validate[['PresetConfig']]() |> expect.error(expected.error)
+  }) 
+  it("then an exception is thrown if configuration has no pwd",{
+    # Given
+    validate <- ODBC.Configuration.Validator()
+    
+    expected.error <- "pwd is NULL. Valid configuration requires a pwd."
+    
+    # When
+    input.configuration <- list()
+    input.configuration[['drv']] <- 'test'
+    input.configuration[['dsn']] <- 'test'
+    input.configuration[['uid']] <- 'test'
+    input.configuration[['pwd']] <- NULL
+    
+    # Then
+    input.configuration |> validate[['PresetConfig']]() |> expect.error(expected.error)
+  })
+  it("then configuration is returned if configuration is valid",{
+    # Given
+    validate <- ODBC.Configuration.Validator()
+    
+    input.configuration <- list()
+    input.configuration[['drv']] <- 'test'
+    input.configuration[['dsn']] <- 'test'
+    input.configuration[['uid']] <- 'test'
+    input.configuration[['pwd']] <- 'test'
+    
+    expected.configuration <- input.configuration
+    
+    # When
+    actual.configuration <- input.configuration |> validate[['PresetConfig']]()
+    
+    # Then
+    actual.configuration |> expect.equal(expected.configuration)
+  })
+})
