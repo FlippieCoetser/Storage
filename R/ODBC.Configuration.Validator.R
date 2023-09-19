@@ -30,6 +30,7 @@ ODBC.Configuration.Validator <- \() {
   }
   validations[['HasPwd']]       <- \(configuration) {
     configuration[['pwd']] |> is.null() |> exception[['pwdIsNull']]()
+    return(configuration)
   }
   return(validations)
 }
