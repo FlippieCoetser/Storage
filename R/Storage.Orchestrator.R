@@ -1,1 +1,4 @@
-Storage.Orchestrator <- \() {}
+Storage.Orchestrator <- \() {
+  orchestrations <- list()
+  return(orchestrations)
+}
