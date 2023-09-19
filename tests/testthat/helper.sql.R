@@ -1,4 +1,8 @@
-configurator  <- ODBC.Configurator()
+configurator  <-   
+  ODBC.Configuration.Broker()  |>
+  ODBC.Configuration.Service() |>
+  ODBC.Configuration.Processor()
+  
 configuration <- configurator[["GetConfig"]]()
 
 sql           <- Query::SQL()
