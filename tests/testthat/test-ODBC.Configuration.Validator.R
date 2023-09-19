@@ -76,3 +76,30 @@ describe("When validators <- ODBC.Configuration.Validator()",{
     validators[['HasPwd']] |> expect.exist()
   })
 })
+
+describe("When configuration |> validate[['HasDrv']]()",{
+  it("then no exception is thrown if drv is not NULL",{
+    # Given
+    validate <- ODBC.Configuration.Validator()
+    
+    # When
+    input.configuration <- list()
+    input.configuration[['drv']] <- 'test'  
+    
+    # Then
+    input.configuration |> validate[['HasDrv']]() |> expect.no.error()
+  })
+  it("then an exception is thrown if drv is NULL",{
+    # Given
+    validate <- ODBC.Configuration.Validator()
+    
+    expected.error <- "drv is NULL. Valid configuration requires a drv."
+    
+    # When
+    input.configuration <- list()
+    input.configuration[['drv']] <- NULL 
+    
+    # Then
+    input.configuration |> validate[['HasDrv']]() |> expect.error(expected.error)
+  })
+})
