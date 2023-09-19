@@ -52,3 +52,23 @@ describe("When process[['OpenConfigFile']]()",{
     call.count |> expect.equal(after.call.count)
   })
 })
+
+describe("When type |> process[['GetConfig']]()",{
+  it("then a present configuration is returned if type is Preset",{
+    # Given
+    validate <- ODBC.Configuration.Validator()
+
+    processor <- 
+      ODBC.Configuration.Broker()  |> 
+      ODBC.Configuration.Service() |> 
+      ODBC.Configuration.Processor()
+
+    type <- 'Preset'
+
+    # When
+    configuration <- type |> processor[['GetConfig']]()
+
+    # Then
+    configuration |> validate[['PresetConfig']]() |> expect.no.error()
+  })
+})
