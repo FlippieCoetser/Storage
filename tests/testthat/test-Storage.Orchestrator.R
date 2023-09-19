@@ -71,6 +71,7 @@ describe("when query |> orchestrate[['ExecuteQuery']]()",{
     query |> orchestrate[['ExecuteQuery']]() |> expect.error(expected.error)
   })
   it("then no exception if thrown if orchestration service instantiated with type equal ODBC",{
+    skip_if_not(environment == 'local')
     # Given
     type <- 'ODBC'
     orchestrate <- configuration |> Storage.Orchestrator(type)
@@ -82,6 +83,7 @@ describe("when query |> orchestrate[['ExecuteQuery']]()",{
     query |> orchestrate[['ExecuteQuery']]() |> expect.no.error()
   })
   it("then no exception is thrown if orchestration service instantiated with no type provided",{
+    skip_if_not(environment == 'local')
     # Given
     orchestrate <- configuration |> Storage.Orchestrator()
 
