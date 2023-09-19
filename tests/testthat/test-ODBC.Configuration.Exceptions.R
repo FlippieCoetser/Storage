@@ -457,3 +457,27 @@ describe("When input |> exception[['databaseIsNull']]()", {
     input |> exception[['databaseIsNull']]() |> expect.error(expected.error)
   })
 })
+
+describe("When input |> exception[['uidIsNull']]()", {
+  it("then no exception is thrown if input is FALSE", {
+    # Given
+    exception <- ODBC.Configuration.Exceptions()
+    
+    # When
+    input <- FALSE
+    
+    # Then
+    input |> exception[['uidIsNull']]() |> expect.no.error()
+  })
+  it("then an exception is thrown if input is TRUE", {
+    # Given
+    exception <- ODBC.Configuration.Exceptions()
+    
+    expected.error <- "uid is NULL. Valid configuration requires a uid."
+    # When
+    input <- TRUE
+    
+    # Then
+    input |> exception[['uidIsNull']]() |> expect.error(expected.error)
+  })
+})
