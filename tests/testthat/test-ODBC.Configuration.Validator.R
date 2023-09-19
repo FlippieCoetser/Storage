@@ -286,3 +286,30 @@ describe("When configuration |> validate[['HasDatabase']]()",{
     actual.configuration |> expect.equal(expected.configuration)
   })
 })
+
+describe("When configuration |> validate[['HasUid']]()",{
+  it("then no exception is thrown if uid is not NULL",{
+    # Given
+    validate <- ODBC.Configuration.Validator()
+    
+    # When
+    input.configuration <- list()
+    input.configuration[['uid']] <- 'test'  
+    
+    # Then
+    input.configuration |> validate[['HasUid']]() |> expect.no.error()
+  })
+  it("then an exception is thrown if uid is NULL",{
+    # Given
+    validate <- ODBC.Configuration.Validator()
+    
+    expected.error <- "uid is NULL. Valid configuration requires a uid."
+    
+    # When
+    input.configuration <- list()
+    input.configuration[['uid']] <- NULL 
+    
+    # Then
+    input.configuration |> validate[['HasUid']]() |> expect.error(expected.error)
+  })
+})
