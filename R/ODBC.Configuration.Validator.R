@@ -9,7 +9,15 @@ ODBC.Configuration.Validator <- \() {
       validations[['HasUid']]() |>
       validations[['HasPwd']]()       
   }
-  validations[['ManualConfig']] <- \() {}
+  validations[['ManualConfig']] <- \(configuration) {
+    configuration |>
+      validations[['HasDrv']]()      |>
+      validations[['HasDriver']]()   |>
+      validations[['HasServer']]()   |>
+      validations[['HasDatabase']]() |>
+      validations[['HasUid']]()      |>
+      validations[['HasPwd']]()       
+  }
   validations[['HasDrv']]       <- \(configuration) {
     configuration[['drv']] |> is.null() |> exception[['drvIsNull']]()
     return(configuration)
