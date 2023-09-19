@@ -38,7 +38,11 @@ ODBC.Configuration.Exceptions <- \() {
       stop("No PWD environment variable not found in .Renviron Configuration file.", call. = FALSE)
     }
   }
-  exceptions[['drvIsNull']]        <- \() {}
+  exceptions[['drvIsNull']]        <- \(invoke) {
+    if(invoke) {
+      stop("drv is NULL. Valid configuration requires a drv.", call. = FALSE)
+    }
+  }
   exceptions[['dsnIsNull']]        <- \(invoke) {
     if(invoke) {
       stop("dsn is NULL. Valid configuration requires a dsn.", call. = FALSE)
