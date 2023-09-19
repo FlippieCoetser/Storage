@@ -44,5 +44,6 @@ ODBC.Configuration.Exceptions <- \() {
   exceptions[['serverIsNull']]     <- \() {}
   exceptions[['databaseIsNull']]   <- \() {}
   exceptions[['uidIsNull']]        <- \() {}
+  exceptions[['pwdIsNull']]        <- \() {}
   return(exceptions)
 }
