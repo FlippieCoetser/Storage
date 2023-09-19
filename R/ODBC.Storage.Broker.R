@@ -1,17 +1,3 @@
-#' ODBC Storage Broker
-#'
-#' @description
-#' Provide a ODBC based storage interface with basic CRUD Operations.
-#' 
-#' @usage NULL
-#' @returns A `list` of functions: 
-#' * `ExecuteQuery(query)`
-#' * `Insert(entity, table)`
-#' * `Select(fields, table)`
-#' * `SelectWhereId(fields, table, id)`
-#' * `Update(entity, table)`
-#' * `Delete(id, table)`
-#' @export
 ODBC.Storage.Broker <- \(configuration, sql = Query::SQL()) {
   exception  <- Storage.Exceptions()
 

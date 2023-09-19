@@ -1,16 +1,3 @@
-#' Mock Storage Broker
-#'
-#' @description
-#' Provide a mock data store with basic CRUD Operations.
-#' 
-#' @usage NULL
-#' @returns A `list` of functions: 
-#' * `Insert(entity, table)`
-#' * `Select(fields, table)`
-#' * `SelectWhereId(fields, table, id)`
-#' * `Update(entity, table)`
-#' * `Delete(id, table)`
-#' @export
 Mock.Storage.Broker <- \(configuration = NULL, data = NULL) {
   exception <- Storage.Exceptions()
 
