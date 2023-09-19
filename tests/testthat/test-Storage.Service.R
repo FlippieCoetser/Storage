@@ -12,13 +12,6 @@ describe("When services <- Storage.Service()",{
     # Then
     services |> expect.list()
   })
-  it("then services contains CreateConnection service",{
-    # Given
-    services <- Storage.Service()
-
-    # Then
-    services[["CreateConnection"]] |> expect.exist()
-  })
   it("then services contains ExecuteQuery service",{
     # Given
     services <- Storage.Service()
@@ -60,28 +53,6 @@ describe("When services <- Storage.Service()",{
 
     # Then
     services[["Delete"]] |> expect.exist()
-  })
-})
-
-describe('When service[["CreateConnection"]]()',{
-  it('then broker[["CreateConnection"]]() is called once',{
-    # Given
-    call.count <- 0
-
-    broker   <- list()
-    broker[["CreateConnection"]] <- \() {
-      call.count <<- call.count + 1
-    }
-
-    services <- broker |> Storage.Service()
-
-    call.count |> expect.equal(0)
-
-    # When
-    services[["CreateConnection"]]()
-    
-    # Then
-    call.count |> expect.equal(1)
   })
 })
 

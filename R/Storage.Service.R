@@ -16,9 +16,6 @@ Storage.Service <- \(broker) {
   validate <- Storage.Validator()
   
   services <- list()
-  services[['CreateConnection']] <- \() {
-    broker[['CreateConnection']]()
-  }
   services[['ExecuteQuery']]     <- \(query) {
     # TODO: Extensive query validation.
     # Current validation check for NULL only.
