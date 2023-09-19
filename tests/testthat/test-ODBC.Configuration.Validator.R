@@ -354,4 +354,19 @@ describe("When configuration |> validate[['HasPwd']]()",{
     # Then
     input.configuration |> validate[['HasPwd']]() |> expect.error(expected.error)
   })
+  it("then configuration is returned if configuration has pwd",{
+    # Given
+    validate <- ODBC.Configuration.Validator()
+    
+    input.configuration <- list()
+    input.configuration[['pwd']] <- 'test'
+    
+    expected.configuration <- input.configuration
+    
+    # When
+    actual.configuration <- input.configuration |> validate[['HasPwd']]()
+    
+    # Then
+    actual.configuration |> expect.equal(expected.configuration)
+  })
 })
