@@ -3,6 +3,5 @@
 export(Mock.Storage.Broker)
 export(ODBC.Configurator)
 export(ODBC.Storage.Broker)
-export(Storage.Configuration.Service)
 export(Storage.Service)
 export(Todo.Service)

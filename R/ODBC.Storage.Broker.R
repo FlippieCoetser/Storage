@@ -13,29 +13,19 @@
 #' * `Delete(id, table)`
 #' @export
 ODBC.Storage.Broker <- \(configuration){
-  validate <- Storage.Configuration.Validator()
-  configuration |> validate[['PresetConfig']]()
-    
+  exception  <- Storage.Exceptions()
+
   sql <- Query::SQL()
 
   operations <- list()
   operations[['CreateConnection']]  <- \() {
-    exception  <- Storage.Exceptions()
-    config <- list(
-      drv = odbc::odbc(),
-      dsn = configuration[['dsn']],
-      uid = configuration[['uid']],
-      pwd = configuration[['pwd']]
-    )
     tryCatch(
-      DBI::dbConnect |> do.call(config),
+      DBI::dbConnect |> do.call(configuration),
       error=exception[['Connection']]
     )
   }
   operations[['ExecuteQuery']]      <- \(query) {
     connection <- operations[['CreateConnection']]()
-    exception  <- Storage.Exceptions()
-
     output <- tryCatch(
         connection |> DBI::dbGetQuery(query),
         error = exception[['Query']]

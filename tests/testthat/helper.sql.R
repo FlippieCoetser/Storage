@@ -1,5 +1,5 @@
-configurator  <- Storage.Configuration.Broker() |> Storage.Configuration.Service()
-configuration <- configurator[["GetPresetConfig"]]()
+configurator  <- ODBC.Configurator()
+configuration <- configurator[["GetConfig"]]()
 
 sql           <- Query::SQL()
 sql.utilities <- Query::SQL.Utilities()
