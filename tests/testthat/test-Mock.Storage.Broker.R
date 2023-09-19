@@ -56,6 +56,21 @@ describe("When operations <- configuration |> Mock.Storage.Broker()",{
   })
 })
 
+describe("when query |> operation[['ExecuteQuery']]()",{
+  it("then an exception is thrown",{
+    # Given
+    operation <- Mock.Storage.Broker()
+
+    expected.error <- "Mock Storage Provider has no ExecuteQuery implementation."
+
+    # When
+    query <- "SELECT 1"
+
+    # Then
+    query |> operation[['ExecuteQuery']]() |> expect.error(expected.error)
+  })
+})
+
 describe("when todo |> operation[['Insert']]('Todo')",{
   it("then todo is inserted into mock data",{
     # Given
