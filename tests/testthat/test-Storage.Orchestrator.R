@@ -40,6 +40,13 @@ describe("When orchestrations <- Storage.Orchestrator()",{
     # Then
     orchestrations[['SelectWhereId']] |> expect.exist()
   })
+  it("then orchestrations contains Update orchestration",{
+    # When
+    orchestrations <- Storage.Orchestrator()
+
+    # Then
+    orchestrations[['Update']] |> expect.exist()
+  })
 })
 
 describe("when query |> orchestrate[['ExecuteQuery']]()",{
