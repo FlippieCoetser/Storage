@@ -11,5 +11,6 @@ Storage.Orchestrator <- \(configuration, type = 'Mock', data = NULL) {
   }
   orchestrations[['Insert']]       <- \() {}
   orchestrations[['Select']]       <- \() {}
+  orchestrations[['SelectWhereId']]<- \() {}
   return(orchestrations)
 }
