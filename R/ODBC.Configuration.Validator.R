@@ -3,6 +3,7 @@ ODBC.Configuration.Validator <- \() {
   validations[['HasDrv']] <- \() {}
   validations[['HasDsn']] <- \() {}
   validations[['HasDriver']] <- \() {}
+  validations[['HasServer']] <- \() {}
   validations[['HasDatabase']] <- \() {}
   return(validations)
 }
