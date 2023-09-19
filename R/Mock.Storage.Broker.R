@@ -15,13 +15,6 @@ Mock.Storage.Broker <- \(configuration = NULL, data = NULL) {
   exception <- Storage.Exceptions()
 
   operations <- list()
-  operations[['CreateConnection']] <- \() {
-    TRUE |> exception[['NoCreateConnection']]()
-  }
-  operations[['ExecuteQuery']]     <- \(query) {
-    TRUE |> exception[['NoExecuteQuery']]()
-  }
-
   operations[['Insert']]           <- \(entity, table) {
     match.count <- (data[[table]][['Id']] == entity[['Id']]) |> sum()
     (match.count != 0) |> exception[['DuplicateKey']]()

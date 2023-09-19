@@ -12,20 +12,6 @@ describe("When operations <- configuration |> Mock.Storage.Broker()",{
     # Then
     operations |> expect.list()
   })
-  it("then operations contains CreateConnection operation",{
-    # When
-    operations <- Mock.Storage.Broker()
-
-    # Then
-    operations[['CreateConnection']] |> expect.exist()
-  })
-  it("then operations contains ExecuteQuery operation",{
-    # When
-    operations <- Mock.Storage.Broker()
-
-    # Then
-    operations[['ExecuteQuery']] |> expect.exist()
-  })
   it("then operations contains Insert operation",{
     # When
     operations <- Mock.Storage.Broker()
@@ -60,30 +46,6 @@ describe("When operations <- configuration |> Mock.Storage.Broker()",{
 
     # Then
     operations[['Delete']] |> expect.exist()
-  })
-})
-
-describe("when operation[['CreateConnection']]()",{
-  it("then an exceptions is thrown",{
-    # When
-    operation <- Mock.Storage.Broker()
-
-    expected.error <- "Mock.Storage: CreateConnection operation not implemented"
-
-    # Then
-    operation[['CreateConnection']]() |> expect.error(expected.error)
-  })
-})
-
-describe("when operation[['ExecuteQuery']]()",{
-  it("then an exceptions is thrown",{
-    # When
-    operation <- Mock.Storage.Broker()
-
-    expected.error <- "Mock.Storage: ExecuteQuery operation not implemented"
-
-    # Then
-    operation[['ExecuteQuery']]() |> expect.error(expected.error)
   })
 })
 
