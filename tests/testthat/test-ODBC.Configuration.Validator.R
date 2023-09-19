@@ -202,3 +202,30 @@ describe("When configuration |> validate[['HasDriver']]()",{
     actual.configuration |> expect.equal(expected.configuration)
   })
 })
+
+describe("When configuration |> validate[['HasServer']]()",{
+  it("then no exception is thrown if server is not NULL",{
+    # Given
+    validate <- ODBC.Configuration.Validator()
+    
+    # When
+    input.configuration <- list()
+    input.configuration[['server']] <- 'test'  
+    
+    # Then
+    input.configuration |> validate[['HasServer']]() |> expect.no.error()
+  })
+  it("then an exception is thrown if server is NULL",{
+    # Given
+    validate <- ODBC.Configuration.Validator()
+    
+    expected.error <- "server is NULL. Valid configuration requires a server."
+    
+    # When
+    input.configuration <- list()
+    input.configuration[['server']] <- NULL 
+    
+    # Then
+    input.configuration |> validate[['HasServer']]() |> expect.error(expected.error)
+  })
+})
