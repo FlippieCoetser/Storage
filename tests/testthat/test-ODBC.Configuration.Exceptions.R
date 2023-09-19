@@ -61,6 +61,13 @@ describe("When exceptions <- ODBC.Configuration.Exceptions()",{
     # Then
     exceptions[['pwdNotFound']] |> expect.exist()
   })
+  it("then exceptions contains drvIsNull exception",{
+    # When
+    exceptions <- ODBC.Configuration.Exceptions()
+
+    # Then
+    exceptions[['drvIsNull']] |> expect.exist()
+  })
   it("then exceptions contains dsnIsNull exception",{
     # When
     exceptions <- ODBC.Configuration.Exceptions()
