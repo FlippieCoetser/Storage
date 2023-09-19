@@ -12,6 +12,13 @@ describe("When operations <- configuration |> Mock.Storage.Broker()",{
     # Then
     operations |> expect.list()
   })
+  it("then operations contains ExecuteQuery operation",{
+    # When
+    operations <- Mock.Storage.Broker()
+
+    # Then
+    operations[['ExecuteQuery']] |> expect.exist()
+  })
   it("then operations contains Insert operation",{
     # When
     operations <- Mock.Storage.Broker()
