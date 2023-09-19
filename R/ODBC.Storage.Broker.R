@@ -26,13 +26,12 @@ ODBC.Storage.Broker <- \(configuration){
   }
   operations[['ExecuteQuery']]      <- \(query) {
     connection <- operations[['CreateConnection']]()
+    
     output <- tryCatch(
         connection |> DBI::dbGetQuery(query),
         error = exception[['Query']]
     )
 
-    # Use new environment for connections
-    # Close based on usage: Little use close quickly. Lots of use close slowly.
     connection |> DBI::dbDisconnect()
 
     return(output)
