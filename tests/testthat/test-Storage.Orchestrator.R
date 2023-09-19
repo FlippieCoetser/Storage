@@ -46,4 +46,16 @@ describe("when query |> orchestrate[['ExecuteQuery']]()",{
     # Then
     query |> orchestrate[['ExecuteQuery']]() |> expect.no.error()
   })
+  it("then an exception is thrown if orchestration service instantiated with no type provided",{
+    # Given
+    orchestrate <- configuration |> Storage.Orchestrator()
+
+    expected.error <- "Mock Storage Provider has no ExecuteQuery implementation."
+
+    # When
+    query <- "SELECT 1"
+
+    # Then
+    query |> orchestrate[['ExecuteQuery']]() |> expect.error(expected.error)
+  })
 })
