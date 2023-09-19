@@ -28,6 +28,8 @@ ODBC.Configuration.Validator <- \() {
     configuration[['uid']] |> is.null() |> exception[['uidIsNull']]()
     return(configuration)
   }
-  validations[['HasPwd']]       <- \() {}
+  validations[['HasPwd']]       <- \(configuration) {
+    configuration[['pwd']] |> is.null() |> exception[['pwdIsNull']]()
+  }
   return(validations)
 }
