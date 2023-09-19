@@ -40,5 +40,6 @@ ODBC.Configuration.Exceptions <- \() {
   }
   exceptions[['drvIsNull']]        <- \() {}
   exceptions[['dsnIsNull']]        <- \() {}
+  exceptions[['driverIsNull']]     <- \() {}
   return(exceptions)
 }
