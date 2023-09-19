@@ -3,3 +3,13 @@ describe('ODBC.Configuration.Validator',{
     ODBC.Configuration.Validator |> expect.exist()
   })
 })
+
+describe("When validators <- ODBC.Configuration.Validator()",{
+  it("then validators is a list",{
+    # When
+    validators <- ODBC.Configuration.Validator()
+
+    # Then
+    validators |> expect.list()
+  })
+})
