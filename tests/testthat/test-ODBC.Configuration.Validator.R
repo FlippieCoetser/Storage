@@ -328,3 +328,30 @@ describe("When configuration |> validate[['HasUid']]()",{
     actual.configuration |> expect.equal(expected.configuration)
   })
 })
+
+describe("When configuration |> validate[['HasPwd']]()",{
+  it("then no exception is thrown if pwd is not NULL",{
+    # Given
+    validate <- ODBC.Configuration.Validator()
+    
+    # When
+    input.configuration <- list()
+    input.configuration[['pwd']] <- 'test'  
+    
+    # Then
+    input.configuration |> validate[['HasPwd']]() |> expect.no.error()
+  })
+  it("then an exception is thrown if pwd is NULL",{
+    # Given
+    validate <- ODBC.Configuration.Validator()
+    
+    expected.error <- "pwd is NULL. Valid configuration requires a pwd."
+    
+    # When
+    input.configuration <- list()
+    input.configuration[['pwd']] <- NULL 
+    
+    # Then
+    input.configuration |> validate[['HasPwd']]() |> expect.error(expected.error)
+  })
+})
