@@ -54,4 +54,11 @@ describe("When validators <- ODBC.Configuration.Validator()",{
     # Then
     validators[['HasUid']] |> expect.exist()
   })
+  it("then validators contains HasPwd validator",{
+    # When
+    validators <- ODBC.Configuration.Validator()
+
+    # Then
+    validators[['HasPwd']] |> expect.exist()
+  })
 })
