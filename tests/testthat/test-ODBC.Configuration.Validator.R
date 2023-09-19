@@ -270,4 +270,19 @@ describe("When configuration |> validate[['HasDatabase']]()",{
     # Then
     input.configuration |> validate[['HasDatabase']]() |> expect.error(expected.error)
   })
+  it("then configuration is returned if configuration has database",{
+    # Given
+    validate <- ODBC.Configuration.Validator()
+    
+    input.configuration <- list()
+    input.configuration[['database']] <- 'test'
+    
+    expected.configuration <- input.configuration
+    
+    # When
+    actual.configuration <- input.configuration |> validate[['HasDatabase']]()
+    
+    # Then
+    actual.configuration |> expect.equal(expected.configuration)
+  })
 })
