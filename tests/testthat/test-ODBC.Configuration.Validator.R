@@ -312,4 +312,19 @@ describe("When configuration |> validate[['HasUid']]()",{
     # Then
     input.configuration |> validate[['HasUid']]() |> expect.error(expected.error)
   })
+  it("then configuration is returned if configuration has uid",{
+    # Given
+    validate <- ODBC.Configuration.Validator()
+    
+    input.configuration <- list()
+    input.configuration[['uid']] <- 'test'
+    
+    expected.configuration <- input.configuration
+    
+    # When
+    actual.configuration <- input.configuration |> validate[['HasUid']]()
+    
+    # Then
+    actual.configuration |> expect.equal(expected.configuration)
+  })
 })
