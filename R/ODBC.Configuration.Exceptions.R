@@ -68,6 +68,10 @@ ODBC.Configuration.Exceptions <- \() {
       stop("uid is NULL. Valid configuration requires a uid.", call. = FALSE)
     }
   }
-  exceptions[['pwdIsNull']]        <- \() {}
+  exceptions[['pwdIsNull']]        <- \(invoke) {
+    if(invoke) {
+      stop("pwd is NULL. Valid configuration requires a pwd.", call. = FALSE)
+    }
+  }
   return(exceptions)
 }
