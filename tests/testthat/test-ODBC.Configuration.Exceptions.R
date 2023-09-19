@@ -89,6 +89,13 @@ describe("When exceptions <- ODBC.Configuration.Exceptions()",{
     # Then
     exceptions[['serverIsNull']] |> expect.exist()
   })
+  it("then exceptions contains databaseIsNull exception",{
+    # When
+    exceptions <- ODBC.Configuration.Exceptions()
+
+    # Then
+    exceptions[['databaseIsNull']] |> expect.exist()
+  })
 })
 
 describe("When input |> exception[['dsnNotFound']]()", {
