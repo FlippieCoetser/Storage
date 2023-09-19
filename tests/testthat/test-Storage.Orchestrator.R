@@ -12,4 +12,11 @@ describe("When orchestrations <- Storage.Orchestrator()",{
     # Then
     orchestrations |> expect.list()
   })
+  it("then orchestrations contains ExecuteQuery orchestration",{
+    # When
+    orchestrations <- Storage.Orchestrator()
+
+    # Then
+    orchestrations[['ExecuteQuery']] |> expect.exist()
+  })
 })
