@@ -1,4 +1,4 @@
-Storage.Orchestrator <- \(configuration, type, data = NULL) {
+Storage.Orchestrator <- \(configuration, type = 'Mock', data = NULL) {
   services <- list()
   services[['Mock']] <- \() configuration |> Mock.Storage.Broker(data)
   services[['ODBC']] <- \() configuration |> ODBC.Storage.Broker()
