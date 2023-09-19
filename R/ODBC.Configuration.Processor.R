@@ -6,6 +6,7 @@ ODBC.Configuration.Processor <- \(service) {
   processes[['GetConfig']] <- \(type) {
     configuration <- list()
     configuration[['Preset']] <- \() service[['GetPresetConfig']]()
+    configuration[['Manual']] <- \() service[['GetManualConfig']]()
     configuration[[type]]()
   }
   return(processes)
