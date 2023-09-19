@@ -3,6 +3,6 @@ ODBC.Configuration.Processor <- \(service) {
   processes[['OpenConfigFile']] <- \() {
     service[['OpenConfigFile']]()
   }
-  processes[['GetConfiguration']] <- \() {}
+  processes[['GetConfig']] <- \() {}
   return(processes)
 }
