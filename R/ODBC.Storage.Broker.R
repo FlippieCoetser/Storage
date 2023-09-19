@@ -12,10 +12,8 @@
 #' * `Update(entity, table)`
 #' * `Delete(id, table)`
 #' @export
-ODBC.Storage.Broker <- \(configuration){
+ODBC.Storage.Broker <- \(configuration, sql = Query::SQL()) {
   exception  <- Storage.Exceptions()
-
-  sql <- Query::SQL()
 
   operations <- list()
   operations[['CreateConnection']]  <- \() {
