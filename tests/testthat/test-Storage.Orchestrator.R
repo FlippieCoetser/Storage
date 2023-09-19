@@ -35,4 +35,15 @@ describe("when query |> orchestrate[['ExecuteQuery']]()",{
     # Then
     query |> orchestrate[['ExecuteQuery']]() |> expect.error(expected.error)
   })
+  it("then no exception if thrown if orchestration service instantiated with type equal ODBC",{
+    # Given
+    type <- 'ODBC'
+    orchestrate <- configuration |> Storage.Orchestrator(type)
+
+    # When
+    query <- "SELECT 1"
+
+    # Then
+    query |> orchestrate[['ExecuteQuery']]() |> expect.no.error()
+  })
 })
