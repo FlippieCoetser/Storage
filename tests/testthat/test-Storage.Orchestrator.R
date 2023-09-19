@@ -47,6 +47,13 @@ describe("When orchestrations <- Storage.Orchestrator()",{
     # Then
     orchestrations[['Update']] |> expect.exist()
   })
+  it("then orchestrations contains Delete orchestration",{
+    # When
+    orchestrations <- Storage.Orchestrator()
+
+    # Then
+    orchestrations[['Delete']] |> expect.exist()
+  })
 })
 
 describe("when query |> orchestrate[['ExecuteQuery']]()",{
