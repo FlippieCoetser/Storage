@@ -96,12 +96,19 @@ describe("When exceptions <- ODBC.Configuration.Exceptions()",{
     # Then
     exceptions[['databaseIsNull']] |> expect.exist()
   })
-    it('then exceptions contains uidIsNull exception',{
+  it('then exceptions contains uidIsNull exception',{
+    # When
+    exceptions <- ODBC.Configuration.Exceptions()
+     
+    # Then
+    exceptions[['uidIsNull']] |> expect.exist()
+  })
+    it('then exceptions contains pwdIsNull exception',{
      # When
       exceptions <- ODBC.Configuration.Exceptions()
      
      # Then
-     exceptions[['uidIsNull']] |> expect.exist()
+     exceptions[['pwdIsNull']] |> expect.exist()
     })
 })
 
