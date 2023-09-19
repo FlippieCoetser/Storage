@@ -26,6 +26,13 @@ describe("When orchestrations <- Storage.Orchestrator()",{
     # Then
     orchestrations[['Insert']] |> expect.exist()
   })
+  it("then orchestrations contains Select orchestration",{
+    # When
+    orchestrations <- Storage.Orchestrator()
+
+    # Then
+    orchestrations[['Select']] |> expect.exist()
+  })
 })
 
 describe("when query |> orchestrate[['ExecuteQuery']]()",{
