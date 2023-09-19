@@ -6,6 +6,7 @@ ODBC.Configuration.Validator <- \() {
   validations[['ManualConfig']] <- \() {}
   validations[['HasDrv']]       <- \(configuration) {
     configuration[['drv']] |> is.null() |> exception[['drvIsNull']]()
+    return(configuration)
   }
   validations[['HasDsn']]       <- \() {}
   validations[['HasDriver']]    <- \() {}
