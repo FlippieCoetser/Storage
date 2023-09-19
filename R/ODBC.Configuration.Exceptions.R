@@ -53,7 +53,11 @@ ODBC.Configuration.Exceptions <- \() {
       stop("driver is NULL. Valid configuration requires a driver.", call. = FALSE)
     }
   }
-  exceptions[['serverIsNull']]     <- \() {}
+  exceptions[['serverIsNull']]     <- \(invoke) {
+    if(invoke) {
+      stop("server is NULL. Valid configuration requires a server.", call. = FALSE)
+    }
+  }
   exceptions[['databaseIsNull']]   <- \() {}
   exceptions[['uidIsNull']]        <- \() {}
   exceptions[['pwdIsNull']]        <- \() {}
