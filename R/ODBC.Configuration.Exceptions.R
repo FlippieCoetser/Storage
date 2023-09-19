@@ -39,7 +39,11 @@ ODBC.Configuration.Exceptions <- \() {
     }
   }
   exceptions[['drvIsNull']]        <- \() {}
-  exceptions[['dsnIsNull']]        <- \() {}
+  exceptions[['dsnIsNull']]        <- \(invoke) {
+    if(invoke) {
+      stop("dsn is NULL. Valid configuration requires a dsn.", call. = FALSE)
+    }
+  }
   exceptions[['driverIsNull']]     <- \() {}
   exceptions[['serverIsNull']]     <- \() {}
   exceptions[['databaseIsNull']]   <- \() {}
