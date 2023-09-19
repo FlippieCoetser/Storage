@@ -54,7 +54,7 @@ describe("When process[['OpenConfigFile']]()",{
 })
 
 describe("When type |> process[['GetConfig']]()",{
-  it("then a present configuration is returned if type is Preset",{
+  it("then a preset configuration is returned if type is Preset",{
     # Given
     validate <- ODBC.Configuration.Validator()
 
@@ -70,5 +70,22 @@ describe("When type |> process[['GetConfig']]()",{
 
     # Then
     configuration |> validate[['PresetConfig']]() |> expect.no.error()
+  })
+  it("then a manual configuration is returned if type if Manual",{
+    # Given
+    validate <- ODBC.Configuration.Validator()
+
+    processor <- 
+      ODBC.Configuration.Broker()  |> 
+      ODBC.Configuration.Service() |> 
+      ODBC.Configuration.Processor()
+
+    type <- 'Manual'
+
+    # When
+    configuration <- type |> processor[['GetConfig']]()
+
+    # Then
+    configuration |> validate[['ManualConfig']]() |> expect.no.error()
   })
 })
