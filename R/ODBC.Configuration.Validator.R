@@ -1,6 +1,7 @@
 ODBC.Configuration.Validator <- \() {
   validations <- list()
   validations[['PresetConfig']] <- \() {}
+  validations[['ManualConfig']] <- \() {}
   validations[['HasDrv']]       <- \() {}
   validations[['HasDsn']]       <- \() {}
   validations[['HasDriver']]    <- \() {}
