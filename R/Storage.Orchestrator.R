@@ -1,4 +1,18 @@
-Storage.Orchestrator <- \(configuration, type = 'Mock', data = NULL) {
+#' Storage Orchestrator
+#'
+#' @description
+#' Provide an storage interface with basic CRUD Operations with ability to switch between MOCK or ODBC Storage Provider.
+#' 
+#' @usage NULL
+#' @returns A `list` of functions: 
+#' * `ExecuteQuery(query)`
+#' * `Insert(entity, table)`
+#' * `Select(fields, table)`
+#' * `SelectWhereId(fields, table, id)`
+#' * `Update(entity, table)`
+#' * `Delete(id, table)`
+#' @export
+Storage.Orchestrator <- \(configuration, type = 'ODBC', data = NULL) {
   services <- list()
   services[['Mock']] <- \() configuration |> Mock.Storage.Broker(data)
   services[['ODBC']] <- \() configuration |> ODBC.Storage.Broker()
