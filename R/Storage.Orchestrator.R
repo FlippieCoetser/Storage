@@ -9,5 +9,6 @@ Storage.Orchestrator <- \(configuration, type = 'Mock', data = NULL) {
   orchestrations[['ExecuteQuery']] <- \(query) {
     query |> service[['ExecuteQuery']]()
   }
+  orchestrations[['Insert']]       <- \() {}
   return(orchestrations)
 }
