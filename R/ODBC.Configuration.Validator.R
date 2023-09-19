@@ -18,6 +18,7 @@ ODBC.Configuration.Validator <- \() {
   }
   validations[['HasServer']]    <- \(configuration) {
     configuration[['server']] |> is.null() |> exception[['serverIsNull']]()
+    return(configuration)
   }
   validations[['HasDatabase']]  <- \() {}
   validations[['HasUid']]       <- \() {}
