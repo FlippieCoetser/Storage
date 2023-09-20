@@ -12,6 +12,5 @@
 #' * `Update(entity, table)`
 #' * `Delete(id, table)`
 #' @export
-Storage <- \(configuration, type = 'ODBC', data = NULL) {
-  Storage.Orchestrator(configuration, type = 'ODBC', data = NULL)
-}
+Storage <- Storage.Orchestrator
+
