@@ -7,7 +7,6 @@ describe("Todo.Service",{
 describe("When services <- Todo.Service()",{
   it("then services is a list",{
     # When
-    storage <- configuration |> Mock.Storage.Broker()
     services <- Todo.Service()
 
     # Then
@@ -53,11 +52,8 @@ describe("When services <- Todo.Service()",{
 describe("When todo |> service[['Insert']]()",{
   it("then todo is added inserted into mock.storage",{
     # Given
-    broker  <- 
-      configuration |> 
-      Mock.Storage.Broker(data) |>
-      Storage.Service() |>
-      Todo.Broker()
+    storage <- configuration |> Storage.Orchestrator('Mock',data)
+    broker  <- storage |> Todo.Broker()
 
     service <- broker |> Todo.Service()
 
@@ -78,11 +74,8 @@ describe("When todo |> service[['Insert']]()",{
   })
   it("then an exception is thrown if todo has no Id",{
     # Given
-    broker  <- 
-      configuration |> 
-      Mock.Storage.Broker(data) |>
-      Storage.Service() |>
-      Todo.Broker()
+    storage <- configuration |> Storage.Orchestrator('Mock',data)
+    broker  <- storage |> Todo.Broker()
 
     service <- broker |> Todo.Service()
 
@@ -97,11 +90,8 @@ describe("When todo |> service[['Insert']]()",{
   })
   it("then an exception is thrown if todo has no Task",{
     # Given
-    broker  <- 
-      configuration |> 
-      Mock.Storage.Broker(data) |>
-      Storage.Service() |>
-      Todo.Broker()
+    storage <- configuration |> Storage.Orchestrator('Mock',data)
+    broker  <- storage |> Todo.Broker()
 
     service <- broker |> Todo.Service()
 
@@ -116,11 +106,8 @@ describe("When todo |> service[['Insert']]()",{
   })
   it("then an exception is thrown if todo has no Status",{
     # Given
-    broker  <- 
-      configuration |> 
-      Mock.Storage.Broker(data) |>
-      Storage.Service() |>
-      Todo.Broker()
+    storage <- configuration |> Storage.Orchestrator('Mock',data)
+    broker  <- storage |> Todo.Broker()
 
     service <- broker |> Todo.Service()
 
@@ -138,11 +125,8 @@ describe("When todo |> service[['Insert']]()",{
 describe("When service[['Select']]()",{
   it("then all todos are returned from mock.storage",{
     # Given
-    broker  <- 
-      configuration |> 
-      Mock.Storage.Broker(data) |>
-      Storage.Service() |>
-      Todo.Broker()
+    storage <- configuration |> Storage.Orchestrator('Mock',data)
+    broker  <- storage |> Todo.Broker()
 
     service <- broker |> Todo.Service()
 
@@ -159,11 +143,8 @@ describe("When service[['Select']]()",{
 describe("When id |> service[['SelectWhereId']]()",{
   it("then todo is returned from mock.storage",{
     # Given
-    broker  <- 
-      configuration |> 
-      Mock.Storage.Broker(data) |>
-      Storage.Service() |>
-      Todo.Broker()
+    storage <- configuration |> Storage.Orchestrator('Mock',data)
+    broker  <- storage |> Todo.Broker()
 
     service <- broker |> Todo.Service()
 
@@ -180,11 +161,8 @@ describe("When id |> service[['SelectWhereId']]()",{
   })
   it("then an exception is thrown if Id null",{
     # Given
-    broker  <- 
-      configuration |> 
-      Mock.Storage.Broker(data) |>
-      Storage.Service() |>
-      Todo.Broker()
+    storage <- configuration |> Storage.Orchestrator('Mock',data)
+    broker  <- storage |> Todo.Broker()
 
     service <- broker |> Todo.Service()
 
@@ -198,11 +176,8 @@ describe("When id |> service[['SelectWhereId']]()",{
 describe("When todo |> service[['Update']]()",{
   it("then todo is updated in mock.storage",{
     # Given
-    broker  <- 
-      configuration |> 
-      Mock.Storage.Broker(data) |>
-      Storage.Service() |>
-      Todo.Broker()
+    storage <- configuration |> Storage.Orchestrator('Mock',data)
+    broker  <- storage |> Todo.Broker()
 
     service <- broker |> Todo.Service()
 
@@ -221,11 +196,8 @@ describe("When todo |> service[['Update']]()",{
   })
   it("then an exception is thrown if todo has no Id",{
     # Given
-    broker  <- 
-      configuration |> 
-      Mock.Storage.Broker(data) |>
-      Storage.Service() |>
-      Todo.Broker()
+    storage <- configuration |> Storage.Orchestrator('Mock',data)
+    broker  <- storage |> Todo.Broker()
 
     service <- broker |> Todo.Service()
 
@@ -240,11 +212,8 @@ describe("When todo |> service[['Update']]()",{
   })
   it("then an exception is thrown if todo has not Task",{
     # Given
-    broker  <- 
-      configuration |> 
-      Mock.Storage.Broker(data) |>
-      Storage.Service() |>
-      Todo.Broker()
+    storage <- configuration |> Storage.Orchestrator('Mock',data)
+    broker  <- storage |> Todo.Broker()
 
     service <- broker |> Todo.Service()
 
@@ -262,11 +231,8 @@ describe("When todo |> service[['Update']]()",{
 describe("When id |> service[['Delete']]()",{
   it("then todo is deleted from mock.storage",{
     # Given
-    broker  <- 
-      configuration |> 
-      Mock.Storage.Broker(data) |>
-      Storage.Service() |>
-      Todo.Broker()
+    storage <- configuration |> Storage.Orchestrator('Mock',data)
+    broker  <- storage |> Todo.Broker()
 
     service <- broker |> Todo.Service()
 
@@ -285,11 +251,8 @@ describe("When id |> service[['Delete']]()",{
   })
   it("then an exception is thrown if Id null",{
     # Given
-    broker  <- 
-      configuration |> 
-      Mock.Storage.Broker(data) |>
-      Storage.Service() |>
-      Todo.Broker()
+    storage <- configuration |> Storage.Orchestrator('Mock',data)
+    broker  <- storage |> Todo.Broker()
 
     service <- broker |> Todo.Service()
 
