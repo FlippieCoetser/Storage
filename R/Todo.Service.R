@@ -1,7 +1,8 @@
-#' Storage Server
+#' Example Todo Service
 #'
 #' @description
-#' Provide an storage interface with basic CRUD Operations with ability to switch between MOCK or ODBC Storage Provider.
+#' Provide a Service which leverage the storage interface provided by this package.
+#' The service includes structural and logical validation of data.
 #' 
 #' @usage NULL
 #' @returns A `list` of functions: 

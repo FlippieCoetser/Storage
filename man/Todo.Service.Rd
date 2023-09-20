@@ -2,7 +2,7 @@
 % Please edit documentation in R/Todo.Service.R
 \name{Todo.Service}
 \alias{Todo.Service}
-\title{Storage Server}
+\title{Example Todo Service}
 \value{
 A \code{list} of functions:
 \itemize{
@@ -14,5 +14,6 @@ A \code{list} of functions:
 }
 }
 \description{
-Provide an storage interface with basic CRUD Operations with ability to switch between MOCK or ODBC Storage Provider.
+Provide a Service which leverage the storage interface provided by this package.
+The service includes structural and logical validation of data.
 }

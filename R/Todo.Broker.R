@@ -1,3 +1,17 @@
+#' Example Todo Broker
+#'
+#' @description
+#' Provide a Broker which leverage the storage interface provided by this package.
+#' The broker excludes structural and logical validation of data.
+#' 
+#' @usage NULL
+#' @returns A `list` of functions: 
+#' * `Insert(todo)`
+#' * `Select(...)`
+#' * `SelectWhereId(id)`
+#' * `Update(todo)`
+#' * `Delete(id)`
+#' @export
 Todo.Broker <- \(storage) {
   sql.utilities <- Query::SQL.Utilities()
   sql.functions <- Query::SQL.Functions()
