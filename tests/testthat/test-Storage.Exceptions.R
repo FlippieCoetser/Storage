@@ -554,7 +554,7 @@ describe("When input |> exception[['NoExecuteQuery']]()",{
     # Given
     exception <- Storage.Exceptions()
 
-    excepted.error <- "Mock.Storage: ExecuteQuery operation not implemented"
+    excepted.error <- "Mock Storage Provider has no ExecuteQuery implementation."
 
     # When
     input <- TRUE

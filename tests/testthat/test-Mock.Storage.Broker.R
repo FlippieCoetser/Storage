@@ -12,6 +12,13 @@ describe("When operations <- configuration |> Mock.Storage.Broker()",{
     # Then
     operations |> expect.list()
   })
+  it("then operations contains ExecuteQuery operation",{
+    # When
+    operations <- Mock.Storage.Broker()
+
+    # Then
+    operations[['ExecuteQuery']] |> expect.exist()
+  })
   it("then operations contains Insert operation",{
     # When
     operations <- Mock.Storage.Broker()
@@ -46,6 +53,21 @@ describe("When operations <- configuration |> Mock.Storage.Broker()",{
 
     # Then
     operations[['Delete']] |> expect.exist()
+  })
+})
+
+describe("when query |> operation[['ExecuteQuery']]()",{
+  it("then an exception is thrown",{
+    # Given
+    operation <- Mock.Storage.Broker()
+
+    expected.error <- "Mock Storage Provider has no ExecuteQuery implementation."
+
+    # When
+    query <- "SELECT 1"
+
+    # Then
+    query |> operation[['ExecuteQuery']]() |> expect.error(expected.error)
   })
 })
 

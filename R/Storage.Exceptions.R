@@ -86,7 +86,7 @@ Storage.Exceptions <- \() {
   }
   exceptions[['NoExecuteQuery']]     <- \(invoke) {
     if (invoke) { 
-      stop("Mock.Storage: ExecuteQuery operation not implemented", call. = FALSE)
+      stop("Mock Storage Provider has no ExecuteQuery implementation.", call. = FALSE)
     }
   }
   return(exceptions)
