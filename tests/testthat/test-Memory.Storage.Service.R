@@ -33,4 +33,11 @@ describe("When services <- Memory.Storage.Service()",{
     # Then
     services[['Select']] |> expect.exist()
   })
+  it("then services contains SelectWhereId service",{
+    # When
+    services <- Memory.Storage.Service()
+
+    # Then
+    services[['SelectWhereId']] |> expect.exist()
+  })
 })
