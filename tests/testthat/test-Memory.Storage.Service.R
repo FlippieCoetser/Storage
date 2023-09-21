@@ -114,3 +114,22 @@ describe("When fields |> service[['Select']](table)",{
     actual.entities |> expect.equal.data(expected.entities)
   })
 })
+
+describe("When fields |> service[['SelectWhereId']](table, id)",{
+  it("then entity with id in table in data store is returned",{
+    # Given
+    broker  <- configuration |> Memory.Storage.Broker(data)
+    service <- broker        |> Memory.Storage.Service()
+
+    existing.entity <- data[[table]] |> tail(1)
+    expected.entity <- existing.entity
+
+    id <- existing.entity[['Id']]
+
+    # When
+    actual.entity <- fields |> service[['SelectWhereId']](table, id)
+
+    # Then
+    actual.entity |> expect.equal.data(expected.entity)
+  })
+})
