@@ -47,4 +47,11 @@ describe("When services <- Memory.Storage.Service()",{
     # Then
     services[['Update']] |> expect.exist()
   })
+  it("then services contains Delete service",{
+    # When
+    services <- Memory.Storage.Service()
+
+    # Then
+    services[['Delete']] |> expect.exist()
+  })
 })
