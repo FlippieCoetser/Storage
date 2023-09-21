@@ -5,5 +5,6 @@ Memory.Storage.Exceptions <- \() {
       stop('Memory Storage Provider has no ExecuteQuery implementation.', call. = FALSE)
     }
   }
+  exceptions[['DuplicateId']] <- \() {}
   return(exceptions)
 }
