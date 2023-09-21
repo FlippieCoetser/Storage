@@ -12,4 +12,11 @@ describe("When exceptions <- Memory.Storage.Exception()",{
     # Then
     exceptions |> expect.list()
   })
+  it('then exceptions contains NoExecuteQuery exception',{
+   # When
+   exceptions <- Memory.Storage.Exceptions()
+   
+   # Then
+   exceptions[['NoExecuteQuery']] |> expect.exist()
+  })
 })
