@@ -12,8 +12,8 @@
 #' * `Update(entity, table)`
 #' * `Delete(id, table)`
 #' @export
-Storage.Service <- \(broker) {
-  validate <- Storage.Validator()
+ODBC.Storage.Service <- \(broker) {
+  validate <- ODBC.Storage.Validator()
   
   services <- list()
   services[['ExecuteQuery']]     <- \(query) {

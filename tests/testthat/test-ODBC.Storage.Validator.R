@@ -1,20 +1,20 @@
-describe("Storage.Validator",{
+describe("ODBC.Storage.Validator",{
   it("Exist",{
-    Storage.Validator |> expect.exist()
+    ODBC.Storage.Validator |> expect.exist()
   })
 })
 
-describe("When validators <- Storage.Validator()",{
+describe("When validators <- ODBC.Storage.Validator()",{
   it("then validators a list",{
     # Given
-    validators <- Storage.Validator()
+    validators <- ODBC.Storage.Validator()
 
     # Then
     validators |> expect.list()
   })
   it("then validators contains Query validator",{
     # Given
-    validators <- Storage.Validator()
+    validators <- ODBC.Storage.Validator()
 
     # Then
     validators[["Query"]] |> expect.exist()
@@ -24,7 +24,7 @@ describe("When validators <- Storage.Validator()",{
 describe('When query |> validate[["Query"]]()',{
   it('then query is returned if query is not null',{
     # Given
-    validate <- Storage.Validator()
+    validate <- ODBC.Storage.Validator()
 
     # When
     query <- 'SELECT 1'
@@ -34,7 +34,7 @@ describe('When query |> validate[["Query"]]()',{
   })
   it('then no exception is thrown when query is not null',{
     # Given
-    validate <- Storage.Validator()
+    validate <- ODBC.Storage.Validator()
 
     # When
     query <- 'SELECT 1'
@@ -44,7 +44,7 @@ describe('When query |> validate[["Query"]]()',{
   })
   it('then an exception is thrown when query is null',{
     # Given
-    validate <- Storage.Validator()
+    validate <- ODBC.Storage.Validator()
 
     expected.error <- 'Query is null. Provide a Query.'
 

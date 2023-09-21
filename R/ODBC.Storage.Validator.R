@@ -1,4 +1,4 @@
-Storage.Validator <- \() {
+ODBC.Storage.Validator <- \() {
   exception <- ODBC.Storage.Exceptions()
   validators <- list()
   validators[['Query']] <- \(query) {

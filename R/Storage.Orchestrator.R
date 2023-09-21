@@ -3,8 +3,9 @@ Storage.Orchestrator <- \(configuration, type = 'odbc', data = NULL) {
   services[['memory']] <- \() {
     configuration |> Memory.Storage.Broker(data) |> Memory.Storage.Service()
   }
-  services[['odbc']]   <- \() configuration |> ODBC.Storage.Broker()
-
+  services[['odbc']]   <- \() {
+    configuration |> ODBC.Storage.Broker() |> ODBC.Storage.Service()
+  }
   service <- services[[type]]()
 
   orchestrations <- list()
