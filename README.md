@@ -127,7 +127,7 @@ data[['Todo']] <- data.frame(
 2. Create a new instance of the `Storage` component with `type = 'memory'` flag and `data = data`.
 
 ```r
-storage <- configuration |> Storage::Storage(type = 'in-memory', data = data)
+storage <- configuration |> Storage::Storage(type = 'memory', data = data)
 ```
 
 ### ODBC Data Store
