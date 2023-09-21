@@ -1,5 +1,6 @@
 Memory.Storage.Service <- \(broker) {
   validate  <- Memory.Storage.Validator()
+  
   services <- list()
   services[['ExecuteQuery']]  <- \(...) {
     validate[['NoImplementation']]()
