@@ -1,7 +1,8 @@
 Memory.Storage.Service <- \(broker) {
+  validate  <- Memory.Storage.Validator()
   services <- list()
-  services[['ExecuteQuery']]  <- \(query) {
-    query |> broker[['ExecuteQuery']]()
+  services[['ExecuteQuery']]  <- \(...) {
+    validate[['NoImplementation']]()
   }
   services[['Insert']]        <- \(entity, table) {
     entity |> broker[['Insert']](table)
