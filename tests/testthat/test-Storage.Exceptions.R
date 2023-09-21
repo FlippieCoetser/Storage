@@ -529,7 +529,7 @@ describe("When input |> exception[['NoCreateConnection']]()",{
     # Given
     exception <- Storage.Exceptions()
 
-    excepted.error <- "Mock.Storage: CreateConnection operation not implemented"
+    excepted.error <- "Memory Storage: CreateConnection operation not implemented"
 
     # When
     input <- TRUE
@@ -554,7 +554,7 @@ describe("When input |> exception[['NoExecuteQuery']]()",{
     # Given
     exception <- Storage.Exceptions()
 
-    excepted.error <- "Mock Storage Provider has no ExecuteQuery implementation."
+    excepted.error <- "Memory Storage Provider has no ExecuteQuery implementation."
 
     # When
     input <- TRUE

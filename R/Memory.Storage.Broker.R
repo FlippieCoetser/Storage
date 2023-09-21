@@ -1,4 +1,4 @@
-Mock.Storage.Broker <- \(configuration = NULL, data = NULL) {
+Memory.Storage.Broker <- \(configuration = NULL, data = NULL) {
   exception <- Storage.Exceptions()
 
   operations <- list()

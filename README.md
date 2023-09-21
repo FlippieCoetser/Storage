@@ -1,132 +1,227 @@
 # Storage
 
-This R Package is used to perform common data operations on various data stores and is a [Standard](https://github.com/hassanhabib/The-Standard) compliant package.
+This R Package provides a common interface for performing data operations on various data stores. Currently an `memory` and `odbc` driver based `Storage` is supported. To configure an `odbc` driver based data store, a `ODBC.Configurator` is made available to retrieve the required configuration parameters from a local `.Renviron` file. Lastly, a `Todo.Service`, is provided as example of how to use the `Storage` component can be injected into a data service.
 
-Typical operations perform on a Data Stores, for example a SQL Database, includes `Insert`, `Select`, `Update` and `Delete`.
-This `Storage` package provides a simple function for each of these operations while hiding all unnessecary details.
+Below is an overview of the different functions available on each of the components:
 
-Current data providers includes an ODBC Data Source and Mock Data Source with Structual Validation and Exceptions Handing.
+## ODBC Configurator
 
-> Note: This is an experimental package which use a simple Todo App as example.
+Two utility functions are provided:
 
-## Usage
+1. `OpenConfigFile`  
+   Opens the `.Renviron` file in your IDE. This function only works when using either VS Code or RStudio.
 
-`ODBC.Storage.Service()` or `Mock.Storage.Service()` take a configuration as input and returns a list of functions, each representing a Data Store operation.
+2. `GetConfig`  
+   Retrieves the configuration parameters from your local `.Renviron` file. By default a preset configuration is assumed which is used when an OS DSN has been setup. A preset type configuration assumes a `DSN`, `UID` and `PWD` variables have been defined in the `.Renviron` file. If no OS DSN has been setup, `GetConfig` can be invoked with `type = 'Manual'` flag. When retrieving configuration parameters using the `type = 'Manual'` flag it is assumed `DRIVER`, `SERVER`, `DATABASE`, `UID`, `PWD` variables have been defined in the `.Renviron` file.
 
-1. Load Package
+## Storage Component
 
-```r
-library(Storage)
-```
+Six functions are provided, five of which are common data operations and one function to execute custom queries:
 
-2. Create Data Store Specific Configuration  
-   Some data stores require a `configuration` to establish a connection. For example, an ODBC Data Source requires a `configuration` with `DSN`, `Username` and `Password`.
-   These configuration details are considered sensitive information and typically stored as Environment Variables on the local machine. (refer to [Environment](https://github.com/FlippieCoetser/Environment) for an overview how to define the needed configuration parameters.). This `Storage` package includes a configurator used to retrieve the variables and add them to a configuration data frame.
+1. `Insert`
+2. `Select`
+3. `SelectWhereId`
+4. `Update`
+5. `Delete`
 
-```r
-configurator <- Storage.Configuration.Service()
-configuration <- configurator[["GetODBCConfiguration"]]()
-```
+Custom data operations can be added using the `ExecuteQuery` function. The `ExecuteQuery` function takes a SQL `query`, passed in as a character data type, and returns a data frame.
 
-3. Get Data Operations  
-   Get a list of Data Operations by using the previously generated configuration
+## Todo Data Service
 
-```r
-operation <- configuration |> Mock.Storage.Service()
-```
+Five functions are provided:
 
-### Insert
+1. `Insert`
+2. `Select`
+3. `SelectWhereId`
+4. `Update`
+5. `Delete`
 
-Insert a new `todo` into data store
+The `Todo.Service` is an example of how to use the `Storage` component. The `Todo.Service` is a simple data service that performs CRUD operations on a `Todo` data model.
 
-```r
-todo <- data.frame(
-  Id     = uuid::UUIDgenerate(),
-  Task   = 'Task',
-  Status = 'New'
-)
-
-todo |> operation[["Todo"]][["Insert"]]()
-```
-
-### Select
-
-Retieve all `todos` stored in data store
-
-```r
-todos <- operation[["Todo"]][["Select"]]()
-```
-
-### Select Specific
-
-Retieve a specific `todo` by `Id` from data store
-
-```r
-# id of existing todo in mock data store
-id <- '7ab3df6f-2e8f-44b4-87bf-3004cf1c16ae'
-
-todo <- id |> operation[["Todo"]][["SelectWhereId"]]()
-```
-
-### Update
-
-Update specific `todo` in data store
-
-```r
-todo <- data.frame(
-  Id     = '7ab3df6f-2e8f-44b4-87bf-3004cf1c16ae',
-  Task   = 'Task',
-  Status = 'Complete'
-)
-
-todo |> operation[["Todo"]][["Update"]]()
-```
-
-### Delete
-
-Remove `todo` from data store using `todo` `Id`
-
-```r
-# id of existing todo in mock data store
-id <- '7ab3df6f-2e8f-44b4-87bf-3004cf1c16ae'
-
-id |> operation[["Todo"]][["Delete"]]()
-```
+> Note: This package is a [Standard](https://github.com/hassanhabib/The-Standard) compliant package.
 
 ## Installation
 
-At the time of writing this README, this `Storage` R-Package is not available on CRAN. Either user GitHub or Build and Install Locally:
+At the time of writing this README, the package is not available on CRAN. However, it can be installed using `devtools`.
 
-### Install via GitHub
+#### Install via GitHub
 
-1. User Devtools
+1. Use Devtools
 
 ```r
 devtools::install_github("https://github.com/FlippieCoetser/Storage")
 ```
 
-### Build and Install Locally
+### Clone, Build and Install Locally
 
-1. Generate `.tar.gz` file
+1. Clone the repository
+
+```bash
+git clone https://github.com/FlippieCoetser/Storage.git
+```
+
+2. Build and Generate `.tar.gz` file
 
 ```r
 devtools::build()
 ```
 
-2. Install `.tar.gz` file
+3. Install the package
 
 ```r
-install.package("path_to_file/tar_gz_file", repos = NULL, type = "source")
+install.packages("path_to_file/tar_gz_file", repos = NULL, type = "source")
 ```
 
-## Contibute
+## Loading the Package
 
-Contributions is encouraged and very much welcomed! Given this R-Package is [Standard](https://github.com/hassanhabib/The-Standard) compliant, any contribution is expected to follow the same principles. This package is also developed using a TDD approach. It is therefore expected that a commit with new working funtionality is preceeded with a commit contain a failing unit test or tests. Lastly, R is flexible and allows for different syntax and techniques to achieve the same outcome. Please stick to the naming and style convention used.
+There are two ways to load the package:
 
-### Unit Tests
+1. User the library function to load all available components into global namespace
+2. Create an new instance of a component using the package namespace
 
-1. Running Unit Tests:
+### User Global Namespace
+
+When using the library function to load the package, three components are loaded into the global namespace.
 
 ```r
-devtools::test()
+library(Storage)
+```
+
+### User Package Namespace
+
+When using the package namespace, the three components can be accessed as follow:
+
+```r
+Storage::ODBC.Configurator()
+Storage::Storage()
+Storage::Todo.Service()
+```
+
+# Usage
+
+Using the `Todo.Service` component two uses cases will be demonstrated, one using an `memory` data store and the other using an `odbc` data store.
+
+## Initialize
+
+### In-Memory Data Store
+
+1. Create an empty `configuration`
+
+```r
+configuration <- list()
+```
+
+2. Create a `data.frame` with some mock todo data
+
+```r
+data <- list()
+data[['Todo']] <- data.frame(
+  Id     = c('7ab3df6f-2e8f-44b4-87bf-3004cf1c16ae',
+            '7bfef861-6fe9-46da-9ad2-6a58779ccdcd',
+            'd3b59bf0-14f0-4444-9ec9-1913e7256ee4'),
+  Task   = c('Task.1','Task.2','Task.3'),
+  Status = c('New','New','Done')
+)
+```
+
+2. Create a new instance of the `Storage` component with `type = 'memory'` flag and `data = data`.
+
+```r
+storage <- configuration |> Storage::Storage(type = 'in-memory', data = data)
+```
+
+### ODBC Data Store
+
+1. Create a new instance of `ODBC.Configurator`
+
+```r
+odbc.configurator <- Storage::ODBC.Configurator()
+```
+
+2. Retrieve the configuration parameters from the local `.Renviron` file
+
+```r
+configuration <- odbc.configurator[['GetConfig']]()
+```
+
+3. Create a new instance of `Storage` component.
+
+```r
+storage <- configuration |> Storage::Storage()
+```
+
+## Use Cases
+
+1. select a `storage` instance based on your desired data store and create a new `Todo.Service` instance
+
+```r
+todo.service <- storage |> Todo.Broker() |> Todo.Service()
+```
+
+### Insert Todo
+
+1. Create a new `todo`
+
+```r
+todo <- data.frame(
+  Id     = uuid::UUIDgenerate(),
+  Task   = "Task",
+  Status = "New"
+)
+```
+
+2. Insert the `todo` into the data store
+
+```r
+todo |> todo.service[['Insert']]()
+```
+
+### Select Todos
+
+1. Select all `todos` in data store
+
+```r
+todos <- todo.service[['Select']]()
+```
+
+### Select Todo Where Id
+
+1. Use the `todo` created in a previous step and extract its `Id`
+
+```r
+id   <- todo[['Id']]
+```
+
+2. Select the `todo` with the extracted `Id`
+
+```r
+todo <- id |> todo.service[['SelectWhereId']]()
+```
+
+### Update Todo
+
+1. Use the `todo` retrieved in previous step and update its `Status`
+
+```r
+todo[['Status']] <- "Done"
+```
+
+2. Update the `todo` in the data store
+
+```r
+todo |> todo.service[['Update']]()
+```
+
+### Delete Todo
+
+1. Use the `todo` retrieved in previous step and extract its `Id`
+
+```r
+id <- todo[['Id']]
+```
+
+2. Delete the `todo` with the extracted `Id`
+
+```r
+id |> todo.service[['Delete']]()
 ```

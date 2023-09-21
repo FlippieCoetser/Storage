@@ -81,12 +81,12 @@ Storage.Exceptions <- \() {
   }
   exceptions[['NoCreateConnection']] <- \(invoke) {
     if (invoke) { 
-      stop("Mock.Storage: CreateConnection operation not implemented", call. = FALSE)
+      stop("Memory Storage: CreateConnection operation not implemented", call. = FALSE)
     }
   }
   exceptions[['NoExecuteQuery']]     <- \(invoke) {
     if (invoke) { 
-      stop("Mock Storage Provider has no ExecuteQuery implementation.", call. = FALSE)
+      stop("Memory Storage Provider has no ExecuteQuery implementation.", call. = FALSE)
     }
   }
   return(exceptions)

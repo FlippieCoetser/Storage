@@ -1,55 +1,55 @@
-describe("Mock.Storage.Broker",{
+describe("Memory.Storage.Broker",{
   it("Exist",{
-    Mock.Storage.Broker |> expect.exist()
+    Memory.Storage.Broker |> expect.exist()
   })
 })
 
-describe("When operations <- configuration |> Mock.Storage.Broker()",{
+describe("When operations <- configuration |> Memory.Storage.Broker()",{
   it("then operations is a list",{
     # When
-    operations <- Mock.Storage.Broker()
+    operations <- Memory.Storage.Broker()
 
     # Then
     operations |> expect.list()
   })
   it("then operations contains ExecuteQuery operation",{
     # When
-    operations <- Mock.Storage.Broker()
+    operations <- Memory.Storage.Broker()
 
     # Then
     operations[['ExecuteQuery']] |> expect.exist()
   })
   it("then operations contains Insert operation",{
     # When
-    operations <- Mock.Storage.Broker()
+    operations <- Memory.Storage.Broker()
 
     # Then
     operations[['Insert']] |> expect.exist()
   })
   it("then operations contains Select operation",{
     # When
-    operations <- Mock.Storage.Broker()
+    operations <- Memory.Storage.Broker()
 
     # Then
     operations[['Select']] |> expect.exist()
   })
   it("then operations contains SelectWhereId operation",{
     # When
-    operations <- Mock.Storage.Broker()
+    operations <- Memory.Storage.Broker()
 
     # Then
     operations[['SelectWhereId']] |> expect.exist()
   })
   it("then operations contains Update operation",{
     # When
-    operations <- Mock.Storage.Broker()
+    operations <- Memory.Storage.Broker()
 
     # Then
     operations[['Update']] |> expect.exist()
   })
   it("then operations contains Delete operation",{
     # When
-    operations <- Mock.Storage.Broker()
+    operations <- Memory.Storage.Broker()
 
     # Then
     operations[['Delete']] |> expect.exist()
@@ -59,9 +59,9 @@ describe("When operations <- configuration |> Mock.Storage.Broker()",{
 describe("when query |> operation[['ExecuteQuery']]()",{
   it("then an exception is thrown",{
     # Given
-    operation <- Mock.Storage.Broker()
+    operation <- Memory.Storage.Broker()
 
-    expected.error <- "Mock Storage Provider has no ExecuteQuery implementation."
+    expected.error <- "Memory Storage Provider has no ExecuteQuery implementation."
 
     # When
     query <- "SELECT 1"
@@ -72,9 +72,9 @@ describe("when query |> operation[['ExecuteQuery']]()",{
 })
 
 describe("when todo |> operation[['Insert']]('Todo')",{
-  it("then todo is inserted into mock data",{
+  it("then todo is inserted into memory data",{
     # Given
-    operation <- configuration |> Mock.Storage.Broker(data)
+    operation <- configuration |> Memory.Storage.Broker(data)
 
     new.todo <- list(
       Id     = uuid::UUIDgenerate(),

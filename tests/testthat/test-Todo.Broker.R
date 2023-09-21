@@ -53,7 +53,7 @@ describe("When todo |> operations[['Insert']]()",{
   it("then todo is inserted into odbc.storage",{
     skip_if_not(environment == 'local')
     # Given
-    storage    <- configuration |> Storage.Orchestrator('ODBC')
+    storage    <- configuration |> Storage.Orchestrator('odbc')
     operations <- storage |> Todo.Broker()
 
     new.todo <- list(
@@ -74,9 +74,9 @@ describe("When todo |> operations[['Insert']]()",{
 
     id |> storage[['Delete']]('Todo')
   })
-  it("then todo is inserted into mock.storage",{
+  it("then todo is inserted into memory.storage",{
     # Given
-    storage    <- configuration |> Storage.Orchestrator('Mock',data)
+    storage    <- configuration |> Storage.Orchestrator('memory',data)
     operations <- storage |> Todo.Broker()
 
     new.todo <- list(
@@ -103,7 +103,7 @@ describe("When operations[['Select']]()",{
   it("then all todos in odbc.storage is returned",{
     skip_if_not(environment == 'local')
     # Given
-    storage    <- configuration |> Storage.Orchestrator('ODBC')
+    storage    <- configuration |> Storage.Orchestrator('odbc')
     operations <- storage |> Todo.Broker()
 
     expected.todos <- fields |> storage[['Select']]('Todo')
@@ -114,9 +114,9 @@ describe("When operations[['Select']]()",{
     # Then
     actual.todos |> expect.equal(expected.todos)
   })
-  it("then all todos in mock.storage is returned",{
+  it("then all todos in memory.storage is returned",{
     # Given
-    storage    <- configuration |> Storage.Orchestrator('Mock',data)
+    storage    <- configuration |> Storage.Orchestrator('memory',data)
     operations <- storage |> Todo.Broker()
 
     expected.todos <- fields |> storage[['Select']]('Todo')
@@ -133,7 +133,7 @@ describe("When id |> operations[['SelectWhereId']]()",{
   it("then todo with id equal id is returned from odbc.storage",{
     skip_if_not(environment == 'local')
     # Given
-    storage    <- configuration |> Storage.Orchestrator('ODBC')
+    storage    <- configuration |> Storage.Orchestrator('odbc')
     operations <- storage |> Todo.Broker()
 
     existing.todos <- fields |> storage[['Select']]('Todo')
@@ -148,9 +148,9 @@ describe("When id |> operations[['SelectWhereId']]()",{
     # Then
     actual.todo |> expect.equal(expected.todo)
   })
-  it("then todo with id equal id is returned from mock.storage",{
+  it("then todo with id equal id is returned from memory.storage",{
     # Given
-    storage    <- configuration |> Storage.Orchestrator('Mock',data)
+    storage    <- configuration |> Storage.Orchestrator('memory',data)
     operations <- storage |> Todo.Broker()
 
     existing.todos <- fields |> storage[['Select']]('Todo')
@@ -171,7 +171,7 @@ describe("When todo |> operations[['Update']]()",{
   it("then todo in odbc.storage is updated",{
     skip_if_not(environment == 'local')
     # Given
-    storage    <- configuration |> Storage.Orchestrator('ODBC')
+    storage    <- configuration |> Storage.Orchestrator('odbc')
     operations <- storage |> Todo.Broker()
 
     new.todo <- list(
@@ -198,9 +198,9 @@ describe("When todo |> operations[['Update']]()",{
 
     id |> storage[['Delete']]('Todo')
   })
-  it("then todo in mock.storage is updated",{
+  it("then todo in memory.storage is updated",{
     # Given
-    storage    <- configuration |> Storage.Orchestrator('Mock',data)
+    storage    <- configuration |> Storage.Orchestrator('memory',data)
     operations <- storage |> Todo.Broker()
 
     new.todo <- list(
@@ -233,7 +233,7 @@ describe("When id |> operations[['Delete']]()",{
   it("then todo with id are removed from odbc.storage",{
     skip_if_not(environment == 'local')
     # Given
-    storage    <- configuration |> Storage.Orchestrator('ODBC')
+    storage    <- configuration |> Storage.Orchestrator('odbc')
     operations <- storage |> Todo.Broker()
 
     new.todo <- list(
@@ -255,9 +255,9 @@ describe("When id |> operations[['Delete']]()",{
     actual.count <- fields |> storage[['SelectWhereId']]('Todo', id) |> nrow()
     actual.count |> expect.equal(expected.count)
   })
-  it("then todo with is are removed from mock.storage",{
+  it("then todo with is are removed from memory.storage",{
     # Given
-    storage    <- configuration |> Storage.Orchestrator('Mock',data)
+    storage    <- configuration |> Storage.Orchestrator('memory',data)
     operations <- storage |> Todo.Broker()
 
     new.todo <- list(
