@@ -12,4 +12,11 @@ describe("When validators <- Memory.Storage.Validation()",{
     # Then
     validators |> expect.list()
   })
+  it('then validators contains NoImplementation validator',{
+   # When
+   validators <- Memory.Storage.Validation()
+   
+   # Then
+   validators[['NoImplementation']] |> expect.exist()
+  })
 })
