@@ -15,6 +15,8 @@ Memory.Storage.Service <- \(broker) {
   services[['Update']]        <- \(entity, table) {
     entity |> broker[['Update']](table)
   }
-  services[['Delete']]        <- \() {}
+  services[['Delete']]        <- \(id, table) {
+    id |> broker[['Delete']](table)
+  }
   return(services)
 }
