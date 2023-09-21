@@ -26,4 +26,11 @@ describe("When services <- Memory.Storage.Service()",{
     # Then
     services[['Insert']] |> expect.function()
   })
+  it("then services contains Select service",{
+    # When
+    services <- Memory.Storage.Service()
+
+    # Then
+    services[['Select']] |> expect.exist()
+  })
 })
