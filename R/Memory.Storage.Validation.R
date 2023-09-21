@@ -1,1 +1,4 @@
-Memory.Storage.Validation <- \() {}
+Memory.Storage.Validation <- \() {
+  validators <- list()
+  return(validators)
+}
