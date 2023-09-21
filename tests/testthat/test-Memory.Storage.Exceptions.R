@@ -52,3 +52,27 @@ describe("When input |> exception[['NoExecuteQuery']]()", {
     input |> exception[['NoExecuteQuery']]() |> expect.error(expected.error)
   })
 })
+
+describe("When input |> exception[['DuplicateId']]()", {
+  it("then no exception is thrown if input is FALSE", {
+    # Given
+    exception <- Memory.Storage.Exceptions()
+    
+    # When
+    input <- FALSE
+    
+    # Then
+    input |> exception[['DuplicateId']]() |> expect.no.error()
+  })
+  it("then an exception is thrown if input is TRUE", {
+    # Given
+    exception <- Memory.Storage.Exceptions()
+    
+    expected.error <- "Memory Data Store Error: Duplicate Id not allowed"
+    # When
+    input <- TRUE
+    
+    # Then
+    input |> exception[['DuplicateId']]() |> expect.error(expected.error)
+  })
+})
