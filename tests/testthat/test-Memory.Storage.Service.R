@@ -55,3 +55,21 @@ describe("When services <- Memory.Storage.Service()",{
     services[['Delete']] |> expect.exist()
   })
 })
+
+describe("When query |> services[['ExecuteQuery']]()",{
+  it("then an exception is thrown",{
+    # Given
+    configuration <- data.frame()
+
+    services <- configuration |> 
+      Memory.Storage.Broker() |> 
+      Memory.Storage.Service()
+
+    query <- "SELECT 1"
+
+    expected.error <- "Memory Storage Provider has no ExecuteQuery implementation."
+    
+    # Then
+    query |> services[['ExecuteQuery']]() |> expect.error()
+  })
+})
