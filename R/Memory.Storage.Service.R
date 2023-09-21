@@ -1,6 +1,8 @@
-Memory.Storage.Service <- \() {
+Memory.Storage.Service <- \(broker) {
   services <- list()
-  services[['ExecuteQuery']]  <- \() {}
+  services[['ExecuteQuery']]  <- \(query) {
+    query |> broker[['ExecuteQuery']]()
+  }
   services[['Insert']]        <- \() {}
   services[['Select']]        <- \() {}
   services[['SelectWhereId']] <- \() {}
