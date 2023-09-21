@@ -2,6 +2,5 @@
 
 export(ODBC.Configurator)
 export(Storage)
-export(Storage.Service)
 export(Todo.Broker)
 export(Todo.Service)
