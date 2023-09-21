@@ -4,5 +4,6 @@ Memory.Storage.Service <- \() {
   services[['Insert']]        <- \() {}
   services[['Select']]        <- \() {}
   services[['SelectWhereId']] <- \() {}
+  services[['Update']]        <- \() {}
   return(services)
 }
