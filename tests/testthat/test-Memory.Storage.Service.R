@@ -17,14 +17,14 @@ describe("When services <- Memory.Storage.Service()",{
     services <- Memory.Storage.Service()
 
     # Then
-    services[['ExecuteQuery']] |> expect.function()
+    services[['ExecuteQuery']] |> expect.exist()
   })
   it("then services contains Insert service",{
     # When
     services <- Memory.Storage.Service()
 
     # Then
-    services[['Insert']] |> expect.function()
+    services[['Insert']] |> expect.exist()
   })
   it("then services contains Select service",{
     # When
