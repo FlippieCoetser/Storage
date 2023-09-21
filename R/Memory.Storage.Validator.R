@@ -1,4 +1,4 @@
-Memory.Storage.Validation <- \() {
+Memory.Storage.Validator <- \() {
   validators <- list()
   validators[['NoImplementation']] <- \() {}
   return(validators)

@@ -1,20 +1,20 @@
-describe('Memory.Storage.Validation',{
+describe('Memory.Storage.Validator',{
   it('Exist',{
-    Memory.Storage.Validation |> expect.exist()
+    Memory.Storage.Validator |> expect.exist()
   })
 })
 
-describe("When validators <- Memory.Storage.Validation()",{
+describe("When validators <- Memory.Storage.Validator()",{
   it("then validators is a list",{
     # When
-    validators <- Memory.Storage.Validation()
+    validators <- Memory.Storage.Validator()
     
     # Then
     validators |> expect.list()
   })
   it('then validators contains NoImplementation validator',{
    # When
-   validators <- Memory.Storage.Validation()
+   validators <- Memory.Storage.Validator()
    
    # Then
    validators[['NoImplementation']] |> expect.exist()
