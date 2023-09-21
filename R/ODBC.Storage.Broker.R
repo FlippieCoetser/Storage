@@ -1,5 +1,5 @@
 ODBC.Storage.Broker <- \(configuration, sql = Query::SQL()) {
-  exception  <- Storage.Exceptions()
+  exception  <- ODBC.Storage.Exceptions()
 
   operations <- list()
   operations[['CreateConnection']]  <- \() {
