@@ -1,5 +1,9 @@
 Memory.Storage.Validator <- \() {
+  exception <- Memory.Storage.Exceptions()
+
   validators <- list()
-  validators[['NoImplementation']] <- \() {}
+  validators[['NoImplementation']] <- \() {
+    TRUE |> exception[['NoExecuteQuery']]()
+  }
   return(validators)
 }
