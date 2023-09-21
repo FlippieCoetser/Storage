@@ -98,3 +98,19 @@ describe("When entity |> service[['Insert']](table)",{
     new.entity[['Id']] |> broker[['Delete']]('Todo')
   })
 })
+
+describe("When fields |> service[['Select']](table)",{
+  it("then all entities in table in data store is returned",{
+    # Given
+    broker  <- configuration |> Memory.Storage.Broker(data)
+    service <- broker        |> Memory.Storage.Service()
+
+    expected.entities <- data[[table]]
+
+    # When
+    actual.entities <- fields |> service[['Select']](table)
+
+    # Then
+    actual.entities |> expect.equal.data(expected.entities)
+  })
+})
