@@ -1,1 +1,4 @@
-Memory.Storage.Exceptions <- \() {}
+Memory.Storage.Exceptions <- \() {
+  exceptions <- list()
+  return(exceptions)
+}
