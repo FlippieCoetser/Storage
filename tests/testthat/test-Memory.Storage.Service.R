@@ -75,27 +75,26 @@ describe("When query |> services[['ExecuteQuery']]()",{
 })
 
 describe("When entity |> service[['Insert']](table)",{
-  it("then todo is inserted into memory data",{
+  it("then entity is inserted table in data store",{
     # Given
     broker  <- configuration |> Memory.Storage.Broker(data)
     service <- broker        |> Memory.Storage.Service()
 
-    new.todo <- data.frame(
+    new.entity <- data.frame(
       Id     = uuid::UUIDgenerate(),
       Task   = 'Task',
       Status = 'New'
     )
-    id <- new.todo[['Id']]
-
-    expected.todo <- new.todo
+    
+    expected.entity <- new.entity
 
     # When
-    new.todo |> service[['Insert']]('Todo')
+    new.entity |> service[['Insert']](table)
 
     # Then
-    actual.todo <- fields |> broker[['SelectWhereId']]('Todo', id)
-    actual.todo |> expect.equal.data(expected.todo)
+    actual.entity <- fields |> broker[['SelectWhereId']](table, new.entity[['Id']])
+    actual.entity |> expect.equal.data(expected.entity)
 
-    id |> broker[['Delete']]('Todo')
+    new.entity[['Id']] |> broker[['Delete']]('Todo')
   })
 })
