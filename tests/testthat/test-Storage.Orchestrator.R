@@ -57,12 +57,12 @@ describe("When orchestrations <- Storage.Orchestrator()",{
 })
 
 describe("when query |> orchestrate[['ExecuteQuery']]()",{
-  it("then an exception is thrown if orchestration service instantiated with type equal mock",{
+  it("then an exception is thrown if orchestration service instantiated with type equal memory",{
     # Given
-    type <- 'Mock'
+    type <- 'memory'
     orchestrate <- configuration |> Storage.Orchestrator(type)
 
-    expected.error <- "Mock Storage Provider has no ExecuteQuery implementation."
+    expected.error <- "Memory Storage Provider has no ExecuteQuery implementation."
 
     # When
     query <- "SELECT 1"
@@ -73,7 +73,7 @@ describe("when query |> orchestrate[['ExecuteQuery']]()",{
   it("then no exception if thrown if orchestration service instantiated with type equal ODBC",{
     skip_if_not(environment == 'local')
     # Given
-    type <- 'ODBC'
+    type <- 'odbc'
     orchestrate <- configuration |> Storage.Orchestrator(type)
 
     # When
