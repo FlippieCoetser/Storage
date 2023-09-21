@@ -3,7 +3,9 @@ Memory.Storage.Service <- \(broker) {
   services[['ExecuteQuery']]  <- \(query) {
     query |> broker[['ExecuteQuery']]()
   }
-  services[['Insert']]        <- \() {}
+  services[['Insert']]        <- \(entity, table) {
+    entity |> broker[['Insert']](table)
+  }
   services[['Select']]        <- \() {}
   services[['SelectWhereId']] <- \() {}
   services[['Update']]        <- \() {}
