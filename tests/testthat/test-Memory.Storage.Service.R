@@ -19,4 +19,11 @@ describe("When services <- Memory.Storage.Service()",{
     # Then
     services[['ExecuteQuery']] |> expect.function()
   })
+  it("then services contains Insert service",{
+    # When
+    services <- Memory.Storage.Service()
+
+    # Then
+    services[['Insert']] |> expect.function()
+  })
 })
