@@ -19,6 +19,13 @@ describe("When exceptions <- Memory.Storage.Exception()",{
    # Then
    exceptions[['NoExecuteQuery']] |> expect.exist()
   })
+  it('then exceptions contains DuplicateId exception',{
+   # When
+   exceptions <- Memory.Storage.Exceptions()
+   
+   # Then
+   exceptions[['DuplicateId']] |> expect.exist()
+  })
 })
 
 describe("When input |> exception[['NoExecuteQuery']]()", {
