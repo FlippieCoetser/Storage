@@ -1,5 +1,5 @@
-Storage.Validator <- \() {
-  exception <- Storage.Exceptions()
+ODBC.Storage.Validator <- \() {
+  exception <- ODBC.Storage.Exceptions()
   validators <- list()
   validators[['Query']] <- \(query) {
     query |> is.null() |> exception[['QueryIsNull']]()

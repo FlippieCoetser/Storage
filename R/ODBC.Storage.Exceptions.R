@@ -1,4 +1,4 @@
-Storage.Exceptions <- \() {
+ODBC.Storage.Exceptions <- \() {
   exceptions <- list()
   exceptions[["ConfigIsNull"]]       <- \(invoke) {
     if (invoke) {

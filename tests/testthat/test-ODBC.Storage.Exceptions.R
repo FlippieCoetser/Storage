@@ -1,125 +1,125 @@
-describe("Storage.Exceptions",{
+describe("ODBC.Storage.Exceptions",{
   it("Exist",{
-    Storage.Exceptions |> expect.exist()
+    ODBC.Storage.Exceptions |> expect.exist()
   })
 })
 
-describe("When exceptions <- Storage.Exceptions()",{
+describe("When exceptions <- ODBC.Storage.Exceptions()",{
   it('then exceptions is a list',{
     # Given
-    exceptions <- Storage.Exceptions()
+    exceptions <- ODBC.Storage.Exceptions()
 
     # Then
     exceptions |> expect.list()
   })
   it("then exceptions contains ConfigIsNull exception",{
     # Given
-    exceptions <- Storage.Exceptions()
+    exceptions <- ODBC.Storage.Exceptions()
 
     # Then
     exceptions[['ConfigIsNull']] |> expect.exist()
   })
   it("then exceptions contains ConfigIsMissing exception",{
     # Given
-    exceptions <- Storage.Exceptions()
+    exceptions <- ODBC.Storage.Exceptions()
 
     # Then
     exceptions[['ConfigIsMissing']] |> expect.exist()
   })
   it("then exceptions contains dsnIsNull exception",{
     # Given
-    exceptions <- Storage.Exceptions()
+    exceptions <- ODBC.Storage.Exceptions()
 
     # Then
     exceptions[['dsnIsNull']] |> expect.exist()
   })
   it("then exceptions contains uidIsNull exception",{
     # Given
-    exceptions <- Storage.Exceptions()
+    exceptions <- ODBC.Storage.Exceptions()
 
     # Then
     exceptions[['uidIsNull']] |> expect.exist()
   })
   it("then exceptions contains pwdIsNull exception",{
     # Given
-    exceptions <- Storage.Exceptions()
+    exceptions <- ODBC.Storage.Exceptions()
 
     # Then
     exceptions[['pwdIsNull']] |> expect.exist()
   })
   it("then exceptions contains Connection exception",{
     # Given
-    exceptions <- Storage.Exceptions()
+    exceptions <- ODBC.Storage.Exceptions()
 
     # Then
     exceptions[['Connection']] |> expect.exist()
   })
   it("then exceptions contains ServerUnreachable exception",{
     # Given
-    exceptions <- Storage.Exceptions()
+    exceptions <- ODBC.Storage.Exceptions()
 
     # Then
     exceptions[['ServerUnreachable']] |> expect.exist()
   })
   it("then exceptions contains InvalidDSN exception",{
     # Given
-    exceptions <- Storage.Exceptions()
+    exceptions <- ODBC.Storage.Exceptions()
 
     # Then
     exceptions[['InvalidDSN']] |> expect.exist()
   })
   it("then exceptions contains LoginFailed exception",{
     # Given
-    exceptions <- Storage.Exceptions()
+    exceptions <- ODBC.Storage.Exceptions()
 
     # Then
     exceptions[['LoginFailed']] |> expect.exist()
   })
   it("then exceptions contains Query exception",{
     # Given
-    exceptions <- Storage.Exceptions()
+    exceptions <- ODBC.Storage.Exceptions()
 
     # Then
     exceptions[['Query']] |> expect.exist()
   })
   it("then exceptions contains DuplicateKey exception",{
     # Given
-    exceptions <- Storage.Exceptions()
+    exceptions <- ODBC.Storage.Exceptions()
 
     # Then
     exceptions[['DuplicateKey']] |> expect.exist()
   })
   it("then exceptions contains NullValue exception",{
     # Given
-    exceptions <- Storage.Exceptions()
+    exceptions <- ODBC.Storage.Exceptions()
 
     # Then
     exceptions[['NullValue']] |> expect.exist()
   })
   it("then exceptions contains ConversionFailed exception",{
     # Given
-    exceptions <- Storage.Exceptions()
+    exceptions <- ODBC.Storage.Exceptions()
 
     # Then
     exceptions[['ConversionFailed']] |> expect.exist()
   })
   it('then exceptions contains QueryIsNull exception',{
     # Given
-    exceptions <- Storage.Exceptions()
+    exceptions <- ODBC.Storage.Exceptions()
 
     # Then
     exceptions[['QueryIsNull']] |> expect.exist()
   })
   it('then exceptions contains NoCreateConnection exception',{
     # Given
-    exceptions <- Storage.Exceptions()
+    exceptions <- ODBC.Storage.Exceptions()
 
     # Then
     exceptions[['NoCreateConnection']] |> expect.exist()
   })
   it('then exceptions contains NoExecuteQuery exception',{
     # Given
-    exceptions <- Storage.Exceptions()
+    exceptions <- ODBC.Storage.Exceptions()
 
     # Then
     exceptions[['NoExecuteQuery']] |> expect.exist()
@@ -129,7 +129,7 @@ describe("When exceptions <- Storage.Exceptions()",{
 describe("when input |> exception[['ConfigIsNull']]()",{
   it('then no exception is thrown when input is FALSE',{
     # Given
-    exception <- Storage.Exceptions()
+    exception <- ODBC.Storage.Exceptions()
 
     # When
     input <- FALSE
@@ -139,7 +139,7 @@ describe("when input |> exception[['ConfigIsNull']]()",{
   })
   it('then an exception is thrown when input is TRUE',{
     # Given
-    exception <- Storage.Exceptions()
+    exception <- ODBC.Storage.Exceptions()
 
     expected.error <- 'Configuration provided is null. Provide valid configuration'
 
@@ -154,7 +154,7 @@ describe("when input |> exception[['ConfigIsNull']]()",{
 describe("when input |> exception[['ConfigIsMissing']]()",{
   it('then no exception is thrown when input is FALSE',{
     # Given
-    exception <- Storage.Exceptions()
+    exception <- ODBC.Storage.Exceptions()
 
     # When
     input <- FALSE
@@ -164,7 +164,7 @@ describe("when input |> exception[['ConfigIsMissing']]()",{
   })
   it('then an exception is thrown when input is TRUE',{
     # Given
-    exception <- Storage.Exceptions()
+    exception <- ODBC.Storage.Exceptions()
 
     expected.error <- 'No configuration provided but required. Provide configuration'
 
@@ -179,7 +179,7 @@ describe("when input |> exception[['ConfigIsMissing']]()",{
 describe("when input |> exception[['DSNIsNull']]()",{
   it('then no exception is thrown when input is FALSE',{
     # Given
-    exception <- Storage.Exceptions()
+    exception <- ODBC.Storage.Exceptions()
 
     # When
     input <- FALSE
@@ -189,7 +189,7 @@ describe("when input |> exception[['DSNIsNull']]()",{
   })
   it('then an exception is thrown when input is TRUE',{
     # Given
-    exception <- Storage.Exceptions()
+    exception <- ODBC.Storage.Exceptions()
 
     expected.error <- 'Configuration has no DSN. Add DSN to configuration'
 
@@ -204,7 +204,7 @@ describe("when input |> exception[['DSNIsNull']]()",{
 describe("When input |> exception[['uidIsNull']]()",{
   it('then no exception is thrown when input is FALSE',{
     # Given
-    exception <- Storage.Exceptions()
+    exception <- ODBC.Storage.Exceptions()
 
     # When
     input <- FALSE
@@ -214,7 +214,7 @@ describe("When input |> exception[['uidIsNull']]()",{
   })
   it('then an exception is thrown when input is TRUE',{
     # Given
-    exception <- Storage.Exceptions()
+    exception <- ODBC.Storage.Exceptions()
 
     expected.error <- 'Configuration has no UID. Add UID to configuration'
 
@@ -229,7 +229,7 @@ describe("When input |> exception[['uidIsNull']]()",{
 describe("When input |> exception[['pwdIsNull']]()",{
   it('then no exception is thrown when input is FALSE',{
     # Given
-    exception <- Storage.Exceptions()
+    exception <- ODBC.Storage.Exceptions()
 
     # When
     input <- FALSE
@@ -239,7 +239,7 @@ describe("When input |> exception[['pwdIsNull']]()",{
   })
   it('then an exception is thrown when input is TRUE',{
     # Given
-    exception <- Storage.Exceptions()
+    exception <- ODBC.Storage.Exceptions()
 
     expected.error <- 'Configuration has no PWD. Add PWD to configuration'
 
@@ -254,7 +254,7 @@ describe("When input |> exception[['pwdIsNull']]()",{
 describe("When input |> exception[['Connection']]()",{
   it('then no exception is thrown if input is "test"',{
     # Given
-    exception <- Storage.Exceptions()
+    exception <- ODBC.Storage.Exceptions()
 
     # When
     input <- 'test'
@@ -264,7 +264,7 @@ describe("When input |> exception[['Connection']]()",{
   })
   it('then an exception is thrown if input contains 08001',{
     # Given
-    exception <- Storage.Exceptions()
+    exception <- ODBC.Storage.Exceptions()
 
     expected.error <- 'TCP Provider: Timeout error, Try again!'
 
@@ -276,7 +276,7 @@ describe("When input |> exception[['Connection']]()",{
   })
   it('then an exception is thrown if input contains IM002',{
     # Given
-    exception <- Storage.Exceptions()
+    exception <- ODBC.Storage.Exceptions()
 
     expected.error <- 'ODBC Driver: Invalid DSN'
 
@@ -288,7 +288,7 @@ describe("When input |> exception[['Connection']]()",{
   })
   it('then an exception is thrown if input contains 28000',{
     # Given
-    exception <- Storage.Exceptions()
+    exception <- ODBC.Storage.Exceptions()
     
     expected.error <- 'ODBC Driver: Login Failed, check credentials'
     
@@ -303,7 +303,7 @@ describe("When input |> exception[['Connection']]()",{
 describe("When input |> exception[['ServerUnreachable']]()",{
   it('then no exception is thrown when input is FALSE',{
     # Given
-    exception <- Storage.Exceptions()
+    exception <- ODBC.Storage.Exceptions()
 
     # When
     input <- FALSE
@@ -313,7 +313,7 @@ describe("When input |> exception[['ServerUnreachable']]()",{
   })
   it('then an exception is thrown when input is TRUE',{
     # Given
-    exception <- Storage.Exceptions()
+    exception <- ODBC.Storage.Exceptions()
 
     expected.error <- 'TCP Provider: Timeout error, Try again!'
 
@@ -328,7 +328,7 @@ describe("When input |> exception[['ServerUnreachable']]()",{
 describe("When input |> exception[['InvalidDSN']]()",{
   it('then no exception is thrown when input is FALSE',{
     # Given
-    exception <- Storage.Exceptions()
+    exception <- ODBC.Storage.Exceptions()
 
     # When
     input <- FALSE
@@ -338,7 +338,7 @@ describe("When input |> exception[['InvalidDSN']]()",{
   })
   it('then an exception is thrown when input is TRUE',{
     # Given
-    exception <- Storage.Exceptions()
+    exception <- ODBC.Storage.Exceptions()
 
     expected.error <- 'ODBC Driver: Invalid DSN'
 
@@ -353,7 +353,7 @@ describe("When input |> exception[['InvalidDSN']]()",{
 describe("When input |> exception[['LoginFailed']]()",{
   it('then no exception is thrown when input is FALSE',{
     # Given
-    exception <- Storage.Exceptions()
+    exception <- ODBC.Storage.Exceptions()
 
     # When
     input <- FALSE
@@ -363,7 +363,7 @@ describe("When input |> exception[['LoginFailed']]()",{
   })
   it('then an exception is thrown when input is TRUE',{
     # Given
-    exception <- Storage.Exceptions()
+    exception <- ODBC.Storage.Exceptions()
 
     expected.error <- 'ODBC Driver: Login Failed, check credentials'
 
@@ -378,7 +378,7 @@ describe("When input |> exception[['LoginFailed']]()",{
 describe("When input |> exception[['Query']]()",{
   it('then an exception is thrown if input contains Duplicate Id',{
     # Given
-    exception <- Storage.Exceptions()
+    exception <- ODBC.Storage.Exceptions()
     
     expected.error <- 'SQL Error: Duplicate Id not allowed'
     
@@ -390,7 +390,7 @@ describe("When input |> exception[['Query']]()",{
   })
   it('then an exception is thrown if input contains NULL value',{
     # Given
-    exception <- Storage.Exceptions()
+    exception <- ODBC.Storage.Exceptions()
     
     expected.error <- 'SQL Error: NULL value not allowed'
     
@@ -402,7 +402,7 @@ describe("When input |> exception[['Query']]()",{
   })
   it('then an exception is thrown if input contains Conversion failed',{
     # Given
-    exception <- Storage.Exceptions()
+    exception <- ODBC.Storage.Exceptions()
     
     expected.error <- 'SQL Error: Conversion from a character to unique identifier failed'
     
@@ -417,7 +417,7 @@ describe("When input |> exception[['Query']]()",{
 describe("When input |> exception[['DuplicateKey']]()",{
   it('then no exception is thrown when input is FALSE',{
     # Given
-    exception <- Storage.Exceptions()
+    exception <- ODBC.Storage.Exceptions()
 
     # When
     input <- FALSE
@@ -427,7 +427,7 @@ describe("When input |> exception[['DuplicateKey']]()",{
   })
   it('then an exception is thrown when input is TRUE',{
     # Given
-    exception <- Storage.Exceptions()
+    exception <- ODBC.Storage.Exceptions()
 
     expected.error <- 'SQL Error: Duplicate Id not allowed'
 
@@ -442,7 +442,7 @@ describe("When input |> exception[['DuplicateKey']]()",{
 describe("When input |> exception[['NullValue']]()",{
   it('then no exception is thrown if input is FALSE',{
     # Given
-    exception <- Storage.Exceptions()
+    exception <- ODBC.Storage.Exceptions()
 
     # When
     input <- FALSE
@@ -452,7 +452,7 @@ describe("When input |> exception[['NullValue']]()",{
   })
   it('then an exception is thrown if input is TRUE',{
     # Given
-    exception <- Storage.Exceptions()
+    exception <- ODBC.Storage.Exceptions()
 
     expected.error <- 'SQL Error: NULL value not allowed'
 
@@ -467,7 +467,7 @@ describe("When input |> exception[['NullValue']]()",{
 describe("When input |> exception[['ConversionFailed']]()",{
   it('then no exception is thrown if input is FALSE',{
     # Given
-    exception <- Storage.Exceptions()
+    exception <- ODBC.Storage.Exceptions()
 
     # When
     input <- FALSE
@@ -477,7 +477,7 @@ describe("When input |> exception[['ConversionFailed']]()",{
   })
   it('then an exception is thrown if input is TRUE',{
     # Given
-    exception <- Storage.Exceptions()
+    exception <- ODBC.Storage.Exceptions()
 
     expected.error <- 'SQL Error: Conversion from a character to unique identifier failed'
 
@@ -492,7 +492,7 @@ describe("When input |> exception[['ConversionFailed']]()",{
 describe("when input |> exception[['QueryIsNull']]()",{
   it('then no exception is thrown when input is FALSE',{
     # Given
-    exception <- Storage.Exceptions()
+    exception <- ODBC.Storage.Exceptions()
 
     # When
     input <- FALSE
@@ -502,7 +502,7 @@ describe("when input |> exception[['QueryIsNull']]()",{
   })
   it('then an exception is thrown when input is TRUE',{
     # Given
-    exception <- Storage.Exceptions()
+    exception <- ODBC.Storage.Exceptions()
 
     expected.error <- 'Query is null. Provide a Query.'
 
@@ -517,7 +517,7 @@ describe("when input |> exception[['QueryIsNull']]()",{
 describe("When input |> exception[['NoCreateConnection']]()",{
   it("then no exceptions is thrown if input if FALSE",{
     # Given
-    exception <- Storage.Exceptions()
+    exception <- ODBC.Storage.Exceptions()
 
     # When
     input <- FALSE
@@ -527,7 +527,7 @@ describe("When input |> exception[['NoCreateConnection']]()",{
   })
   it("then an exceptions is thrown if input is TRUE",{
     # Given
-    exception <- Storage.Exceptions()
+    exception <- ODBC.Storage.Exceptions()
 
     excepted.error <- "Memory Storage: CreateConnection operation not implemented"
 
@@ -542,7 +542,7 @@ describe("When input |> exception[['NoCreateConnection']]()",{
 describe("When input |> exception[['NoExecuteQuery']]()",{
   it("then no exceptions is thrown if input if FALSE",{
     # Given
-    exception <- Storage.Exceptions()
+    exception <- ODBC.Storage.Exceptions()
 
     # When
     input <- FALSE
@@ -552,7 +552,7 @@ describe("When input |> exception[['NoExecuteQuery']]()",{
   })
   it("then an exceptions is thrown if input is TRUE",{
     # Given
-    exception <- Storage.Exceptions()
+    exception <- ODBC.Storage.Exceptions()
 
     excepted.error <- "Memory Storage Provider has no ExecuteQuery implementation."
 
