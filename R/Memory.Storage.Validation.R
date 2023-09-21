@@ -1,0 +1,1 @@
+Memory.Storage.Validation <- \() {}
