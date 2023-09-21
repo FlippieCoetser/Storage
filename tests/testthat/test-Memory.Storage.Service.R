@@ -162,3 +162,28 @@ describe("When entity |> service[['Update']](table)",{
     actual.entity |> expect.equal.data(expected.entity)
   })
 })
+
+describe("when id |> service[['Delete']](table)",{
+  it("then entity with id in table in data store is deleted",{
+    # Given
+    broker  <- configuration |> Memory.Storage.Broker(data)
+    service <- broker        |> Memory.Storage.Service()
+
+    new.entity <- data.frame(
+      Id     = uuid::UUIDgenerate(),
+      Task   = 'Task',
+      Status = 'New'
+    )
+
+    new.entity |> broker[['Insert']](table)
+    id <- new.entity[['Id']]
+
+    expected.rows <- 0
+
+    # When
+    id |> service[['Delete']](table)
+
+    # Then
+    fields |> broker[['SelectWhereId']](table, id) |> expect.rows(expected.rows)
+  })
+})
