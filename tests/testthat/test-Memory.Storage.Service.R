@@ -133,3 +133,32 @@ describe("When fields |> service[['SelectWhereId']](table, id)",{
     actual.entity |> expect.equal.data(expected.entity)
   })
 })
+
+describe("When entity |> service[['Update']](table)",{
+  it("then entity is updated in table in data store",{
+    # Given
+    broker  <- configuration |> Memory.Storage.Broker(data)
+    service <- broker        |> Memory.Storage.Service()
+
+    new.entity <- data.frame(
+      Id     = uuid::UUIDgenerate(),
+      Task   = 'Task',
+      Status = 'New'
+    )
+
+    new.entity |> broker[['Insert']](table)
+    id <- new.entity[['Id']]
+
+    updated.entity <- new.entity
+    updated.entity[['Status']] <- 'Updated'
+
+    expected.entity <- updated.entity
+
+    # When
+    updated.entity |> service[['Update']](table)
+
+    # Then
+    actual.entity <- fields |> broker[['SelectWhereId']](table, id)
+    actual.entity |> expect.equal.data(expected.entity)
+  })
+})
