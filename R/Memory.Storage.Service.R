@@ -9,7 +9,9 @@ Memory.Storage.Service <- \(broker) {
   services[['Select']]        <- \(fields, table) {
     fields |> broker[['Select']](table)
   }
-  services[['SelectWhereId']] <- \() {}
+  services[['SelectWhereId']] <- \(fields, table, id) {
+    fields |> broker[['SelectWhereId']](table, id)
+  }
   services[['Update']]        <- \() {}
   services[['Delete']]        <- \() {}
   return(services)
