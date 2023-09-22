@@ -4,55 +4,66 @@ describe('Storage.Orchestrator',{
   })
 })
 
-describe("When orchestrations <- Storage.Orchestrator()",{
+describe("When orchestrations <- configuration |> Storage.Orchestrator()",{
   it("then orchestrations is a list",{
     # When
-    orchestrations <- Storage.Orchestrator()
+    orchestrations <- configuration |> Storage.Orchestrator()
 
     # Then
     orchestrations |> expect.list()
   })
   it("then orchestrations contains ExecuteQuery orchestration",{
     # When
-    orchestrations <- Storage.Orchestrator()
+    orchestrations <- configuration |> Storage.Orchestrator()
 
     # Then
     orchestrations[['ExecuteQuery']] |> expect.exist()
   })
   it("then orchestrations contains Insert orchestration",{
     # When
-    orchestrations <- Storage.Orchestrator()
+    orchestrations <- configuration |> Storage.Orchestrator()
 
     # Then
     orchestrations[['Insert']] |> expect.exist()
   })
   it("then orchestrations contains Select orchestration",{
     # When
-    orchestrations <- Storage.Orchestrator()
+    orchestrations <- configuration |> Storage.Orchestrator()
 
     # Then
     orchestrations[['Select']] |> expect.exist()
   })
   it("then orchestrations contains SelectWhereId orchestration",{
     # When
-    orchestrations <- Storage.Orchestrator()
+    orchestrations <- configuration |> Storage.Orchestrator()
 
     # Then
     orchestrations[['SelectWhereId']] |> expect.exist()
   })
   it("then orchestrations contains Update orchestration",{
     # When
-    orchestrations <- Storage.Orchestrator()
+    orchestrations <- configuration |> Storage.Orchestrator()
 
     # Then
     orchestrations[['Update']] |> expect.exist()
   })
   it("then orchestrations contains Delete orchestration",{
     # When
-    orchestrations <- Storage.Orchestrator()
+    orchestrations <- configuration |> Storage.Orchestrator()
 
     # Then
     orchestrations[['Delete']] |> expect.exist()
+  })
+})
+
+describe("When configuration |> Storage.Orchestration()",{
+  it("then an exception is thrown if configuration is invalid",{
+    # Given
+    configuration <- list()
+    expected.error <- "Invalid ODBC configuration. Provide valid Preset or Manual configuration."
+
+    # When
+    configuration |> Storage.Orchestrator() |> expect.error(expected.error)
   })
 })
 
