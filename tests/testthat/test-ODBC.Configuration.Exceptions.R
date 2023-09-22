@@ -12,6 +12,13 @@ describe("When exceptions <- ODBC.Configuration.Exceptions()",{
     # Then
     exceptions |> expect.list()
   })
+  it("then exceptions contains InvalidConfig exception",{
+    # When
+    exceptions <- ODBC.Configuration.Exceptions()
+
+    # Then
+    exceptions[['InvalidConfig']] |> expect.exist()
+  })
   it("then exceptions contains Configuration exception",{
     # When
     exceptions <- ODBC.Configuration.Exceptions()
