@@ -23,6 +23,7 @@ ODBC.Configuration.Validator <- \() {
     if (!valid.config) {
       TRUE |> exception[['InvalidConfig']]()
     }
+    return(configuration)
   }
   validations[['PresetConfig']] <- \(configuration) {
     configuration |>
