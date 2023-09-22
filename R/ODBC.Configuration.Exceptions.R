@@ -1,5 +1,6 @@
 ODBC.Configuration.Exceptions <- \() {
   exceptions <- list()
+  exceptions[['InvalidConfig']]    <- \() {}
   exceptions[['Configuration']]    <- \(error) {
     'DSN'      |> grepl(error) |> exceptions[['dsnNotFound']]()
     'DRIVER'   |> grepl(error) |> exceptions[['driverNotFound']]()
