@@ -12,6 +12,13 @@ describe("When validators <- ODBC.Configuration.Validator()",{
     # Then
     validators |> expect.list()
   })
+  it("then validators contains Configuration validator",{
+    # When
+    validators <- ODBC.Configuration.Validator()
+
+    # Then
+    validators[['Configuration']] |> expect.exist()
+  })
   it('then validators contains PresetConfig validator',{
    # When
    validators <- ODBC.Configuration.Validator()
