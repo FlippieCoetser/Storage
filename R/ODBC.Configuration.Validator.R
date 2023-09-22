@@ -2,6 +2,8 @@ ODBC.Configuration.Validator <- \() {
   exception <- ODBC.Configuration.Exceptions()
 
   validations <- list()
+  validations[['Configuration']] <- \() {
+  }
   validations[['PresetConfig']] <- \(configuration) {
     configuration |>
       validations[['HasDrv']]() |>
