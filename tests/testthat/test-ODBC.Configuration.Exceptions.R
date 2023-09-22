@@ -512,3 +512,27 @@ describe("When input |> exception[['pwdIsNull']]()", {
     input |> exception[['pwdIsNull']]() |> expect.error(expected.error)
   })
 })
+
+describe("When input |> exception[['InvalidConfig']]()", {
+  it("then no exception is thrown if input is FALSE", {
+    # Given
+    exception <- ODBC.Configuration.Exceptions()
+    
+    # When
+    input <- FALSE
+    
+    # Then
+    input |> exception[['InvalidConfig']]() |> expect.no.error()
+  })
+  it("then an exception is thrown if input is TRUE", {
+    # Given
+    exception <- ODBC.Configuration.Exceptions()
+    
+    expected.error <- "Invalid ODBC configuration. Provide valid Preset or Manual configuration."
+    # When
+    input <- TRUE
+    
+    # Then
+    input |> exception[['InvalidConfig']]() |> expect.error(expected.error)
+  })
+})
