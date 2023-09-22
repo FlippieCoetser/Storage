@@ -624,3 +624,70 @@ describe("When configuration |> validate[['ManualConfig']]()",{
     actual.configuration |> expect.equal(expected.configuration)
   })
 })
+
+describe("When configuration |> validate[['Configuration']]()",{
+  it("then no exception is thrown if configuration is valid Preset configuration",{
+    # Given
+    validate <- ODBC.Configuration.Validator()
+    
+    # When
+    input.configuration <- list()
+    input.configuration[['drv']] <- 'test'
+    input.configuration[['dsn']] <- 'test'
+    input.configuration[['uid']] <- 'test'
+    input.configuration[['pwd']] <- 'test'
+    
+    # Then
+    input.configuration |> validate[['Configuration']]() |> expect.no.error()
+  })
+  it("then no exception is thrown if configuration is valid Manual configuration",{
+    # Given
+    validate <- ODBC.Configuration.Validator()
+    
+    # When
+    input.configuration <- list()
+    input.configuration[['drv']]      <- 'test'
+    input.configuration[['driver']]   <- 'test'
+    input.configuration[['server']]   <- 'test'
+    input.configuration[['database']] <- 'test'
+    input.configuration[['uid']]      <- 'test'
+    input.configuration[['pwd']]      <- 'test'
+    
+    # Then
+    input.configuration |> validate[['Configuration']]() |> expect.no.error()
+  })
+  it("then an exception is thrown if configuration is invalid Preset configuration",{
+    # Given
+    validate <- ODBC.Configuration.Validator()
+    
+    expected.error <- "Invalid ODBC configuration. Provide valid Preset or Manual configuration."
+    
+    # When
+    input.configuration <- list()
+    input.configuration[['drv']] <- NULL
+    input.configuration[['dsn']] <- 'test'
+    input.configuration[['uid']] <- 'test'
+    input.configuration[['pwd']] <- 'test'
+    
+    # Then
+    input.configuration |> validate[['Configuration']]() |> expect.error(expected.error)
+  })
+  it("then an exception is thrown if configuration is invalid Manual configuration",{
+    # Given
+    validate <- ODBC.Configuration.Validator()
+    
+    expected.error <- "Invalid ODBC configuration. Provide valid Preset or Manual configuration."
+    
+    # When
+    input.configuration <- list()
+    input.configuration[['drv']]      <- 'test'
+    input.configuration[['driver']]   <- NULL
+    input.configuration[['server']]   <- 'test'
+    input.configuration[['database']] <- 'test'
+    input.configuration[['uid']]      <- 'test'
+    input.configuration[['pwd']]      <- 'test'
+    
+    # Then
+    input.configuration |> validate[['Configuration']]() |> expect.error(expected.error)
+  })
+})
