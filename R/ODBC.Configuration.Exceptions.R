@@ -1,6 +1,10 @@
 ODBC.Configuration.Exceptions <- \() {
   exceptions <- list()
-  exceptions[['InvalidConfig']]    <- \() {}
+  exceptions[['InvalidConfig']]    <- \(invoke) {
+    if(invoke) {
+      stop("Invalid ODBC configuration. Provide valid Preset or Manual configuration.", call. = FALSE)
+    }
+  }
   exceptions[['Configuration']]    <- \(error) {
     'DSN'      |> grepl(error) |> exceptions[['dsnNotFound']]()
     'DRIVER'   |> grepl(error) |> exceptions[['driverNotFound']]()
