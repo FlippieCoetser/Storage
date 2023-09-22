@@ -690,4 +690,40 @@ describe("When configuration |> validate[['Configuration']]()",{
     # Then
     input.configuration |> validate[['Configuration']]() |> expect.error(expected.error)
   })
+  it("then configuration is returned if configuration is valid Preset configuration",{
+    # Given
+    validate <- ODBC.Configuration.Validator()
+    
+    # When
+    input.configuration <- list()
+    input.configuration[['drv']] <- 'test'
+    input.configuration[['dsn']] <- 'test'
+    input.configuration[['uid']] <- 'test'
+    input.configuration[['pwd']] <- 'test'
+
+    expected.configuration <- input.configuration
+    
+    # Then
+    actual.configuration <- expected.configuration |> validate[['Configuration']]() 
+    actual.configuration |> expect.equal(expected.configuration)
+  })
+  it("then configuration is returned if configuration is valid Manual configuration",{
+    # Given
+    validate <- ODBC.Configuration.Validator()
+    
+    # When
+    input.configuration <- list()
+    input.configuration[['drv']]      <- 'test'
+    input.configuration[['driver']]   <- 'test'
+    input.configuration[['server']]   <- 'test'
+    input.configuration[['database']] <- 'test'
+    input.configuration[['uid']]      <- 'test'
+    input.configuration[['pwd']]      <- 'test'
+
+    expected.configuration <- input.configuration
+    
+    # Then
+    actual.configuration <- expected.configuration |> validate[['Configuration']]() 
+    actual.configuration |> expect.equal(expected.configuration)
+  })
 })
