@@ -19,4 +19,11 @@ describe("When data <- Todo.Mock.Data",{
     # Then
     data[['Task']] |> expect.exist()
   })
+  it("then data contains Status column",{
+    # When
+    data <- Todo.Mock.Data
+
+    # Then
+    data[['Status']] |> expect.exist()
+  })
 })
