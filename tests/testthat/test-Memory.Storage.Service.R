@@ -92,7 +92,7 @@ describe("When entity |> service[['Insert']](table)",{
     new.entity |> service[['Insert']](table)
 
     # Then
-    actual.entity <- fields |> broker[['SelectWhereId']](table, new.entity[['Id']])
+    actual.entity <- new.entity[['Id']] |> broker[['SelectWhereId']](table, fields)
     actual.entity |> expect.equal.data(expected.entity)
 
     new.entity[['Id']] |> broker[['Delete']]('Todo')
@@ -108,7 +108,7 @@ describe("When fields |> service[['Select']](table)",{
     expected.entities <- data[[table]]
 
     # When
-    actual.entities <- fields |> service[['Select']](table)
+    actual.entities <- table |> service[['Select']](fields)
 
     # Then
     actual.entities |> expect.equal.data(expected.entities)
@@ -127,7 +127,7 @@ describe("When fields |> service[['SelectWhereId']](table, id)",{
     id <- existing.entity[['Id']]
 
     # When
-    actual.entity <- fields |> service[['SelectWhereId']](table, id)
+    actual.entity <- id |> service[['SelectWhereId']](table, fields)
 
     # Then
     actual.entity |> expect.equal.data(expected.entity)
@@ -158,7 +158,7 @@ describe("When entity |> service[['Update']](table)",{
     updated.entity |> service[['Update']](table)
 
     # Then
-    actual.entity <- fields |> broker[['SelectWhereId']](table, id)
+    actual.entity <- id |> broker[['SelectWhereId']](table, fields)
     actual.entity |> expect.equal.data(expected.entity)
   })
 })
@@ -184,6 +184,6 @@ describe("when id |> service[['Delete']](table)",{
     id |> service[['Delete']](table)
 
     # Then
-    fields |> broker[['SelectWhereId']](table, id) |> expect.rows(expected.rows)
+    id |> broker[['SelectWhereId']](table, fields) |> expect.rows(expected.rows)
   })
 })

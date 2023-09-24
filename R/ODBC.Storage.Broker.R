@@ -26,13 +26,13 @@ ODBC.Storage.Broker <- \(configuration, sql = Query::SQL()) {
     sql[['VALUES']](entity) |>
     operations[['ExecuteQuery']]()
   }
-  operations[['Select']]            <- \(fields, table) {
+  operations[['Select']]            <- \(table, fields) {
     fields |>
     sql[['SELECT']]()    |>
     sql[['FROM']](table) |>
     operations[['ExecuteQuery']]()
   }
-  operations[['SelectWhereId']]     <- \(fields, table, id) {
+  operations[['SelectWhereId']]     <- \(id, table, fields) {
     fields |>
       sql[['SELECT']]()        |>
       sql[['FROM']](table)     |>

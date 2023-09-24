@@ -28,10 +28,10 @@ Todo.Broker <- \(storage) {
     todo |> storage[['Insert']](table)
   }
   operations[['Select']]        <- \(...)  {
-    fields |> storage[['Select']](table)
+    table |> storage[['Select']](fields)
   }
   operations[['SelectWhereId']] <- \(id)   {
-    fields |> storage[['SelectWhereId']](table, id)
+    id |> storage[['SelectWhereId']](table, fields)
   }
   operations[['Update']]        <- \(todo) {
     todo |> storage[['Update']](table)
