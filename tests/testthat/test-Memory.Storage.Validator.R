@@ -39,3 +39,22 @@ describe("When validate[['NoImplementation']]()",{
     validators[['NoImplementation']]() |> expect.error(expected.error)
   })
 })
+
+describe("When entity |> validate[['IsNew']](table)",{
+  it("then an exception is thrown if entity exist in memory storage",{
+    # Given
+    configuration <- data.frame()
+
+    broker <- configuration |> Memory.Storage.Broker()
+    Todo.Mock.Data |> broker[['Seed']](table)
+
+    validator <- broker |> Memory.Storage.Validator()
+
+    existing.entity <- Todo.Mock.Data |> tail(1)
+    
+    expected.error <- 'Memory Storage Provider Error: Duplicate Id not allowed.'
+    
+    # Then
+    existing.entity |> validator[['IsNew']](table) |> expect.error(expected.error)
+  })  
+})
