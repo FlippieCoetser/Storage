@@ -142,3 +142,24 @@ describe("when table |> operation[['Select']]()",{
     actual.todos |> expect.equal.data(expected.todos)
   })
 })
+
+describe("when id |> operation[['SelectWhereId']](table)",{
+  it("then entity is returned from memory data",{
+    # Given
+    configuration <- data.frame()
+
+    operation <- configuration |> Memory.Storage.Broker()
+    Todo.Mock.Data |> operation[['Seed']]('Todo')
+
+    existing.todo <- Todo.Mock.Data |> tail(1)
+
+    expected.todo <- existing.todo
+    id            <- existing.todo[['Id']]
+
+    # When
+    actual.todo <- id |> operation[['SelectWhereId']]('Todo')
+
+    # Then
+    actual.todo |> expect.equal.data(expected.todo)
+  })
+})
