@@ -1,4 +1,4 @@
-Memory.Storage.Broker <- \(configuration = NULL, data = NULL) {
+Memory.Storage.Broker <- \(configuration = NULL) {
   exception <- Memory.Storage.Exceptions()
 
   data <- list()

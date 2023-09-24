@@ -64,7 +64,7 @@ describe("When operations <- configuration |> Memory.Storage.Broker()",{
 })
 
 describe("when entities |> operation[['Seed']](table)",{
-  it("then entities are seeded into table into data in memory",{
+  it("then entities are inserted into table in memory",{
     # Given
     operation <- configuration |> Memory.Storage.Broker()
 
@@ -100,7 +100,8 @@ describe("when query |> operation[['ExecuteQuery']]()",{
 describe("when todo |> operation[['Insert']]('Todo')",{
   it("then todo is inserted into memory data",{
     # Given
-    operation <- configuration |> Memory.Storage.Broker(data)
+    operation <- configuration |> Memory.Storage.Broker()
+    Todo.Mock.Data |> operation[['Seed']](table)
 
     new.todo <- data.frame(
       Id     = uuid::UUIDgenerate(),
