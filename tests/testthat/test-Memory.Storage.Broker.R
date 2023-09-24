@@ -89,6 +89,22 @@ describe("when entities |> operation[['Seed']](table)",{
   })
 })
 
+describe("when operation[['GetTableNames']]()",{
+  it("then returns data.frame with table names if data in memory has one or more table",{
+    # Given
+    operation <- Memory.Storage.Broker()
+    Todo.Mock.Data |> operation[['Seed']]('Todo')
+
+    expected.table.names <- 'Todo'
+
+    # When
+    actual.table.names <- operation[['GetTableNames']]()
+
+    # Then
+    actual.table.names |> expect.equal(expected.table.names)
+  })
+})
+
 describe("when query |> operation[['ExecuteQuery']]()",{
   it("then an exception is thrown",{
     # Given
