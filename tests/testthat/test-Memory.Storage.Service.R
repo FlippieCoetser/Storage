@@ -273,6 +273,27 @@ describe("When entity |> service[['Update']](table)",{
     actual.entity <- id |> broker[['SelectWhereId']](table, fields)
     actual.entity |> expect.equal.data(expected.entity)
   })
+  it("then an exception is thrown if entity does not exist",{
+    # Given
+    configuration <- data.frame()
+
+    service <- configuration  |> 
+      Memory.Storage.Broker() |>
+      Memory.Storage.Service()
+
+    Todo.Mock.Data |> service[['Seed']](table)
+
+    new.entity <- data.frame(
+      Id     = uuid::UUIDgenerate(),
+      Task   = 'Task',
+      Status = 'New'
+    )
+
+    expected.error <- "Memory Storage Provider Error: Entity not found."
+
+    # Then
+    new.entity |> service[['Update']](table) |> expect.error(expected.error)
+  })
   it("then an exception is thrown if table is invalid",{
     # Given
     configuration <- data.frame()
