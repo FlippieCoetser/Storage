@@ -69,7 +69,7 @@ describe("When todo |> operations[['Insert']]()",{
     new.todo |> operations[['Insert']]()
 
     # Then
-    actual.todo <- fields |> storage[['SelectWhereId']]('Todo', id)
+    actual.todo <- id |> storage[['SelectWhereId']]('Todo', fields)
     actual.todo |> expect.equal(expected.todo)
 
     id |> storage[['Delete']]('Todo')
@@ -92,7 +92,7 @@ describe("When todo |> operations[['Insert']]()",{
     new.todo |> operations[['Insert']]()
 
     # Then
-    actual.todo <- fields |> storage[['SelectWhereId']]('Todo', id)
+    actual.todo <- id |> storage[['SelectWhereId']]('Todo', fields)
     actual.todo |> expect.equal.data(expected.todo)
 
     id |> storage[['Delete']]('Todo')
@@ -106,7 +106,7 @@ describe("When operations[['Select']]()",{
     storage    <- configuration |> Storage.Orchestrator('odbc')
     operations <- storage |> Todo.Broker()
 
-    expected.todos <- fields |> storage[['Select']]('Todo')
+    expected.todos <- 'Todo' |> storage[['Select']](fields)
 
     # When
     actual.todos <- operations[['Select']]()
@@ -119,7 +119,7 @@ describe("When operations[['Select']]()",{
     storage    <- configuration |> Storage.Orchestrator('memory',data)
     operations <- storage |> Todo.Broker()
 
-    expected.todos <- fields |> storage[['Select']]('Todo')
+    expected.todos <- 'Todo' |> storage[['Select']](fields)
 
     # When
     actual.todos <- operations[['Select']]()
@@ -136,11 +136,11 @@ describe("When id |> operations[['SelectWhereId']]()",{
     storage    <- configuration |> Storage.Orchestrator('odbc')
     operations <- storage |> Todo.Broker()
 
-    existing.todos <- fields |> storage[['Select']]('Todo')
+    existing.todos <- 'Todo' |> storage[['Select']](fields)
     existing.todo  <- existing.todos |> tail(1)
     existing.id    <- existing.todo[['Id']]
 
-    expected.todo <- fields |> storage[['SelectWhereId']]('Todo', existing.id)
+    expected.todo <- existing.id |> storage[['SelectWhereId']]('Todo', fields)
 
     # When
     actual.todo <- existing.id |> operations[['SelectWhereId']]()
@@ -153,11 +153,11 @@ describe("When id |> operations[['SelectWhereId']]()",{
     storage    <- configuration |> Storage.Orchestrator('memory',data)
     operations <- storage |> Todo.Broker()
 
-    existing.todos <- fields |> storage[['Select']]('Todo')
+    existing.todos <- 'Todo' |> storage[['Select']](fields)
     existing.todo  <- existing.todos |> tail(1)
     existing.id    <- existing.todo[['Id']]
 
-    expected.todo <- fields |> storage[['SelectWhereId']]('Todo', existing.id)
+    expected.todo <- existing.id |> storage[['SelectWhereId']]('Todo', fields)
 
     # When
     actual.todo <- existing.id |> operations[['SelectWhereId']]()
@@ -193,7 +193,7 @@ describe("When todo |> operations[['Update']]()",{
     updated.todo |> operations[['Update']]()
 
     # Then
-    actual.todo <- fields |> storage[['SelectWhereId']]('Todo', id)
+    actual.todo <- id |> storage[['SelectWhereId']]('Todo', fields)
     actual.todo |> expect.equal(expected.todo)
 
     id |> storage[['Delete']]('Todo')
@@ -222,7 +222,7 @@ describe("When todo |> operations[['Update']]()",{
     updated.todo |> operations[['Update']]()
 
     # Then
-    actual.todo <- fields |> storage[['SelectWhereId']]('Todo', id)
+    actual.todo <- id |> storage[['SelectWhereId']]('Todo', fields)
     actual.todo |> expect.equal.data(expected.todo)
 
     id |> storage[['Delete']]('Todo')
@@ -252,7 +252,7 @@ describe("When id |> operations[['Delete']]()",{
     id |> operations[['Delete']]()
 
     # Then
-    actual.count <- fields |> storage[['SelectWhereId']]('Todo', id) |> nrow()
+    actual.count <- id |> storage[['SelectWhereId']]('Todo', fields) |> nrow()
     actual.count |> expect.equal(expected.count)
   })
   it("then todo with is are removed from memory.storage",{
@@ -276,7 +276,7 @@ describe("When id |> operations[['Delete']]()",{
     id |> operations[['Delete']]()
 
     # Then
-    actual.count <- fields |> storage[['SelectWhereId']]('Todo', id) |> nrow()
+    actual.count <- id |> storage[['SelectWhereId']]('Todo', fields) |> nrow()
     actual.count |> expect.equal(expected.count)
   })
 })
