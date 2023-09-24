@@ -97,11 +97,13 @@ describe("when query |> operation[['ExecuteQuery']]()",{
   })
 })
 
-describe("when todo |> operation[['Insert']]('Todo')",{
-  it("then todo is inserted into memory data",{
+describe("when entity |> operation[['Insert']](table)",{
+  it("then entity is inserted into memory data",{
     # Given
+    configuration <- data.frame()
+
     operation <- configuration |> Memory.Storage.Broker()
-    Todo.Mock.Data |> operation[['Seed']](table)
+    Todo.Mock.Data |> operation[['Seed']]('Todo')
 
     new.todo <- data.frame(
       Id     = uuid::UUIDgenerate(),
@@ -116,7 +118,7 @@ describe("when todo |> operation[['Insert']]('Todo')",{
     new.todo |> operation[['Insert']]('Todo')
 
     # Then
-    actual.todo <- id |> operation[['SelectWhereId']]('Todo', fields)
+    actual.todo <- id |> operation[['SelectWhereId']]('Todo')
     actual.todo |> expect.equal.data(expected.todo)
 
     id |> operation[['Delete']]('Todo')
