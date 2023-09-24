@@ -1,7 +1,7 @@
-Storage.Orchestrator <- \(configuration, type = 'odbc', data = NULL) {
+Storage.Orchestrator <- \(configuration, type = 'odbc') {
   services <- list()
   services[['memory']] <- \() {
-    configuration |> Memory.Storage.Broker(data) |> Memory.Storage.Service()
+    configuration |> Memory.Storage.Broker() |> Memory.Storage.Service()
   }
   services[['odbc']]   <- \() {
     validate <- ODBC.Configuration.Validator()
@@ -12,6 +12,7 @@ Storage.Orchestrator <- \(configuration, type = 'odbc', data = NULL) {
   service <- services[[type]]()
 
   orchestrations <- list()
+  orchestrations[['Seed']]         <- \() {}
   orchestrations[['ExecuteQuery']] <- \(query) {
     query |> service[['ExecuteQuery']]()
   }
