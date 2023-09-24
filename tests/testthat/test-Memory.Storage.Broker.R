@@ -124,3 +124,21 @@ describe("when entity |> operation[['Insert']](table)",{
     id |> operation[['Delete']]('Todo')
   })
 })
+
+describe("when table |> operation[['Select']]()",{
+  it("then all entities are returned from memory data",{
+    # Given
+    configuration <- data.frame()
+
+    operation <- configuration |> Memory.Storage.Broker()
+    Todo.Mock.Data |> operation[['Seed']]('Todo')
+
+    expected.todos <- Todo.Mock.Data
+
+    # When
+    actual.todos <- 'Todo' |> operation[['Select']]()
+
+    # Then
+    actual.todos |> expect.equal.data(expected.todos)
+  })
+})
