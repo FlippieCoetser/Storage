@@ -12,4 +12,11 @@ describe("When data <- Todo.Mock.Data",{
     # Then
     data[['Id']] |> expect.exist()
   })
+  it("then data contains Task column",{
+    # When
+    data <- Todo.Mock.Data
+
+    # Then
+    data[['Task']] |> expect.exist()
+  })
 })
