@@ -33,7 +33,7 @@ describe("When validate[['NoImplementation']]()",{
     # Given
     validators <- Memory.Storage.Validator()
     
-    expected.error <- "Memory Storage Provider has no ExecuteQuery implementation."
+    expected.error <- 'Memory Storage Provider Error: ExecuteQuery not implemented.'
     
     # When
     validators[['NoImplementation']]() |> expect.error(expected.error)

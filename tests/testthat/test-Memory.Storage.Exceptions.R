@@ -43,7 +43,7 @@ describe("When input |> exception[['NoExecuteQuery']]()", {
     # Given
     exception <- Memory.Storage.Exceptions()
     
-    expected.error <- "Memory Storage Provider has no ExecuteQuery implementation."
+    expected.error <- 'Memory Storage Provider Error: ExecuteQuery not implemented.'
     
     # When
     input <- TRUE
@@ -68,7 +68,7 @@ describe("When input |> exception[['DuplicateId']]()", {
     # Given
     exception <- Memory.Storage.Exceptions()
     
-    expected.error <- "Memory Data Store Error: Duplicate Id not allowed"
+    expected.error <- 'Memory Storage Provider Error: Duplicate Id not allowed.'
     # When
     input <- TRUE
     

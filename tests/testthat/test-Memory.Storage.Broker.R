@@ -87,7 +87,7 @@ describe("when query |> operation[['ExecuteQuery']]()",{
     # Given
     operation <- Memory.Storage.Broker()
 
-    expected.error <- "Memory Storage Provider has no ExecuteQuery implementation."
+    expected.error <- 'Memory Storage Provider Error: ExecuteQuery not implemented.'
 
     # When
     query <- "SELECT 1"
