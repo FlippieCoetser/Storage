@@ -10,6 +10,7 @@ Memory.Storage.Validator <- \(broker = NULL) {
     (match.count != 0) |> exception[['DuplicateId']]()
     return(entity)
   }
+  validators[['EntityExist']]      <- \() {}
   validators[['IsValidTable']]     <- \(table) {
     broker[['GetTableNames']]() |> 
       is.element(table)         |> 
