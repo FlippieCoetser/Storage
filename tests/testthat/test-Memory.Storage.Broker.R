@@ -19,6 +19,13 @@ describe("When operations <- configuration |> Memory.Storage.Broker()",{
     # Then
     operations[['Seed']] |> expect.exist()
   })
+  it("then operations contains GetTableNames operation",{
+    # When
+    operations <- Memory.Storage.Broker()
+
+    # Then
+    operations[['GetTableNames']] |> expect.exist()
+  })
   it("then operations contains ExecuteQuery operation",{
     # When
     operations <- Memory.Storage.Broker()
@@ -81,6 +88,7 @@ describe("when entities |> operation[['Seed']](table)",{
     actual.entities |> expect.equal.data(expected.entities)
   })
 })
+
 
 describe("when query |> operation[['ExecuteQuery']]()",{
   it("then an exception is thrown",{
