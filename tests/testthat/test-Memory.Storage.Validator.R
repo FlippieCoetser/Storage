@@ -19,6 +19,13 @@ describe("When validators <- Memory.Storage.Validator()",{
    # Then
    validators[['NoImplementation']] |> expect.exist()
   })
+  it('then validators contains IsNew validator',{
+   # When
+   validators <- Memory.Storage.Validator()
+   
+   # Then
+   validators[['IsNew']] |> expect.exist()
+  })
 })
 
 describe("When validate[['NoImplementation']]()",{
