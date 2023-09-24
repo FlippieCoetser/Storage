@@ -106,17 +106,16 @@ describe("when operation[['GetTableNames']]()",{
 })
 
 describe("when query |> operation[['ExecuteQuery']]()",{
-  it("then an exception is thrown",{
+  it("then an empty data frame is returned",{
     # Given
     operation <- Memory.Storage.Broker()
 
-    expected.error <- 'Memory Storage Provider Error: ExecuteQuery not implemented.'
-
     # When
     query <- "SELECT 1"
+    results <- query |> operation[['ExecuteQuery']]()
 
     # Then
-    query |> operation[['ExecuteQuery']]() |> expect.error(expected.error)
+    results |> expect.data.frame()
   })
 })
 

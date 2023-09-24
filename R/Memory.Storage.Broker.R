@@ -10,7 +10,7 @@ Memory.Storage.Broker <- \(configuration = NULL) {
     data |> names()
   }
   operations[['ExecuteQuery']]     <- \(query) {
-    TRUE |> exception[['NoExecuteQuery']]()
+    return(data.frame())
   }
   operations[['Insert']]           <- \(entity, table) {
     data[[table]] <<- data[[table]] |> rbind(entity)
