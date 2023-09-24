@@ -168,7 +168,7 @@ describe("When entity |> service[['Insert']](table)",{
   })
 })
 
-describe("When fields |> service[['Select']](table)",{
+describe("When table |> service[['Select']](fields)",{
   it("then all entities in table in data store is returned",{
     # Given
     broker  <- configuration |> Memory.Storage.Broker()
@@ -183,6 +183,23 @@ describe("When fields |> service[['Select']](table)",{
 
     # Then
     actual.entities |> expect.equal.data(expected.entities)
+  })
+  it("then an exception is thrown if table is invalid",{
+    # Given
+    configuration <- data.frame()
+ 
+    service <- configuration  |> 
+      Memory.Storage.Broker() |> 
+      Memory.Storage.Service()
+
+    Todo.Mock.Data |> service[['Seed']](table)
+
+    invalid.table <- 'InvalidTable'
+
+    expected.error <- "Memory Storage Provider Error: InvalidTable is not a valid table."
+
+    # Then
+    invalid.table |> service[['Select']](fields) |> expect.error(expected.error)
   })
 })
 
