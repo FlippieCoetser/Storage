@@ -10,5 +10,6 @@ Memory.Storage.Exceptions <- \() {
       stop('Memory Storage Provider Error: Duplicate Id not allowed.', call. = FALSE)
     }
   }
+  exceptions[['InvalidTable']] <- \() {}
   return(exceptions)
 }
