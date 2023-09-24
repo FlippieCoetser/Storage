@@ -63,6 +63,26 @@ describe("When services <- Memory.Storage.Service()",{
   })
 })
 
+describe("when entities |> service[['Seed']](table)",{
+  it("then entities are inserted into table in memory",{
+    # Given
+    broker  <- configuration |> Memory.Storage.Broker()
+    service <- broker        |> Memory.Storage.Service()
+
+    table <- 'Todo'
+
+    seed.entities     <- Todo.Mock.Data
+    expected.entities <- seed.entities
+
+    # When
+    seed.entities |> service[['Seed']](table)
+
+    # Then
+    actual.entities <- table |> broker[['Select']]()
+    actual.entities |> expect.equal.data(expected.entities)
+  })
+})
+
 describe("When query |> services[['ExecuteQuery']]()",{
   it("then an exception is thrown",{
     # Given
