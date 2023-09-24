@@ -26,12 +26,12 @@ describe("When exceptions <- Memory.Storage.Exception()",{
    # Then
    exceptions[['DuplicateId']] |> expect.exist()
   })
-  it('then exceptions contains InvalidEntity exception',{
+  it('then exceptions contains EntityNotFound exception',{
    # When
    exceptions <- Memory.Storage.Exceptions()
    
    # Then
-   exceptions[['InvalidEntity']] |> expect.exist()
+   exceptions[['EntityNotFound']] |> expect.exist()
   })
   it('then exceptions contains InvalidTable exception',{
    # When
