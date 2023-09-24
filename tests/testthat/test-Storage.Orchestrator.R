@@ -12,6 +12,13 @@ describe("When orchestrations <- configuration |> Storage.Orchestrator()",{
     # Then
     orchestrations |> expect.list()
   })
+  it("then orchestrations contains Seed orchestration",{
+    # When
+    orchestrations <- configuration |> Storage.Orchestrator()
+
+    # Then
+    orchestrations[['Seed']] |> expect.exist()
+  })
   it("then orchestrations contains ExecuteQuery orchestration",{
     # When
     orchestrations <- configuration |> Storage.Orchestrator()
