@@ -8,6 +8,7 @@ Memory.Storage.Broker <- \(configuration = NULL) {
     data[[table]] <<- entities
     return(data.frame())
   }
+  operations[['GetTableNames']]    <- \() { }
   operations[['ExecuteQuery']]     <- \(query) {
     TRUE |> exception[['NoExecuteQuery']]()
   }
