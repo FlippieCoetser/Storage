@@ -273,6 +273,29 @@ describe("When entity |> service[['Update']](table)",{
     actual.entity <- id |> broker[['SelectWhereId']](table, fields)
     actual.entity |> expect.equal.data(expected.entity)
   })
+  it("then an exception is thrown if table is invalid",{
+    # Given
+    configuration <- data.frame()
+
+    service <- configuration  |> 
+      Memory.Storage.Broker() |> 
+      Memory.Storage.Service()
+
+    Todo.Mock.Data |> service[['Seed']](table)
+
+    entity <- Todo.Mock.Data |> tail(1)
+    id     <- entity[['Id']]
+
+    updated.entity <- entity
+    updated.entity[['Status']] <- 'Updated'
+
+    expected.error <- "Memory Storage Provider Error: InvalidTable is not a valid table."
+
+    invalid.table <- 'InvalidTable'
+
+    # Then
+    updated.entity |> service[['Update']](invalid.table) |> expect.error(expected.error)
+  })
 })
 
 describe("when id |> service[['Delete']](table)",{
