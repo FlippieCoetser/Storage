@@ -83,3 +83,29 @@ describe("When input |> exception[['DuplicateId']]()", {
     input |> exception[['DuplicateId']]() |> expect.error(expected.error)
   })
 })
+
+describe("When input |> exception[['InvalidTable']](table)", {
+  it("then no exception is thrown if input is FALSE", {
+    # Given
+    exception <- Memory.Storage.Exceptions()
+    
+    # When
+    input <- FALSE
+    
+    # Then
+    input |> exception[['InvalidTable']]() |> expect.no.error()
+  })
+  it("then an exception is thrown if input is TRUE", {
+    # Given
+    exception <- Memory.Storage.Exceptions()
+
+    invalid.table <- 'Invalid Table'
+    
+    expected.error <- paste0("Memory Storage Provider Error: ", invalid.table, "is not a valid table.")
+    # When
+    input <- TRUE
+    
+    # Then
+    input |> exception[['InvalidTable']](invalid.table) |> expect.error(expected.error)
+  })
+})
