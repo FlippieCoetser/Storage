@@ -19,12 +19,12 @@ describe("When validators <- Memory.Storage.Validator()",{
    # Then
    validators[['NoImplementation']] |> expect.exist()
   })
-  it('then validators contains IsNew validator',{
+  it('then validators contains IsNewEntity validator',{
    # When
    validators <- Memory.Storage.Validator()
    
    # Then
-   validators[['IsNew']] |> expect.exist()
+   validators[['IsNewEntity']] |> expect.exist()
   })
 })
 
@@ -40,7 +40,7 @@ describe("When validate[['NoImplementation']]()",{
   })
 })
 
-describe("When entity |> validate[['IsNew']](table)",{
+describe("When entity |> validate[['IsNewEntity']](table)",{
   it("then an exception is thrown if entity exist in memory storage",{
     # Given
     configuration <- data.frame()
@@ -55,7 +55,7 @@ describe("When entity |> validate[['IsNew']](table)",{
     expected.error <- 'Memory Storage Provider Error: Duplicate Id not allowed.'
     
     # Then
-    existing.entity |> validator[['IsNew']](table) |> expect.error(expected.error)
+    existing.entity |> validator[['IsNewEntity']](table) |> expect.error(expected.error)
   })  
 })
 

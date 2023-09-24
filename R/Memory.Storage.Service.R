@@ -9,7 +9,7 @@ Memory.Storage.Service <- \(broker) {
     validate[['NoImplementation']]()
   }
   services[['Insert']]        <- \(entity, table) {
-    entity |> validate[['IsNew']](table)
+    entity |> validate[['IsNewEntity']](table)
     entity |> broker[['Insert']](table)
   }
   services[['Select']]        <- \(table, fields) {
