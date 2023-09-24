@@ -163,3 +163,35 @@ describe("when id |> operation[['SelectWhereId']](table)",{
     actual.todo |> expect.equal.data(expected.todo)
   })
 })
+
+describe("when entity |> operation[['Update']](table)",{
+  it("then entity is updated in table in memory data",{
+    # Given
+    configuration <- data.frame()
+
+    operation <- configuration |> Memory.Storage.Broker()
+    Todo.Mock.Data |> operation[['Seed']]('Todo')
+
+    new.todo <- data.frame(
+      Id     = uuid::UUIDgenerate(),
+      Task   = 'Task',
+      Status = 'New'
+    )
+    new.todo |> operation[['Insert']]('Todo')
+    id <- new.todo[['Id']]
+
+    updated.todo <- new.todo
+    updated.todo[['Status']] <- 'Updated'
+
+    expected.todo <- updated.todo
+
+    # When
+    updated.todo |> operation[['Update']]('Todo')
+
+    # Then
+    actual.todo <- id |> operation[['SelectWhereId']]('Todo')
+    actual.todo |> expect.equal.data(expected.todo)
+
+    id |> operation[['Delete']]('Todo')
+  })
+})
