@@ -143,6 +143,29 @@ describe("When entity |> service[['Insert']](table)",{
     # Then
     existing.entity |> service[['Insert']](table) |> expect.error(expected.error)
   })
+  it("then an exception is thrown if table is invalid",{
+    # Given
+    configuration <- data.frame()
+
+    service <- configuration  |> 
+      Memory.Storage.Broker() |> 
+      Memory.Storage.Service()
+
+    Todo.Mock.Data |> service[['Seed']](table)
+
+    new.entity <- data.frame(
+      Id     = uuid::UUIDgenerate(),
+      Task   = 'Task',
+      Status = 'New'
+    )
+    
+    invalid.table <- 'InvalidTable'
+
+    expected.error <- "Memory Storage Provider Error: InvalidTable is not a valid table."
+
+    # Then
+    new.entity |> service[['Insert']](invalid.table) |> expect.error(expected.error)
+  })
 })
 
 describe("When fields |> service[['Select']](table)",{
