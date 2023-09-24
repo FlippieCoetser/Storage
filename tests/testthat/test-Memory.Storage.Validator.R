@@ -66,6 +66,29 @@ describe("When entity |> validate[['IsNewEntity']](table)",{
   })  
 })
 
+describe("When entity |> validate[['EntityExist']](table)",{
+  it("then an exception is thrown if entity does not exist in memory storage",{
+    # Given
+    configuration <- data.frame()
+
+    broker <- configuration |> Memory.Storage.Broker()
+    Todo.Mock.Data |> broker[['Seed']](table)
+
+    validator <- broker |> Memory.Storage.Validator()
+
+    new.entity <- data.frame(
+      Id     = uuid::UUIDgenerate(),
+      Task   = 'Task',
+      Status = 'New'
+    )
+    
+    expected.error <- 'Memory Storage Provider Error: Entity not found.'
+    
+    # Then
+    new.entity |> validator[['EntityExist']](table) |> expect.error(expected.error)
+  })  
+})
+
 describe("When table |> validate[['IsValidTable']]()",{
   it("then no exception is thrown if table is a valid table",{
     # Given
