@@ -126,6 +126,23 @@ describe("When entity |> service[['Insert']](table)",{
 
     new.entity[['Id']] |> broker[['Delete']]('Todo')
   })
+  it("then an exception is thrown if entity is not new",{
+    # Given
+    configuration <- data.frame()
+
+    service  <- configuration |> 
+      Memory.Storage.Broker() |> 
+      Memory.Storage.Service()
+       
+    Todo.Mock.Data |> service[['Seed']](table)
+
+    existing.entity <- Todo.Mock.Data |> tail(1)
+
+    expected.error <- "Memory Storage Provider Error: Duplicate Id not allowed."
+
+    # Then
+    existing.entity |> service[['Insert']](table) |> expect.error(expected.error)
+  })
 })
 
 describe("When fields |> service[['Select']](table)",{
