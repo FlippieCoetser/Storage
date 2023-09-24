@@ -203,7 +203,7 @@ describe("When table |> service[['Select']](fields)",{
   })
 })
 
-describe("When fields |> service[['SelectWhereId']](table, id)",{
+describe("When id |> service[['SelectWhereId']](table, fields)",{
   it("then entity with id in table in data store is returned",{
     # Given
     broker  <- configuration |> Memory.Storage.Broker()
