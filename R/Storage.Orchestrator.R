@@ -4,6 +4,9 @@ Storage.Orchestrator <- \(configuration, type = 'odbc', data = NULL) {
     configuration |> Memory.Storage.Broker(data) |> Memory.Storage.Service()
   }
   services[['odbc']]   <- \() {
+    validate <- ODBC.Configuration.Validator()
+
+    configuration |> validate[['Configuration']]()
     configuration |> ODBC.Storage.Broker() |> ODBC.Storage.Service()
   }
   service <- services[[type]]()

@@ -11,11 +11,11 @@ ODBC.Storage.Service <- \(broker) {
   services[['Insert']]           <- \(entity, table) {
     entity |> broker[['Insert']](table)
   }
-  services[['Select']]           <- \(fields, table) {
-    fields |> broker[['Select']](table)
+  services[['Select']]           <- \(table, fields) {
+    table |> broker[['Select']](fields)
   }
-  services[['SelectWhereId']]    <- \(fields, table, id) {
-    fields |> broker[['SelectWhereId']](table, id)
+  services[['SelectWhereId']]    <- \(id, table, fields) {
+    id |> broker[['SelectWhereId']](table, fields)
   }
   services[['Update']]           <- \(entity, table) {
     entity |> broker[['Update']](table)

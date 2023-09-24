@@ -44,7 +44,16 @@ The `Todo.Service` is an example of how to use the `Storage` component. The `Tod
 
 At the time of writing this README, the package is not available on CRAN. However, it can be installed using `devtools`.
 
-#### Install via GitHub
+#### Install Dependencies
+
+1. This package has two dependencies: `Environment`, `Query`:
+
+```r
+devtools::install_github("https://github.com/FlippieCoetser/Environment")
+devtools::install_github("https://github.com/FlippieCoetser/Query")
+```
+
+### Install via GitHub
 
 1. Use Devtools
 

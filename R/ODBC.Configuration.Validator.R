@@ -2,6 +2,29 @@ ODBC.Configuration.Validator <- \() {
   exception <- ODBC.Configuration.Exceptions()
 
   validations <- list()
+  validations[['Configuration']] <- \(configuration) {
+    valid.preset.config <- TRUE
+    valid.manual.config <- TRUE
+
+    tryCatch(
+      configuration |> validations[['PresetConfig']](),
+      error = \(...) {
+        valid.preset.config <<- FALSE
+      }
+    )
+    tryCatch(
+      configuration |> validations[['ManualConfig']](),
+      error = \(...) {
+        valid.manual.config <<- FALSE
+      }
+    )
+
+    valid.config <- valid.preset.config || valid.manual.config
+    if (!valid.config) {
+      TRUE |> exception[['InvalidConfig']]()
+    }
+    return(configuration)
+  }
   validations[['PresetConfig']] <- \(configuration) {
     configuration |>
       validations[['HasDrv']]() |>

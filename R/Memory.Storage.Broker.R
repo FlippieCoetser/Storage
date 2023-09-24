@@ -12,10 +12,10 @@ Memory.Storage.Broker <- \(configuration = NULL, data = NULL) {
     data[[table]] <<- data[[table]] |> rbind(entity)
     return(data.frame())
   }
-  operations[['Select']]           <- \(fields, table) {
+  operations[['Select']]           <- \(table, fields = NULL) {
     data[[table]]
   }
-  operations[['SelectWhereId']]    <- \(fields, table, id) {
+  operations[['SelectWhereId']]    <- \(id, table, fields = NULL) {
     data[[table]][data[[table]][['Id']] == id,]
   }
   operations[['Update']]           <- \(entity, table) { 

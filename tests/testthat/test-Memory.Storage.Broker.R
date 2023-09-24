@@ -83,20 +83,20 @@ describe("when todo |> operation[['Insert']]('Todo')",{
     # Given
     operation <- configuration |> Memory.Storage.Broker(data)
 
-    new.todo <- list(
+    new.todo <- data.frame(
       Id     = uuid::UUIDgenerate(),
       Task   = 'Task',
       Status = 'New'
     )
     id <- new.todo[['Id']]
 
-    expected.todo <- new.todo |> as.data.frame()
+    expected.todo <- new.todo
 
     # When
     new.todo |> operation[['Insert']]('Todo')
 
     # Then
-    actual.todo <- fields |> operation[['SelectWhereId']]('Todo', id)
+    actual.todo <- id |> operation[['SelectWhereId']]('Todo', fields)
     actual.todo |> expect.equal.data(expected.todo)
 
     id |> operation[['Delete']]('Todo')

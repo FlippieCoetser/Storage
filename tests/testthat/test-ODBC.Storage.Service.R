@@ -123,8 +123,8 @@ describe("When entity |> service[['Insert']](table)",{
   })
 })
 
-describe("When fields |> service[['Select']](table)",{
-  it("then fields |> broker[['Select']](table) is called",{
+describe("When table |> service[['Select']](fields)",{
+  it("then table |> broker[['Select']](fields) is called",{
     # Given
     input.fields <- list()
     input.table  <- 'table'
@@ -133,7 +133,7 @@ describe("When fields |> service[['Select']](table)",{
     actual.table  <- NULL
 
     broker <- list()
-    broker[['Select']] <- \(fields, table) {
+    broker[['Select']] <- \(table, fields) {
       actual.fields <<- fields
       actual.table  <<- table
     }
@@ -144,7 +144,7 @@ describe("When fields |> service[['Select']](table)",{
     expected.table  <- input.table
 
     # When
-    input.fields |> services[['Select']](input.table)
+    input.table |> services[['Select']](input.fields)
 
     # Then
     actual.fields |> expect.equal(expected.fields)
@@ -152,8 +152,8 @@ describe("When fields |> service[['Select']](table)",{
   })
 })
 
-describe("When fields |> service[['SelectWhereId']](table, id)",{
-  it("then fields |> broker[['SelectWhereId']](table, id) is called",{
+describe("When id |> service[['SelectWhereId']](table, fields)",{
+  it("then id |> broker[['SelectWhereId']](table, fields) is called",{
     # Given
     input.fields <- list()
     input.table  <- 'table'
@@ -164,7 +164,7 @@ describe("When fields |> service[['SelectWhereId']](table, id)",{
     actual.id     <- NULL
 
     broker <- list()
-    broker[['SelectWhereId']] <- \(fields, table, id) {
+    broker[['SelectWhereId']] <- \(id, table, fields) {
       actual.fields <<- fields
       actual.table  <<- table
       actual.id     <<- id
@@ -177,7 +177,7 @@ describe("When fields |> service[['SelectWhereId']](table, id)",{
     expected.id     <- input.id
 
     # When
-    input.fields |> services[['SelectWhereId']](input.table, input.id)
+    input.id |> services[['SelectWhereId']](input.table, input.fields)
 
     # Then
     actual.fields |> expect.equal(expected.fields)

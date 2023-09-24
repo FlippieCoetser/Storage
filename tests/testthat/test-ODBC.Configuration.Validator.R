@@ -12,6 +12,13 @@ describe("When validators <- ODBC.Configuration.Validator()",{
     # Then
     validators |> expect.list()
   })
+  it("then validators contains Configuration validator",{
+    # When
+    validators <- ODBC.Configuration.Validator()
+
+    # Then
+    validators[['Configuration']] |> expect.exist()
+  })
   it('then validators contains PresetConfig validator',{
    # When
    validators <- ODBC.Configuration.Validator()
@@ -614,6 +621,109 @@ describe("When configuration |> validate[['ManualConfig']]()",{
     actual.configuration <- input.configuration |> validate[['ManualConfig']]()
     
     # Then
+    actual.configuration |> expect.equal(expected.configuration)
+  })
+})
+
+describe("When configuration |> validate[['Configuration']]()",{
+  it("then no exception is thrown if configuration is valid Preset configuration",{
+    # Given
+    validate <- ODBC.Configuration.Validator()
+    
+    # When
+    input.configuration <- list()
+    input.configuration[['drv']] <- 'test'
+    input.configuration[['dsn']] <- 'test'
+    input.configuration[['uid']] <- 'test'
+    input.configuration[['pwd']] <- 'test'
+    
+    # Then
+    input.configuration |> validate[['Configuration']]() |> expect.no.error()
+  })
+  it("then no exception is thrown if configuration is valid Manual configuration",{
+    # Given
+    validate <- ODBC.Configuration.Validator()
+    
+    # When
+    input.configuration <- list()
+    input.configuration[['drv']]      <- 'test'
+    input.configuration[['driver']]   <- 'test'
+    input.configuration[['server']]   <- 'test'
+    input.configuration[['database']] <- 'test'
+    input.configuration[['uid']]      <- 'test'
+    input.configuration[['pwd']]      <- 'test'
+    
+    # Then
+    input.configuration |> validate[['Configuration']]() |> expect.no.error()
+  })
+  it("then an exception is thrown if configuration is invalid Preset configuration",{
+    # Given
+    validate <- ODBC.Configuration.Validator()
+    
+    expected.error <- "Invalid ODBC configuration. Provide valid Preset or Manual configuration."
+    
+    # When
+    input.configuration <- list()
+    input.configuration[['drv']] <- NULL
+    input.configuration[['dsn']] <- 'test'
+    input.configuration[['uid']] <- 'test'
+    input.configuration[['pwd']] <- 'test'
+    
+    # Then
+    input.configuration |> validate[['Configuration']]() |> expect.error(expected.error)
+  })
+  it("then an exception is thrown if configuration is invalid Manual configuration",{
+    # Given
+    validate <- ODBC.Configuration.Validator()
+    
+    expected.error <- "Invalid ODBC configuration. Provide valid Preset or Manual configuration."
+    
+    # When
+    input.configuration <- list()
+    input.configuration[['drv']]      <- 'test'
+    input.configuration[['driver']]   <- NULL
+    input.configuration[['server']]   <- 'test'
+    input.configuration[['database']] <- 'test'
+    input.configuration[['uid']]      <- 'test'
+    input.configuration[['pwd']]      <- 'test'
+    
+    # Then
+    input.configuration |> validate[['Configuration']]() |> expect.error(expected.error)
+  })
+  it("then configuration is returned if configuration is valid Preset configuration",{
+    # Given
+    validate <- ODBC.Configuration.Validator()
+    
+    # When
+    input.configuration <- list()
+    input.configuration[['drv']] <- 'test'
+    input.configuration[['dsn']] <- 'test'
+    input.configuration[['uid']] <- 'test'
+    input.configuration[['pwd']] <- 'test'
+
+    expected.configuration <- input.configuration
+    
+    # Then
+    actual.configuration <- expected.configuration |> validate[['Configuration']]() 
+    actual.configuration |> expect.equal(expected.configuration)
+  })
+  it("then configuration is returned if configuration is valid Manual configuration",{
+    # Given
+    validate <- ODBC.Configuration.Validator()
+    
+    # When
+    input.configuration <- list()
+    input.configuration[['drv']]      <- 'test'
+    input.configuration[['driver']]   <- 'test'
+    input.configuration[['server']]   <- 'test'
+    input.configuration[['database']] <- 'test'
+    input.configuration[['uid']]      <- 'test'
+    input.configuration[['pwd']]      <- 'test'
+
+    expected.configuration <- input.configuration
+    
+    # Then
+    actual.configuration <- expected.configuration |> validate[['Configuration']]() 
     actual.configuration |> expect.equal(expected.configuration)
   })
 })
