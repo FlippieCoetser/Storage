@@ -116,3 +116,28 @@ describe("When input |> exception[['InvalidTable']](table)", {
     input |> exception[['InvalidTable']](invalid.table) |> expect.error(expected.error)
   })
 })
+
+describe("When input |> exception[['EntityNotFound']]()", {
+  it("then no exception is thrown if input is FALSE", {
+    # Given
+    exception <- Memory.Storage.Exceptions()
+    
+    # When
+    input <- FALSE
+    
+    # Then
+    input |> exception[['EntityNotFound']]() |> expect.no.error()
+  })
+  it("then an exception is thrown if input is TRUE", {
+    # Given
+    exception <- Memory.Storage.Exceptions()
+    
+    expected.error <- 'Memory Storage Provider Error: Entity not found.'
+    
+    # When
+    input <- TRUE
+    
+    # Then
+    input |> exception[['EntityNotFound']]() |> expect.error(expected.error)
+  })
+})
