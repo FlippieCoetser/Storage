@@ -101,7 +101,7 @@ describe("When input |> exception[['InvalidTable']](table)", {
 
     invalid.table <- 'Invalid Table'
     
-    expected.error <- paste0("Memory Storage Provider Error: ", invalid.table, "is not a valid table.")
+    expected.error <- paste0("Memory Storage Provider Error: ", invalid.table, " is not a valid table.")
     # When
     input <- TRUE
     
