@@ -1,5 +1,5 @@
 Memory.Storage.Service <- \(broker) {
-  validate  <- Memory.Storage.Validator()
+  validate  <- Memory.Storage.Validator(broker)
   
   services <- list()
   services[['Seed']]          <- \(data, table) {
@@ -9,6 +9,7 @@ Memory.Storage.Service <- \(broker) {
     validate[['NoImplementation']]()
   }
   services[['Insert']]        <- \(entity, table) {
+    entity |> validate[['IsNew']](table)
     entity |> broker[['Insert']](table)
   }
   services[['Select']]        <- \(table, fields) {
