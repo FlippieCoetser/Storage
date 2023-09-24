@@ -89,7 +89,6 @@ describe("when entities |> operation[['Seed']](table)",{
   })
 })
 
-
 describe("when query |> operation[['ExecuteQuery']]()",{
   it("then an exception is thrown",{
     # Given
