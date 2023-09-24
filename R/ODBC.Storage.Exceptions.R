@@ -79,15 +79,5 @@ ODBC.Storage.Exceptions <- \() {
       stop('Query is null. Provide a Query.', call. = FALSE)
     } 
   }
-  exceptions[['NoCreateConnection']] <- \(invoke) {
-    if (invoke) { 
-      stop("Memory Storage: CreateConnection operation not implemented", call. = FALSE)
-    }
-  }
-  exceptions[['NoExecuteQuery']]     <- \(invoke) {
-    if (invoke) { 
-      stop("Memory Storage Provider has no ExecuteQuery implementation.", call. = FALSE)
-    }
-  }
   return(exceptions)
 }

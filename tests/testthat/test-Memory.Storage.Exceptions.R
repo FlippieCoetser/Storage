@@ -26,6 +26,20 @@ describe("When exceptions <- Memory.Storage.Exception()",{
    # Then
    exceptions[['DuplicateId']] |> expect.exist()
   })
+  it('then exceptions contains EntityNotFound exception',{
+   # When
+   exceptions <- Memory.Storage.Exceptions()
+   
+   # Then
+   exceptions[['EntityNotFound']] |> expect.exist()
+  })
+  it('then exceptions contains InvalidTable exception',{
+   # When
+   exceptions <- Memory.Storage.Exceptions()
+   
+   # Then
+   exceptions[['InvalidTable']] |> expect.exist()
+  })
 })
 
 describe("When input |> exception[['NoExecuteQuery']]()", {
@@ -43,7 +57,7 @@ describe("When input |> exception[['NoExecuteQuery']]()", {
     # Given
     exception <- Memory.Storage.Exceptions()
     
-    expected.error <- "Memory Storage Provider has no ExecuteQuery implementation."
+    expected.error <- 'Memory Storage Provider Error: ExecuteQuery not implemented.'
     
     # When
     input <- TRUE
@@ -68,11 +82,62 @@ describe("When input |> exception[['DuplicateId']]()", {
     # Given
     exception <- Memory.Storage.Exceptions()
     
-    expected.error <- "Memory Data Store Error: Duplicate Id not allowed"
+    expected.error <- 'Memory Storage Provider Error: Duplicate Id not allowed.'
     # When
     input <- TRUE
     
     # Then
     input |> exception[['DuplicateId']]() |> expect.error(expected.error)
+  })
+})
+
+describe("When input |> exception[['InvalidTable']](table)", {
+  it("then no exception is thrown if input is FALSE", {
+    # Given
+    exception <- Memory.Storage.Exceptions()
+    
+    # When
+    input <- FALSE
+    
+    # Then
+    input |> exception[['InvalidTable']]() |> expect.no.error()
+  })
+  it("then an exception is thrown if input is TRUE", {
+    # Given
+    exception <- Memory.Storage.Exceptions()
+
+    invalid.table <- 'Invalid Table'
+    
+    expected.error <- paste0("Memory Storage Provider Error: ", invalid.table, " is not a valid table.")
+    # When
+    input <- TRUE
+    
+    # Then
+    input |> exception[['InvalidTable']](invalid.table) |> expect.error(expected.error)
+  })
+})
+
+describe("When input |> exception[['EntityNotFound']]()", {
+  it("then no exception is thrown if input is FALSE", {
+    # Given
+    exception <- Memory.Storage.Exceptions()
+    
+    # When
+    input <- FALSE
+    
+    # Then
+    input |> exception[['EntityNotFound']]() |> expect.no.error()
+  })
+  it("then an exception is thrown if input is TRUE", {
+    # Given
+    exception <- Memory.Storage.Exceptions()
+    
+    expected.error <- 'Memory Storage Provider Error: Entity not found.'
+    
+    # When
+    input <- TRUE
+    
+    # Then
+    input |> exception[['EntityNotFound']]() |> expect.error(expected.error)
   })
 })

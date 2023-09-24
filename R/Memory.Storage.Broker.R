@@ -1,6 +1,4 @@
 Memory.Storage.Broker <- \(configuration = NULL) {
-  exception <- Memory.Storage.Exceptions()
-
   data <- list()
 
   operations <- list()
@@ -8,12 +6,13 @@ Memory.Storage.Broker <- \(configuration = NULL) {
     data[[table]] <<- entities
     return(data.frame())
   }
+  operations[['GetTableNames']]    <- \() {
+    data |> names()
+  }
   operations[['ExecuteQuery']]     <- \(query) {
-    TRUE |> exception[['NoExecuteQuery']]()
+    return(data.frame())
   }
   operations[['Insert']]           <- \(entity, table) {
-    match.count <- (data[[table]][['Id']] == entity[['Id']]) |> sum()
-    (match.count != 0) |> exception[['DuplicateId']]()
     data[[table]] <<- data[[table]] |> rbind(entity)
     return(data.frame())
   }
@@ -23,15 +22,14 @@ Memory.Storage.Broker <- \(configuration = NULL) {
   operations[['SelectWhereId']]    <- \(id, table, fields = NULL) {
     data[[table]][data[[table]][['Id']] == id,]
   }
-  operations[['Update']]           <- \(entity, table) { 
-    match.index <- entity[['Id']] |> match(data[[table]][['Id']])
-    if(match.index |> is.na() |> isFALSE()) {
-      data[[table]][match.index,] <<- entity
-    }
+  operations[['Update']]           <- \(entity, table) {
+    condition <- data[[table]][['Id']] == entity[['Id']]
+    data[[table]][condition,] <<- entity
     return(data.frame())      
   }
   operations[['Delete']]           <- \(id, table) {
-    data[[table]] <<- data[[table]][data[[table]][['Id']] != id,]
+    condition <- data[[table]][['Id']] != id
+    data[[table]] <<- data[[table]][condition,]
     return(data.frame())
   }
   return(operations)  
