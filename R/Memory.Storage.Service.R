@@ -20,10 +20,12 @@ Memory.Storage.Service <- \(broker) {
   }
   services[['SelectWhereId']] <- \(id, table, fields) {
     table |> validate[['IsValidTable']]()
-    
+
     id |> broker[['SelectWhereId']](table, fields)
   }
   services[['Update']]        <- \(entity, table) {
+    table |> validate[['IsValidTable']]()
+    
     entity |> broker[['Update']](table)
   }
   services[['Delete']]        <- \(id, table) {
