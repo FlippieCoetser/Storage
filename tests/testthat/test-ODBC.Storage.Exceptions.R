@@ -110,20 +110,6 @@ describe("When exceptions <- ODBC.Storage.Exceptions()",{
     # Then
     exceptions[['QueryIsNull']] |> expect.exist()
   })
-  it('then exceptions contains NoCreateConnection exception',{
-    # Given
-    exceptions <- ODBC.Storage.Exceptions()
-
-    # Then
-    exceptions[['NoCreateConnection']] |> expect.exist()
-  })
-  it('then exceptions contains NoExecuteQuery exception',{
-    # Given
-    exceptions <- ODBC.Storage.Exceptions()
-
-    # Then
-    exceptions[['NoExecuteQuery']] |> expect.exist()
-  })
 })
 
 describe("when input |> exception[['ConfigIsNull']]()",{
@@ -511,55 +497,5 @@ describe("when input |> exception[['QueryIsNull']]()",{
 
     # Then
     input |> exception[["QueryIsNull"]]() |> expect_error(expected.error)
-  })
-})
-
-describe("When input |> exception[['NoCreateConnection']]()",{
-  it("then no exceptions is thrown if input if FALSE",{
-    # Given
-    exception <- ODBC.Storage.Exceptions()
-
-    # When
-    input <- FALSE
-
-    # Then
-    input |> exception[["NoCreateConnection"]]() |> expect.no.error()
-  })
-  it("then an exceptions is thrown if input is TRUE",{
-    # Given
-    exception <- ODBC.Storage.Exceptions()
-
-    excepted.error <- "Memory Storage: CreateConnection operation not implemented"
-
-    # When
-    input <- TRUE
-
-    # Then
-    input |> exception[["NoCreateConnection"]]() |> expect.error(excepted.error)
-  })
-})
-
-describe("When input |> exception[['NoExecuteQuery']]()",{
-  it("then no exceptions is thrown if input if FALSE",{
-    # Given
-    exception <- ODBC.Storage.Exceptions()
-
-    # When
-    input <- FALSE
-
-    # Then
-    input |> exception[["NoExecuteQuery"]]() |> expect.no.error()
-  })
-  it("then an exceptions is thrown if input is TRUE",{
-    # Given
-    exception <- ODBC.Storage.Exceptions()
-
-    excepted.error <- "Memory Storage Provider has no ExecuteQuery implementation."
-
-    # When
-    input <- TRUE
-
-    # Then
-    input |> exception[["NoExecuteQuery"]]() |> expect.error(excepted.error)
   })
 })
