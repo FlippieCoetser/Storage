@@ -58,3 +58,40 @@ describe("When entity |> validate[['IsNew']](table)",{
     existing.entity |> validator[['IsNew']](table) |> expect.error(expected.error)
   })  
 })
+
+describe("When table |> validate[['IsValidTable']]()",{
+  it("then no exception is thrown if table is a valid table",{
+    # Given
+    table <- 'Todo'
+    
+    configuration <- data.frame()
+
+    broker <- configuration |> Memory.Storage.Broker()
+
+
+    Todo.Mock.Data |> broker[['Seed']](table)
+
+    validator <- broker |> Memory.Storage.Validator()
+
+    valid.table <- table
+    
+    # Then
+    valid.table |> validator[['IsValidTable']]() |> expect.no.error()
+  })
+  it("then an exception is thrown if table is not a valid table",{
+    # Given
+    configuration <- data.frame()
+
+    broker <- configuration |> Memory.Storage.Broker()
+    Todo.Mock.Data |> broker[['Seed']](table)
+
+    validator <- broker |> Memory.Storage.Validator()
+
+    invalid.table <- 'InvalidTable'
+    
+    expected.error <- 'Memory Storage Provider Error: InvalidTable is not a valid table.'
+    
+    # Then
+    invalid.table |> validator[['IsValidTable']]() |> expect.error(expected.error)
+  })
+})
