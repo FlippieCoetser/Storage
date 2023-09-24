@@ -12,6 +12,13 @@ describe("When operations <- configuration |> Memory.Storage.Broker()",{
     # Then
     operations |> expect.list()
   })
+  it("then operations contains Seed operation",{
+    # When
+    operations <- Memory.Storage.Broker()
+
+    # Then
+    operations[['Seed']] |> expect.exist()
+  })
   it("then operations contains ExecuteQuery operation",{
     # When
     operations <- Memory.Storage.Broker()
@@ -56,6 +63,25 @@ describe("When operations <- configuration |> Memory.Storage.Broker()",{
   })
 })
 
+describe("when entities |> operation[['Seed']](table)",{
+  it("then entities are inserted into table in memory",{
+    # Given
+    operation <- configuration |> Memory.Storage.Broker()
+
+    table <- 'Todo'
+
+    seed.entities     <- Todo.Mock.Data
+    expected.entities <- seed.entities
+
+    # When
+    seed.entities |> operation[['Seed']](table)
+
+    # Then
+    actual.entities <- table |> operation[['Select']]()
+    actual.entities |> expect.equal.data(expected.entities)
+  })
+})
+
 describe("when query |> operation[['ExecuteQuery']]()",{
   it("then an exception is thrown",{
     # Given
@@ -74,7 +100,8 @@ describe("when query |> operation[['ExecuteQuery']]()",{
 describe("when todo |> operation[['Insert']]('Todo')",{
   it("then todo is inserted into memory data",{
     # Given
-    operation <- configuration |> Memory.Storage.Broker(data)
+    operation <- configuration |> Memory.Storage.Broker()
+    Todo.Mock.Data |> operation[['Seed']](table)
 
     new.todo <- data.frame(
       Id     = uuid::UUIDgenerate(),

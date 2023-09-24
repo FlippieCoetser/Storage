@@ -52,9 +52,11 @@ describe("When services <- Todo.Service()",{
 describe("When todo |> service[['Insert']]()",{
   it("then todo is added inserted into memory.storage",{
     # Given
-    storage <- configuration |> Storage.Orchestrator('memory',data)
-    broker  <- storage |> Todo.Broker()
+    storage <- configuration |> Storage.Orchestrator('memory')
 
+    Todo.Mock.Data |> storage[['Seed']]('Todo')
+
+    broker  <- storage |> Todo.Broker()
     service <- broker |> Todo.Service()
 
     new.todo <- data.frame(
@@ -74,9 +76,11 @@ describe("When todo |> service[['Insert']]()",{
   })
   it("then an exception is thrown if todo has no Id",{
     # Given
-    storage <- configuration |> Storage.Orchestrator('memory',data)
-    broker  <- storage |> Todo.Broker()
+    storage <- configuration |> Storage.Orchestrator('memory')
 
+    Todo.Mock.Data |> storage[['Seed']]('Todo')
+
+    broker  <- storage |> Todo.Broker()
     service <- broker |> Todo.Service()
 
     new.todo <- list(
@@ -90,9 +94,11 @@ describe("When todo |> service[['Insert']]()",{
   })
   it("then an exception is thrown if todo has no Task",{
     # Given
-    storage <- configuration |> Storage.Orchestrator('memory',data)
-    broker  <- storage |> Todo.Broker()
+    storage <- configuration |> Storage.Orchestrator('memory')
 
+    Todo.Mock.Data |> storage[['Seed']]('Todo')
+
+    broker  <- storage |> Todo.Broker()
     service <- broker |> Todo.Service()
 
     new.todo <- list(
@@ -106,9 +112,11 @@ describe("When todo |> service[['Insert']]()",{
   })
   it("then an exception is thrown if todo has no Status",{
     # Given
-    storage <- configuration |> Storage.Orchestrator('memory',data)
-    broker  <- storage |> Todo.Broker()
+    storage <- configuration |> Storage.Orchestrator('memory')
 
+    Todo.Mock.Data |> storage[['Seed']]('Todo')
+
+    broker  <- storage |> Todo.Broker()
     service <- broker |> Todo.Service()
 
     new.todo <- list(
@@ -125,9 +133,11 @@ describe("When todo |> service[['Insert']]()",{
 describe("When service[['Select']]()",{
   it("then all todos are returned from memory.storage",{
     # Given
-    storage <- configuration |> Storage.Orchestrator('memory',data)
-    broker  <- storage |> Todo.Broker()
+    storage <- configuration |> Storage.Orchestrator('memory')
 
+    Todo.Mock.Data |> storage[['Seed']]('Todo')
+
+    broker  <- storage |> Todo.Broker()
     service <- broker |> Todo.Service()
 
     expected.todos <- broker[['Select']]()
@@ -143,9 +153,11 @@ describe("When service[['Select']]()",{
 describe("When id |> service[['SelectWhereId']]()",{
   it("then todo is returned from memory.storage",{
     # Given
-    storage <- configuration |> Storage.Orchestrator('memory',data)
-    broker  <- storage |> Todo.Broker()
+    storage <- configuration |> Storage.Orchestrator('memory')
 
+    Todo.Mock.Data |> storage[['Seed']]('Todo')
+
+    broker  <- storage |> Todo.Broker()
     service <- broker |> Todo.Service()
 
     expected.todos <- broker[['Select']]()
@@ -161,9 +173,11 @@ describe("When id |> service[['SelectWhereId']]()",{
   })
   it("then an exception is thrown if Id null",{
     # Given
-    storage <- configuration |> Storage.Orchestrator('memory',data)
-    broker  <- storage |> Todo.Broker()
+    storage <- configuration |> Storage.Orchestrator('memory')
 
+    Todo.Mock.Data |> storage[['Seed']]('Todo')
+
+    broker  <- storage |> Todo.Broker()
     service <- broker |> Todo.Service()
 
     id <- NULL
@@ -176,9 +190,11 @@ describe("When id |> service[['SelectWhereId']]()",{
 describe("When todo |> service[['Update']]()",{
   it("then todo is updated in memory.storage",{
     # Given
-    storage <- configuration |> Storage.Orchestrator('memory',data)
-    broker  <- storage |> Todo.Broker()
+    storage <- configuration |> Storage.Orchestrator('memory')
 
+    Todo.Mock.Data |> storage[['Seed']]('Todo')
+
+    broker  <- storage |> Todo.Broker()
     service <- broker |> Todo.Service()
 
     expected.todos <- broker[['Select']]()
@@ -196,9 +212,11 @@ describe("When todo |> service[['Update']]()",{
   })
   it("then an exception is thrown if todo has no Id",{
     # Given
-    storage <- configuration |> Storage.Orchestrator('memory',data)
-    broker  <- storage |> Todo.Broker()
+    storage <- configuration |> Storage.Orchestrator('memory')
 
+    Todo.Mock.Data |> storage[['Seed']]('Todo')
+
+    broker  <- storage |> Todo.Broker()
     service <- broker |> Todo.Service()
 
     todo <- list(
@@ -212,9 +230,11 @@ describe("When todo |> service[['Update']]()",{
   })
   it("then an exception is thrown if todo has not Task",{
     # Given
-    storage <- configuration |> Storage.Orchestrator('memory',data)
-    broker  <- storage |> Todo.Broker()
+    storage <- configuration |> Storage.Orchestrator('memory')
 
+    Todo.Mock.Data |> storage[['Seed']]('Todo')
+
+    broker  <- storage |> Todo.Broker()
     service <- broker |> Todo.Service()
 
     todo <- list(
@@ -231,9 +251,11 @@ describe("When todo |> service[['Update']]()",{
 describe("When id |> service[['Delete']]()",{
   it("then todo is deleted from memory.storage",{
     # Given
-    storage <- configuration |> Storage.Orchestrator('memory',data)
-    broker  <- storage |> Todo.Broker()
+    storage <- configuration |> Storage.Orchestrator('memory')
 
+    Todo.Mock.Data |> storage[['Seed']]('Todo')
+
+    broker  <- storage |> Todo.Broker()
     service <- broker |> Todo.Service()
 
     expected.todos <- broker[['Select']]()
@@ -251,9 +273,11 @@ describe("When id |> service[['Delete']]()",{
   })
   it("then an exception is thrown if Id null",{
     # Given
-    storage <- configuration |> Storage.Orchestrator('memory',data)
-    broker  <- storage |> Todo.Broker()
+    storage <- configuration |> Storage.Orchestrator('memory')
 
+    Todo.Mock.Data |> storage[['Seed']]('Todo')
+
+    broker  <- storage |> Todo.Broker()
     service <- broker |> Todo.Service()
 
     id <- NULL

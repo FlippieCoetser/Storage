@@ -56,14 +56,14 @@ describe("When todo |> operations[['Insert']]()",{
     storage    <- configuration |> Storage.Orchestrator('odbc')
     operations <- storage |> Todo.Broker()
 
-    new.todo <- list(
+    new.todo <- data.frame(
       Id     = uuid::UUIDgenerate(),
       Task   = 'Task',
       Status = 'New'
     )
     id <- new.todo[['Id']]
 
-    expected.todo <- new.todo |> as.data.frame()
+    expected.todo <- new.todo  
 
     # When
     new.todo |> operations[['Insert']]()
@@ -76,8 +76,10 @@ describe("When todo |> operations[['Insert']]()",{
   })
   it("then todo is inserted into memory.storage",{
     # Given
-    storage    <- configuration |> Storage.Orchestrator('memory',data)
+    storage    <- configuration |> Storage.Orchestrator('memory')
     operations <- storage |> Todo.Broker()
+
+    Todo.Mock.Data |> storage[['Seed']]('Todo')
 
     new.todo <- list(
       Id     = uuid::UUIDgenerate(),
@@ -116,8 +118,10 @@ describe("When operations[['Select']]()",{
   })
   it("then all todos in memory.storage is returned",{
     # Given
-    storage    <- configuration |> Storage.Orchestrator('memory',data)
+    storage    <- configuration |> Storage.Orchestrator('memory')
     operations <- storage |> Todo.Broker()
+
+    Todo.Mock.Data |> storage[['Seed']]('Todo')
 
     expected.todos <- 'Todo' |> storage[['Select']](fields)
 
@@ -150,8 +154,10 @@ describe("When id |> operations[['SelectWhereId']]()",{
   })
   it("then todo with id equal id is returned from memory.storage",{
     # Given
-    storage    <- configuration |> Storage.Orchestrator('memory',data)
+    storage    <- configuration |> Storage.Orchestrator('memory')
     operations <- storage |> Todo.Broker()
+
+    Todo.Mock.Data |> storage[['Seed']]('Todo')
 
     existing.todos <- 'Todo' |> storage[['Select']](fields)
     existing.todo  <- existing.todos |> tail(1)
@@ -200,8 +206,10 @@ describe("When todo |> operations[['Update']]()",{
   })
   it("then todo in memory.storage is updated",{
     # Given
-    storage    <- configuration |> Storage.Orchestrator('memory',data)
+    storage    <- configuration |> Storage.Orchestrator('memory')
     operations <- storage |> Todo.Broker()
+
+    Todo.Mock.Data |> storage[['Seed']]('Todo')
 
     new.todo <- list(
       Id     = uuid::UUIDgenerate(),
@@ -257,8 +265,10 @@ describe("When id |> operations[['Delete']]()",{
   })
   it("then todo with is are removed from memory.storage",{
     # Given
-    storage    <- configuration |> Storage.Orchestrator('memory',data)
+    storage    <- configuration |> Storage.Orchestrator('memory')
     operations <- storage |> Todo.Broker()
+
+    Todo.Mock.Data |> storage[['Seed']]('Todo')
 
     new.todo <- list(
       Id     = uuid::UUIDgenerate(),

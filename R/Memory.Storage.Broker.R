@@ -1,7 +1,13 @@
-Memory.Storage.Broker <- \(configuration = NULL, data = NULL) {
+Memory.Storage.Broker <- \(configuration = NULL) {
   exception <- Memory.Storage.Exceptions()
 
+  data <- list()
+
   operations <- list()
+  operations[['Seed']]             <- \(entities, table) {
+    data[[table]] <<- entities
+    return(data.frame())
+  }
   operations[['ExecuteQuery']]     <- \(query) {
     TRUE |> exception[['NoExecuteQuery']]()
   }
