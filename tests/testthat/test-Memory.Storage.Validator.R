@@ -26,6 +26,13 @@ describe("When validators <- Memory.Storage.Validator()",{
    # Then
    validators[['IsNewEntity']] |> expect.exist()
   })
+  it('then validators contains EntityExist validator',{
+   # When
+   validators <- Memory.Storage.Validator()
+   
+   # Then
+   validators[['EntityExist']] |> expect.exist()
+  })
 })
 
 describe("When validate[['NoImplementation']]()",{
