@@ -195,3 +195,30 @@ describe("when entity |> operation[['Update']](table)",{
     id |> operation[['Delete']]('Todo')
   })
 })
+
+describe("when id |> operation[['Delete']](table)",{
+  it("then entity with matching id is deleted from table in memory data if exist",{
+    # Given
+    configuration <- data.frame()
+
+    operation <- configuration |> Memory.Storage.Broker()
+    Todo.Mock.Data |> operation[['Seed']]('Todo')
+
+    new.todo <- data.frame(
+      Id     = uuid::UUIDgenerate(),
+      Task   = 'Task',
+      Status = 'New'
+    )
+    new.todo |> operation[['Insert']]('Todo')
+    id <- new.todo[['Id']]
+
+    expected.todos <- Todo.Mock.Data
+
+    # When
+    id |> operation[['Delete']]('Todo')
+
+    # Then
+    actual.todos <- 'Todo' |> operation[['Select']]()
+    actual.todos |> expect.equal.data(expected.todos)
+  })
+})
