@@ -12,8 +12,6 @@ Memory.Storage.Broker <- \(configuration = NULL) {
     TRUE |> exception[['NoExecuteQuery']]()
   }
   operations[['Insert']]           <- \(entity, table) {
-    match.count <- (data[[table]][['Id']] == entity[['Id']]) |> sum()
-    (match.count != 0) |> exception[['DuplicateId']]()
     data[[table]] <<- data[[table]] |> rbind(entity)
     return(data.frame())
   }
