@@ -70,6 +70,28 @@ describe("When services <- Memory.Storage.Service()",{
   })
 })
 
+describe("When model |> service[['CreateTable']](table)",{
+  it("then table is created in memory",{
+    # Given
+    broker  <- configuration |> Memory.Storage.Broker()
+    service <- broker        |> Memory.Storage.Service()
+
+    model <- data.frame(
+      Id     = character(0),
+      Task   = character(0),
+      Status = character(0)
+    )
+
+    table <- 'Todo'
+
+    # When
+    model |> service[['CreateTable']](table)
+
+    # Then
+    broker[['GetTableNames']]() |> expect.equal(table)
+  })
+})
+
 describe("when entities |> service[['SeedTable']](table)",{
   it("then entities are inserted into table in memory",{
     # Given
