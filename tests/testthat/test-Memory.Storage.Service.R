@@ -12,6 +12,13 @@ describe("When services <- Memory.Storage.Service()",{
     # Then
     services |> expect.list()
   })
+  it("then services contains CreateTable service",{
+    # When
+    services <- Memory.Storage.Service()
+
+    # Then
+    services[['CreateTable']] |> expect.exist()
+  })
   it("then services contains SeedTable service",{
     # When
     services <- Memory.Storage.Service()
