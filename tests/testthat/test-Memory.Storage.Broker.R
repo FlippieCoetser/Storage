@@ -12,6 +12,13 @@ describe("When operations <- configuration |> Memory.Storage.Broker()",{
     # Then
     operations |> expect.list()
   })
+  it('then operations contains CreateTable operation',{
+    # When
+    operations <- Memory.Storage.Broker()
+
+    # Then
+    operations[['CreateTable']] |> expect.exist()
+  })
   it("then operations contains Seed operation",{
     # When
     operations <- Memory.Storage.Broker()
