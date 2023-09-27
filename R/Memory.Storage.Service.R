@@ -2,7 +2,9 @@ Memory.Storage.Service <- \(broker) {
   validate  <- Memory.Storage.Validator(broker)
   
   services <- list()
-  services[['CreateTable']]   <- \() {}
+  services[['CreateTable']]   <- \(model, table) {
+    model |> broker[['CreateTable']](table)
+  }
   services[['SeedTable']]          <- \(data, table) {
     data |> broker[['SeedTable']](table)
   }
