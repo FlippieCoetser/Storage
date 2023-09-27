@@ -5,7 +5,7 @@ Memory.Storage.Service <- \(broker) {
   services[['CreateTable']]   <- \(model, table) {
     model |> broker[['CreateTable']](table)
   }
-  services[['SeedTable']]          <- \(data, table) {
+  services[['SeedTable']]     <- \(data, table) {
     data |> broker[['SeedTable']](table)
   }
   services[['ExecuteQuery']]  <- \(...) {
