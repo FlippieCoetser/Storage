@@ -160,7 +160,7 @@ data <- data.frame(
   Status = c('New','New','Done')
 )
 
-data |> storage[['Seed']](table)
+data |> storage[['SeedTable']](table)
 ```
 
 2. select a `storage` instance based on your desired data store and create a new `Todo.Service` instance

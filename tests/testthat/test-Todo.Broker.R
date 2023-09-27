@@ -79,7 +79,7 @@ describe("When todo |> operations[['Insert']]()",{
     storage    <- configuration |> Storage.Orchestrator('memory')
     operations <- storage |> Todo.Broker()
 
-    Todo.Mock.Data |> storage[['Seed']]('Todo')
+    Todo.Mock.Data |> storage[['SeedTable']]('Todo')
 
     new.todo <- list(
       Id     = uuid::UUIDgenerate(),
@@ -121,7 +121,7 @@ describe("When operations[['Select']]()",{
     storage    <- configuration |> Storage.Orchestrator('memory')
     operations <- storage |> Todo.Broker()
 
-    Todo.Mock.Data |> storage[['Seed']]('Todo')
+    Todo.Mock.Data |> storage[['SeedTable']]('Todo')
 
     expected.todos <- 'Todo' |> storage[['Select']](fields)
 
@@ -157,7 +157,7 @@ describe("When id |> operations[['SelectWhereId']]()",{
     storage    <- configuration |> Storage.Orchestrator('memory')
     operations <- storage |> Todo.Broker()
 
-    Todo.Mock.Data |> storage[['Seed']]('Todo')
+    Todo.Mock.Data |> storage[['SeedTable']]('Todo')
 
     existing.todos <- 'Todo' |> storage[['Select']](fields)
     existing.todo  <- existing.todos |> tail(1)
@@ -209,7 +209,7 @@ describe("When todo |> operations[['Update']]()",{
     storage    <- configuration |> Storage.Orchestrator('memory')
     operations <- storage |> Todo.Broker()
 
-    Todo.Mock.Data |> storage[['Seed']]('Todo')
+    Todo.Mock.Data |> storage[['SeedTable']]('Todo')
 
     new.todo <- list(
       Id     = uuid::UUIDgenerate(),
@@ -268,7 +268,7 @@ describe("When id |> operations[['Delete']]()",{
     storage    <- configuration |> Storage.Orchestrator('memory')
     operations <- storage |> Todo.Broker()
 
-    Todo.Mock.Data |> storage[['Seed']]('Todo')
+    Todo.Mock.Data |> storage[['SeedTable']]('Todo')
 
     new.todo <- list(
       Id     = uuid::UUIDgenerate(),

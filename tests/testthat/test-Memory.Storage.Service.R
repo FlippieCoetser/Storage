@@ -12,12 +12,12 @@ describe("When services <- Memory.Storage.Service()",{
     # Then
     services |> expect.list()
   })
-  it("then services contains Seed service",{
+  it("then services contains SeedTable service",{
     # When
     services <- Memory.Storage.Service()
 
     # Then
-    services[['Seed']] |> expect.exist()
+    services[['SeedTable']] |> expect.exist()
   })
   it("then services contains ExecuteQuery service",{
     # When
@@ -63,7 +63,7 @@ describe("When services <- Memory.Storage.Service()",{
   })
 })
 
-describe("when entities |> service[['Seed']](table)",{
+describe("when entities |> service[['SeedTable']](table)",{
   it("then entities are inserted into table in memory",{
     # Given
     broker  <- configuration |> Memory.Storage.Broker()
@@ -75,7 +75,7 @@ describe("when entities |> service[['Seed']](table)",{
     expected.entities <- seed.entities
 
     # When
-    seed.entities |> service[['Seed']](table)
+    seed.entities |> service[['SeedTable']](table)
 
     # Then
     actual.entities <- table |> broker[['Select']]()
@@ -107,7 +107,7 @@ describe("When entity |> service[['Insert']](table)",{
     broker  <- configuration |> Memory.Storage.Broker()
     service <- broker        |> Memory.Storage.Service()
 
-    Todo.Mock.Data |> service[['Seed']](table)
+    Todo.Mock.Data |> service[['SeedTable']](table)
 
     new.entity <- data.frame(
       Id     = uuid::UUIDgenerate(),
@@ -134,7 +134,7 @@ describe("When entity |> service[['Insert']](table)",{
       Memory.Storage.Broker() |> 
       Memory.Storage.Service()
        
-    Todo.Mock.Data |> service[['Seed']](table)
+    Todo.Mock.Data |> service[['SeedTable']](table)
 
     existing.entity <- Todo.Mock.Data |> tail(1)
 
@@ -151,7 +151,7 @@ describe("When entity |> service[['Insert']](table)",{
       Memory.Storage.Broker() |> 
       Memory.Storage.Service()
 
-    Todo.Mock.Data |> service[['Seed']](table)
+    Todo.Mock.Data |> service[['SeedTable']](table)
 
     new.entity <- data.frame(
       Id     = uuid::UUIDgenerate(),
@@ -174,7 +174,7 @@ describe("When table |> service[['Select']](fields)",{
     broker  <- configuration |> Memory.Storage.Broker()
     service <- broker        |> Memory.Storage.Service()
 
-    Todo.Mock.Data |> service[['Seed']](table)
+    Todo.Mock.Data |> service[['SeedTable']](table)
 
     expected.entities <- Todo.Mock.Data
 
@@ -192,7 +192,7 @@ describe("When table |> service[['Select']](fields)",{
       Memory.Storage.Broker() |> 
       Memory.Storage.Service()
 
-    Todo.Mock.Data |> service[['Seed']](table)
+    Todo.Mock.Data |> service[['SeedTable']](table)
 
     invalid.table <- 'InvalidTable'
 
@@ -209,7 +209,7 @@ describe("When id |> service[['SelectWhereId']](table, fields)",{
     broker  <- configuration |> Memory.Storage.Broker()
     service <- broker        |> Memory.Storage.Service()
 
-    Todo.Mock.Data |> service[['Seed']](table)
+    Todo.Mock.Data |> service[['SeedTable']](table)
 
     existing.entity <- Todo.Mock.Data |> tail(1)
     expected.entity <- existing.entity
@@ -230,7 +230,7 @@ describe("When id |> service[['SelectWhereId']](table, fields)",{
       Memory.Storage.Broker() |> 
       Memory.Storage.Service()
 
-    Todo.Mock.Data |> service[['Seed']](table)
+    Todo.Mock.Data |> service[['SeedTable']](table)
 
     existing.entity <- Todo.Mock.Data |> tail(1)
     id <- existing.entity[['Id']]
@@ -250,7 +250,7 @@ describe("When entity |> service[['Update']](table)",{
     broker  <- configuration |> Memory.Storage.Broker()
     service <- broker        |> Memory.Storage.Service()
 
-    Todo.Mock.Data |> service[['Seed']](table)
+    Todo.Mock.Data |> service[['SeedTable']](table)
 
     new.entity <- data.frame(
       Id     = uuid::UUIDgenerate(),
@@ -281,7 +281,7 @@ describe("When entity |> service[['Update']](table)",{
       Memory.Storage.Broker() |>
       Memory.Storage.Service()
 
-    Todo.Mock.Data |> service[['Seed']](table)
+    Todo.Mock.Data |> service[['SeedTable']](table)
 
     new.entity <- data.frame(
       Id     = uuid::UUIDgenerate(),
@@ -302,7 +302,7 @@ describe("When entity |> service[['Update']](table)",{
       Memory.Storage.Broker() |> 
       Memory.Storage.Service()
 
-    Todo.Mock.Data |> service[['Seed']](table)
+    Todo.Mock.Data |> service[['SeedTable']](table)
 
     entity <- Todo.Mock.Data |> tail(1)
     id     <- entity[['Id']]
@@ -325,7 +325,7 @@ describe("when id |> service[['Delete']](table)",{
     broker  <- configuration |> Memory.Storage.Broker()
     service <- broker        |> Memory.Storage.Service()
 
-    Todo.Mock.Data |> service[['Seed']](table)
+    Todo.Mock.Data |> service[['SeedTable']](table)
 
     new.entity <- data.frame(
       Id     = uuid::UUIDgenerate(),
@@ -352,7 +352,7 @@ describe("when id |> service[['Delete']](table)",{
       Memory.Storage.Broker() |> 
       Memory.Storage.Service()
 
-    Todo.Mock.Data |> service[['Seed']](table)
+    Todo.Mock.Data |> service[['SeedTable']](table)
 
     entity <- Todo.Mock.Data |> tail(1)
     id     <- entity[['Id']]

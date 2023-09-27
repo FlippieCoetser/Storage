@@ -53,7 +53,7 @@ describe("When entity |> validate[['IsNewEntity']](table)",{
     configuration <- data.frame()
 
     broker <- configuration |> Memory.Storage.Broker()
-    Todo.Mock.Data |> broker[['Seed']](table)
+    Todo.Mock.Data |> broker[['SeedTable']](table)
 
     validator <- broker |> Memory.Storage.Validator()
 
@@ -72,7 +72,7 @@ describe("When entity |> validate[['EntityExist']](table)",{
     configuration <- data.frame()
 
     broker <- configuration |> Memory.Storage.Broker()
-    Todo.Mock.Data |> broker[['Seed']](table)
+    Todo.Mock.Data |> broker[['SeedTable']](table)
 
     validator <- broker |> Memory.Storage.Validator()
 
@@ -99,7 +99,7 @@ describe("When table |> validate[['IsValidTable']]()",{
     broker <- configuration |> Memory.Storage.Broker()
 
 
-    Todo.Mock.Data |> broker[['Seed']](table)
+    Todo.Mock.Data |> broker[['SeedTable']](table)
 
     validator <- broker |> Memory.Storage.Validator()
 
@@ -113,7 +113,7 @@ describe("When table |> validate[['IsValidTable']]()",{
     configuration <- data.frame()
 
     broker <- configuration |> Memory.Storage.Broker()
-    Todo.Mock.Data |> broker[['Seed']](table)
+    Todo.Mock.Data |> broker[['SeedTable']](table)
 
     validator <- broker |> Memory.Storage.Validator()
 

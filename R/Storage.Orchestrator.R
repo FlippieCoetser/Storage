@@ -12,8 +12,8 @@ Storage.Orchestrator <- \(configuration, type = 'odbc') {
   service <- services[[type]]()
 
   orchestrations <- list()
-  orchestrations[['Seed']]         <- \(data, table) {
-    data |> service[['Seed']](table)
+  orchestrations[['SeedTable']]         <- \(data, table) {
+    data |> service[['SeedTable']](table)
   }
   orchestrations[['ExecuteQuery']] <- \(query) {
     query |> service[['ExecuteQuery']]()
