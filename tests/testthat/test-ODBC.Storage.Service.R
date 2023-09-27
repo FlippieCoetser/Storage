@@ -19,40 +19,40 @@ describe("When services <- ODBC.Storage.Service()",{
     # Then
     services[["ExecuteQuery"]] |> expect.exist()
   })
-  it("then services contains Insert service",{
+  it("then services contains Add service",{
     # Given
     services <- ODBC.Storage.Service()
 
     # Then
-    services[["Insert"]] |> expect.exist()
+    services[["Add"]] |> expect.exist()
   })
-  it("then services contains Select service",{
+  it("then services contains Retrieve service",{
     # Given
     services <- ODBC.Storage.Service()
 
     # Then
-    services[["Select"]] |> expect.exist()
+    services[["Retrieve"]] |> expect.exist()
   })
-  it("then services contains SelectWhereId service",{
+  it("then services contains RetrieveWhereId service",{
     # Given
     services <- ODBC.Storage.Service()
 
     # Then
-    services[["SelectWhereId"]] |> expect.exist()
+    services[["RetrieveWhereId"]] |> expect.exist()
   })
-  it("then services contains Update service",{
+  it("then services contains Modify service",{
     # Given
     services <- ODBC.Storage.Service()
 
     # Then
-    services[["Update"]] |> expect.exist()
+    services[["Modify"]] |> expect.exist()
   })
-  it("then services contains Delete service",{
+  it("then services contains Remove service",{
     # Given
     services <- ODBC.Storage.Service()
 
     # Then
-    services[["Delete"]] |> expect.exist()
+    services[["Remove"]] |> expect.exist()
   })
 })
 
@@ -94,7 +94,7 @@ describe('When query |> service[["ExecuteQuery"]]()',{
   })
 })
 
-describe("When entity |> service[['Insert']](table)",{
+describe("When entity |> service[['Add']](table)",{
   it("then entity |> broker[['Insert']](table) is called",{
     # Given
     input.entity <- list()
@@ -115,7 +115,7 @@ describe("When entity |> service[['Insert']](table)",{
     expected.table  <- input.table
 
     # When
-    input.entity |> services[['Insert']](input.table)
+    input.entity |> services[['Add']](input.table)
 
     # Then
     actual.entity |> expect.equal(expected.entity)
@@ -123,7 +123,7 @@ describe("When entity |> service[['Insert']](table)",{
   })
 })
 
-describe("When table |> service[['Select']](fields)",{
+describe("When table |> service[['Retrieve']](fields)",{
   it("then table |> broker[['Select']](fields) is called",{
     # Given
     input.fields <- list()
@@ -144,7 +144,7 @@ describe("When table |> service[['Select']](fields)",{
     expected.table  <- input.table
 
     # When
-    input.table |> services[['Select']](input.fields)
+    input.table |> services[['Retrieve']](input.fields)
 
     # Then
     actual.fields |> expect.equal(expected.fields)
@@ -152,7 +152,7 @@ describe("When table |> service[['Select']](fields)",{
   })
 })
 
-describe("When id |> service[['SelectWhereId']](table, fields)",{
+describe("When id |> service[['RetrieveWhereId']](table, fields)",{
   it("then id |> broker[['SelectWhereId']](table, fields) is called",{
     # Given
     input.fields <- list()
@@ -177,7 +177,7 @@ describe("When id |> service[['SelectWhereId']](table, fields)",{
     expected.id     <- input.id
 
     # When
-    input.id |> services[['SelectWhereId']](input.table, input.fields)
+    input.id |> services[['RetrieveWhereId']](input.table, input.fields)
 
     # Then
     actual.fields |> expect.equal(expected.fields)
@@ -186,7 +186,7 @@ describe("When id |> service[['SelectWhereId']](table, fields)",{
   })
 })
 
-describe("When entity |> service[['Update']](table)",{
+describe("When entity |> service[['Modify']](table)",{
   it("then entity |> broker[['Update']](table) is called",{
     # Given
     input.entity <- list()
@@ -207,7 +207,7 @@ describe("When entity |> service[['Update']](table)",{
     expected.table  <- input.table
 
     # When
-    input.entity |> services[['Update']](input.table)
+    input.entity |> services[['Modify']](input.table)
 
     # Then
     actual.entity |> expect.equal(expected.entity)
@@ -215,7 +215,7 @@ describe("When entity |> service[['Update']](table)",{
   })
 })
 
-describe("When id |> service[['Delete']](table)",{
+describe("When id |> service[['Remove']](table)",{
   it("then id |> broker[['Delete']](table) is called",{
     # Given
     input.table <- 'table'
@@ -236,7 +236,7 @@ describe("When id |> service[['Delete']](table)",{
     expected.id    <- input.id
 
     # When
-    input.id |> services[['Delete']](input.table)
+    input.id |> services[['Remove']](input.table)
 
     # Then
     actual.table |> expect.equal(expected.table)

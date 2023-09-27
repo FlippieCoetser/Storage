@@ -69,10 +69,10 @@ describe("When todo |> operations[['Insert']]()",{
     new.todo |> operations[['Insert']]()
 
     # Then
-    actual.todo <- id |> storage[['SelectWhereId']]('Todo', fields)
+    actual.todo <- id |> storage[['RetrieveWhereId']]('Todo', fields)
     actual.todo |> expect.equal(expected.todo)
 
-    id |> storage[['Delete']]('Todo')
+    id |> storage[['Remove']]('Todo')
   })
   it("then todo is inserted into memory.storage",{
     # Given
@@ -94,10 +94,10 @@ describe("When todo |> operations[['Insert']]()",{
     new.todo |> operations[['Insert']]()
 
     # Then
-    actual.todo <- id |> storage[['SelectWhereId']]('Todo', fields)
+    actual.todo <- id |> storage[['RetrieveWhereId']]('Todo', fields)
     actual.todo |> expect.equal.data(expected.todo)
 
-    id |> storage[['Delete']]('Todo')
+    id |> storage[['Remove']]('Todo')
   })
 })
 
@@ -108,7 +108,7 @@ describe("When operations[['Select']]()",{
     storage    <- configuration |> Storage.Orchestrator('odbc')
     operations <- storage |> Todo.Broker()
 
-    expected.todos <- 'Todo' |> storage[['Select']](fields)
+    expected.todos <- 'Todo' |> storage[['Retrieve']](fields)
 
     # When
     actual.todos <- operations[['Select']]()
@@ -123,7 +123,7 @@ describe("When operations[['Select']]()",{
 
     Todo.Mock.Data |> storage[['SeedTable']]('Todo')
 
-    expected.todos <- 'Todo' |> storage[['Select']](fields)
+    expected.todos <- 'Todo' |> storage[['Retrieve']](fields)
 
     # When
     actual.todos <- operations[['Select']]()
@@ -140,11 +140,11 @@ describe("When id |> operations[['SelectWhereId']]()",{
     storage    <- configuration |> Storage.Orchestrator('odbc')
     operations <- storage |> Todo.Broker()
 
-    existing.todos <- 'Todo' |> storage[['Select']](fields)
+    existing.todos <- 'Todo' |> storage[['Retrieve']](fields)
     existing.todo  <- existing.todos |> tail(1)
     existing.id    <- existing.todo[['Id']]
 
-    expected.todo <- existing.id |> storage[['SelectWhereId']]('Todo', fields)
+    expected.todo <- existing.id |> storage[['RetrieveWhereId']]('Todo', fields)
 
     # When
     actual.todo <- existing.id |> operations[['SelectWhereId']]()
@@ -159,11 +159,11 @@ describe("When id |> operations[['SelectWhereId']]()",{
 
     Todo.Mock.Data |> storage[['SeedTable']]('Todo')
 
-    existing.todos <- 'Todo' |> storage[['Select']](fields)
+    existing.todos <- 'Todo' |> storage[['Retrieve']](fields)
     existing.todo  <- existing.todos |> tail(1)
     existing.id    <- existing.todo[['Id']]
 
-    expected.todo <- existing.id |> storage[['SelectWhereId']]('Todo', fields)
+    expected.todo <- existing.id |> storage[['RetrieveWhereId']]('Todo', fields)
 
     # When
     actual.todo <- existing.id |> operations[['SelectWhereId']]()
@@ -186,7 +186,7 @@ describe("When todo |> operations[['Update']]()",{
       Status = 'New'
     )
 
-    new.todo |> storage[['Insert']]('Todo')
+    new.todo |> storage[['Add']]('Todo')
 
     updated.todo <- new.todo |> as.data.frame()
     updated.todo[['Status']] <- 'Done'
@@ -199,10 +199,10 @@ describe("When todo |> operations[['Update']]()",{
     updated.todo |> operations[['Update']]()
 
     # Then
-    actual.todo <- id |> storage[['SelectWhereId']]('Todo', fields)
+    actual.todo <- id |> storage[['RetrieveWhereId']]('Todo', fields)
     actual.todo |> expect.equal(expected.todo)
 
-    id |> storage[['Delete']]('Todo')
+    id |> storage[['Remove']]('Todo')
   })
   it("then todo in memory.storage is updated",{
     # Given
@@ -217,7 +217,7 @@ describe("When todo |> operations[['Update']]()",{
       Status = 'New'
     )
 
-    new.todo |> storage[['Insert']]('Todo')
+    new.todo |> storage[['Add']]('Todo')
 
     updated.todo <- new.todo |> as.data.frame()
     updated.todo[['Status']] <- 'Done'
@@ -230,10 +230,10 @@ describe("When todo |> operations[['Update']]()",{
     updated.todo |> operations[['Update']]()
 
     # Then
-    actual.todo <- id |> storage[['SelectWhereId']]('Todo', fields)
+    actual.todo <- id |> storage[['RetrieveWhereId']]('Todo', fields)
     actual.todo |> expect.equal.data(expected.todo)
 
-    id |> storage[['Delete']]('Todo')
+    id |> storage[['Remove']]('Todo')
   })
 })
 
@@ -250,7 +250,7 @@ describe("When id |> operations[['Delete']]()",{
       Status = 'New'
     )
 
-    new.todo |> storage[['Insert']]('Todo')
+    new.todo |> storage[['Add']]('Todo')
 
     id <- new.todo[['Id']]
 
@@ -260,7 +260,7 @@ describe("When id |> operations[['Delete']]()",{
     id |> operations[['Delete']]()
 
     # Then
-    actual.count <- id |> storage[['SelectWhereId']]('Todo', fields) |> nrow()
+    actual.count <- id |> storage[['RetrieveWhereId']]('Todo', fields) |> nrow()
     actual.count |> expect.equal(expected.count)
   })
   it("then todo with is are removed from memory.storage",{
@@ -276,7 +276,7 @@ describe("When id |> operations[['Delete']]()",{
       Status = 'New'
     )
 
-    new.todo |> storage[['Insert']]('Todo')
+    new.todo |> storage[['Add']]('Todo')
 
     id <- new.todo[['Id']]
 
@@ -286,7 +286,7 @@ describe("When id |> operations[['Delete']]()",{
     id |> operations[['Delete']]()
 
     # Then
-    actual.count <- id |> storage[['SelectWhereId']]('Todo', fields) |> nrow()
+    actual.count <- id |> storage[['RetrieveWhereId']]('Todo', fields) |> nrow()
     actual.count |> expect.equal(expected.count)
   })
 })

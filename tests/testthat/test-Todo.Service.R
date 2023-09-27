@@ -12,44 +12,44 @@ describe("When services <- Todo.Service()",{
     # Then
     services |> expect.list()
   })
-  it("then services contains Insert service",{
+  it("then services contains Add service",{
     # When
     services <- Todo.Service()
 
     # Then
-    services[['Insert']] |> expect.exist()
+    services[['Add']] |> expect.exist()
   })
-  it("then services contains Select service",{
+  it("then services contains Retrieve service",{
     # When
     services <- Todo.Service()
 
     # Then
-    services[['Select']] |> expect.exist()
+    services[['Retrieve']] |> expect.exist()
   })
-  it("then services contains SelectWhereId service",{
+  it("then services contains RetrieveWhereId service",{
     # When
     services <- Todo.Service()
 
     # Then
-    services[['SelectWhereId']] |> expect.exist()
+    services[['RetrieveWhereId']] |> expect.exist()
   })
-  it("then services contains Update service",{
+  it("then services contains Modify service",{
     # When
     services <- Todo.Service()
 
     # Then
-    services[['Update']] |> expect.exist()
+    services[['Modify']] |> expect.exist()
   })
-  it("then services contains Delete service",{
+  it("then services contains Remove service",{
     # When
     services <- Todo.Service()
 
     # Then
-    services[['Delete']] |> expect.exist()
+    services[['Remove']] |> expect.exist()
   })
 })
 
-describe("When todo |> service[['Insert']]()",{
+describe("When todo |> service[['Add']]()",{
   it("then todo is added inserted into memory.storage",{
     # Given
     storage <- configuration |> Storage.Orchestrator('memory')
@@ -68,7 +68,7 @@ describe("When todo |> service[['Insert']]()",{
     expected.todo <- new.todo
     
     # When
-    new.todo |> service[['Insert']]()
+    new.todo |> service[['Add']]()
 
     # Then
     actual.todo <- new.todo[['Id']] |> broker[['SelectWhereId']]()
@@ -90,7 +90,7 @@ describe("When todo |> service[['Insert']]()",{
     )
 
     # Then
-    new.todo |> service[['Insert']]() |> expect.error()
+    new.todo |> service[['Add']]() |> expect.error()
   })
   it("then an exception is thrown if todo has no Task",{
     # Given
@@ -108,7 +108,7 @@ describe("When todo |> service[['Insert']]()",{
     )
 
     # Then
-    new.todo |> service[['Insert']]() |> expect.error()
+    new.todo |> service[['Add']]() |> expect.error()
   })
   it("then an exception is thrown if todo has no Status",{
     # Given
@@ -126,11 +126,11 @@ describe("When todo |> service[['Insert']]()",{
     )
 
     # Then
-    new.todo |> service[['Insert']]() |> expect.error()
+    new.todo |> service[['Add']]() |> expect.error()
   })
 })
 
-describe("When service[['Select']]()",{
+describe("When service[['Retrieve']]()",{
   it("then all todos are returned from memory.storage",{
     # Given
     storage <- configuration |> Storage.Orchestrator('memory')
@@ -143,14 +143,14 @@ describe("When service[['Select']]()",{
     expected.todos <- broker[['Select']]()
 
     # When
-    actual.todos <- service[['Select']]()
+    actual.todos <- service[['Retrieve']]()
 
     # Then
     actual.todos |> expect.equal.data(expected.todos)
   })
 })
 
-describe("When id |> service[['SelectWhereId']]()",{
+describe("When id |> service[['RetrieveWhereId']]()",{
   it("then todo is returned from memory.storage",{
     # Given
     storage <- configuration |> Storage.Orchestrator('memory')
@@ -166,7 +166,7 @@ describe("When id |> service[['SelectWhereId']]()",{
     id <- expected.todo[['Id']]
 
     # When
-    actual.todo <- id |> service[['SelectWhereId']]()
+    actual.todo <- id |> service[['RetrieveWhereId']]()
 
     # Then
     actual.todo |> expect.equal.data(expected.todo)
@@ -183,11 +183,11 @@ describe("When id |> service[['SelectWhereId']]()",{
     id <- NULL
 
     # Then
-    id |> service[['SelectWhereId']]() |> expect.error()
+    id |> service[['RetrieveWhereId']]() |> expect.error()
   })
 })
 
-describe("When todo |> service[['Update']]()",{
+describe("When todo |> service[['Modify']]()",{
   it("then todo is updated in memory.storage",{
     # Given
     storage <- configuration |> Storage.Orchestrator('memory')
@@ -204,10 +204,10 @@ describe("When todo |> service[['Update']]()",{
     id <- expected.todo[['Id']]
 
     # When
-    expected.todo |> service[['Update']]()
+    expected.todo |> service[['Modify']]()
 
     # Then
-    actual.todo <- id |> service[['SelectWhereId']]()
+    actual.todo <- id |> service[['RetrieveWhereId']]()
     actual.todo |> expect.equal.data(expected.todo)
   })
   it("then an exception is thrown if todo has no Id",{
@@ -226,7 +226,7 @@ describe("When todo |> service[['Update']]()",{
     )
 
     # Then
-    todo |> service[['Update']]() |> expect.error()
+    todo |> service[['Modify']]() |> expect.error()
   })
   it("then an exception is thrown if todo has not Task",{
     # Given
@@ -244,11 +244,11 @@ describe("When todo |> service[['Update']]()",{
     )
 
     # Then
-    todo |> service[['Update']]() |> expect.error()
+    todo |> service[['Modify']]() |> expect.error()
   })
 })
 
-describe("When id |> service[['Delete']]()",{
+describe("When id |> service[['Remove']]()",{
   it("then todo is deleted from memory.storage",{
     # Given
     storage <- configuration |> Storage.Orchestrator('memory')
@@ -265,7 +265,7 @@ describe("When id |> service[['Delete']]()",{
     id <- expected.todo[['Id']]
 
     # When
-    id |> service[['Delete']]()
+    id |> service[['Remove']]()
 
     # Then
     actual.todo <- id |> broker[['SelectWhereId']]()
@@ -283,6 +283,6 @@ describe("When id |> service[['Delete']]()",{
     id <- NULL
 
     # Then
-    id |> service[['Delete']]() |> expect.error()
+    id |> service[['Remove']]() |> expect.error()
   })
 })

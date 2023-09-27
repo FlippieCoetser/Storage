@@ -7,11 +7,11 @@
 A \code{list} of functions:
 \itemize{
 \item \code{ExecuteQuery(query)}
-\item \code{Insert(entity, table)}
-\item \code{Select(fields, table)}
-\item \code{SelectWhereId(fields, table, id)}
-\item \code{Update(entity, table)}
-\item \code{Delete(id, table)}
+\item \code{Add(entity, table)}
+\item \code{Retrieve(table, fields)}
+\item \code{RetrieveWhereId(id, table, fields)}
+\item \code{Modify(entity, table)}
+\item \code{Remove(id, table)}
 }
 }
 \description{

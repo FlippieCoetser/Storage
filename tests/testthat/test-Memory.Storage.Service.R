@@ -12,6 +12,13 @@ describe("When services <- Memory.Storage.Service()",{
     # Then
     services |> expect.list()
   })
+  it("then services contains CreateTable service",{
+    # When
+    services <- Memory.Storage.Service()
+
+    # Then
+    services[['CreateTable']] |> expect.exist()
+  })
   it("then services contains SeedTable service",{
     # When
     services <- Memory.Storage.Service()
@@ -26,40 +33,62 @@ describe("When services <- Memory.Storage.Service()",{
     # Then
     services[['ExecuteQuery']] |> expect.exist()
   })
-  it("then services contains Insert service",{
+  it("then services contains Add service",{
     # When
     services <- Memory.Storage.Service()
 
     # Then
-    services[['Insert']] |> expect.exist()
+    services[['Add']] |> expect.exist()
   })
-  it("then services contains Select service",{
+  it("then services contains Retrieve service",{
     # When
     services <- Memory.Storage.Service()
 
     # Then
-    services[['Select']] |> expect.exist()
+    services[['Retrieve']] |> expect.exist()
   })
-  it("then services contains SelectWhereId service",{
+  it("then services contains RetrieveWhereId service",{
     # When
     services <- Memory.Storage.Service()
 
     # Then
-    services[['SelectWhereId']] |> expect.exist()
+    services[['RetrieveWhereId']] |> expect.exist()
   })
-  it("then services contains Update service",{
+  it("then services contains Modify service",{
     # When
     services <- Memory.Storage.Service()
 
     # Then
-    services[['Update']] |> expect.exist()
+    services[['Modify']] |> expect.exist()
   })
-  it("then services contains Delete service",{
+  it("then services contains Remove service",{
     # When
     services <- Memory.Storage.Service()
 
     # Then
-    services[['Delete']] |> expect.exist()
+    services[['Remove']] |> expect.exist()
+  })
+})
+
+describe("When model |> service[['CreateTable']](table)",{
+  it("then table is created in memory",{
+    # Given
+    broker  <- configuration |> Memory.Storage.Broker()
+    service <- broker        |> Memory.Storage.Service()
+
+    model <- data.frame(
+      Id     = character(0),
+      Task   = character(0),
+      Status = character(0)
+    )
+
+    table <- 'Todo'
+
+    # When
+    model |> service[['CreateTable']](table)
+
+    # Then
+    broker[['GetTableNames']]() |> expect.equal(table)
   })
 })
 
@@ -101,8 +130,8 @@ describe("When query |> services[['ExecuteQuery']]()",{
   })
 })
 
-describe("When entity |> service[['Insert']](table)",{
-  it("then entity is inserted table in data store",{
+describe("When entity |> service[['Add']](table)",{
+  it("then entity is Add table in data store",{
     # Given
     broker  <- configuration |> Memory.Storage.Broker()
     service <- broker        |> Memory.Storage.Service()
@@ -118,7 +147,7 @@ describe("When entity |> service[['Insert']](table)",{
     expected.entity <- new.entity
 
     # When
-    new.entity |> service[['Insert']](table)
+    new.entity |> service[['Add']](table)
 
     # Then
     actual.entity <- new.entity[['Id']] |> broker[['SelectWhereId']](table, fields)
@@ -141,7 +170,7 @@ describe("When entity |> service[['Insert']](table)",{
     expected.error <- "Memory Storage Provider Error: Duplicate Id not allowed."
 
     # Then
-    existing.entity |> service[['Insert']](table) |> expect.error(expected.error)
+    existing.entity |> service[['Add']](table) |> expect.error(expected.error)
   })
   it("then an exception is thrown if table is invalid",{
     # Given
@@ -164,11 +193,11 @@ describe("When entity |> service[['Insert']](table)",{
     expected.error <- "Memory Storage Provider Error: InvalidTable is not a valid table."
 
     # Then
-    new.entity |> service[['Insert']](invalid.table) |> expect.error(expected.error)
+    new.entity |> service[['Add']](invalid.table) |> expect.error(expected.error)
   })
 })
 
-describe("When table |> service[['Select']](fields)",{
+describe("When table |> service[['Retrieve']](fields)",{
   it("then all entities in table in data store is returned",{
     # Given
     broker  <- configuration |> Memory.Storage.Broker()
@@ -179,7 +208,7 @@ describe("When table |> service[['Select']](fields)",{
     expected.entities <- Todo.Mock.Data
 
     # When
-    actual.entities <- table |> service[['Select']](fields)
+    actual.entities <- table |> service[['Retrieve']](fields)
 
     # Then
     actual.entities |> expect.equal.data(expected.entities)
@@ -199,11 +228,11 @@ describe("When table |> service[['Select']](fields)",{
     expected.error <- "Memory Storage Provider Error: InvalidTable is not a valid table."
 
     # Then
-    invalid.table |> service[['Select']](fields) |> expect.error(expected.error)
+    invalid.table |> service[['Retrieve']](fields) |> expect.error(expected.error)
   })
 })
 
-describe("When id |> service[['SelectWhereId']](table, fields)",{
+describe("When id |> service[['RetrieveWhereId']](table, fields)",{
   it("then entity with id in table in data store is returned",{
     # Given
     broker  <- configuration |> Memory.Storage.Broker()
@@ -217,7 +246,7 @@ describe("When id |> service[['SelectWhereId']](table, fields)",{
     id <- existing.entity[['Id']]
 
     # When
-    actual.entity <- id |> service[['SelectWhereId']](table, fields)
+    actual.entity <- id |> service[['RetrieveWhereId']](table, fields)
 
     # Then
     actual.entity |> expect.equal.data(expected.entity)
@@ -240,11 +269,11 @@ describe("When id |> service[['SelectWhereId']](table, fields)",{
     expected.error <- "Memory Storage Provider Error: InvalidTable is not a valid table."
 
     # Then
-    id |> service[['SelectWhereId']](invalid.table, fields) |> expect.error(expected.error)
+    id |> service[['RetrieveWhereId']](invalid.table, fields) |> expect.error(expected.error)
   })
 })
 
-describe("When entity |> service[['Update']](table)",{
+describe("When entity |> service[['Modify']](table)",{
   it("then entity is updated in table in data store",{
     # Given
     broker  <- configuration |> Memory.Storage.Broker()
@@ -267,7 +296,7 @@ describe("When entity |> service[['Update']](table)",{
     expected.entity <- updated.entity
 
     # When
-    updated.entity |> service[['Update']](table)
+    updated.entity |> service[['Modify']](table)
 
     # Then
     actual.entity <- id |> broker[['SelectWhereId']](table, fields)
@@ -292,7 +321,7 @@ describe("When entity |> service[['Update']](table)",{
     expected.error <- "Memory Storage Provider Error: Entity not found."
 
     # Then
-    new.entity |> service[['Update']](table) |> expect.error(expected.error)
+    new.entity |> service[['Modify']](table) |> expect.error(expected.error)
   })
   it("then an exception is thrown if table is invalid",{
     # Given
@@ -315,11 +344,11 @@ describe("When entity |> service[['Update']](table)",{
     invalid.table <- 'InvalidTable'
 
     # Then
-    updated.entity |> service[['Update']](invalid.table) |> expect.error(expected.error)
+    updated.entity |> service[['Modify']](invalid.table) |> expect.error(expected.error)
   })
 })
 
-describe("when id |> service[['Delete']](table)",{
+describe("when id |> service[['Remove']](table)",{
   it("then entity with id in table in data store is deleted",{
     # Given
     broker  <- configuration |> Memory.Storage.Broker()
@@ -339,7 +368,7 @@ describe("when id |> service[['Delete']](table)",{
     expected.rows <- 0
 
     # When
-    id |> service[['Delete']](table)
+    id |> service[['Remove']](table)
 
     # Then
     id |> broker[['SelectWhereId']](table, fields) |> expect.rows(expected.rows)
@@ -362,6 +391,6 @@ describe("when id |> service[['Delete']](table)",{
     expected.error <- "Memory Storage Provider Error: InvalidTable is not a valid table."
 
     # Then
-    id |> service[['Delete']](invalid.table) |> expect.error(expected.error) 
+    id |> service[['Remove']](invalid.table) |> expect.error(expected.error) 
   })
 })  

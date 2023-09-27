@@ -18,20 +18,20 @@ Storage.Orchestrator <- \(configuration, type = 'odbc') {
   orchestrations[['ExecuteQuery']] <- \(query) {
     query |> service[['ExecuteQuery']]()
   }
-  orchestrations[['Insert']]       <- \(entity, table) {
-    entity |> service[['Insert']](table)
+  orchestrations[['Add']]       <- \(entity, table) {
+    entity |> service[['Add']](table)
   }
-  orchestrations[['Select']]       <- \(fields, table) {
-    fields |> service[['Select']](table)
+  orchestrations[['Retrieve']]       <- \(fields, table) {
+    fields |> service[['Retrieve']](table)
   }
-  orchestrations[['SelectWhereId']]<- \(fields, table, id) {
-    fields |> service[['SelectWhereId']](table, id)
+  orchestrations[['RetrieveWhereId']]<- \(fields, table, id) {
+    fields |> service[['RetrieveWhereId']](table, id)
   }
-  orchestrations[['Update']]       <- \(entity, table) {
-    entity |> service[['Update']](table)
+  orchestrations[['Modify']]       <- \(entity, table) {
+    entity |> service[['Modify']](table)
   }
-  orchestrations[['Delete']]       <- \(id, table) {
-    id |> service[['Delete']](table)
+  orchestrations[['Remove']]       <- \(id, table) {
+    id |> service[['Remove']](table)
   }
   return(orchestrations)
 }
