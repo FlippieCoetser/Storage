@@ -4,7 +4,7 @@ Memory.Storage.Broker <- \(configuration = NULL) {
   operations <- list()
   operations[['Seed']]             <- \(entities, table) {
     data[[table]] <<- entities
-    return(data.frame())
+    return(NULL)
   }
   operations[['GetTableNames']]    <- \() {
     data |> names()
