@@ -77,6 +77,27 @@ describe("When operations <- configuration |> Memory.Storage.Broker()",{
   })
 })
 
+describe("When model |> operation[['CreateTable']](table)",{
+  it("then table is created in memory",{
+    # Given
+    operation <- Memory.Storage.Broker()
+
+    model <- data.frame(
+      Id     = character(0),
+      Task   = character(0),
+      Status = character(0)
+    )
+
+    table <- 'Todo'
+
+    # When
+    model |> operation[['CreateTable']](table)
+
+    # Then
+    operation[['GetTableNames']]() |> expect.equal(table)
+  })
+})
+
 describe("when entities |> operation[['Seed']](table)",{
   it("then entities are inserted into table in memory",{
     # Given
