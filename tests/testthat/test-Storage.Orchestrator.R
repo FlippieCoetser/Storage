@@ -26,40 +26,40 @@ describe("When orchestrations <- configuration |> Storage.Orchestrator()",{
     # Then
     orchestrations[['ExecuteQuery']] |> expect.exist()
   })
-  it("then orchestrations contains Insert orchestration",{
+  it("then orchestrations contains Add orchestration",{
     # When
     orchestrations <- configuration |> Storage.Orchestrator()
 
     # Then
-    orchestrations[['Insert']] |> expect.exist()
+    orchestrations[['Add']] |> expect.exist()
   })
-  it("then orchestrations contains Select orchestration",{
+  it("then orchestrations contains Retrieve orchestration",{
     # When
     orchestrations <- configuration |> Storage.Orchestrator()
 
     # Then
-    orchestrations[['Select']] |> expect.exist()
+    orchestrations[['Retrieve']] |> expect.exist()
   })
-  it("then orchestrations contains SelectWhereId orchestration",{
+  it("then orchestrations contains RetrieveWhereId orchestration",{
     # When
     orchestrations <- configuration |> Storage.Orchestrator()
 
     # Then
-    orchestrations[['SelectWhereId']] |> expect.exist()
+    orchestrations[['RetrieveWhereId']] |> expect.exist()
   })
-  it("then orchestrations contains Update orchestration",{
+  it("then orchestrations contains Modify orchestration",{
     # When
     orchestrations <- configuration |> Storage.Orchestrator()
 
     # Then
-    orchestrations[['Update']] |> expect.exist()
+    orchestrations[['Modify']] |> expect.exist()
   })
-  it("then orchestrations contains Delete orchestration",{
+  it("then orchestrations contains Remove orchestration",{
     # When
     orchestrations <- configuration |> Storage.Orchestrator()
 
     # Then
-    orchestrations[['Delete']] |> expect.exist()
+    orchestrations[['Remove']] |> expect.exist()
   })
 })
 

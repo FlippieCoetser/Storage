@@ -25,19 +25,19 @@ Todo.Broker <- \(storage) {
 
   operations <- list()
   operations[['Insert']]        <- \(todo) {
-    todo |> storage[['Insert']](table)
+    todo |> storage[['Add']](table)
   }
   operations[['Select']]        <- \(...)  {
-    table |> storage[['Select']](fields)
+    table |> storage[['Retrieve']](fields)
   }
   operations[['SelectWhereId']] <- \(id)   {
-    id |> storage[['SelectWhereId']](table, fields)
+    id |> storage[['RetrieveWhereId']](table, fields)
   }
   operations[['Update']]        <- \(todo) {
-    todo |> storage[['Update']](table)
+    todo |> storage[['Modify']](table)
   }
   operations[['Delete']]        <- \(id)   {
-    id |> storage[['Delete']](table)
+    id |> storage[['Remove']](table)
   }
   return(operations)
 }

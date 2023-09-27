@@ -18,11 +18,11 @@ Two utility functions are provided:
 
 Six functions are provided, five of which are common data operations and one function to execute custom queries:
 
-1. `Insert`
-2. `Select`
-3. `SelectWhereId`
-4. `Update`
-5. `Delete`
+1. `Add`
+2. `Retrieve`
+3. `RetrieveWhereId`
+4. `Modify`
+5. `Remove`
 
 Custom data operations can be added using the `ExecuteQuery` function. The `ExecuteQuery` function takes a SQL `query`, passed in as a character data type, and returns a data frame.
 
@@ -30,11 +30,11 @@ Custom data operations can be added using the `ExecuteQuery` function. The `Exec
 
 Five functions are provided:
 
-1. `Insert`
-2. `Select`
-3. `SelectWhereId`
-4. `Update`
-5. `Delete`
+1. `Add`
+2. `Retrieve`
+3. `RetrieveWhereId`
+4. `Modify`
+5. `Remove`
 
 The `Todo.Service` is an example of how to use the `Storage` component. The `Todo.Service` is a simple data service that performs CRUD operations on a `Todo` data model.
 
@@ -169,7 +169,7 @@ data |> storage[['SeedTable']](table)
 todo.service <- storage |> Todo.Broker() |> Todo.Service()
 ```
 
-### Insert Todo
+### Add Todo
 
 1. Create a new `todo`
 
@@ -181,21 +181,21 @@ todo <- data.frame(
 )
 ```
 
-2. Insert the `todo` into the data store
+2. Add the `todo` into the data store
 
 ```r
-todo |> todo.service[['Insert']]()
+todo |> todo.service[['Add']]()
 ```
 
-### Select Todos
+### Retrieve Todos
 
-1. Select all `todos` in the data store
+1. Retrieve all `todos` in the data store
 
 ```r
-todos <- todo.service[['Select']]()
+todos <- todo.service[['Retrieve']]()
 ```
 
-### Select Todo Where Id
+### Retrieve Todo Where Id
 
 1. Use the `todo` created in a previous step and extract its `Id`
 
@@ -203,13 +203,13 @@ todos <- todo.service[['Select']]()
 id   <- todo[['Id']]
 ```
 
-2. Select the `todo` with the extracted `Id`
+2. Retrieve the `todo` with the extracted `Id`
 
 ```r
-todo <- id |> todo.service[['SelectWhereId']]()
+todo <- id |> todo.service[['RetrieveWhereId']]()
 ```
 
-### Update Todo
+### Modify Todo
 
 1. Use the `todo` retrieved in the previous step and update its `Status`
 
@@ -217,13 +217,13 @@ todo <- id |> todo.service[['SelectWhereId']]()
 todo[['Status']] <- "Done"
 ```
 
-2. Update the `todo` in the data store
+2. Modify the `todo` in the data store
 
 ```r
-todo |> todo.service[['Update']]()
+todo |> todo.service[['Modify']]()
 ```
 
-### Delete Todo
+### Remove Todo
 
 1. Use the `todo` retrieved in the previous step and extract its `Id`
 
@@ -231,8 +231,8 @@ todo |> todo.service[['Update']]()
 id <- todo[['Id']]
 ```
 
-2. Delete the `todo` with the extracted `Id`
+2. Remove the `todo` with the extracted `Id`
 
 ```r
-id |> todo.service[['Delete']]()
+id |> todo.service[['Remove']]()
 ```

@@ -16,24 +16,24 @@ Todo.Service <- \(broker) {
   validate <- Todo.Model.Validator()
   
   services <- list()
-  services[['Insert']]        <- \(todo) {
+  services[['Add']]             <- \(todo) {
     todo |> validate[['Todo']]()
     todo |> broker[['Insert']]()
   }
-  services[['Select']]        <- \(...) {
+  services[['Retrieve']]        <- \(...) {
     ... |> broker[['Select']]()
   }
-  services[['SelectWhereId']] <- \(id) {
+  services[['RetrieveWhereId']] <- \(id) {
     # TODO: Extensive id pattern validation.
     # Current validation check for NULL only.
     id |> validate[['Id']]()
     id |> broker[['SelectWhereId']]()
   }
-  services[['Update']]        <- \(todo) {
+  services[['Modify']]          <- \(todo) {
     todo |> validate[['Todo']]()
     todo |> broker[['Update']]()
   }
-  services[['Delete']]        <- \(id) {
+  services[['Remove']]          <- \(id) {
     # TODO: Extensive id pattern validation.
     # Current validation check for NULL only.
     id |> validate[['Id']]()
