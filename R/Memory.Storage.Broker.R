@@ -1,35 +1,39 @@
 Memory.Storage.Broker <- \(configuration = NULL) {
-  data <- list()
+  tables <- list()
 
   operations <- list()
-  operations[['Seed']]             <- \(entities, table) {
-    data[[table]] <<- entities
+  operations[['CreateTable']]   <- \(model, table) {
+    tables[[table]] <<- model
+    return(NULL)
+   }
+  operations[['SeedTable']]     <- \(data, table) {
+    tables[[table]] <<- tables[[table]] |> rbind(data)
     return(NULL)
   }
-  operations[['GetTableNames']]    <- \() {
-    data |> names()
+  operations[['GetTableNames']] <- \() {
+    tables |> names()
   }
-  operations[['ExecuteQuery']]     <- \(query) {
+  operations[['ExecuteQuery']]  <- \(query) {
     return(data.frame())
   }
-  operations[['Insert']]           <- \(entity, table) {
-    data[[table]] <<- data[[table]] |> rbind(entity)
+  operations[['Insert']]        <- \(entity, table) {
+    tables[[table]] <<- tables[[table]] |> rbind(entity)
     return(data.frame())
   }
-  operations[['Select']]           <- \(table, fields = NULL) {
-    data[[table]]
+  operations[['Select']]        <- \(table, fields = NULL) {
+    tables[[table]]
   }
-  operations[['SelectWhereId']]    <- \(id, table, fields = NULL) {
-    data[[table]][data[[table]][['Id']] == id,]
+  operations[['SelectWhereId']] <- \(id, table, fields = NULL) {
+    tables[[table]][tables[[table]][['Id']] == id,]
   }
-  operations[['Update']]           <- \(entity, table) {
-    condition <- data[[table]][['Id']] == entity[['Id']]
-    data[[table]][condition,] <<- entity
+  operations[['Update']]        <- \(entity, table) {
+    condition <- tables[[table]][['Id']] == entity[['Id']]
+    tables[[table]][condition,] <<- entity
     return(data.frame())      
   }
-  operations[['Delete']]           <- \(id, table) {
-    condition <- data[[table]][['Id']] != id
-    data[[table]] <<- data[[table]][condition,]
+  operations[['Delete']]        <- \(id, table) {
+    condition <- tables[[table]][['Id']] != id
+    tables[[table]] <<- tables[[table]][condition,]
     return(data.frame())
   }
   return(operations)  
