@@ -6,11 +6,11 @@
 \value{
 A \code{list} of functions:
 \itemize{
-\item \code{Insert(todo)}
-\item \code{Select(...)}
-\item \code{SelectWhereId(id)}
-\item \code{Update(todo)}
-\item \code{Delete(id)}
+\item \code{Add(todo)}
+\item \code{Retrieve(...)}
+\item \code{RetrieveWhereId(id)}
+\item \code{Modify(todo)}
+\item \code{Remove(id)}
 }
 }
 \description{

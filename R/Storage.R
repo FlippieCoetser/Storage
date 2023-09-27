@@ -6,11 +6,11 @@
 #' @usage NULL
 #' @returns A `list` of functions: 
 #' * `ExecuteQuery(query)`
-#' * `Insert(entity, table)`
-#' * `Select(fields, table)`
-#' * `SelectWhereId(fields, table, id)`
-#' * `Update(entity, table)`
-#' * `Delete(id, table)`
+#' * `Add(entity, table)`
+#' * `Retrieve(table, fields)`
+#' * `RetrieveWhereId(id, table, fields)`
+#' * `Modify(entity, table)`
+#' * `Remove(id, table)`
 #' @export
 Storage <- Storage.Orchestrator
 

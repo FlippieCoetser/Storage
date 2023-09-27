@@ -6,11 +6,11 @@
 #' 
 #' @usage NULL
 #' @returns A `list` of functions: 
-#' * `Insert(todo)`
-#' * `Select(...)`
-#' * `SelectWhereId(id)`
-#' * `Update(todo)`
-#' * `Delete(id)`
+#' * `Add(todo)`
+#' * `Retrieve(...)`
+#' * `RetrieveWhereId(id)`
+#' * `Modify(todo)`
+#' * `Remove(id)`
 #' @export
 Todo.Service <- \(broker) {
   validate <- Todo.Model.Validator()
