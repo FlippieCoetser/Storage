@@ -1,39 +1,39 @@
 Memory.Storage.Broker <- \(configuration = NULL) {
-  data <- list()
+  tables <- list()
 
   operations <- list()
   operations[['CreateTable']]      <- \(model, table) {
-    data[[table]] <<- model
+    tables[[table]] <<- model
     return(NULL)
    }
   operations[['Seed']]             <- \(entities, table) {
-    data[[table]] <<- entities
+    tables[[table]] <<- entities
     return(NULL)
   }
   operations[['GetTableNames']]    <- \() {
-    data |> names()
+    tables |> names()
   }
   operations[['ExecuteQuery']]     <- \(query) {
     return(data.frame())
   }
   operations[['Insert']]           <- \(entity, table) {
-    data[[table]] <<- data[[table]] |> rbind(entity)
+    tables[[table]] <<- tables[[table]] |> rbind(entity)
     return(data.frame())
   }
   operations[['Select']]           <- \(table, fields = NULL) {
-    data[[table]]
+    tables[[table]]
   }
   operations[['SelectWhereId']]    <- \(id, table, fields = NULL) {
-    data[[table]][data[[table]][['Id']] == id,]
+    tables[[table]][tables[[table]][['Id']] == id,]
   }
   operations[['Update']]           <- \(entity, table) {
-    condition <- data[[table]][['Id']] == entity[['Id']]
-    data[[table]][condition,] <<- entity
+    condition <- tables[[table]][['Id']] == entity[['Id']]
+    tables[[table]][condition,] <<- entity
     return(data.frame())      
   }
   operations[['Delete']]           <- \(id, table) {
-    condition <- data[[table]][['Id']] != id
-    data[[table]] <<- data[[table]][condition,]
+    condition <- tables[[table]][['Id']] != id
+    tables[[table]] <<- tables[[table]][condition,]
     return(data.frame())
   }
   return(operations)  
