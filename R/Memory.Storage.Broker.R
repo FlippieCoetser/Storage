@@ -6,8 +6,8 @@ Memory.Storage.Broker <- \(configuration = NULL) {
     tables[[table]] <<- model
     return(NULL)
    }
-  operations[['Seed']]             <- \(entities, table) {
-    tables[[table]] <<- entities
+  operations[['Seed']]             <- \(data, table) {
+    tables[[table]] <<- data
     return(NULL)
   }
   operations[['GetTableNames']]    <- \() {
