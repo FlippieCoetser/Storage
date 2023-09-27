@@ -2,6 +2,7 @@ Memory.Storage.Broker <- \(configuration = NULL) {
   data <- list()
 
   operations <- list()
+  operations[['CreateTable']]      <- \() { }
   operations[['Seed']]             <- \(entities, table) {
     data[[table]] <<- entities
     return(NULL)
