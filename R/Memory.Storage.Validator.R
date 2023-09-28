@@ -2,6 +2,7 @@ Memory.Storage.Validator <- \(broker = NULL) {
   exception <- Memory.Storage.Exceptions()
 
   validators <- list()
+  validators[['Model']]            <- \() {}
   validators[['NoImplementation']] <- \() {
     TRUE |> exception[['NoExecuteQuery']]()
   }
