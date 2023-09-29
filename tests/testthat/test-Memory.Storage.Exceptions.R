@@ -155,3 +155,28 @@ describe("When input |> exception[['EntityNotFound']]()", {
     input |> exception[['EntityNotFound']]() |> expect.error(expected.error)
   })
 })
+
+describe("When input |> exception[['InvalidType']]()", {
+  it("then no exception is thrown if input is FALSE", {
+    # Given
+    exception <- Memory.Storage.Exceptions()
+    
+    # When
+    input <- FALSE
+    
+    # Then
+    input |> exception[['InvalidType']]() |> expect.no.error()
+  })
+  it("then an exception is thrown if input is TRUE", {
+    # Given
+    exception <- Memory.Storage.Exceptions()
+    
+    type <- 'data.frame'
+    expected.error <- paste0("Memory Storage Provider Error: Invalid Type. Expected '", type,"'.")
+    # When
+    input <- TRUE
+    
+    # Then
+    input |> exception[['InvalidType']](type) |> expect.error(expected.error)
+  })
+})
