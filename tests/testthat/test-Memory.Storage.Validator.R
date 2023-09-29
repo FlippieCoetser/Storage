@@ -640,6 +640,55 @@ describe("When entity |> validate[['Entity']]()",{
   })
 })
 
+describe("When id |> validate[['Id']]()",{
+  it("then an exception is thrown if id is NULL",{
+    # Given
+    validate <- Memory.Storage.Validator()
+    
+    expected.error <- "Memory Storage Provider Error: id is NULL."
+    
+    # When
+    input <- NULL 
+    
+    # Then
+    input |> validate[['Id']]() |> expect.error(expected.error)
+  })
+  it("then an exception is thrown if id is not characters",{
+    # Given
+    validate <- Memory.Storage.Validator()
+    
+    expected.error <- "Memory Storage Provider Error: Invalid Type. Expected 'character'."
+    
+    # When
+    input <- 1
+    
+    # Then
+    input |> validate[['Id']]() |> expect.error(expected.error)
+  })
+  it("then an exception is thrown if id is invalid identifier",{
+    # Given
+    validate <- Memory.Storage.Validator()
+    
+    expected.error <- "Memory Storage Provider Error: Invalid identifier. Expected id to be a valid identifier."
+    
+    # When
+    input <- ''
+    
+    # Then
+    input |> validate[['Id']]() |> expect.error(expected.error)
+  })
+  it('then no exception is thrown if id is valid',{
+    # Given
+    validate <- Memory.Storage.Validator()
+    
+    # When
+    input <- uuid::UUIDgenerate()
+    
+    # Then
+    input |> validate[['Id']]() |> expect.no.error()
+  })
+})
+
 describe("When id |> validate[['Identifier']](name)",{
   it('then no exception is thrown if id is a valid unique identifier',{
     # Given
