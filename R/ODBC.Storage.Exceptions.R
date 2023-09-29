@@ -79,7 +79,11 @@ ODBC.Storage.Exceptions <- \() {
       stop('Query is null. Provide a Query.', call. = FALSE)
     } 
   }
-  exceptions[['InvalidType']]        <- \() {}
+  exceptions[['InvalidType']]       <- \(invoke, type) {
+    if(invoke) {
+      stop("ODBC Storage Provider Error: Invalid Type. Expected '", type,"'.", call. = FALSE)
+    }
+  }
   exceptions[['InvalidRows']]        <- \() {}
   exceptions[['InvalidIdentifier']]  <- \() {}
   return(exceptions)
