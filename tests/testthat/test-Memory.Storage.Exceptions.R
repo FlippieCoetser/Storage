@@ -46,7 +46,6 @@ describe("When exceptions <- Memory.Storage.Exceptions()",{
     
     # Then
     exceptions[['InvalidType']] |> expect.exist()
-    })
   })
 })
 
