@@ -19,6 +19,13 @@ describe("When validators <- ODBC.Storage.Validator()",{
     # Then
     validators[["Query"]] |> expect.exist()
   })
+  it('then validators contains Fields validator',{
+    # Given
+    validators <- ODBC.Storage.Validator()
+
+    # Then
+    validators[["Fields"]] |> expect.exist()
+  })
   it('then validators contains Entity validator',{
     # Given
     validators <- ODBC.Storage.Validator()
