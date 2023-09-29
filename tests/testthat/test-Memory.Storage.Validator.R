@@ -498,4 +498,16 @@ describe("When data |> validate[['Data']]()",{
     # Then
     input |> validate[['Data']]() |> expect.error(expected.error)
   })
+  it('then an exception is thrown if data is empty data.frame',{
+    # Given
+    validate <- Memory.Storage.Validator()
+    
+    expected.error <- "Memory Storage Provider Error: Invalid number of rows. Expected >0 rows."
+    
+    # When
+    input <- data.frame()
+    
+    # Then
+    input |> validate[['Data']]() |> expect.error(expected.error)
+  })
 })
