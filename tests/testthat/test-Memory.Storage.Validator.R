@@ -56,6 +56,33 @@ describe("When validators <- Memory.Storage.Validator()",{
   })
 })
 
+describe("When input |> validate[['NotNULL']](name)",{
+  it("then no exception is thrown if input is not NULL",{
+    # Given
+    validate <- Memory.Storage.Validator()
+    
+    # When
+    name  <- 'input'
+    input <- ''
+    
+    # Then
+    input |> validate[['NotNULL']](name) |> expect.no.error()
+  })
+  it("then an exception is thrown if input is NULL",{
+    # Given
+    validate <- Memory.Storage.Validator()
+
+    name <- 'input'
+    expected.error <- paste0('Memory Storage Provider Error: ',name,' is NULL.')
+    
+    # When
+    input <- NULL 
+    
+    # Then
+    input |> validate[['NotNULL']](name) |> expect.error(expected.error)
+  })
+})
+
 describe("When input |> validate[['IsDataFrame']]()",{
   it("then no exception is thrown if input is a data.frame",{
     # Given
