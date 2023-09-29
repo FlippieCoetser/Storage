@@ -611,6 +611,44 @@ describe("When entity |> service[['Modify']](table)",{
     # Then
     data.frame() |> service[['Modify']](table) |> expect.error(expected.error)
   })
+  it("then an exception is thrown if table is NULL",{
+    # Given
+    configuration <- data.frame()
+ 
+    service <- configuration  |> 
+      Memory.Storage.Broker() |> 
+      Memory.Storage.Service()
+
+    new.entity <- data.frame(
+      Id     = uuid::UUIDgenerate(),
+      Task   = 'Task',
+      Status = 'New'
+    )
+
+    expected.error <- "Memory Storage Provider Error: table is NULL."
+
+    # Then
+    new.entity |> service[['Modify']](NULL) |> expect.error(expected.error)
+  })
+  it("then an exception is thrown if table in not characters",{
+    # Given
+    configuration <- data.frame()
+ 
+    service <- configuration  |> 
+      Memory.Storage.Broker() |> 
+      Memory.Storage.Service()
+
+    new.entity <- data.frame(
+      Id     = uuid::UUIDgenerate(),
+      Task   = 'Task',
+      Status = 'New'
+    )
+
+    expected.error <- "Memory Storage Provider Error: Invalid Type. Expected 'character'."
+
+    # Then
+    new.entity |> service[['Modify']](123) |> expect.error(expected.error)
+  })
   it("then an exception is thrown if entity does not exist",{
     # Given
     configuration <- data.frame()
