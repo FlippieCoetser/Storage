@@ -94,6 +94,10 @@ ODBC.Storage.Exceptions <- \() {
       stop('ODBC Storage Provider Error: Invalid identifier. Expected ', name, ' to be a valid identifier.', call. = FALSE)
     }
   }
-  exceptions[['IsNULL']]             <- \() {}
+  exceptions[['IsNULL']]             <- \(invoke, variable) {
+    if(invoke) {
+      stop('ODBC Storage Provider Error: ',variable,' is NULL.', call. = FALSE)
+    }
+  }
   return(exceptions)
 }
