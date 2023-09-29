@@ -90,6 +90,51 @@ describe("When model |> service[['CreateTable']](table)",{
     # Then
     broker[['GetTableNames']]() |> expect.equal(table)
   })
+  it('then an exception is thrown if model is NULL',{
+    # Given
+    configuration <- data.frame()
+
+    service <- configuration |> 
+      Memory.Storage.Broker() |> 
+      Memory.Storage.Service()
+
+    model <- NULL
+
+    expected.error <- "Memory Storage Provider Error: Model is NULL."
+
+    # Then
+    model |> service[['CreateTable']](table) |> expect.error(expected.error)
+  })
+  it('then an exception is thrown if model is not data.frame',{
+    # Given
+    configuration <- data.frame()
+
+    service <- configuration |> 
+      Memory.Storage.Broker() |> 
+      Memory.Storage.Service()
+
+    model <- list()
+
+    expected.error <- "Memory Storage Provider Error: Invalid Type. Expected 'data.frame'."
+
+    # Then
+    model |> service[['CreateTable']](table) |> expect.error(expected.error)
+  })
+  it('then an exception if thrown if model is not empty data.frame',{
+    # Given
+    configuration <- data.frame()
+
+    service <- configuration |> 
+      Memory.Storage.Broker() |> 
+      Memory.Storage.Service()
+
+    model <- data.frame(Id =  '123')
+
+    expected.error <- "Memory Storage Provider Error: Invalid number of rows. Expected 0 rows."
+
+    # Then
+    model |> service[['CreateTable']](table) |> expect.error(expected.error)
+  })
 })
 
 describe("when entities |> service[['SeedTable']](table)",{
