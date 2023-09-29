@@ -10,6 +10,7 @@ Memory.Storage.Validator <- \(broker = NULL) {
     input |> is.data.frame() |> isFALSE() |> exception[['InvalidType']]('data.frame')
     return(input)
   }
+  validators[['IsEmpty']]          <- \() {}
   validators[['Model']]            <- \(model) {
     model |> validators[['NotNULL']]('Model')
     model |> validators[['IsDataFrame']]()
