@@ -49,6 +49,31 @@ describe("When validators <- Memory.Storage.Validator()",{
   })
 })
 
+describe("When input |> validate[['IsDataFrame']]()",{
+  it("then no exception is thrown if input is a data.frame",{
+    # Given
+    validate <- Memory.Storage.Validator()
+    
+    # When
+    input <- data.frame()
+ 
+    # Then
+    input |> validate[['IsDataFrame']]() |> expect.no.error()
+  })
+  it("then an exception is thrown if input is NULL",{
+    # Given
+    validate <- Memory.Storage.Validator()
+    
+    expected.error <- "Memory Storage Provider Error: Invalid Type. Expected 'data.frame'."
+    
+    # When
+    input <- list()
+    
+    # Then
+    input |> validate[['IsDataFrame']]() |> expect.error(expected.error)
+  })
+})
+
 describe("When validate[['NoImplementation']]()",{
   it("then an exceptions is thrown",{
     # Given
