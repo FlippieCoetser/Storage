@@ -5,10 +5,12 @@ Memory.Storage.Service <- \(broker) {
   services[['CreateTable']]     <- \(model, table) {
     model |> validate[['Model']]()
     table |> validate[['Table']]()
-    
+
     model |> broker[['CreateTable']](table)
   }
   services[['SeedTable']]       <- \(data, table) {
+    data |> validate[['Data']]()
+    
     data |> broker[['SeedTable']](table)
   }
   services[['ExecuteQuery']]    <- \(...) {
