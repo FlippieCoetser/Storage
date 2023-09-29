@@ -1,7 +1,8 @@
 ODBC.Storage.Validator <- \() {
   exception <- ODBC.Storage.Exceptions()
   validators <- list()
-  validators[['Query']] <- \(query) {
+  validators[['Entity']] <- \() {}
+  validators[['Query']]  <- \(query) {
     query |> is.null() |> exception[['QueryIsNull']]()
     return(query)
   }
