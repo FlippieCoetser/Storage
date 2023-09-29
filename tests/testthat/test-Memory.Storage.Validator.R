@@ -132,6 +132,31 @@ describe("When input |> validate[['NotNULL']](name)",{
   })
 })
 
+describe("When input |> validate[['NotEmpty']]()",{
+  it("then no exception is thrown if input is not empty",{
+    # Given
+    validate <- Memory.Storage.Validator()
+    
+    # When
+    input <- data.frame(Id = '123')
+    
+    # Then
+    input |> validate[['NotEmpty']]() |> expect.no.error()
+  })
+  it("then an exception is thrown if input is empty",{
+    # Given
+    validate <- Memory.Storage.Validator()
+    
+    expected.error <- 'Memory Storage Provider Error: Invalid number of rows. Expected >0 rows.'
+    
+    # When
+    input <- data.frame()
+    
+    # Then
+    input |> validate[['NotEmpty']]() |> expect.error(expected.error)
+  })
+})
+
 describe("When input |> validate[['IsDataFrame']]()",{
   it("then no exception is thrown if input is a data.frame",{
     # Given
