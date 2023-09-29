@@ -349,7 +349,7 @@ describe("When model |> validate[['Model']]()",{
     validate <- Memory.Storage.Validator()
     
     variable <- 'Model'
-    expected.error <- 'Memory Storage Provider Error: Model is NULL.'
+    expected.error <- 'Memory Storage Provider Error: model is NULL.'
     
     # When
     input.model <- NULL

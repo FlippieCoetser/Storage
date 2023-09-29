@@ -4,7 +4,7 @@ Memory.Storage.Validator <- \(broker = NULL) {
   validators <- list()
   validators[['Model']]            <- \(model) {
     model |> 
-      validators[['NotNULL']]('Model') |>
+      validators[['NotNULL']]('model') |>
       validators[['IsDataFrame']]()    |>
       validators[['IsEmpty']]()
   }
