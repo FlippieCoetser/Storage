@@ -40,6 +40,7 @@ Memory.Storage.Service <- \(broker) {
   }
   services[['Modify']]          <- \(entity, table) {
     entity |> validate[['Entity']]()
+    table  |> validate[['Table']]()
     
     table |> validate[['IsValidTable']]()
 
