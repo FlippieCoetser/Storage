@@ -18,6 +18,7 @@ Memory.Storage.Validator <- \(broker = NULL) {
     model |> validators[['NotNULL']]('Model')
     model |> validators[['IsDataFrame']]()
     model |> validators[['IsEmpty']]()
+    return(model)
   }
   validators[['NoImplementation']] <- \() {
     TRUE |> exception[['NoExecuteQuery']]()
