@@ -385,16 +385,15 @@ describe("When model |> validate[['Model']]()",{
 })
 
 describe("When table |> validate[['Table']]()",{
-  it("then no exception is thrown if table is not NULL",{
+  it("then no exception if thrown if table is valid",{
     # Given
     validate <- Memory.Storage.Validator()
     
     # When
-    input.table <- list()
-    input.table[['table']] <- 'test'  
+    input <- 'test'  
     
     # Then
-    input.table |> validate[['Table']]() |> expect.no.error()
+    input |> validate[['Table']]() |> expect.no.error()
   })
   it("then an exception is thrown if table is NULL",{
     # Given
@@ -404,6 +403,18 @@ describe("When table |> validate[['Table']]()",{
     
     # When
     input <- NULL 
+    
+    # Then
+    input |> validate[['Table']]() |> expect.error(expected.error)
+  })
+  it('then an exception if thrown if table is not characters',{
+    # Given
+    validate <- Memory.Storage.Validator()
+    
+    expected.error <- "Memory Storage Provider Error: Invalid Type. Expected 'character'."
+    
+    # When
+    input <- 1
     
     # Then
     input |> validate[['Table']]() |> expect.error(expected.error)
