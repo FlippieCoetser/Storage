@@ -197,6 +197,54 @@ describe("when entities |> service[['SeedTable']](table)",{
     actual.entities <- table |> broker[['Select']]()
     actual.entities |> expect.equal.data(expected.entities)
   })
+  it("then an exception is thrown if data is NULL",{
+    # Given
+    configuration <- data.frame()
+
+    service <- configuration |> 
+      Memory.Storage.Broker() |> 
+      Memory.Storage.Service()
+
+    table <- 'Todo'
+    seed.entities  <- NULL
+
+    expected.error <- "Memory Storage Provider Error: data is NULL."
+
+    # Then
+    seed.entities |> service[['SeedTable']](table) |> expect.error(expected.error)
+  })
+  it('then an exception is thrown if data is not data.frame',{
+    # Given
+    configuration <- data.frame()
+
+    service <- configuration |> 
+      Memory.Storage.Broker() |> 
+      Memory.Storage.Service()
+
+    table <- 'Todo'
+    seed.entities  <- list()
+
+    expected.error <- "Memory Storage Provider Error: Invalid Type. Expected 'data.frame'."
+
+    # Then
+    seed.entities |> service[['SeedTable']](table) |> expect.error(expected.error)
+  })
+  it('then an exception if thrown if data is empty data.frame',{
+    # Given
+    configuration <- data.frame()
+
+    service <- configuration |> 
+      Memory.Storage.Broker() |> 
+      Memory.Storage.Service()
+
+    table <- 'Todo'
+    seed.entities  <- data.frame()
+
+    expected.error <- "Memory Storage Provider Error: Invalid number of rows. Expected >0 rows."
+
+    # Then
+    seed.entities |> service[['SeedTable']](table) |> expect.error(expected.error)
+  })
 })
 
 describe("When query |> services[['ExecuteQuery']]()",{
