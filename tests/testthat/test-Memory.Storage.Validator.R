@@ -284,15 +284,28 @@ describe("When input |> validate[['IsEmpty']]()",{
   })
 })
 
-describe("When validate[['NoImplementation']]()",{
-  it("then an exceptions is thrown",{
+describe("When input |> validate[['NoImplementation']]()",{
+  it('then no exception is thrown if input is FALSE',{
+    # Given
+    validate <- Memory.Storage.Validator()
+    
+    # When
+    input <- FALSE
+    
+    # Then
+    input |> validate[['NoImplementation']]() |> expect.no.error()
+  })
+  it("then an exceptions is thrown if input is TRUE",{
     # Given
     validators <- Memory.Storage.Validator()
     
     expected.error <- 'Memory Storage Provider Error: ExecuteQuery not implemented.'
     
     # When
-    validators[['NoImplementation']]() |> expect.error(expected.error)
+    input <- TRUE
+
+    # Then
+    input |> validators[['NoImplementation']]() |> expect.error(expected.error)
   })
 })
 

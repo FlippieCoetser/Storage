@@ -39,8 +39,8 @@ Memory.Storage.Validator <- \(broker = NULL) {
     input |> nrow() |> (\(x) x != 0)() |> exception[['InvalidRows']](0)
     return(input)
   }
-  validators[['NoImplementation']] <- \() {
-    TRUE |> exception[['NoExecuteQuery']]()
+  validators[['NoImplementation']] <- \(input) {
+    input |> exception[['NoExecuteQuery']]()
   }
   validators[['IsNewEntity']]      <- \(entity, table) {
     match.count <- entity[['Id']] |> broker[['SelectWhereId']](table) |> nrow() 
