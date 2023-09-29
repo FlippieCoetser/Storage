@@ -213,7 +213,7 @@ describe("When input |> exception[['InvalidRows']]()", {
   })
 })
 
-describe("When input |> exception[['IsNULL']]()", {
+describe("When input |> exception[['IsNULL']](variable)", {
   it("then no exception is thrown if input is FALSE", {
     # Given
     exception <- Memory.Storage.Exceptions()
