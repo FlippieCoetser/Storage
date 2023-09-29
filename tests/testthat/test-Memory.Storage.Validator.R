@@ -639,3 +639,33 @@ describe("When entity |> validate[['Entity']]()",{
     input |> validate[['Entity']]() |> expect.no.error()
   })
 })
+
+describe("When id |> validate[['Identifier']](name)",{
+  it('then no exception is thrown if id is a valid unique identifier',{
+    # Given
+    configuration <- data.frame()
+
+    broker <- configuration |> Memory.Storage.Broker()
+    validator <- broker |> Memory.Storage.Validator()
+
+    valid.id <- uuid::UUIDgenerate()
+    
+    # Then
+    valid.id |> validator[['Identifier']]() |> expect.no.error()
+  })
+  it('then an exception is thrown if id is an invalid identifier',{
+    # Given
+    configuration <- data.frame()
+
+    broker <- configuration |> Memory.Storage.Broker()
+    validator <- broker |> Memory.Storage.Validator()
+
+    name       <- 'id'
+    invalid.id <- 'InvalidIdentifier'
+    
+    expected.error <- paste0('Memory Storage Provider Error: Invalid identifier. Expected ',name,' to be a valid identifier.')
+    
+    # Then
+    invalid.id |> validator[['Identifier']](name) |> expect.error(expected.error)
+  })
+})
