@@ -572,6 +572,45 @@ describe("When entity |> service[['Modify']](table)",{
     actual.entity <- id |> broker[['SelectWhereId']](table, fields)
     actual.entity |> expect.equal.data(expected.entity)
   })
+  it("then an exception is thrown if entity is NULL",{
+    # Given
+    configuration <- data.frame()
+ 
+    service <- configuration  |> 
+      Memory.Storage.Broker() |> 
+      Memory.Storage.Service()
+
+    expected.error <- "Memory Storage Provider Error: entity is NULL."
+
+    # Then
+    NULL |> service[['Modify']](table) |> expect.error(expected.error)
+  })
+  it("then an exception is thrown if entity is not data.frame",{
+    # Given
+    configuration <- data.frame()
+ 
+    service <- configuration  |> 
+      Memory.Storage.Broker() |> 
+      Memory.Storage.Service()
+
+    expected.error <- "Memory Storage Provider Error: Invalid Type. Expected 'data.frame'."
+
+    # Then
+    list() |> service[['Modify']](table) |> expect.error(expected.error)
+  })
+  it("then an exception is thrown if entity does not have one row",{
+    # Given
+    configuration <- data.frame()
+ 
+    service <- configuration  |> 
+      Memory.Storage.Broker() |> 
+      Memory.Storage.Service()
+
+    expected.error <- "Memory Storage Provider Error: Invalid number of rows. Expected 1 rows."
+
+    # Then
+    data.frame() |> service[['Modify']](table) |> expect.error(expected.error)
+  })
   it("then an exception is thrown if entity does not exist",{
     # Given
     configuration <- data.frame()
