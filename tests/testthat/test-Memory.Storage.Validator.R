@@ -155,6 +155,19 @@ describe("When input |> validate[['NotEmpty']]()",{
     # Then
     input |> validate[['NotEmpty']]() |> expect.error(expected.error)
   })
+  it("then input is returned if input is not empty",{
+    # Given
+    validate <- Memory.Storage.Validator()
+    
+    input    <- data.frame(Id = '123')
+    expected <- input
+    
+    # When
+    actual <- input |> validate[['NotEmpty']]()
+    
+    # Then
+    actual |> expect.equal(expected)
+  })
 })
 
 describe("When input |> validate[['IsDataFrame']]()",{
