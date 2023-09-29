@@ -47,6 +47,13 @@ describe("When exceptions <- Memory.Storage.Exceptions()",{
     # Then
     exceptions[['InvalidType']] |> expect.exist()
   })
+  it('then exceptions contains InvalidRows exception',{
+    # When
+    exceptions <- Memory.Storage.Exceptions()
+    
+    # Then
+    exceptions[['InvalidRows']] |> expect.exist()
+  })
 })
 
 describe("When input |> exception[['NoExecuteQuery']]()", {
