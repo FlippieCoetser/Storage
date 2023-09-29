@@ -26,6 +26,14 @@ describe("When validators <- Memory.Storage.Validator()",{
     # Then
     validators[['IsDataFrame']] |> expect.exist()
   })
+  it('then validators contains IsEmpty validator',{
+    # When
+    validators <- Memory.Storage.Validator()
+    
+    # Then
+    validators[['IsEmpty']] |> expect.exist()
+  })
+  })
   it('then validators contains Model validator',{
     # When
     validators <- Memory.Storage.Validator()
