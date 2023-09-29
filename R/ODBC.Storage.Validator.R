@@ -8,6 +8,7 @@ ODBC.Storage.Validator <- \() {
   validators[['IsCharacters']] <- \() {}
   validators[['IsDataFrame']]  <- \() {}
   validators[['HasOneRow']]    <- \() {}
+  validators[['Identifier']]   <- \() {}
   validators[['Query']]  <- \(query) {
     query |> is.null() |> exception[['QueryIsNull']]()
     return(query)
