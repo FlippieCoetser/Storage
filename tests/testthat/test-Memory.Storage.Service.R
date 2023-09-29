@@ -457,6 +457,32 @@ describe("When table |> service[['Retrieve']](fields)",{
     # Then
     actual.entities |> expect.equal.data(expected.entities)
   })
+  it('then an exception is thrown if table is NULL',{
+    # Given
+    configuration <- data.frame()
+
+    service <- configuration  |> 
+      Memory.Storage.Broker() |> 
+      Memory.Storage.Service()
+
+    expected.error <- "Memory Storage Provider Error: table is NULL."
+
+    # Then
+    NULL |> service[['Retrieve']](fields) |> expect.error(expected.error)
+  })
+  it('then an exception is thrown if table is not characters',{
+    # Given
+    configuration <- data.frame()
+
+    service <- configuration  |> 
+      Memory.Storage.Broker() |> 
+      Memory.Storage.Service()
+
+    expected.error <- "Memory Storage Provider Error: Invalid Type. Expected 'character'."
+
+    # Then
+    123 |> service[['Retrieve']](fields) |> expect.error(expected.error)
+  })
   it("then an exception is thrown if table is invalid",{
     # Given
     configuration <- data.frame()
