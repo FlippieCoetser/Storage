@@ -90,25 +90,192 @@ describe("When model |> service[['CreateTable']](table)",{
     # Then
     broker[['GetTableNames']]() |> expect.equal(table)
   })
+  it('then an exception is thrown if model is NULL',{
+    # Given
+    configuration <- data.frame()
+
+    service <- configuration |> 
+      Memory.Storage.Broker() |> 
+      Memory.Storage.Service()
+
+    model <- NULL
+
+    expected.error <- "Memory Storage Provider Error: model is NULL."
+
+    # Then
+    model |> service[['CreateTable']](table) |> expect.error(expected.error)
+  })
+  it('then an exception is thrown if model is not data.frame',{
+    # Given
+    configuration <- data.frame()
+
+    service <- configuration |> 
+      Memory.Storage.Broker() |> 
+      Memory.Storage.Service()
+
+    model <- list()
+
+    expected.error <- "Memory Storage Provider Error: Invalid Type. Expected 'data.frame'."
+
+    # Then
+    model |> service[['CreateTable']](table) |> expect.error(expected.error)
+  })
+  it('then an exception is thrown if model is not empty data.frame',{
+    # Given
+    configuration <- data.frame()
+
+    service <- configuration |> 
+      Memory.Storage.Broker() |> 
+      Memory.Storage.Service()
+
+    model <- data.frame(Id =  '123')
+
+    expected.error <- "Memory Storage Provider Error: Invalid number of rows. Expected 0 rows."
+
+    # Then
+    model |> service[['CreateTable']](table) |> expect.error(expected.error)
+  })
+  it('then an exception is thrown if table is NULL',{
+    # Given
+    configuration <- data.frame()
+
+    service <- configuration |> 
+      Memory.Storage.Broker() |> 
+      Memory.Storage.Service()
+
+    model <- data.frame(
+      Id     = character(0),
+      Task   = character(0),
+      Status = character(0)
+    )
+
+    table <- NULL
+
+    expected.error <- "Memory Storage Provider Error: table is NULL."
+
+    # Then
+    model |> service[['CreateTable']](table) |> expect.error(expected.error)
+  })
+  it('then an exception is thrown if table is not characters',{
+    # Given
+    configuration <- data.frame()
+
+    service <- configuration |> 
+      Memory.Storage.Broker() |> 
+      Memory.Storage.Service()
+
+    model <- data.frame(
+      Id     = character(0),
+      Task   = character(0),
+      Status = character(0)
+    )
+
+    table <- 123
+
+    expected.error <- "Memory Storage Provider Error: Invalid Type. Expected 'character'."
+
+    # Then
+    model |> service[['CreateTable']](table) |> expect.error(expected.error)
+  })
 })
 
-describe("when entities |> service[['SeedTable']](table)",{
-  it("then entities are inserted into table in memory",{
+describe("when data |> service[['SeedTable']](table)",{
+  it("then data are inserted into table in memory",{
     # Given
     broker  <- configuration |> Memory.Storage.Broker()
     service <- broker        |> Memory.Storage.Service()
 
     table <- 'Todo'
 
-    seed.entities     <- Todo.Mock.Data
-    expected.entities <- seed.entities
+    seed.data     <- Todo.Mock.Data
+    expected.data <- seed.data
 
     # When
-    seed.entities |> service[['SeedTable']](table)
+    seed.data |> service[['SeedTable']](table)
 
     # Then
-    actual.entities <- table |> broker[['Select']]()
-    actual.entities |> expect.equal.data(expected.entities)
+    actual.data <- table |> broker[['Select']]()
+    actual.data |> expect.equal.data(expected.data)
+  })
+  it("then an exception is thrown if data is NULL",{
+    # Given
+    configuration <- data.frame()
+
+    service <- configuration |> 
+      Memory.Storage.Broker() |> 
+      Memory.Storage.Service()
+
+    table <- 'Todo'
+    seed.data  <- NULL
+
+    expected.error <- "Memory Storage Provider Error: data is NULL."
+
+    # Then
+    seed.data |> service[['SeedTable']](table) |> expect.error(expected.error)
+  })
+  it('then an exception is thrown if data is not data.frame',{
+    # Given
+    configuration <- data.frame()
+
+    service <- configuration |> 
+      Memory.Storage.Broker() |> 
+      Memory.Storage.Service()
+
+    table <- 'Todo'
+    seed.data  <- list()
+
+    expected.error <- "Memory Storage Provider Error: Invalid Type. Expected 'data.frame'."
+
+    # Then
+    seed.data |> service[['SeedTable']](table) |> expect.error(expected.error)
+  })
+  it('then an exception is thrown if data is empty data.frame',{
+    # Given
+    configuration <- data.frame()
+
+    service <- configuration |> 
+      Memory.Storage.Broker() |> 
+      Memory.Storage.Service()
+
+    table <- 'Todo'
+    seed.data  <- data.frame()
+
+    expected.error <- "Memory Storage Provider Error: Invalid number of rows. Expected >0 rows."
+
+    # Then
+    seed.data |> service[['SeedTable']](table) |> expect.error(expected.error)
+  })
+  it('then an exception is thrown if table is NULL',{
+    # Given
+    configuration <- data.frame()
+
+    service <- configuration |> 
+      Memory.Storage.Broker() |> 
+      Memory.Storage.Service()
+
+    table <- NULL
+    seed.data  <- Todo.Mock.Data
+
+    expected.error <- "Memory Storage Provider Error: table is NULL."
+
+    # Then
+    seed.data |> service[['SeedTable']](table) |> expect.error(expected.error)
+  })
+  it('then an exception is thrown if table is not characters',{
+    # Given
+    configuration <- data.frame()
+
+    service <- configuration |> 
+      Memory.Storage.Broker() |> 
+      Memory.Storage.Service()
+
+    table <- 123
+    seed.data  <- Todo.Mock.Data
+
+    expected.error <- "Memory Storage Provider Error: Invalid Type. Expected 'character'."
+
+    # Then
+    seed.data |> service[['SeedTable']](table) |> expect.error(expected.error)
   })
 })
 
@@ -155,6 +322,45 @@ describe("When entity |> service[['Add']](table)",{
 
     new.entity[['Id']] |> broker[['Delete']]('Todo')
   })
+  it('then an exception is thrown if entity is NULL',{
+    # Given
+    configuration <- data.frame()
+
+    service <- configuration |> 
+      Memory.Storage.Broker() |> 
+      Memory.Storage.Service()
+
+    expected.error <- "Memory Storage Provider Error: entity is NULL."
+
+    # Then
+    NULL |> service[['Add']](table) |> expect.error(expected.error)
+  })
+  it('then an exception is thrown if entity is not data.frame',{
+    # Given
+    configuration <- data.frame()
+
+    service <- configuration |> 
+      Memory.Storage.Broker() |> 
+      Memory.Storage.Service()
+
+    expected.error <- "Memory Storage Provider Error: Invalid Type. Expected 'data.frame'."
+
+    # Then
+    list() |> service[['Add']](table) |> expect.error(expected.error)
+  })
+  it('then an exception is thrown if entity does not have one row',{
+    # Given
+    configuration <- data.frame()
+
+    service <- configuration |> 
+      Memory.Storage.Broker() |> 
+      Memory.Storage.Service()
+
+    expected.error <- "Memory Storage Provider Error: Invalid number of rows. Expected 1 rows."
+
+    # Then
+    data.frame() |> service[['Add']](table) |> expect.error(expected.error)
+  })
   it("then an exception is thrown if entity is not new",{
     # Given
     configuration <- data.frame()
@@ -171,6 +377,44 @@ describe("When entity |> service[['Add']](table)",{
 
     # Then
     existing.entity |> service[['Add']](table) |> expect.error(expected.error)
+  })
+  it('then an exception is thrown if table is NULL',{
+    # Given
+    configuration <- data.frame()
+
+    service <- configuration |> 
+      Memory.Storage.Broker() |> 
+      Memory.Storage.Service()
+
+    new.entity <- data.frame(
+      Id     = uuid::UUIDgenerate(),
+      Task   = 'Task',
+      Status = 'New'
+    )
+
+    expected.error <- "Memory Storage Provider Error: table is NULL."
+
+    # Then
+    new.entity |> service[['Add']](NULL) |> expect.error(expected.error)
+  })
+  it('then an exception is thrown if table is not characters',{
+    # Given
+    configuration <- data.frame()
+
+    service <- configuration |> 
+      Memory.Storage.Broker() |> 
+      Memory.Storage.Service()
+
+    new.entity <- data.frame(
+      Id     = uuid::UUIDgenerate(),
+      Task   = 'Task',
+      Status = 'New'
+    )
+
+    expected.error <- "Memory Storage Provider Error: Invalid Type. Expected 'character'."
+
+    # Then
+    new.entity |> service[['Add']](123) |> expect.error(expected.error)
   })
   it("then an exception is thrown if table is invalid",{
     # Given
@@ -213,6 +457,32 @@ describe("When table |> service[['Retrieve']](fields)",{
     # Then
     actual.entities |> expect.equal.data(expected.entities)
   })
+  it('then an exception is thrown if table is NULL',{
+    # Given
+    configuration <- data.frame()
+
+    service <- configuration  |> 
+      Memory.Storage.Broker() |> 
+      Memory.Storage.Service()
+
+    expected.error <- "Memory Storage Provider Error: table is NULL."
+
+    # Then
+    NULL |> service[['Retrieve']](fields) |> expect.error(expected.error)
+  })
+  it('then an exception is thrown if table is not characters',{
+    # Given
+    configuration <- data.frame()
+
+    service <- configuration  |> 
+      Memory.Storage.Broker() |> 
+      Memory.Storage.Service()
+
+    expected.error <- "Memory Storage Provider Error: Invalid Type. Expected 'character'."
+
+    # Then
+    123 |> service[['Retrieve']](fields) |> expect.error(expected.error)
+  })
   it("then an exception is thrown if table is invalid",{
     # Given
     configuration <- data.frame()
@@ -250,6 +520,77 @@ describe("When id |> service[['RetrieveWhereId']](table, fields)",{
 
     # Then
     actual.entity |> expect.equal.data(expected.entity)
+  })
+  it('then an exception is thrown if id is NULL',{
+    # Given
+    configuration <- data.frame()
+ 
+    service <- configuration  |> 
+      Memory.Storage.Broker() |> 
+      Memory.Storage.Service()
+
+    expected.error <- "Memory Storage Provider Error: id is NULL."
+
+    # Then
+    NULL |> service[['RetrieveWhereId']](table, fields) |> expect.error(expected.error)
+  })
+  it('then an exception is thrown if id is not characters',{
+    # Given
+    configuration <- data.frame()
+ 
+    service <- configuration  |> 
+      Memory.Storage.Broker() |> 
+      Memory.Storage.Service()
+
+    expected.error <- "Memory Storage Provider Error: Invalid Type. Expected 'character'."
+
+    # Then
+    123 |> service[['RetrieveWhereId']](table, fields) |> expect.error(expected.error)
+  })
+  it('then an exception is thrown if id is invalid identifier',{
+    # Given
+    configuration <- data.frame()
+ 
+    service <- configuration  |> 
+      Memory.Storage.Broker() |> 
+      Memory.Storage.Service()
+
+    expected.error <- "Memory Storage Provider Error: Invalid identifier."
+
+    # Then
+    'InvalidId' |> service[['RetrieveWhereId']](table, fields) |> expect.error(expected.error)
+  })
+  it('then an exception is thrown if table is NULL',{
+    # Given
+    configuration <- data.frame()
+ 
+    service <- configuration  |> 
+      Memory.Storage.Broker() |> 
+      Memory.Storage.Service()
+
+    existing.entity <- Todo.Mock.Data |> tail(1)
+    id <- existing.entity[['Id']]
+
+    expected.error <- "Memory Storage Provider Error: table is NULL."
+
+    # Then
+    id |> service[['RetrieveWhereId']](NULL, fields) |> expect.error(expected.error)
+  })
+  it('then an exception is thrown if table is not characters',{
+    # Given
+    configuration <- data.frame()
+ 
+    service <- configuration  |> 
+      Memory.Storage.Broker() |> 
+      Memory.Storage.Service()
+
+    existing.entity <- Todo.Mock.Data |> tail(1)
+    id <- existing.entity[['Id']]
+
+    expected.error <- "Memory Storage Provider Error: Invalid Type. Expected 'character'."
+
+    # Then
+    id |> service[['RetrieveWhereId']](123, fields) |> expect.error(expected.error)
   })
   it("then an exception is thrown if table is invalid",{
     # Given
@@ -301,6 +642,83 @@ describe("When entity |> service[['Modify']](table)",{
     # Then
     actual.entity <- id |> broker[['SelectWhereId']](table, fields)
     actual.entity |> expect.equal.data(expected.entity)
+  })
+  it("then an exception is thrown if entity is NULL",{
+    # Given
+    configuration <- data.frame()
+ 
+    service <- configuration  |> 
+      Memory.Storage.Broker() |> 
+      Memory.Storage.Service()
+
+    expected.error <- "Memory Storage Provider Error: entity is NULL."
+
+    # Then
+    NULL |> service[['Modify']](table) |> expect.error(expected.error)
+  })
+  it("then an exception is thrown if entity is not data.frame",{
+    # Given
+    configuration <- data.frame()
+ 
+    service <- configuration  |> 
+      Memory.Storage.Broker() |> 
+      Memory.Storage.Service()
+
+    expected.error <- "Memory Storage Provider Error: Invalid Type. Expected 'data.frame'."
+
+    # Then
+    list() |> service[['Modify']](table) |> expect.error(expected.error)
+  })
+  it("then an exception is thrown if entity does not have one row",{
+    # Given
+    configuration <- data.frame()
+ 
+    service <- configuration  |> 
+      Memory.Storage.Broker() |> 
+      Memory.Storage.Service()
+
+    expected.error <- "Memory Storage Provider Error: Invalid number of rows. Expected 1 rows."
+
+    # Then
+    data.frame() |> service[['Modify']](table) |> expect.error(expected.error)
+  })
+  it("then an exception is thrown if table is NULL",{
+    # Given
+    configuration <- data.frame()
+ 
+    service <- configuration  |> 
+      Memory.Storage.Broker() |> 
+      Memory.Storage.Service()
+
+    new.entity <- data.frame(
+      Id     = uuid::UUIDgenerate(),
+      Task   = 'Task',
+      Status = 'New'
+    )
+
+    expected.error <- "Memory Storage Provider Error: table is NULL."
+
+    # Then
+    new.entity |> service[['Modify']](NULL) |> expect.error(expected.error)
+  })
+  it("then an exception is thrown if table in not characters",{
+    # Given
+    configuration <- data.frame()
+ 
+    service <- configuration  |> 
+      Memory.Storage.Broker() |> 
+      Memory.Storage.Service()
+
+    new.entity <- data.frame(
+      Id     = uuid::UUIDgenerate(),
+      Task   = 'Task',
+      Status = 'New'
+    )
+
+    expected.error <- "Memory Storage Provider Error: Invalid Type. Expected 'character'."
+
+    # Then
+    new.entity |> service[['Modify']](123) |> expect.error(expected.error)
   })
   it("then an exception is thrown if entity does not exist",{
     # Given
@@ -372,6 +790,87 @@ describe("when id |> service[['Remove']](table)",{
 
     # Then
     id |> broker[['SelectWhereId']](table, fields) |> expect.rows(expected.rows)
+  })
+  it('then an exception is thrown if id is NULL',{
+    # Given
+    configuration <- data.frame()
+ 
+    service <- configuration  |> 
+      Memory.Storage.Broker() |> 
+      Memory.Storage.Service()
+    
+    expected.error <- "Memory Storage Provider Error: id is NULL."
+
+    # Then
+    NULL |> service[['Remove']](table) |> expect.error(expected.error)
+  })
+  it('then an exception is thrown if id is not characters',{
+    # Given
+    configuration <- data.frame()
+ 
+    service <- configuration  |> 
+      Memory.Storage.Broker() |> 
+      Memory.Storage.Service()
+    
+    expected.error <- "Memory Storage Provider Error: Invalid Type. Expected 'character'."
+
+    # Then
+    123 |> service[['Remove']](table) |> expect.error(expected.error)
+  })
+  it('then an exception is thrown if id is invalid identifier',{
+    # Given
+    configuration <- data.frame()
+ 
+    service <- configuration  |> 
+      Memory.Storage.Broker() |> 
+      Memory.Storage.Service()
+    
+    expected.error <- "Memory Storage Provider Error: Invalid identifier."
+
+    # Then
+    'InvalidId' |> service[['Remove']](table) |> expect.error(expected.error)
+  })
+  it('then an exception is thrown if table is NULL',{
+    # Given
+    broker  <- configuration |> Memory.Storage.Broker()
+    service <- broker        |> Memory.Storage.Service()
+
+    Todo.Mock.Data |> service[['SeedTable']](table)
+
+    new.entity <- data.frame(
+      Id     = uuid::UUIDgenerate(),
+      Task   = 'Task',
+      Status = 'New'
+    )
+
+    new.entity |> broker[['Insert']](table)
+    id <- new.entity[['Id']]
+    
+    expected.error <- "Memory Storage Provider Error: table is NULL."
+
+    # Then
+    id |> service[['Remove']](NULL) |> expect.error(expected.error)
+  })
+  it('then an exception is thrown if table is not characters',{
+    # Given
+    broker  <- configuration |> Memory.Storage.Broker()
+    service <- broker        |> Memory.Storage.Service()
+
+    Todo.Mock.Data |> service[['SeedTable']](table)
+
+    new.entity <- data.frame(
+      Id     = uuid::UUIDgenerate(),
+      Task   = 'Task',
+      Status = 'New'
+    )
+
+    new.entity |> broker[['Insert']](table)
+    id <- new.entity[['Id']]
+    
+    expected.error <- "Memory Storage Provider Error: Invalid Type. Expected 'character'."
+
+    # Then
+    id |> service[['Remove']](123) |> expect.error(expected.error)
   })
   it("then an exception is thrown if table is invalid",{
     # Given

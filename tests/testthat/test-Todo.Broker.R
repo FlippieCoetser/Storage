@@ -81,7 +81,7 @@ describe("When todo |> operations[['Insert']]()",{
 
     Todo.Mock.Data |> storage[['SeedTable']]('Todo')
 
-    new.todo <- list(
+    new.todo <- data.frame(
       Id     = uuid::UUIDgenerate(),
       Task   = 'Task',
       Status = 'New'
@@ -211,7 +211,7 @@ describe("When todo |> operations[['Update']]()",{
 
     Todo.Mock.Data |> storage[['SeedTable']]('Todo')
 
-    new.todo <- list(
+    new.todo <- data.frame(
       Id     = uuid::UUIDgenerate(),
       Task   = 'Task',
       Status = 'New'
@@ -270,7 +270,7 @@ describe("When id |> operations[['Delete']]()",{
 
     Todo.Mock.Data |> storage[['SeedTable']]('Todo')
 
-    new.todo <- list(
+    new.todo <- data.frame(
       Id     = uuid::UUIDgenerate(),
       Task   = 'Task',
       Status = 'New'

@@ -4,7 +4,7 @@ describe('Memory.Storage.Exceptions',{
   })
 })
 
-describe("When exceptions <- Memory.Storage.Exception()",{
+describe("When exceptions <- Memory.Storage.Exceptions()",{
   it("then exceptions is a list",{
     # When
     exceptions <- Memory.Storage.Exceptions()
@@ -39,6 +39,34 @@ describe("When exceptions <- Memory.Storage.Exception()",{
    
    # Then
    exceptions[['InvalidTable']] |> expect.exist()
+  })
+  it('then exceptions contains InvalidType exception',{
+    # When
+    exceptions <- Memory.Storage.Exceptions()
+    
+    # Then
+    exceptions[['InvalidType']] |> expect.exist()
+  })
+  it('then exceptions contains InvalidRows exception',{
+    # When
+    exceptions <- Memory.Storage.Exceptions()
+    
+    # Then
+    exceptions[['InvalidRows']] |> expect.exist()
+  })
+  it('then exceptions contains InvalidIdentifier exception',{
+    # When
+    exceptions <- Memory.Storage.Exceptions()
+    
+    # Then
+    exceptions[['InvalidIdentifier']] |> expect.exist()
+  })
+  it('then exceptions contains IsNULL exception',{
+    # When
+    exceptions <- Memory.Storage.Exceptions()
+    
+    # Then
+    exceptions[['IsNULL']] |> expect.exist()
   })
 })
 
@@ -139,5 +167,106 @@ describe("When input |> exception[['EntityNotFound']]()", {
     
     # Then
     input |> exception[['EntityNotFound']]() |> expect.error(expected.error)
+  })
+})
+
+describe("When input |> exception[['InvalidType']]()", {
+  it("then no exception is thrown if input is FALSE", {
+    # Given
+    exception <- Memory.Storage.Exceptions()
+    
+    # When
+    input <- FALSE
+    
+    # Then
+    input |> exception[['InvalidType']]() |> expect.no.error()
+  })
+  it("then an exception is thrown if input is TRUE", {
+    # Given
+    exception <- Memory.Storage.Exceptions()
+    
+    type <- 'data.frame'
+    expected.error <- paste0("Memory Storage Provider Error: Invalid Type. Expected '", type,"'.")
+    # When
+    input <- TRUE
+    
+    # Then
+    input |> exception[['InvalidType']](type) |> expect.error(expected.error)
+  })
+})
+
+describe("When input |> exception[['InvalidRows']]()", {
+  it("then no exception is thrown if input is FALSE", {
+    # Given
+    exception <- Memory.Storage.Exceptions()
+    
+    # When
+    input <- FALSE
+    
+    # Then
+    input |> exception[['InvalidRows']]() |> expect.no.error()
+  })
+  it("then an exception is thrown if input is TRUE", {
+    # Given
+    exception <- Memory.Storage.Exceptions()
+    
+    count <- 0
+    expected.error <- paste0("Memory Storage Provider Error: Invalid number of rows. Expected ",count," rows.")
+    # When
+    input <- TRUE
+    
+    # Then
+    input |> exception[['InvalidRows']](count) |> expect.error(expected.error)
+  })
+})
+
+describe("When input |> exception[['InvalidIdentifier']](name)", {
+  it("then no exception is thrown if input is FALSE", {
+    # Given
+    exception <- Memory.Storage.Exceptions()
+    
+    # When
+    input <- FALSE
+    
+    # Then
+    input |> exception[['InvalidIdentifier']]() |> expect.no.error()
+  })
+  it("then an exception is thrown if input is TRUE", {
+    # Given
+    exception <- Memory.Storage.Exceptions()
+
+    name <- 'name'
+    
+    expected.error <- paste0("Memory Storage Provider Error: Invalid identifier. Expected ",name," to be a valid identifier.")
+    # When
+    input <- TRUE
+    
+    # Then
+    input |> exception[['InvalidIdentifier']](name) |> expect.error(expected.error)
+  })
+})
+
+describe("When input |> exception[['IsNULL']](variable)", {
+  it("then no exception is thrown if input is FALSE", {
+    # Given
+    exception <- Memory.Storage.Exceptions()
+    
+    # When
+    input <- FALSE
+    
+    # Then
+    input |> exception[['IsNULL']]() |> expect.no.error()
+  })
+  it("then an exception is thrown if input is TRUE", {
+    # Given
+    exception <- Memory.Storage.Exceptions()
+    
+    variable <- 'variable'
+    expected.error <- paste0("Memory Storage Provider Error: ",variable, " is NULL.")
+    # When
+    input <- TRUE
+    
+    # Then
+    input |> exception[['IsNULL']](variable) |> expect.error(expected.error)
   })
 })
