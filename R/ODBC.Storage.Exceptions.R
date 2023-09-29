@@ -79,17 +79,17 @@ ODBC.Storage.Exceptions <- \() {
       stop('Query is null. Provide a Query.', call. = FALSE)
     } 
   }
-  exceptions[['InvalidType']]       <- \(invoke, type) {
+  exceptions[['InvalidType']]        <- \(invoke, type) {
     if(invoke) {
       stop("ODBC Storage Provider Error: Invalid Type. Expected '", type,"'.", call. = FALSE)
     }
   }
-  exceptions[['InvalidRows']]       <- \(invoke, count) {
+  exceptions[['InvalidRows']]        <- \(invoke, count) {
     if(invoke) {
       stop('ODBC Storage Provider Error: Invalid number of rows. Expected ', count, ' rows.', call. = FALSE)
     }
   }
-  exceptions[['InvalidIdentifier']] <- \(invoke, name) { 
+  exceptions[['InvalidIdentifier']]  <- \(invoke, name) { 
     if(invoke) {
       stop('ODBC Storage Provider Error: Invalid identifier. Expected ', name, ' to be a valid identifier.', call. = FALSE)
     }
