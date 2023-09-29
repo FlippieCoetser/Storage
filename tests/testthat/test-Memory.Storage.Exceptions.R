@@ -4,7 +4,7 @@ describe('Memory.Storage.Exceptions',{
   })
 })
 
-describe("When exceptions <- Memory.Storage.Exception()",{
+describe("When exceptions <- Memory.Storage.Exceptions()",{
   it("then exceptions is a list",{
     # When
     exceptions <- Memory.Storage.Exceptions()
