@@ -668,4 +668,19 @@ describe("When id |> validate[['Identifier']](name)",{
     # Then
     invalid.id |> validator[['Identifier']](name) |> expect.error(expected.error)
   })
+  it('then returns id if id is a valid unique identifier',{
+    # Given
+    configuration <- data.frame()
+
+    broker <- configuration |> Memory.Storage.Broker()
+    validator <- broker |> Memory.Storage.Validator()
+
+    valid.id <- uuid::UUIDgenerate()
+    
+    # When
+    actual <- valid.id |> validator[['Identifier']]()
+    
+    # Then
+    actual |> expect.equal(valid.id)
+  })
 })
