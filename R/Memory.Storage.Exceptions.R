@@ -21,5 +21,6 @@ Memory.Storage.Exceptions <- \() {
     }
   }
   exceptions[['InvalidType']]    <- \() {}
+  exceptions[['InvalidRows']]    <- \() {}
   return(exceptions)
 }
