@@ -20,5 +20,6 @@ Memory.Storage.Exceptions <- \() {
       stop('Memory Storage Provider Error: ', table, ' is not a valid table.', call. = FALSE)
     }
   }
+  exceptions[['InvalidType']]    <- \() {}
   return(exceptions)
 }
