@@ -30,6 +30,10 @@ Memory.Storage.Exceptions <- \() {
       stop('Memory Storage Provider Error: Invalid number of rows. Expected ', count, ' rows.', call. = FALSE)
     }
   }
-  exceptions[['IsNULL']]         <- \() {}
+  exceptions[['IsNULL']]         <- \(invoke, input) {
+    if(invoke) {
+      stop('Memory Storage Provider Error: ',input,' is NULL.', call. = FALSE)
+    }
+  }
   return(exceptions)
 }
