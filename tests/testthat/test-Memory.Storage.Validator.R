@@ -207,6 +207,19 @@ describe("When input |> validate[['HasOneRow']]()",{
     # Then
     input |> validate[['HasOneRow']]() |> expect.error(expected.error)
   })
+  it('then input is returned if input has one row',{
+    # Given
+    validate <- Memory.Storage.Validator()
+    
+    input    <- data.frame(Id = '123')
+    expected <- input
+    
+    # When
+    actual <- input |> validate[['HasOneRow']]()
+    
+    # Then
+    actual |> expect.equal(expected)
+  })
 })
 
 describe("When input |> validate[['NotEmpty']]()",{
