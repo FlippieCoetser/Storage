@@ -135,6 +135,48 @@ describe("When model |> service[['CreateTable']](table)",{
     # Then
     model |> service[['CreateTable']](table) |> expect.error(expected.error)
   })
+  it('then an exception is thrown if table is NULL',{
+    # Given
+    configuration <- data.frame()
+
+    service <- configuration |> 
+      Memory.Storage.Broker() |> 
+      Memory.Storage.Service()
+
+    model <- data.frame(
+      Id     = character(0),
+      Task   = character(0),
+      Status = character(0)
+    )
+
+    table <- NULL
+
+    expected.error <- "Memory Storage Provider Error: table is NULL."
+
+    # Then
+    model |> service[['CreateTable']](table) |> expect.error(expected.error)
+  })
+  it('then an exception if thrown if table is not characters',{
+    # Given
+    configuration <- data.frame()
+
+    service <- configuration |> 
+      Memory.Storage.Broker() |> 
+      Memory.Storage.Service()
+
+    model <- data.frame(
+      Id     = character(0),
+      Task   = character(0),
+      Status = character(0)
+    )
+
+    table <- 123
+
+    expected.error <- "Memory Storage Provider Error: Invalid Type. Expected 'character'."
+
+    # Then
+    model |> service[['CreateTable']](table) |> expect.error(expected.error)
+  })
 })
 
 describe("when entities |> service[['SeedTable']](table)",{
