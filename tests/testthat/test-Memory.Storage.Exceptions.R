@@ -212,3 +212,28 @@ describe("When input |> exception[['InvalidRows']]()", {
     input |> exception[['InvalidRows']](count) |> expect.error(expected.error)
   })
 })
+
+describe("When input |> exception[['IsNULL']]()", {
+  it("then no exception is thrown if input is FALSE", {
+    # Given
+    exception <- Memory.Storage.Exceptions()
+    
+    # When
+    input <- FALSE
+    
+    # Then
+    input |> exception[['IsNULL']]() |> expect.no.error()
+  })
+  it("then an exception is thrown if input is TRUE", {
+    # Given
+    exception <- Memory.Storage.Exceptions()
+    
+    variable <- 'variable'
+    expected.error <- paste0("Memory Storage Provider Error: ",variable, " is NULL.")
+    # When
+    input <- TRUE
+    
+    # Then
+    input |> exception[['IsNULL']](variable) |> expect.error(expected.error)
+  })
+})
