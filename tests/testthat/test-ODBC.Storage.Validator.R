@@ -54,6 +54,13 @@ describe("When validators <- ODBC.Storage.Validator()",{
     # Then
     validators[["IsCharacters"]] |> expect.exist()
   })
+  it('then validators contains IsDataFrame validator',{
+    # Given
+    validators <- ODBC.Storage.Validator()
+
+    # Then
+    validators[["IsDataFrame"]] |> expect.exist()
+  })
 })
 
 describe('When query |> validate[["Query"]]()',{
