@@ -172,6 +172,19 @@ describe("When input |> validate[['IsCharacters']]()",{
     # Then
     input |> validate[['IsCharacters']]() |> expect.error(expected.error)
   })
+  it("then input is returned if input has member",{
+    # Given
+    validate <- Memory.Storage.Validator()
+    
+    input    <- 'test'
+    expected <- input
+    
+    # When
+    actual <- input |> validate[['IsCharacters']]()
+    
+    # Then
+    actual |> expect.equal(expected)
+  })
 })
 
 describe("When input |> validate[['IsEmpty']]()",{
