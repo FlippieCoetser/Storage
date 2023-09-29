@@ -383,3 +383,29 @@ describe("When model |> validate[['Model']]()",{
     actual.model |> expect.equal(expected.model)
   })
 })
+
+describe("When table |> validate[['Table']]()",{
+  it("then no exception is thrown if table is not NULL",{
+    # Given
+    validate <- Memory.Storage.Validator()
+    
+    # When
+    input.table <- list()
+    input.table[['table']] <- 'test'  
+    
+    # Then
+    input.table |> validate[['Table']]() |> expect.no.error()
+  })
+  it("then an exception is thrown if table is NULL",{
+    # Given
+    validate <- Memory.Storage.Validator()
+    
+    expected.error <- "Memory Storage Provider Error: table is NULL."
+    
+    # When
+    input <- NULL 
+    
+    # Then
+    input |> validate[['Table']]() |> expect.error(expected.error)
+  })
+})
