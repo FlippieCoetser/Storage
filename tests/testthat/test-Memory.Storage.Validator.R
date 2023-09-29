@@ -134,6 +134,16 @@ describe("When table |> validate[['IsValidTable']]()",{
 })
 
 describe("When model |> validate[['Model']]()",{
+  it("then no exception is thrown if model is a data.frame",{
+    # Given
+    validate <- Memory.Storage.Validator()
+    
+    # When
+    input.model <- data.frame()
+    
+    # Then
+    input.model |> validate[['Model']]() |> expect.no.error()
+  })
   it("then an exception if thrown if model is NULL",{
     # Given
     validate <- Memory.Storage.Validator()
@@ -146,16 +156,6 @@ describe("When model |> validate[['Model']]()",{
     
     # Then
     input.model |> validate[['Model']]() |> expect.error(expected.error)
-  })
-  it("then no exception is thrown if model is a data.frame",{
-    # Given
-    validate <- Memory.Storage.Validator()
-    
-    # When
-    input.model <- data.frame()
-    
-    # Then
-    input.model |> validate[['Model']]() |> expect.no.error()
   })
   it("then an exception is thrown if model is not a data.frame",{
     # Given
