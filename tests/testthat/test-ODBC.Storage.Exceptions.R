@@ -520,3 +520,28 @@ describe("when input |> exception[['QueryIsNull']]()",{
     input |> exception[["QueryIsNull"]]() |> expect_error(expected.error)
   })
 })
+
+describe("When input |> exception[['InvalidType']](type)", {
+  it("then no exception is thrown if input is FALSE", {
+    # Given
+    exception <- ODBC.Storage.Exceptions()
+    
+    # When
+    input <- FALSE
+    
+    # Then
+    input |> exception[['InvalidType']]() |> expect.no.error()
+  })
+  it("then an exception is thrown if input is TRUE", {
+    # Given
+    exception <- ODBC.Storage.Exceptions()
+    
+    type <- 'data.frame'
+    expected.error <- paste0("ODBC Storage Provider Error: Invalid Type. Expected '", type,"'.")
+    # When
+    input <- TRUE
+    
+    # Then
+    input |> exception[['InvalidType']](type) |> expect.error(expected.error)
+  })
+})
