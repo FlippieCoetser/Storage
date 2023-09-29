@@ -134,6 +134,19 @@ describe("When table |> validate[['IsValidTable']]()",{
 })
 
 describe("When model |> validate[['Model']]()",{
+  it("then an exception if thrown if model is NULL",{
+    # Given
+    validate <- Memory.Storage.Validator()
+    
+    variable <- 'Model'
+    expected.error <- 'Memory Storage Provider Error: Model is NULL.'
+    
+    # When
+    input.model <- NULL
+    
+    # Then
+    input.model |> validate[['Model']]() |> expect.error(expected.error)
+  })
   it("then no exception is thrown if model is a data.frame",{
     # Given
     validate <- Memory.Storage.Validator()
