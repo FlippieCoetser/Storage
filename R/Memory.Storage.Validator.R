@@ -20,6 +20,7 @@ Memory.Storage.Validator <- \(broker = NULL) {
   }
   validators[['NotEmpty']]         <- \(input) {
     input |> nrow() |> (\(x) x == 0)() |> exception[['InvalidRows']]('>0')
+    return(input)
   }
   validators[['IsDataFrame']]      <- \(input) {
     input |> is.data.frame() |> isFALSE() |> exception[['InvalidType']]('data.frame')
