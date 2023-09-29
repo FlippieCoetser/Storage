@@ -245,6 +245,38 @@ describe("when data |> service[['SeedTable']](table)",{
     # Then
     seed.data |> service[['SeedTable']](table) |> expect.error(expected.error)
   })
+  it('then an exception is thrown if table is NULL',{
+    # Given
+    configuration <- data.frame()
+
+    service <- configuration |> 
+      Memory.Storage.Broker() |> 
+      Memory.Storage.Service()
+
+    table <- NULL
+    seed.data  <- Todo.Mock.Data
+
+    expected.error <- "Memory Storage Provider Error: table is NULL."
+
+    # Then
+    seed.data |> service[['SeedTable']](table) |> expect.error(expected.error)
+  })
+  it('then an exception is thrown if table is not characters',{
+    # Given
+    configuration <- data.frame()
+
+    service <- configuration |> 
+      Memory.Storage.Broker() |> 
+      Memory.Storage.Service()
+
+    table <- 123
+    seed.data  <- Todo.Mock.Data
+
+    expected.error <- "Memory Storage Provider Error: Invalid Type. Expected 'character'."
+
+    # Then
+    seed.data |> service[['SeedTable']](table) |> expect.error(expected.error)
+  })
 })
 
 describe("When query |> services[['ExecuteQuery']]()",{
