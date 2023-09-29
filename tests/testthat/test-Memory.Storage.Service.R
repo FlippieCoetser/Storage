@@ -100,7 +100,7 @@ describe("When model |> service[['CreateTable']](table)",{
 
     model <- NULL
 
-    expected.error <- "Memory Storage Provider Error: Model is NULL."
+    expected.error <- "Memory Storage Provider Error: model is NULL."
 
     # Then
     model |> service[['CreateTable']](table) |> expect.error(expected.error)
