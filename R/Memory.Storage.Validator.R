@@ -2,6 +2,12 @@ Memory.Storage.Validator <- \(broker = NULL) {
   exception <- Memory.Storage.Exceptions()
 
   validators <- list()
+  validators[['Model']]            <- \(model) {
+    model |> 
+      validators[['NotNULL']]('Model') |>
+      validators[['IsDataFrame']]()    |>
+      validators[['IsEmpty']]()
+  }
   validators[['NotNULL']]          <- \(input, name) {
     input |> is.null() |> exception[['IsNULL']](name)
     return(input)
@@ -13,12 +19,6 @@ Memory.Storage.Validator <- \(broker = NULL) {
   validators[['IsEmpty']]          <- \(input) {
     input |> nrow() |> (\(x) x != 0)() |> exception[['InvalidRows']](0)
     return(input)
-  }
-  validators[['Model']]            <- \(model) {
-    model |> 
-      validators[['NotNULL']]('Model') |>
-      validators[['IsDataFrame']]()    |>
-      validators[['IsEmpty']]()
   }
   validators[['NoImplementation']] <- \() {
     TRUE |> exception[['NoExecuteQuery']]()
