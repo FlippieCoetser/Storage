@@ -1,6 +1,7 @@
 ODBC.Storage.Validator <- \() {
   exception <- ODBC.Storage.Exceptions()
   validators <- list()
+  validators[['Fields']]       <- \() {}
   validators[['Entity']]       <- \() {}
   validators[['Table']]        <- \() {}
   validators[['Id']]           <- \() {}
