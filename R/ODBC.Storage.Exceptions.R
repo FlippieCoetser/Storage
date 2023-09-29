@@ -79,5 +79,6 @@ ODBC.Storage.Exceptions <- \() {
       stop('Query is null. Provide a Query.', call. = FALSE)
     } 
   }
+  exceptions[['InvalidType']]        <- \() {}
   return(exceptions)
 }
