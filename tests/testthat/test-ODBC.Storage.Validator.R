@@ -40,6 +40,13 @@ describe("When validators <- ODBC.Storage.Validator()",{
     # Then
     validators[["Id"]] |> expect.exist()
   })
+  it('then validators contains NotNULL validator',{
+    # Given
+    validators <- ODBC.Storage.Validator()
+
+    # Then
+    validators[["NotNULL"]] |> expect.exist()
+  })
 })
 
 describe('When query |> validate[["Query"]]()',{
