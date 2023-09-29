@@ -28,6 +28,8 @@ Memory.Storage.Service <- \(broker) {
     entity |> broker[['Insert']](table)
   }
   services[['Retrieve']]        <- \(table, fields) {
+    table |> validate[['Table']]()
+
     table |> validate[['IsValidTable']]()
     table |> broker[['Select']](fields)
   }
