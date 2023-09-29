@@ -131,6 +131,13 @@ describe("When exceptions <- ODBC.Storage.Exceptions()",{
     # Then
     exceptions[['InvalidIdentifier']] |> expect.exist()
   })
+  it('then exceptions contains IsNULL exception',{
+    # Given
+    exceptions <- ODBC.Storage.Exceptions()
+
+    # Then
+    exceptions[['IsNULL']] |> expect.exist()
+  })
 })
 
 describe("when input |> exception[['ConfigIsNull']]()",{
