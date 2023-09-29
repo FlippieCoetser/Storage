@@ -26,6 +26,7 @@ Memory.Storage.Validator <- \(broker = NULL) {
       validators[['HasOneRow']]()   
   }
   validators[['Id']]               <- \() {}
+  validators[['Identifier']]       <- \() {}
   validators[['IsEmpty']]          <- \(input) {
     input |> nrow() |> (\(x) x != 0)() |> exception[['InvalidRows']](0)
     return(input)
