@@ -472,3 +472,18 @@ describe("When table |> validate[['Table']]()",{
     input |> validate[['Table']]() |> expect.error(expected.error)
   })
 })
+
+describe("When data |> validate[['Data']]()",{
+  it('then an exception is thrown if data is NULL',{
+    # Given
+    validate <- Memory.Storage.Validator()
+    
+    expected.error <- "Memory Storage Provider Error: data is NULL."
+    
+    # When
+    input <- NULL
+    
+    # Then
+    input |> validate[['Data']]() |> expect.error(expected.error)
+  })
+})
