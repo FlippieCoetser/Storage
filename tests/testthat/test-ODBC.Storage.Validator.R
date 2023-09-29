@@ -26,6 +26,13 @@ describe("When validators <- ODBC.Storage.Validator()",{
     # Then
     validators[["Entity"]] |> expect.exist()
   })
+  it('then validators contains Table validator',{
+    # Given
+    validators <- ODBC.Storage.Validator()
+
+    # Then
+    validators[["Table"]] |> expect.exist()
+  })
 })
 
 describe('When query |> validate[["Query"]]()',{
