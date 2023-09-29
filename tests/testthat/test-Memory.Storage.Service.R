@@ -560,6 +560,38 @@ describe("When id |> service[['RetrieveWhereId']](table, fields)",{
     # Then
     'InvalidId' |> service[['RetrieveWhereId']](table, fields) |> expect.error(expected.error)
   })
+  it('then an exception is thrown if table is NULL',{
+    # Given
+    configuration <- data.frame()
+ 
+    service <- configuration  |> 
+      Memory.Storage.Broker() |> 
+      Memory.Storage.Service()
+
+    existing.entity <- Todo.Mock.Data |> tail(1)
+    id <- existing.entity[['Id']]
+
+    expected.error <- "Memory Storage Provider Error: table is NULL."
+
+    # Then
+    id |> service[['RetrieveWhereId']](NULL, fields) |> expect.error(expected.error)
+  })
+  it('then an exception is thrown if table is not characters',{
+    # Given
+    configuration <- data.frame()
+ 
+    service <- configuration  |> 
+      Memory.Storage.Broker() |> 
+      Memory.Storage.Service()
+
+    existing.entity <- Todo.Mock.Data |> tail(1)
+    id <- existing.entity[['Id']]
+
+    expected.error <- "Memory Storage Provider Error: Invalid Type. Expected 'character'."
+
+    # Then
+    id |> service[['RetrieveWhereId']](123, fields) |> expect.error(expected.error)
+  })
   it("then an exception is thrown if table is invalid",{
     # Given
     configuration <- data.frame()
