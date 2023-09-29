@@ -20,6 +20,7 @@ Memory.Storage.Validator <- \(broker = NULL) {
       validators[['NotEmpty']]()
   }
   validators[['Entity']]           <- \() {}
+  validators[['HasOneRow']]        <- \() {}
   validators[['NotNULL']]          <- \(input, name) {
     input |> is.null() |> exception[['IsNULL']](name)
     return(input)
