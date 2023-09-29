@@ -144,6 +144,16 @@ describe("When model |> validate[['Model']]()",{
     # Then
     input.model |> validate[['Model']]() |> expect.no.error()
   })
+  it("then no exception if thrown if model is a data.frame with 0 rows",{
+    # Given
+    validate <- Memory.Storage.Validator()
+    
+    # When
+    input.model <- data.frame(Id = character(0), Task = character(0), Status = character(0))
+    
+    # Then
+    input.model |> validate[['Model']]() |> expect.no.error()
+  })
   it("then an exception if thrown if model is NULL",{
     # Given
     validate <- Memory.Storage.Validator()
