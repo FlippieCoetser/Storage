@@ -184,6 +184,31 @@ describe("When input |> validate[['IsEmpty']]()",{
   })
 })
 
+describe("When input |> validate[['HasOneRow']]()",{
+  it("then no exception is thrown if input has one row",{
+    # Given
+    validate <- Memory.Storage.Validator()
+    
+    # When
+    input <- data.frame(Id = '123')  
+    
+    # Then
+    input |> validate[['HasOneRow']]() |> expect.no.error()
+  })
+  it("then an exception is thrown if input does not have one row",{
+    # Given
+    validate <- Memory.Storage.Validator()
+    
+    expected.error <- "Memory Storage Provider Error: Invalid number of rows. Expected 1 rows."
+    
+    # When
+    input <- data.frame(Id = c('123','456'))
+    
+    # Then
+    input |> validate[['HasOneRow']]() |> expect.error(expected.error)
+  })
+})
+
 describe("When input |> validate[['NotEmpty']]()",{
   it("then no exception is thrown if input is not empty",{
     # Given
