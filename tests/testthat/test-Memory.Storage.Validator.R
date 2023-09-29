@@ -146,6 +146,44 @@ describe("When input |> validate[['NotNULL']](name)",{
   })
 })
 
+describe("When input |> validate[['IsEmpty']]()",{
+  it("then no exception is thrown if input is empty data.frame",{
+    # Given
+    validate <- Memory.Storage.Validator()
+    
+    # When
+    input <- data.frame()
+
+    # Then
+    input |> validate[['IsEmpty']]() |> expect.no.error()
+  })
+  it("then an exception is thrown if input is not empty data.frame",{
+    # Given
+    validate <- Memory.Storage.Validator()
+    
+    expected.error <- "Memory Storage Provider Error: Invalid number of rows. Expected 0 rows."
+    
+    # When
+    input <- data.frame(Id = '123')
+    
+    # Then
+    input |> validate[['IsEmpty']]() |> expect.error(expected.error)
+  })
+  it("then input is returned if input is empty data.frame",{
+    # Given
+    validate <- Memory.Storage.Validator()
+    
+    input    <- data.frame()
+    expected <- input
+    
+    # When
+    actual <- input |> validate[['IsEmpty']]()
+    
+    # Then
+    actual |> expect.equal(expected)
+  })
+})
+
 describe("When input |> validate[['NotEmpty']]()",{
   it("then no exception is thrown if input is not empty",{
     # Given
@@ -254,44 +292,6 @@ describe("When input |> validate[['IsCharacters']]()",{
     
     # When
     actual <- input |> validate[['IsCharacters']]()
-    
-    # Then
-    actual |> expect.equal(expected)
-  })
-})
-
-describe("When input |> validate[['IsEmpty']]()",{
-  it("then no exception is thrown if input is empty data.frame",{
-    # Given
-    validate <- Memory.Storage.Validator()
-    
-    # When
-    input <- data.frame()
-
-    # Then
-    input |> validate[['IsEmpty']]() |> expect.no.error()
-  })
-  it("then an exception is thrown if input is not empty data.frame",{
-    # Given
-    validate <- Memory.Storage.Validator()
-    
-    expected.error <- "Memory Storage Provider Error: Invalid number of rows. Expected 0 rows."
-    
-    # When
-    input <- data.frame(Id = '123')
-    
-    # Then
-    input |> validate[['IsEmpty']]() |> expect.error(expected.error)
-  })
-  it("then input is returned if input is empty data.frame",{
-    # Given
-    validate <- Memory.Storage.Validator()
-    
-    input    <- data.frame()
-    expected <- input
-    
-    # When
-    actual <- input |> validate[['IsEmpty']]()
     
     # Then
     actual |> expect.equal(expected)
