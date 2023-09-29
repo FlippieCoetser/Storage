@@ -9,9 +9,10 @@ Memory.Storage.Service <- \(broker) {
     model |> broker[['CreateTable']](table)
   }
   services[['SeedTable']]       <- \(data, table) {
-    data |> validate[['Data']]()
-    
-    data |> broker[['SeedTable']](table)
+    data  |> validate[['Data']]()
+    table |> validate[['Table']]()
+
+    data  |> broker[['SeedTable']](table)
   }
   services[['ExecuteQuery']]    <- \(...) {
     validate[['NoImplementation']]()
