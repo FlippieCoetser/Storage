@@ -180,3 +180,28 @@ describe("When input |> exception[['InvalidType']]()", {
     input |> exception[['InvalidType']](type) |> expect.error(expected.error)
   })
 })
+
+describe("When input |> exception[['InvalidRows']]()", {
+  it("then no exception is thrown if input is FALSE", {
+    # Given
+    exception <- Memory.Storage.Exceptions()
+    
+    # When
+    input <- FALSE
+    
+    # Then
+    input |> exception[['InvalidRows']]() |> expect.no.error()
+  })
+  it("then an exception is thrown if input is TRUE", {
+    # Given
+    exception <- Memory.Storage.Exceptions()
+    
+    count <- 0
+    expected.error <- paste0("Memory Storage Provider Error: Invalid number of rows. Expected ",count," rows.")
+    # When
+    input <- TRUE
+    
+    # Then
+    input |> exception[['InvalidRows']](count) |> expect.error(expected.error)
+  })
+})
