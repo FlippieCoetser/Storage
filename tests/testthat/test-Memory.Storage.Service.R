@@ -120,7 +120,7 @@ describe("When model |> service[['CreateTable']](table)",{
     # Then
     model |> service[['CreateTable']](table) |> expect.error(expected.error)
   })
-  it('then an exception if thrown if model is not empty data.frame',{
+  it('then an exception is thrown if model is not empty data.frame',{
     # Given
     configuration <- data.frame()
 
@@ -156,7 +156,7 @@ describe("When model |> service[['CreateTable']](table)",{
     # Then
     model |> service[['CreateTable']](table) |> expect.error(expected.error)
   })
-  it('then an exception if thrown if table is not characters',{
+  it('then an exception is thrown if table is not characters',{
     # Given
     configuration <- data.frame()
 
