@@ -8,6 +8,7 @@ Memory.Storage.Validator <- \(broker = NULL) {
       validators[['IsDataFrame']]()    |>
       validators[['IsEmpty']]()
   }
+  validators[['Table']]            <- \() {}
   validators[['NotNULL']]          <- \(input, name) {
     input |> is.null() |> exception[['IsNULL']](name)
     return(input)
