@@ -317,4 +317,17 @@ describe("When model |> validate[['Model']]()",{
     # Then
     input.model |> validate[['Model']]() |> expect.error(expected.error)
   })
+  it("then model is returned if model is valid",{
+    # Given
+    validate <- Memory.Storage.Validator()
+    
+    input.model <- data.frame(Id = character(0), Task = character(0), Status = character(0))
+    expected.model <- input.model
+    
+    # When
+    actual.model <- input.model |> validate[['Model']]()
+    
+    # Then
+    actual.model |> expect.equal(expected.model)
+  })
 })
