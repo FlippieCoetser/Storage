@@ -132,3 +132,28 @@ describe("When table |> validate[['IsValidTable']]()",{
     invalid.table |> validator[['IsValidTable']]() |> expect.error(expected.error)
   })
 })
+
+describe("When model |> validate[['Model']]()",{
+  it("then no exception is thrown if model is a data.frame",{
+    # Given
+    validate <- Memory.Storage.Validator()
+    
+    # When
+    input.model <- data.frame()
+    
+    # Then
+    input.model |> validate[['Model']]() |> expect.no.error()
+  })
+  it("then an exception is thrown if model is not a data.frame",{
+    # Given
+    validate <- Memory.Storage.Validator()
+    
+    expected.error <- "Memory Storage Provider Error: Invalid Type. Expected 'data.frame'."
+    
+    # When
+    input.model <- list()
+    
+    # Then
+    input.model |> validate[['Model']]() |> expect.error(expected.error)
+  })
+})
