@@ -149,6 +149,31 @@ describe("When input |> validate[['IsDataFrame']]()",{
   })
 })
 
+describe("When input |> validate[['IsCharacters']]()",{
+  it("then no exception is thrown if input is characters",{
+    # Given
+    validate <- Memory.Storage.Validator()
+    
+    # When
+    input <- 'test'  
+    
+    # Then
+    input |> validate[['IsCharacters']]() |> expect.no.error()
+  })
+  it("then an exception is thrown if input is not characters",{
+    # Given
+    validate <- Memory.Storage.Validator()
+    
+    expected.error <- "Memory Storage Provider Error: Invalid Type. Expected 'character'."
+    
+    # When
+    input <- 1
+    
+    # Then
+    input |> validate[['IsCharacters']]() |> expect.error(expected.error)
+  })
+})
+
 describe("When input |> validate[['IsEmpty']]()",{
   it("then no exception is thrown if input is empty data.frame",{
     # Given
