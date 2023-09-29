@@ -179,23 +179,23 @@ describe("When model |> service[['CreateTable']](table)",{
   })
 })
 
-describe("when entities |> service[['SeedTable']](table)",{
-  it("then entities are inserted into table in memory",{
+describe("when data |> service[['SeedTable']](table)",{
+  it("then data are inserted into table in memory",{
     # Given
     broker  <- configuration |> Memory.Storage.Broker()
     service <- broker        |> Memory.Storage.Service()
 
     table <- 'Todo'
 
-    seed.entities     <- Todo.Mock.Data
-    expected.entities <- seed.entities
+    seed.data     <- Todo.Mock.Data
+    expected.data <- seed.data
 
     # When
-    seed.entities |> service[['SeedTable']](table)
+    seed.data |> service[['SeedTable']](table)
 
     # Then
-    actual.entities <- table |> broker[['Select']]()
-    actual.entities |> expect.equal.data(expected.entities)
+    actual.data <- table |> broker[['Select']]()
+    actual.data |> expect.equal.data(expected.data)
   })
   it("then an exception is thrown if data is NULL",{
     # Given
@@ -206,12 +206,12 @@ describe("when entities |> service[['SeedTable']](table)",{
       Memory.Storage.Service()
 
     table <- 'Todo'
-    seed.entities  <- NULL
+    seed.data  <- NULL
 
     expected.error <- "Memory Storage Provider Error: data is NULL."
 
     # Then
-    seed.entities |> service[['SeedTable']](table) |> expect.error(expected.error)
+    seed.data |> service[['SeedTable']](table) |> expect.error(expected.error)
   })
   it('then an exception is thrown if data is not data.frame',{
     # Given
@@ -222,12 +222,12 @@ describe("when entities |> service[['SeedTable']](table)",{
       Memory.Storage.Service()
 
     table <- 'Todo'
-    seed.entities  <- list()
+    seed.data  <- list()
 
     expected.error <- "Memory Storage Provider Error: Invalid Type. Expected 'data.frame'."
 
     # Then
-    seed.entities |> service[['SeedTable']](table) |> expect.error(expected.error)
+    seed.data |> service[['SeedTable']](table) |> expect.error(expected.error)
   })
   it('then an exception if thrown if data is empty data.frame',{
     # Given
@@ -238,12 +238,12 @@ describe("when entities |> service[['SeedTable']](table)",{
       Memory.Storage.Service()
 
     table <- 'Todo'
-    seed.entities  <- data.frame()
+    seed.data  <- data.frame()
 
     expected.error <- "Memory Storage Provider Error: Invalid number of rows. Expected >0 rows."
 
     # Then
-    seed.entities |> service[['SeedTable']](table) |> expect.error(expected.error)
+    seed.data |> service[['SeedTable']](table) |> expect.error(expected.error)
   })
 })
 
