@@ -110,6 +110,13 @@ describe("When exceptions <- ODBC.Storage.Exceptions()",{
     # Then
     exceptions[['QueryIsNull']] |> expect.exist()
   })
+  it('then exceptions contains InvalidType exception',{
+    # Given
+    exceptions <- ODBC.Storage.Exceptions()
+
+    # Then
+    exceptions[['InvalidType']] |> expect.exist()
+  })
 })
 
 describe("when input |> exception[['ConfigIsNull']]()",{
