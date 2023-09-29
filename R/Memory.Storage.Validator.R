@@ -18,6 +18,7 @@ Memory.Storage.Validator <- \(broker = NULL) {
   }
   validators[['IsCharacters']]     <- \(input) {
     input |> is.character() |> isFALSE() |> exception[['InvalidType']]('character')
+    return(input)
   }
   validators[['IsEmpty']]          <- \(input) {
     input |> nrow() |> (\(x) x != 0)() |> exception[['InvalidRows']](0)
