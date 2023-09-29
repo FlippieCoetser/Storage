@@ -220,6 +220,32 @@ describe("When input |> exception[['InvalidRows']]()", {
   })
 })
 
+describe("When input |> exception[['InvalidIdentifier']](name)", {
+  it("then no exception is thrown if input is FALSE", {
+    # Given
+    exception <- Memory.Storage.Exceptions()
+    
+    # When
+    input <- FALSE
+    
+    # Then
+    input |> exception[['InvalidIdentifier']]() |> expect.no.error()
+  })
+  it("then an exception is thrown if input is TRUE", {
+    # Given
+    exception <- Memory.Storage.Exceptions()
+
+    name <- 'name'
+    
+    expected.error <- paste0("Memory Storage Provider Error: Invalid identifier. Expected ",name," to be a valid identifier.")
+    # When
+    input <- TRUE
+    
+    # Then
+    input |> exception[['InvalidIdentifier']](name) |> expect.error(expected.error)
+  })
+})
+
 describe("When input |> exception[['IsNULL']](variable)", {
   it("then no exception is thrown if input is FALSE", {
     # Given
