@@ -545,3 +545,28 @@ describe("When input |> exception[['InvalidType']](type)", {
     input |> exception[['InvalidType']](type) |> expect.error(expected.error)
   })
 })
+
+describe("When input |> exception[['InvalidRows']](count)", {
+  it("then no exception is thrown if input is FALSE", {
+    # Given
+    exception <- ODBC.Storage.Exceptions()
+    
+    # When
+    input <- FALSE
+    
+    # Then
+    input |> exception[['InvalidRows']]() |> expect.no.error()
+  })
+  it("then an exception is thrown if input is TRUE", {
+    # Given
+    exception <- ODBC.Storage.Exceptions()
+    
+    count <- 0
+    expected.error <- paste0("ODBC Storage Provider Error: Invalid number of rows. Expected ",count," rows.")
+    # When
+    input <- TRUE
+    
+    # Then
+    input |> exception[['InvalidRows']](count) |> expect.error(expected.error)
+  })
+})
