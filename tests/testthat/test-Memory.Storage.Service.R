@@ -521,6 +521,45 @@ describe("When id |> service[['RetrieveWhereId']](table, fields)",{
     # Then
     actual.entity |> expect.equal.data(expected.entity)
   })
+  it('then an exception is thrown if id is NULL',{
+    # Given
+    configuration <- data.frame()
+ 
+    service <- configuration  |> 
+      Memory.Storage.Broker() |> 
+      Memory.Storage.Service()
+
+    expected.error <- "Memory Storage Provider Error: id is NULL."
+
+    # Then
+    NULL |> service[['RetrieveWhereId']](table, fields) |> expect.error(expected.error)
+  })
+  it('then an exception is thrown if id is not characters',{
+    # Given
+    configuration <- data.frame()
+ 
+    service <- configuration  |> 
+      Memory.Storage.Broker() |> 
+      Memory.Storage.Service()
+
+    expected.error <- "Memory Storage Provider Error: Invalid Type. Expected 'character'."
+
+    # Then
+    123 |> service[['RetrieveWhereId']](table, fields) |> expect.error(expected.error)
+  })
+  it('then an exception is thrown if id is invalid identifier',{
+    # Given
+    configuration <- data.frame()
+ 
+    service <- configuration  |> 
+      Memory.Storage.Broker() |> 
+      Memory.Storage.Service()
+
+    expected.error <- "Memory Storage Provider Error: Invalid identifier."
+
+    # Then
+    'InvalidId' |> service[['RetrieveWhereId']](table, fields) |> expect.error(expected.error)
+  })
   it("then an exception is thrown if table is invalid",{
     # Given
     configuration <- data.frame()
