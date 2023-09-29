@@ -81,5 +81,6 @@ ODBC.Storage.Exceptions <- \() {
   }
   exceptions[['InvalidType']]        <- \() {}
   exceptions[['InvalidRows']]        <- \() {}
+  exceptions[['InvalidIdentifier']]  <- \() {}
   return(exceptions)
 }
