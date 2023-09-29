@@ -40,6 +40,13 @@ describe("When validators <- Memory.Storage.Validator()",{
     # Then
     validators[['IsEmpty']] |> expect.exist()
   })
+  it('then validators contains NotEmpty validator',{
+    # When
+    validators <- Memory.Storage.Validator()
+    
+    # Then
+    validators[['NotEmpty']] |> expect.exist()
+  })
   it('then validators contains Model validator',{
     # When
     validators <- Memory.Storage.Validator()
