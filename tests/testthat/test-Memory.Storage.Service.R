@@ -229,7 +229,7 @@ describe("when data |> service[['SeedTable']](table)",{
     # Then
     seed.data |> service[['SeedTable']](table) |> expect.error(expected.error)
   })
-  it('then an exception if thrown if data is empty data.frame',{
+  it('then an exception is thrown if data is empty data.frame',{
     # Given
     configuration <- data.frame()
 
