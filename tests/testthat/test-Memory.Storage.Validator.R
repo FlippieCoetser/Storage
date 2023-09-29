@@ -576,3 +576,52 @@ describe("When data |> validate[['Data']]()",{
     input |> validate[['Data']]() |> expect.error(expected.error)
   })
 })
+
+describe("When entity |> validate[['Entity']]()",{
+  it("then an exception is thrown if entity is NULL",{
+    # Given
+    validate <- Memory.Storage.Validator()
+    
+    expected.error <- "Memory Storage Provider Error: entity is NULL."
+    
+    # When
+    input <- NULL 
+    
+    # Then
+    input |> validate[['Entity']]() |> expect.error(expected.error)
+  })
+  it("then an exception is thrown if entity is not data.frame",{
+    # Given
+    validate <- Memory.Storage.Validator()
+    
+    expected.error <- "Memory Storage Provider Error: Invalid Type. Expected 'data.frame'."
+    
+    # When
+    input <- list()
+    
+    # Then
+    input |> validate[['Entity']]() |> expect.error(expected.error)
+  })
+  it("then an exception is thrown if entity is empty data.frame",{
+    # Given
+    validate <- Memory.Storage.Validator()
+    
+    expected.error <- "Memory Storage Provider Error: Invalid number of rows. Expected 1 rows."
+    
+    # When
+    input <- data.frame()
+    
+    # Then
+    input |> validate[['Entity']]() |> expect.error(expected.error)
+  })
+  it('then no exception is thrown if entity is valid',{
+    # Given
+    validate <- Memory.Storage.Validator()
+    
+    # When
+    input <- data.frame(Id = '123', Task = 'Task', Status = 'New')
+    
+    # Then
+    input |> validate[['Entity']]() |> expect.no.error()
+  })
+})
