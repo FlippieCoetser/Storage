@@ -486,4 +486,16 @@ describe("When data |> validate[['Data']]()",{
     # Then
     input |> validate[['Data']]() |> expect.error(expected.error)
   })
+  it('then an exception is thrown if data is not data.frame',{
+    # Given
+    validate <- Memory.Storage.Validator()
+    
+    expected.error <- "Memory Storage Provider Error: Invalid Type. Expected 'data.frame'."
+    
+    # When
+    input <- list()
+    
+    # Then
+    input |> validate[['Data']]() |> expect.error(expected.error)
+  })
 })
