@@ -89,6 +89,13 @@ describe("When validators <- Memory.Storage.Validator()",{
     # Then
     validators[['Id']] |> expect.exist()
   })
+  it('then validators contains Identifier validator',{
+    # When
+    validators <- Memory.Storage.Validator()
+    
+    # Then
+    validators[['Identifier']] |> expect.exist()
+  })
   it('then validators contains NoImplementation validator',{
    # When
    validators <- Memory.Storage.Validator()
