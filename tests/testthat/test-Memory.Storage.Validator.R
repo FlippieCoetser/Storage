@@ -26,6 +26,13 @@ describe("When validators <- Memory.Storage.Validator()",{
     # Then
     validators[['IsDataFrame']] |> expect.exist()
   })
+  it('then validators contains IsEmpty validator',{
+    # When
+    validators <- Memory.Storage.Validator()
+    
+    # Then
+    validators[['IsEmpty']] |> expect.exist()
+  })
   it('then validators contains Model validator',{
     # When
     validators <- Memory.Storage.Validator()
@@ -132,6 +139,31 @@ describe("When input |> validate[['IsDataFrame']]()",{
     
     # Then
     actual |> expect.equal(expected)
+  })
+})
+
+describe("When input |> validate[['IsEmpty']]()",{
+  it("then no exception is thrown if input is empty data.frame",{
+    # Given
+    validate <- Memory.Storage.Validator()
+    
+    # When
+    input <- data.frame()
+
+    # Then
+    input |> validate[['IsEmpty']]() |> expect.no.error()
+  })
+  it("then an exception is thrown if input is not empty data.frame",{
+    # Given
+    validate <- Memory.Storage.Validator()
+    
+    expected.error <- "Memory Storage Provider Error: Invalid number of rows. Expected 0 rows."
+    
+    # When
+    input <- data.frame(Id = '123')
+    
+    # Then
+    input |> validate[['IsEmpty']]() |> expect.error(expected.error)
   })
 })
 
