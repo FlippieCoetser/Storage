@@ -51,6 +51,8 @@ Memory.Storage.Service <- \(broker) {
     entity |> broker[['Update']](table)
   }
   services[['Remove']]          <- \(id, table) {
+    id    |> validate[['Id']]()
+    
     table |> validate[['IsValidTable']]()
     
     id |> broker[['Delete']](table)
