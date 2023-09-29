@@ -84,7 +84,11 @@ ODBC.Storage.Exceptions <- \() {
       stop("ODBC Storage Provider Error: Invalid Type. Expected '", type,"'.", call. = FALSE)
     }
   }
-  exceptions[['InvalidRows']]        <- \() {}
+  exceptions[['InvalidRows']]       <- \(invoke, count) {
+    if(invoke) {
+      stop('ODBC Storage Provider Error: Invalid number of rows. Expected ', count, ' rows.', call. = FALSE)
+    }
+  }
   exceptions[['InvalidIdentifier']]  <- \() {}
   return(exceptions)
 }
