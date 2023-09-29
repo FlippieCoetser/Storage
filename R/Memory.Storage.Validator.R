@@ -20,13 +20,17 @@ Memory.Storage.Validator <- \(broker = NULL) {
       validators[['NotEmpty']]()
   }
   validators[['Entity']]           <- \() {}
-  validators[['HasOneRow']]        <- \() {}
-  validators[['NotNULL']]          <- \(input, name) {
-    input |> is.null() |> exception[['IsNULL']](name)
+  validators[['IsEmpty']]          <- \(input) {
+    input |> nrow() |> (\(x) x != 0)() |> exception[['InvalidRows']](0)
     return(input)
   }
+  validators[['HasOneRow']]        <- \() {}
   validators[['NotEmpty']]         <- \(input) {
     input |> nrow() |> (\(x) x == 0)() |> exception[['InvalidRows']]('>0')
+    return(input)
+  }
+  validators[['NotNULL']]          <- \(input, name) {
+    input |> is.null() |> exception[['IsNULL']](name)
     return(input)
   }
   validators[['IsDataFrame']]      <- \(input) {
@@ -35,10 +39,6 @@ Memory.Storage.Validator <- \(broker = NULL) {
   }
   validators[['IsCharacters']]     <- \(input) {
     input |> is.character() |> isFALSE() |> exception[['InvalidType']]('character')
-    return(input)
-  }
-  validators[['IsEmpty']]          <- \(input) {
-    input |> nrow() |> (\(x) x != 0)() |> exception[['InvalidRows']](0)
     return(input)
   }
   validators[['NoImplementation']] <- \(input) {
