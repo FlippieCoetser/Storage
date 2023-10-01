@@ -284,3 +284,28 @@ describe("When entity |> validate[['Entity']]()",{
     input |> validate[['Entity']]() |> expect.no.error()
   })
 })
+
+describe("When input |> validate[['IsCharacters']]()",{
+  it("then no exception is thrown if input is characters",{
+    # Given
+    validate <- ODBC.Storage.Validator()
+    
+    # When
+    input <- 'test'  
+    
+    # Then
+    input |> validate[['IsCharacters']]() |> expect.no.error()
+  })
+  it("then an exception is thrown if input is not characters",{
+    # Given
+    validate <- ODBC.Storage.Validator()
+    
+    expected.error <- "ODBC Storage Provider Error: Invalid Type. Expected 'character'."
+    
+    # When
+    input <- 1
+    
+    # Then
+    input |> validate[['IsCharacters']]() |> expect.error(expected.error)
+  })
+})
