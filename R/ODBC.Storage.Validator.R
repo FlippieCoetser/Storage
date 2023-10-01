@@ -12,7 +12,11 @@ ODBC.Storage.Validator <- \() {
       validators[['IsDataFrame']]()     |>
       validators[['HasOneRow']]()   
   }
-  validators[['Table']]        <- \() {}
+  validators[['Table']]        <- \(table) {
+    table |> 
+      validators[['NotNULL']]('table') |>
+      validators[['IsCharacters']]()
+  }
   validators[['Id']]           <- \() {}
   validators[['NotNULL']]      <- \(input, name) {
     input |> is.null() |> exception[['IsNULL']](name)
