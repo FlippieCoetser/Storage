@@ -97,7 +97,7 @@ describe('When query |> service[["ExecuteQuery"]]()',{
 describe("When entity |> service[['Add']](table)",{
   it("then entity |> broker[['Insert']](table) is called",{
     # Given
-    input.entity <- list()
+    input.entity <- data.frame(Id = 1)
     input.table  <- 'table'
 
     actual.entity <- NULL
