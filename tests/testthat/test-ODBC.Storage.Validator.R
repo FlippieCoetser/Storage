@@ -144,4 +144,18 @@ describe("When input |> validate[['NotNULL']](name)",{
     # Then
     input |> validate[['NotNULL']](name) |> expect.error(expected.error)
   })
+  it("then input is returned if input is not NULL",{
+    # Given
+    validate <- ODBC.Storage.Validator()
+    
+    input <- list()
+    
+    expected <- input
+    
+    # When
+    actual <- input |> validate[['NotNULL']]()
+    
+    # Then
+    actual |> expect.equal(expected)
+  })
 })
