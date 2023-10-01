@@ -368,6 +368,40 @@ describe("When entity |> service[['Modify']](table)",{
     # Then
     entity |> services[['Modify']]('table') |> expect.error(expected.error)
   })
+  it('then an exception is thrown if table is NULL',{
+    # Given
+    broker <- list()
+    broker[['Upsert']] <- \(entity, table) {} 
+
+    services <- broker |> ODBC.Storage.Service()
+
+    expected.error <- 'ODBC Storage Provider Error: table is NULL.'
+
+    entity <- data.frame(Id = 1)
+
+    # When
+    table <- NULL
+
+    # Then
+    entity |> services[['Modify']](table) |> expect.error(expected.error)
+  })
+  it('then an exception is thrown if table is not characters',{
+    # Given
+    broker <- list()
+    broker[['Upsert']] <- \(entity, table) {} 
+
+    services <- broker |> ODBC.Storage.Service()
+
+    expected.error <- "ODBC Storage Provider Error: Invalid Type. Expected 'character'."
+
+    entity <- data.frame(Id = 1)
+
+    # When
+    table <- list()
+
+    # Then
+    entity |> services[['Modify']](table) |> expect.error(expected.error)
+  })
 })
 
 describe("When id |> service[['Remove']](table)",{
