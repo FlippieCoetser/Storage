@@ -5,7 +5,7 @@ Memory.Storage.Broker <- \(configuration = NULL) {
   operations[['CreateTable']]   <- \(model, table) {
     tables[[table]] <<- model
     return(NULL)
-   }
+  }
   operations[['SeedTable']]     <- \(data, table) {
     tables[[table]] <<- tables[[table]] |> rbind(data)
     return(NULL)
