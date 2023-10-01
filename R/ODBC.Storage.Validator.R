@@ -16,6 +16,7 @@ ODBC.Storage.Validator <- \() {
   validators[['IsCharacters']] <- \() {}
   validators[['IsDataFrame']]  <- \(input) {
     input |> is.data.frame() |> isFALSE() |> exception[['InvalidType']]('data.frame')
+    return(input)
   }
   validators[['HasOneRow']]    <- \() {}
   validators[['Identifier']]   <- \() {}
