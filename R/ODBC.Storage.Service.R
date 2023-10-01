@@ -24,6 +24,7 @@ ODBC.Storage.Service <- \(broker) {
   }
   services[['Modify']]          <- \(entity, table) {
     entity |> validate[['Entity']]()
+    table  |> validate[['Table']]()
     
     entity |> broker[['Update']](table)
   }
