@@ -21,7 +21,7 @@ ODBC.Storage.Service <- \(broker) {
   }
   services[['RetrieveWhereId']] <- \(id, table, fields) {
     id    |> validate[['Id']]()
-
+    table |> validate[['Table']]()
 
     id |> broker[['SelectWhereId']](table, fields)
   }
