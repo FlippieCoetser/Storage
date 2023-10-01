@@ -180,7 +180,7 @@ describe("When todo |> operations[['Update']]()",{
     storage    <- configuration |> Storage.Orchestrator('odbc')
     operations <- storage |> Todo.Broker()
 
-    new.todo <- list(
+    new.todo <- data.frame(
       Id     = uuid::UUIDgenerate(),
       Task   = 'Task',
       Status = 'New'
@@ -244,7 +244,7 @@ describe("When id |> operations[['Delete']]()",{
     storage    <- configuration |> Storage.Orchestrator('odbc')
     operations <- storage |> Todo.Broker()
 
-    new.todo <- list(
+    new.todo <- data.frame(
       Id     = uuid::UUIDgenerate(),
       Task   = 'Task',
       Status = 'New'

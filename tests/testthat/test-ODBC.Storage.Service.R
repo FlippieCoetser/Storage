@@ -267,7 +267,7 @@ describe("When id |> service[['RetrieveWhereId']](table, fields)",{
     # Given
     input.fields <- list()
     input.table  <- 'table'
-    input.id     <- 1
+    input.id     <- uuid::UUIDgenerate()
 
     actual.fields <- NULL
     actual.table  <- NULL
@@ -378,7 +378,7 @@ describe("When id |> service[['RetrieveWhereId']](table, fields)",{
 describe("When entity |> service[['Modify']](table)",{
   it("then entity |> broker[['Update']](table) is called",{
     # Given
-    input.entity <- list()
+    input.entity <- data.frame(Id = '123')
     input.table  <- 'table'
 
     actual.entity <- NULL
@@ -487,7 +487,7 @@ describe("When id |> service[['Remove']](table)",{
   it("then id |> broker[['Delete']](table) is called",{
     # Given
     input.table <- 'table'
-    input.id    <- 1
+    input.id    <- uuid::UUIDgenerate()
 
     actual.table <- NULL
     actual.id    <- NULL
