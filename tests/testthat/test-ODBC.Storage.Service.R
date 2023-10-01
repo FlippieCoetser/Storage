@@ -166,7 +166,7 @@ describe("When entity |> service[['Add']](table)",{
     # Then
     entity |> services[['Add']]('table') |> expect.error(expected.error)
   })
-  it('then an exception if thrown if table is NULL',{
+  it('then an exception is thrown if table is NULL',{
     # Given
     broker <- list()
     broker[['Insert']] <- \(entity, table) {} 
