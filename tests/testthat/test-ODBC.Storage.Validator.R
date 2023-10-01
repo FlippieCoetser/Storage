@@ -235,3 +235,52 @@ describe("When input |> validate[['HasOneRow']]()",{
     actual |> expect.equal(expected)
   })
 })
+
+describe("When entity |> validate[['Entity']]()",{
+  it("then an exception is thrown if entity is NULL",{
+    # Given
+    validate <- ODBC.Storage.Validator()
+    
+    expected.error <- "ODBC Storage Provider Error: entity is NULL."
+    
+    # When
+    input <- NULL 
+    
+    # Then
+    input |> validate[['Entity']]() |> expect.error(expected.error)
+  })
+  it("then an exception is thrown if entity is not data.frame",{
+    # Given
+    validate <- ODBC.Storage.Validator()
+    
+    expected.error <- "ODBC Storage Provider Error: Invalid Type. Expected 'data.frame'."
+    
+    # When
+    input <- list()
+    
+    # Then
+    input |> validate[['Entity']]() |> expect.error(expected.error)
+  })
+  it("then an exception is thrown if entity is empty data.frame",{
+    # Given
+    validate <- ODBC.Storage.Validator()
+    
+    expected.error <- "ODBC Storage Provider Error: Invalid number of rows. Expected 1 rows."
+    
+    # When
+    input <- data.frame()
+    
+    # Then
+    input |> validate[['Entity']]() |> expect.error(expected.error)
+  })
+  it('then no exception is thrown if entity is valid',{
+    # Given
+    validate <- ODBC.Storage.Validator()
+    
+    # When
+    input <- data.frame(Id = '123', Task = 'Task', Status = 'New')
+    
+    # Then
+    input |> validate[['Entity']]() |> expect.no.error()
+  })
+})
