@@ -183,4 +183,17 @@ describe("When input |> validate[['IsDataFrame']]()",{
     # Then
     input |> validate[['IsDataFrame']]() |> expect.error(expected.error)
   })
+  it("then input is returned if input has member",{
+    # Given
+    validate <- ODBC.Storage.Validator()
+    
+    input    <- data.frame()
+    expected <- input
+    
+    # When
+    actual <- input |> validate[['IsDataFrame']]()
+    
+    # Then
+    actual |> expect.equal(expected)
+  })
 })
