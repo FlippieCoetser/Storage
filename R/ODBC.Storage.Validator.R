@@ -6,7 +6,12 @@ ODBC.Storage.Validator <- \() {
     return(query)
   }
   validators[['Fields']]       <- \() {}
-  validators[['Entity']]       <- \() {}
+  validators[['Entity']]       <- \(input) {
+    input |> 
+      validators[['NotNULL']]('entity') |>
+      validators[['IsDataFrame']]()     |>
+      validators[['HasOneRow']]()   
+  }
   validators[['Table']]        <- \() {}
   validators[['Id']]           <- \() {}
   validators[['NotNULL']]      <- \(input, name) {
