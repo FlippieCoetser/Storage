@@ -555,4 +555,38 @@ describe("When id |> service[['Remove']](table)",{
     # Then
     id |> services[['Remove']]('table') |> expect.error(expected.error)
   })
+  it('then an exception is thrown if table is NULL',{
+    # Given
+    broker <- list()
+    broker[['Delete']] <- \(id, table) {} 
+
+    services <- broker |> ODBC.Storage.Service()
+
+    expected.error <- 'ODBC Storage Provider Error: table is NULL.'
+
+    id <- uuid::UUIDgenerate()
+
+    # When
+    table <- NULL
+
+    # Then
+    id |> services[['Remove']](table) |> expect.error(expected.error)
+  })
+  it('then an exception is thrown if table is not characters',{
+    # Given
+    broker <- list()
+    broker[['Delete']] <- \(id, table) {} 
+
+    services <- broker |> ODBC.Storage.Service()
+
+    expected.error <- "ODBC Storage Provider Error: Invalid Type. Expected 'character'."
+
+    id <- uuid::UUIDgenerate()
+
+    # When
+    table <- list()
+
+    # Then
+    id |> services[['Remove']](table) |> expect.error(expected.error)
+  })
 })
