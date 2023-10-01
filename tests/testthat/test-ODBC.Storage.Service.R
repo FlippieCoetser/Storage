@@ -121,6 +121,51 @@ describe("When entity |> service[['Add']](table)",{
     actual.entity |> expect.equal(expected.entity)
     actual.table  |> expect.equal(expected.table)
   })
+  it("then an exception is thrown if entity is NULL",{
+    # Given
+    broker <- list()
+    broker[['Insert']] <- \(entity, table) {} 
+
+    services <- broker |> ODBC.Storage.Service()
+
+    expected.error <- 'ODBC Storage Provider Error: entity is NULL.'
+
+    # When
+    entity <- NULL
+
+    # Then
+    entity |> services[['Add']]('table') |> expect.error(expected.error)
+  })
+  it('then an exception is thrown if entity is not a data.frame',{
+    # Given
+    broker <- list()
+    broker[['Insert']] <- \(entity, table) {} 
+
+    services <- broker |> ODBC.Storage.Service()
+
+    expected.error <- "ODBC Storage Provider Error: Invalid Type. Expected 'data.frame'."
+
+    # When
+    entity <- list()
+
+    # Then
+    entity |> services[['Add']]('table') |> expect.error(expected.error)
+  })
+  it('then an exception is thrown if entity does not have one row',{
+    # Given
+    broker <- list()
+    broker[['Insert']] <- \(entity, table) {} 
+
+    services <- broker |> ODBC.Storage.Service()
+
+    expected.error <- "ODBC Storage Provider Error: Invalid number of rows. Expected 1 rows."
+
+    # When
+    entity <- data.frame()
+
+    # Then
+    entity |> services[['Add']]('table') |> expect.error(expected.error)
+  })
 })
 
 describe("When table |> service[['Retrieve']](fields)",{
