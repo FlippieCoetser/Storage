@@ -159,3 +159,28 @@ describe("When input |> validate[['NotNULL']](name)",{
     actual |> expect.equal(expected)
   })
 })
+
+describe("When input |> validate[['IsDataFrame']]()",{
+  it("then no exception is thrown if input is a data.frame",{
+    # Given
+    validate <- ODBC.Storage.Validator()
+    
+    # When
+    input <- data.frame()
+ 
+    # Then
+    input |> validate[['IsDataFrame']]() |> expect.no.error()
+  })
+  it("then an exception is thrown if input is a list",{
+    # Given
+    validate <- ODBC.Storage.Validator()
+    
+    expected.error <- "ODBC Storage Provider Error: Invalid Type. Expected 'data.frame'."
+    
+    # When
+    input <- list()
+    
+    # Then
+    input |> validate[['IsDataFrame']]() |> expect.error(expected.error)
+  })
+})
