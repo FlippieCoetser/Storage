@@ -33,8 +33,8 @@ ODBC.Storage.Service <- \(broker) {
   }
   services[['Remove']]          <- \(id, table) {
     id    |> validate[['Id']]()
+    table |> validate[['Table']]()
 
-    
     id |> broker[['Delete']](table)
   }
   return(services)
