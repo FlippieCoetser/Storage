@@ -32,6 +32,9 @@ ODBC.Storage.Service <- \(broker) {
     entity |> broker[['Update']](table)
   }
   services[['Remove']]          <- \(id, table) {
+    id    |> validate[['Id']]()
+
+    
     id |> broker[['Delete']](table)
   }
   return(services)
