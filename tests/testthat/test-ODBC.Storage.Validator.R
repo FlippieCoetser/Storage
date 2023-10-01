@@ -382,4 +382,16 @@ describe("When id |> validate[['Identifier']](name)",{
     # Then
     invalid.id |> validate[['Identifier']](name) |> expect.error(expected.error)
   })
+  it('then returns id if id is a valid unique identifier',{
+    # Given
+    validate <- ODBC.Storage.Validator()
+
+    valid.id <- uuid::UUIDgenerate()
+    
+    # When
+    actual <- valid.id |> validate[['Identifier']]()
+    
+    # Then
+    actual |> expect.equal(valid.id)
+  })
 })
