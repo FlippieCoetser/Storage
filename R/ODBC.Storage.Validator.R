@@ -34,6 +34,9 @@ ODBC.Storage.Validator <- \() {
     input |> nrow() |> (\(x) x != 1)() |> exception[['InvalidRows']](1)
     return(input)
   }
-  validators[['Identifier']]   <- \() {}
+  validators[['Identifier']]   <- \(id, name) {
+    pattern <- "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+    pattern |> grepl(id) |> isFALSE() |> exception[['InvalidIdentifier']](name)
+  }
   return(validators)
 }
