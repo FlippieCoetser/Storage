@@ -118,3 +118,30 @@ describe('When query |> validate[["Query"]]()',{
     query |> validate[["Query"]]() |> expect.error(expected.error)
   })
 })
+
+describe("When input |> validate[['NotNULL']](name)",{
+  it("then no exception is thrown if input is not NULL",{
+    # Given
+    validate <- ODBC.Storage.Validator()
+    
+    # When
+    name  <- 'input'
+    input <- ''
+    
+    # Then
+    input |> validate[['NotNULL']](name) |> expect.no.error()
+  })
+  it("then an exception is thrown if input is NULL",{
+    # Given
+    validate <- ODBC.Storage.Validator()
+
+    name <- 'input'
+    expected.error <- paste0('ODBC Storage Provider Error: ',name,' is NULL.')
+    
+    # When
+    input <- NULL 
+    
+    # Then
+    input |> validate[['NotNULL']](name) |> expect.error(expected.error)
+  })
+})
