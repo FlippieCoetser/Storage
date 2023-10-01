@@ -9,6 +9,8 @@ ODBC.Storage.Service <- \(broker) {
     query |> broker[['ExecuteQuery']]()
   }
   services[['Add']]             <- \(entity, table) {
+    entity |> validate[['Entity']]()
+
     entity |> broker[['Insert']](table)
   }
   services[['Retrieve']]        <- \(table, fields) {
