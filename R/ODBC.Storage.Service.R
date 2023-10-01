@@ -2,6 +2,7 @@ ODBC.Storage.Service <- \(broker) {
   validate <- ODBC.Storage.Validator()
   
   services <- list()
+  # TODO: Refactor -> Execute.Query
   services[['ExecuteQuery']]    <- \(query) {
     # TODO: Extensive query validation.
     # Current validation check for NULL only.

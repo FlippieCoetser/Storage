@@ -2,18 +2,21 @@ Memory.Storage.Service <- \(broker) {
   validate  <- Memory.Storage.Validator(broker)
   
   services <- list()
+  # TODO: Refactor -> Create.Table
   services[['CreateTable']]     <- \(model, table) {
     model |> validate[['Model']]()
     table |> validate[['Table']]()
 
     model |> broker[['CreateTable']](table)
   }
+  # TODO: Refactor -> Seed.Table
   services[['SeedTable']]       <- \(data, table) {
     data  |> validate[['Data']]()
     table |> validate[['Table']]()
 
     data  |> broker[['SeedTable']](table)
   }
+  # TODO: Refactor -> Execute.Query
   services[['ExecuteQuery']]    <- \(...) {
     TRUE |> validate[['NoImplementation']]()
     ...  |> broker[['ExecuteQuery']]()

@@ -12,6 +12,7 @@ Storage.Orchestrator <- \(configuration, type = 'odbc') {
   service <- services[[type]]()
 
   orchestrations <- list()
+  # TODO: Refactor -> Seed.Table
   orchestrations[['SeedTable']]         <- \(data, table) {
     data |> service[['SeedTable']](table)
   }

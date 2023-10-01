@@ -41,30 +41,37 @@ ODBC.Configuration.Validator <- \() {
       validations[['HasUid']]()      |>
       validations[['HasPwd']]()       
   }
+  # TODO: Refactor -> Has.Drv
   validations[['HasDrv']]       <- \(configuration) {
     configuration[['drv']] |> is.null() |> exception[['drvIsNull']]()
     return(configuration)
   }
+  # TODO: Refactor -> Has.Dsn
   validations[['HasDsn']]       <- \(configuration) {
     configuration[['dsn']] |> is.null() |> exception[['dsnIsNull']]()
     return(configuration)
   }
+  # TODO: Refactor -> Has.Driver
   validations[['HasDriver']]    <- \(configuration) {
     configuration[['driver']] |> is.null() |> exception[['driverIsNull']]()
     return(configuration)
   }
+  # TODO: Refactor -> Has.Server
   validations[['HasServer']]    <- \(configuration) {
     configuration[['server']] |> is.null() |> exception[['serverIsNull']]()
     return(configuration)
   }
+  # TODO: Refactor -> Has.Database
   validations[['HasDatabase']]  <- \(configuration) {
     configuration[['database']] |> is.null() |> exception[['databaseIsNull']]()
     return(configuration)
   }
+  # TODO: Refactor -> Has.Uid
   validations[['HasUid']]       <- \(configuration) {
     configuration[['uid']] |> is.null() |> exception[['uidIsNull']]()
     return(configuration)
   }
+  # TODO: Refactor -> Has.Pwd
   validations[['HasPwd']]       <- \(configuration) {
     configuration[['pwd']] |> is.null() |> exception[['pwdIsNull']]()
     return(configuration)

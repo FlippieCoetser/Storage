@@ -34,16 +34,19 @@ Memory.Storage.Validator <- \(broker = NULL) {
   validators[['NoImplementation']] <- \(input) {
     input |> exception[['NoExecuteQuery']]()
   }
+  # TODO: Refactor -> Is.New.Entity
   validators[['IsNewEntity']]      <- \(entity, table) {
     match.count <- entity[['Id']] |> broker[['SelectWhereId']](table) |> nrow() 
     (match.count != 0) |> exception[['DuplicateId']]()
     return(entity)
   }
+  # TODO: Refactor -> Is.Existing.Entity
   validators[['EntityExist']]      <- \(entity, table) {
     match.count <- entity[['Id']] |> broker[['SelectWhereId']](table) |> nrow() 
     (match.count == 0) |> exception[['EntityNotFound']]()
     return(entity)
   }
+  # TODO: Refactor -> Is.Existing.Table
   validators[['IsValidTable']]     <- \(table) {
     broker[['GetTableNames']]() |> 
       is.element(table)         |> 

@@ -2,12 +2,14 @@ ODBC.Storage.Broker <- \(configuration, sql = Query::SQL()) {
   exception  <- ODBC.Storage.Exceptions()
 
   operations <- list()
+  # TODO: Refactor -> Create.Connection
   operations[['CreateConnection']]  <- \() {
     tryCatch(
       DBI::dbConnect |> do.call(configuration),
       error=exception[['Connection']]
     )
   }
+  # TODO: Refactor -> Execute.Query
   operations[['ExecuteQuery']]      <- \(query) {
     connection <- operations[['CreateConnection']]()
     
