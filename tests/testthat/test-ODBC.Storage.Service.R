@@ -229,6 +229,37 @@ describe("When table |> service[['Retrieve']](fields)",{
     actual.fields |> expect.equal(expected.fields)
     actual.table  |> expect.equal(expected.table)
   })
+  it('then an exception is thrown if table is NULL',{
+    # Given
+    broker <- list()
+    broker[['Select']] <- \(table, fields) {} 
+
+    services <- broker |> ODBC.Storage.Service()
+
+    expected.error <- 'ODBC Storage Provider Error: table is NULL.'
+
+    # When
+    table <- NULL
+
+    # Then
+    table |> services[['Retrieve']](list()) |> expect.error(expected.error)
+  })
+  it('then an exception is thrown if table is not characters',{
+    # Given
+    broker <- list()
+    broker[['Select']] <- \(table, fields) {} 
+
+    services <- broker |> ODBC.Storage.Service()
+
+    expected.error <- "ODBC Storage Provider Error: Invalid Type. Expected 'character'."
+
+    # When
+    table <- list()
+
+    # Then
+    table |> services[['Retrieve']](list()) |> expect.error(expected.error)
+
+  })
 })
 
 describe("When id |> service[['RetrieveWhereId']](table, fields)",{
