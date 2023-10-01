@@ -128,7 +128,7 @@ describe("When entity |> service[['Add']](table)",{
 
     services <- broker |> ODBC.Storage.Service()
 
-    expected.error <- 'ODBC Storage Provider Error: entity is NULL.'
+    expected.error <- "Argument.NULL: 'entity' cannot not be NULL."
 
     # When
     entity <- NULL
@@ -173,7 +173,7 @@ describe("When entity |> service[['Add']](table)",{
 
     services <- broker |> ODBC.Storage.Service()
 
-    expected.error <- 'ODBC Storage Provider Error: table is NULL.'
+    expected.error <- "Argument.NULL: 'table' cannot not be NULL."
 
     entity <- data.frame(Id = 1)
 
@@ -236,7 +236,7 @@ describe("When table |> service[['Retrieve']](fields)",{
 
     services <- broker |> ODBC.Storage.Service()
 
-    expected.error <- 'ODBC Storage Provider Error: table is NULL.'
+    expected.error <- "Argument.NULL: 'table' cannot not be NULL."
 
     # When
     table <- NULL
@@ -301,7 +301,7 @@ describe("When id |> service[['RetrieveWhereId']](table, fields)",{
 
     services <- broker |> ODBC.Storage.Service()
 
-    expected.error <- 'ODBC Storage Provider Error: id is NULL.'
+    expected.error <- "Argument.NULL: 'id' cannot not be NULL."
 
     # When
     id <- NULL
@@ -346,7 +346,7 @@ describe("When id |> service[['RetrieveWhereId']](table, fields)",{
 
     services <- broker |> ODBC.Storage.Service()
 
-    expected.error <- 'ODBC Storage Provider Error: table is NULL.'
+    expected.error <- "Argument.NULL: 'table' cannot not be NULL."
 
     id <- uuid::UUIDgenerate()
 
@@ -409,7 +409,7 @@ describe("When entity |> service[['Modify']](table)",{
 
     services <- broker |> ODBC.Storage.Service()
 
-    expected.error <- 'ODBC Storage Provider Error: entity is NULL.'
+    expected.error <- "Argument.NULL: 'entity' cannot not be NULL."
 
     # When
     entity <- NULL
@@ -454,7 +454,7 @@ describe("When entity |> service[['Modify']](table)",{
 
     services <- broker |> ODBC.Storage.Service()
 
-    expected.error <- 'ODBC Storage Provider Error: table is NULL.'
+    expected.error <- "Argument.NULL: 'table' cannot not be NULL."
 
     entity <- data.frame(Id = 1)
 
@@ -517,7 +517,7 @@ describe("When id |> service[['Remove']](table)",{
 
     services <- broker |> ODBC.Storage.Service()
 
-    expected.error <- 'ODBC Storage Provider Error: id is NULL.'
+    expected.error <- "Argument.NULL: 'id' cannot not be NULL."
 
     # When
     id <- NULL
@@ -562,7 +562,7 @@ describe("When id |> service[['Remove']](table)",{
 
     services <- broker |> ODBC.Storage.Service()
 
-    expected.error <- 'ODBC Storage Provider Error: table is NULL.'
+    expected.error <- "Argument.NULL: 'table' cannot not be NULL."
 
     id <- uuid::UUIDgenerate()
 

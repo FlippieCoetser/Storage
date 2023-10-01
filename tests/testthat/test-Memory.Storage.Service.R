@@ -100,7 +100,7 @@ describe("When model |> service[['CreateTable']](table)",{
 
     model <- NULL
 
-    expected.error <- "Memory Storage Provider Error: model is NULL."
+    expected.error <- "Argument.NULL: 'model' cannot not be NULL."
 
     # Then
     model |> service[['CreateTable']](table) |> expect.error(expected.error)
@@ -151,7 +151,7 @@ describe("When model |> service[['CreateTable']](table)",{
 
     table <- NULL
 
-    expected.error <- "Memory Storage Provider Error: table is NULL."
+    expected.error <- "Argument.NULL: 'table' cannot not be NULL."
 
     # Then
     model |> service[['CreateTable']](table) |> expect.error(expected.error)
@@ -208,7 +208,7 @@ describe("when data |> service[['SeedTable']](table)",{
     table <- 'Todo'
     seed.data  <- NULL
 
-    expected.error <- "Memory Storage Provider Error: data is NULL."
+    expected.error <- "Argument.NULL: 'data' cannot not be NULL."
 
     # Then
     seed.data |> service[['SeedTable']](table) |> expect.error(expected.error)
@@ -256,7 +256,7 @@ describe("when data |> service[['SeedTable']](table)",{
     table <- NULL
     seed.data  <- Todo.Mock.Data
 
-    expected.error <- "Memory Storage Provider Error: table is NULL."
+    expected.error <- "Argument.NULL: 'table' cannot not be NULL."
 
     # Then
     seed.data |> service[['SeedTable']](table) |> expect.error(expected.error)
@@ -330,7 +330,7 @@ describe("When entity |> service[['Add']](table)",{
       Memory.Storage.Broker() |> 
       Memory.Storage.Service()
 
-    expected.error <- "Memory Storage Provider Error: entity is NULL."
+    expected.error <- "Argument.NULL: 'entity' cannot not be NULL."
 
     # Then
     NULL |> service[['Add']](table) |> expect.error(expected.error)
@@ -392,7 +392,7 @@ describe("When entity |> service[['Add']](table)",{
       Status = 'New'
     )
 
-    expected.error <- "Memory Storage Provider Error: table is NULL."
+    expected.error <- "Argument.NULL: 'table' cannot not be NULL."
 
     # Then
     new.entity |> service[['Add']](NULL) |> expect.error(expected.error)
@@ -465,7 +465,7 @@ describe("When table |> service[['Retrieve']](fields)",{
       Memory.Storage.Broker() |> 
       Memory.Storage.Service()
 
-    expected.error <- "Memory Storage Provider Error: table is NULL."
+    expected.error <- "Argument.NULL: 'table' cannot not be NULL."
 
     # Then
     NULL |> service[['Retrieve']](fields) |> expect.error(expected.error)
@@ -529,7 +529,7 @@ describe("When id |> service[['RetrieveWhereId']](table, fields)",{
       Memory.Storage.Broker() |> 
       Memory.Storage.Service()
 
-    expected.error <- "Memory Storage Provider Error: id is NULL."
+    expected.error <- "Argument.NULL: 'id' cannot not be NULL."
 
     # Then
     NULL |> service[['RetrieveWhereId']](table, fields) |> expect.error(expected.error)
@@ -571,7 +571,7 @@ describe("When id |> service[['RetrieveWhereId']](table, fields)",{
     existing.entity <- Todo.Mock.Data |> tail(1)
     id <- existing.entity[['Id']]
 
-    expected.error <- "Memory Storage Provider Error: table is NULL."
+    expected.error <- "Argument.NULL: 'table' cannot not be NULL."
 
     # Then
     id |> service[['RetrieveWhereId']](NULL, fields) |> expect.error(expected.error)
@@ -651,7 +651,7 @@ describe("When entity |> service[['Modify']](table)",{
       Memory.Storage.Broker() |> 
       Memory.Storage.Service()
 
-    expected.error <- "Memory Storage Provider Error: entity is NULL."
+    expected.error <- "Argument.NULL: 'entity' cannot not be NULL."
 
     # Then
     NULL |> service[['Modify']](table) |> expect.error(expected.error)
@@ -696,7 +696,7 @@ describe("When entity |> service[['Modify']](table)",{
       Status = 'New'
     )
 
-    expected.error <- "Memory Storage Provider Error: table is NULL."
+    expected.error <- "Argument.NULL: 'table' cannot not be NULL."
 
     # Then
     new.entity |> service[['Modify']](NULL) |> expect.error(expected.error)
@@ -799,7 +799,7 @@ describe("when id |> service[['Remove']](table)",{
       Memory.Storage.Broker() |> 
       Memory.Storage.Service()
     
-    expected.error <- "Memory Storage Provider Error: id is NULL."
+    expected.error <- "Argument.NULL: 'id' cannot not be NULL."
 
     # Then
     NULL |> service[['Remove']](table) |> expect.error(expected.error)
@@ -846,7 +846,7 @@ describe("when id |> service[['Remove']](table)",{
     new.entity |> broker[['Insert']](table)
     id <- new.entity[['Id']]
     
-    expected.error <- "Memory Storage Provider Error: table is NULL."
+    expected.error <- "Argument.NULL: 'table' cannot not be NULL."
 
     # Then
     id |> service[['Remove']](NULL) |> expect.error(expected.error)

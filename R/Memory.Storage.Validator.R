@@ -1,33 +1,33 @@
 Memory.Storage.Validator <- \(broker = NULL) {
   exception <- Memory.Storage.Exceptions()
 
-  validators <- list()
+  validators <- Validate::Validator()
   validators[['Model']]            <- \(model) {
     model |> 
-      validators[['NotNULL']]('model') |>
-      validators[['IsDataFrame']]()    |>
+      validators[['Is.Not.NULL']]('model') |>
+      validators[['IsDataFrame']]()        |>
       validators[['IsEmpty']]()
   }
   validators[['Table']]            <- \(table) {
     table |> 
-      validators[['NotNULL']]('table') |>
+      validators[['Is.Not.NULL']]('table') |>
       validators[['IsCharacters']]()
   }
   validators[['Data']]             <- \(data) {
     data |> 
-      validators[['NotNULL']]('data') |>
+      validators[['Is.Not.NULL']]('data') |>
       validators[['IsDataFrame']]()   |>
       validators[['NotEmpty']]()
   }
-  validators[['Entity']]           <- \(input) {
-    input |> 
-      validators[['NotNULL']]('entity') |>
+  validators[['Entity']]           <- \(entity) {
+    entity |> 
+      validators[['Is.Not.NULL']]('entity') |>
       validators[['IsDataFrame']]()     |>
       validators[['HasOneRow']]()   
   }
   validators[['Id']]               <- \(id) {
     id |> 
-      validators[['NotNULL']]('id')  |>
+      validators[['Is.Not.NULL']]('id')  |>
       validators[['IsCharacters']]() |>
       validators[['Identifier']]('id')
   }

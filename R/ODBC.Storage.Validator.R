@@ -1,25 +1,26 @@
 ODBC.Storage.Validator <- \() {
   exception <- ODBC.Storage.Exceptions()
-  validators <- list()
+
+  validators <- Validate::Validator()
   validators[['Query']]        <- \(query) {
     query |> is.null() |> exception[['QueryIsNull']]()
     return(query)
   }
   validators[['Fields']]       <- \() {}
-  validators[['Entity']]       <- \(input) {
-    input |> 
-      validators[['NotNULL']]('entity') |>
+  validators[['Entity']]       <- \(entity) {
+    entity |> 
+      validators[['Is.Not.NULL']]('entity') |>
       validators[['IsDataFrame']]()     |>
       validators[['HasOneRow']]()   
   }
   validators[['Table']]        <- \(table) {
     table |> 
-      validators[['NotNULL']]('table') |>
+      validators[['Is.Not.NULL']]('table') |>
       validators[['IsCharacters']]()
   }
   validators[['Id']]           <- \(id) {
     id |> 
-      validators[['NotNULL']]('id')  |>
+      validators[['Is.Not.NULL']]('id')  |>
       validators[['IsCharacters']]() |>
       validators[['Identifier']]('id')
   }

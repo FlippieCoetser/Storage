@@ -479,8 +479,7 @@ describe("When model |> validate[['Model']]()",{
     # Given
     validate <- Memory.Storage.Validator()
     
-    variable <- 'Model'
-    expected.error <- 'Memory Storage Provider Error: model is NULL.'
+    expected.error <- "Argument.NULL: 'model' cannot not be NULL."
     
     # When
     input.model <- NULL
@@ -530,7 +529,7 @@ describe("When table |> validate[['Table']]()",{
     # Given
     validate <- Memory.Storage.Validator()
     
-    expected.error <- "Memory Storage Provider Error: table is NULL."
+    expected.error <- "Argument.NULL: 'table' cannot not be NULL."
     
     # When
     input <- NULL 
@@ -557,7 +556,7 @@ describe("When data |> validate[['Data']]()",{
     # Given
     validate <- Memory.Storage.Validator()
     
-    expected.error <- "Memory Storage Provider Error: data is NULL."
+    expected.error <- "Argument.NULL: 'data' cannot not be NULL."
     
     # When
     input <- NULL
@@ -596,7 +595,7 @@ describe("When entity |> validate[['Entity']]()",{
     # Given
     validate <- Memory.Storage.Validator()
     
-    expected.error <- "Memory Storage Provider Error: entity is NULL."
+    expected.error <- "Argument.NULL: 'entity' cannot not be NULL."
     
     # When
     input <- NULL 
@@ -645,7 +644,7 @@ describe("When id |> validate[['Id']]()",{
     # Given
     validate <- Memory.Storage.Validator()
     
-    expected.error <- "Memory Storage Provider Error: id is NULL."
+    expected.error <- "Argument.NULL: 'id' cannot not be NULL."
     
     # When
     input <- NULL 

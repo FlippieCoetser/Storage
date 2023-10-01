@@ -241,7 +241,7 @@ describe("When entity |> validate[['Entity']]()",{
     # Given
     validate <- ODBC.Storage.Validator()
     
-    expected.error <- "ODBC Storage Provider Error: entity is NULL."
+    expected.error <- "Argument.NULL: 'entity' cannot not be NULL."
     
     # When
     input <- NULL 
@@ -338,7 +338,7 @@ describe("When table |> validate[['Table']]()",{
     # Given
     validate <- ODBC.Storage.Validator()
     
-    expected.error <- "ODBC Storage Provider Error: table is NULL."
+    expected.error <- "Argument.NULL: 'table' cannot not be NULL."
     
     # When
     input <- NULL 
@@ -401,7 +401,7 @@ describe("When id |> validate[['Id']]()",{
     # Given
     validate <- ODBC.Storage.Validator()
     
-    expected.error <- "ODBC Storage Provider Error: id is NULL."
+    expected.error <- "Argument.NULL: 'id' cannot not be NULL."
     
     # When
     input <- NULL 
