@@ -20,6 +20,9 @@ ODBC.Storage.Service <- \(broker) {
     table |> broker[['Select']](fields)
   }
   services[['RetrieveWhereId']] <- \(id, table, fields) {
+    id    |> validate[['Id']]()
+
+
     id |> broker[['SelectWhereId']](table, fields)
   }
   services[['Modify']]          <- \(entity, table) {
