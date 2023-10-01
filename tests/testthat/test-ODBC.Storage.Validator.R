@@ -197,3 +197,28 @@ describe("When input |> validate[['IsDataFrame']]()",{
     actual |> expect.equal(expected)
   })
 })
+
+describe("When input |> validate[['HasOneRow']]()",{
+  it("then no exception is thrown if input has one row",{
+    # Given
+    validate <- ODBC.Storage.Validator()
+    
+    # When
+    input <- data.frame(Id = '123')  
+    
+    # Then
+    input |> validate[['HasOneRow']]() |> expect.no.error()
+  })
+  it("then an exception is thrown if input does not have one row",{
+    # Given
+    validate <- ODBC.Storage.Validator()
+    
+    expected.error <- "ODBC Storage Provider Error: Invalid number of rows. Expected 1 rows."
+    
+    # When
+    input <- data.frame(Id = c('123','456'))
+    
+    # Then
+    input |> validate[['HasOneRow']]() |> expect.error(expected.error)
+  })
+})
