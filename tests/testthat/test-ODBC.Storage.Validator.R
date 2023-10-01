@@ -322,3 +322,40 @@ describe("When input |> validate[['IsCharacters']]()",{
     actual |> expect.equal(expected)
   })
 })
+
+describe("When table |> validate[['Table']]()",{
+  it("then no exception if thrown if table is valid",{
+    # Given
+    validate <- ODBC.Storage.Validator()
+    
+    # When
+    input <- 'test'  
+    
+    # Then
+    input |> validate[['Table']]() |> expect.no.error()
+  })
+  it("then an exception is thrown if table is NULL",{
+    # Given
+    validate <- ODBC.Storage.Validator()
+    
+    expected.error <- "ODBC Storage Provider Error: table is NULL."
+    
+    # When
+    input <- NULL 
+    
+    # Then
+    input |> validate[['Table']]() |> expect.error(expected.error)
+  })
+  it('then an exception if thrown if table is not characters',{
+    # Given
+    validate <- ODBC.Storage.Validator()
+    
+    expected.error <- "ODBC Storage Provider Error: Invalid Type. Expected 'character'."
+    
+    # When
+    input <- 1
+    
+    # Then
+    input |> validate[['Table']]() |> expect.error(expected.error)
+  })
+})
