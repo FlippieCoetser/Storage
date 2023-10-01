@@ -9,7 +9,9 @@ ODBC.Storage.Validator <- \() {
   validators[['Entity']]       <- \() {}
   validators[['Table']]        <- \() {}
   validators[['Id']]           <- \() {}
-  validators[['NotNULL']]      <- \() {}
+  validators[['NotNULL']]      <- \(input, name) {
+    input |> is.null() |> exception[['IsNULL']](name)
+  }
   validators[['IsCharacters']] <- \() {}
   validators[['IsDataFrame']]  <- \() {}
   validators[['HasOneRow']]    <- \() {}
