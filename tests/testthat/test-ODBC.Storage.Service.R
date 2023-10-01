@@ -97,7 +97,7 @@ describe('When query |> service[["ExecuteQuery"]]()',{
 describe("When entity |> service[['Add']](table)",{
   it("then entity |> broker[['Insert']](table) is called",{
     # Given
-    input.entity <- list()
+    input.entity <- data.frame(Id = 1)
     input.table  <- 'table'
 
     actual.entity <- NULL
@@ -120,6 +120,85 @@ describe("When entity |> service[['Add']](table)",{
     # Then
     actual.entity |> expect.equal(expected.entity)
     actual.table  |> expect.equal(expected.table)
+  })
+  it("then an exception is thrown if entity is NULL",{
+    # Given
+    broker <- list()
+    broker[['Insert']] <- \(entity, table) {} 
+
+    services <- broker |> ODBC.Storage.Service()
+
+    expected.error <- 'ODBC Storage Provider Error: entity is NULL.'
+
+    # When
+    entity <- NULL
+
+    # Then
+    entity |> services[['Add']]('table') |> expect.error(expected.error)
+  })
+  it('then an exception is thrown if entity is not a data.frame',{
+    # Given
+    broker <- list()
+    broker[['Insert']] <- \(entity, table) {} 
+
+    services <- broker |> ODBC.Storage.Service()
+
+    expected.error <- "ODBC Storage Provider Error: Invalid Type. Expected 'data.frame'."
+
+    # When
+    entity <- list()
+
+    # Then
+    entity |> services[['Add']]('table') |> expect.error(expected.error)
+  })
+  it('then an exception is thrown if entity does not have one row',{
+    # Given
+    broker <- list()
+    broker[['Insert']] <- \(entity, table) {} 
+
+    services <- broker |> ODBC.Storage.Service()
+
+    expected.error <- "ODBC Storage Provider Error: Invalid number of rows. Expected 1 rows."
+
+    # When
+    entity <- data.frame()
+
+    # Then
+    entity |> services[['Add']]('table') |> expect.error(expected.error)
+  })
+  it('then an exception is thrown if table is NULL',{
+    # Given
+    broker <- list()
+    broker[['Insert']] <- \(entity, table) {} 
+
+    services <- broker |> ODBC.Storage.Service()
+
+    expected.error <- 'ODBC Storage Provider Error: table is NULL.'
+
+    entity <- data.frame(Id = 1)
+
+    # When
+    table <- NULL
+
+    # Then
+    entity |> services[['Add']](table) |> expect.error(expected.error)
+  })
+  it('then an exception is thrown if table is not characters',{
+    # Given
+    broker <- list()
+    broker[['Insert']] <- \(entity, table) {} 
+
+    services <- broker |> ODBC.Storage.Service()
+
+    expected.error <- "ODBC Storage Provider Error: Invalid Type. Expected 'character'."
+
+    entity <- data.frame(Id = 1)
+
+    # When
+    table <- list()
+
+    # Then
+    entity |> services[['Add']](table) |> expect.error(expected.error)
   })
 })
 
@@ -150,6 +229,37 @@ describe("When table |> service[['Retrieve']](fields)",{
     actual.fields |> expect.equal(expected.fields)
     actual.table  |> expect.equal(expected.table)
   })
+  it('then an exception is thrown if table is NULL',{
+    # Given
+    broker <- list()
+    broker[['Select']] <- \(table, fields) {} 
+
+    services <- broker |> ODBC.Storage.Service()
+
+    expected.error <- 'ODBC Storage Provider Error: table is NULL.'
+
+    # When
+    table <- NULL
+
+    # Then
+    table |> services[['Retrieve']](list()) |> expect.error(expected.error)
+  })
+  it('then an exception is thrown if table is not characters',{
+    # Given
+    broker <- list()
+    broker[['Select']] <- \(table, fields) {} 
+
+    services <- broker |> ODBC.Storage.Service()
+
+    expected.error <- "ODBC Storage Provider Error: Invalid Type. Expected 'character'."
+
+    # When
+    table <- list()
+
+    # Then
+    table |> services[['Retrieve']](list()) |> expect.error(expected.error)
+
+  })
 })
 
 describe("When id |> service[['RetrieveWhereId']](table, fields)",{
@@ -157,7 +267,7 @@ describe("When id |> service[['RetrieveWhereId']](table, fields)",{
     # Given
     input.fields <- list()
     input.table  <- 'table'
-    input.id     <- 1
+    input.id     <- uuid::UUIDgenerate()
 
     actual.fields <- NULL
     actual.table  <- NULL
@@ -184,12 +294,91 @@ describe("When id |> service[['RetrieveWhereId']](table, fields)",{
     actual.table  |> expect.equal(expected.table)
     actual.id     |> expect.equal(expected.id)
   })
+  it('then an exception is thrown if id is NULL',{
+    # Given
+    broker <- list()
+    broker[['SelectWhereId']] <- \(id, table, fields) {} 
+
+    services <- broker |> ODBC.Storage.Service()
+
+    expected.error <- 'ODBC Storage Provider Error: id is NULL.'
+
+    # When
+    id <- NULL
+
+    # Then
+    id |> services[['RetrieveWhereId']]('table', list()) |> expect.error(expected.error)
+  })
+  it('then an exception is thrown if id is not character',{
+    # Given
+    broker <- list()
+    broker[['SelectWhereId']] <- \(id, table, fields) {} 
+
+    services <- broker |> ODBC.Storage.Service()
+
+    expected.error <- "ODBC Storage Provider Error: Invalid Type. Expected 'character'."
+
+    # When
+    id <- list()
+
+    # Then
+    id |> services[['RetrieveWhereId']]('table', list()) |> expect.error(expected.error)
+  })
+  it('then an exception is thrown if id in invalid identifier',{
+    # Given
+    broker <- list()
+    broker[['SelectWhereId']] <- \(id, table, fields) {} 
+
+    services <- broker |> ODBC.Storage.Service()
+
+    expected.error <- "ODBC Storage Provider Error: Invalid identifier. Expected id to be a valid identifier."
+
+    # When
+    id <- 'a'
+
+    # Then
+    id |> services[['RetrieveWhereId']]('table', list()) |> expect.error(expected.error)
+  })
+  it('then an exception is thrown if table is NULL',{
+    # Given
+    broker <- list()
+    broker[['SelectWhereId']] <- \(id, table, fields) {} 
+
+    services <- broker |> ODBC.Storage.Service()
+
+    expected.error <- 'ODBC Storage Provider Error: table is NULL.'
+
+    id <- uuid::UUIDgenerate()
+
+    # When
+    table <- NULL
+
+    # Then
+    id |> services[['RetrieveWhereId']](table, list()) |> expect.error(expected.error)
+  })
+  it('then an exception is thrown if table is not characters',{
+    # Given
+    broker <- list()
+    broker[['SelectWhereId']] <- \(id, table, fields) {} 
+
+    services <- broker |> ODBC.Storage.Service()
+
+    expected.error <- "ODBC Storage Provider Error: Invalid Type. Expected 'character'."
+
+    id <- uuid::UUIDgenerate()
+
+    # When
+    table <- list()
+
+    # Then
+    id |> services[['RetrieveWhereId']](table, list()) |> expect.error(expected.error)
+  })
 })
 
 describe("When entity |> service[['Modify']](table)",{
   it("then entity |> broker[['Update']](table) is called",{
     # Given
-    input.entity <- list()
+    input.entity <- data.frame(Id = '123')
     input.table  <- 'table'
 
     actual.entity <- NULL
@@ -213,13 +402,92 @@ describe("When entity |> service[['Modify']](table)",{
     actual.entity |> expect.equal(expected.entity)
     actual.table  |> expect.equal(expected.table)
   })
+  it("then an exception is thrown if entity is NULL",{
+    # Given
+    broker <- list()
+    broker[['Upsert']] <- \(entity, table) {} 
+
+    services <- broker |> ODBC.Storage.Service()
+
+    expected.error <- 'ODBC Storage Provider Error: entity is NULL.'
+
+    # When
+    entity <- NULL
+
+    # Then
+    entity |> services[['Modify']]('table') |> expect.error(expected.error)
+  })
+  it('then an exception is thrown if entity is not a data.frame',{
+    # Given
+    broker <- list()
+    broker[['Upsert']] <- \(entity, table) {} 
+
+    services <- broker |> ODBC.Storage.Service()
+
+    expected.error <- "ODBC Storage Provider Error: Invalid Type. Expected 'data.frame'."
+
+    # When
+    entity <- list()
+
+    # Then
+    entity |> services[['Modify']]('table') |> expect.error(expected.error)
+  })
+  it('then an exception is thrown if entity does not have one row',{
+    # Given
+    broker <- list()
+    broker[['Upsert']] <- \(entity, table) {} 
+
+    services <- broker |> ODBC.Storage.Service()
+
+    expected.error <- "ODBC Storage Provider Error: Invalid number of rows. Expected 1 rows."
+
+    # When
+    entity <- data.frame()
+
+    # Then
+    entity |> services[['Modify']]('table') |> expect.error(expected.error)
+  })
+  it('then an exception is thrown if table is NULL',{
+    # Given
+    broker <- list()
+    broker[['Upsert']] <- \(entity, table) {} 
+
+    services <- broker |> ODBC.Storage.Service()
+
+    expected.error <- 'ODBC Storage Provider Error: table is NULL.'
+
+    entity <- data.frame(Id = 1)
+
+    # When
+    table <- NULL
+
+    # Then
+    entity |> services[['Modify']](table) |> expect.error(expected.error)
+  })
+  it('then an exception is thrown if table is not characters',{
+    # Given
+    broker <- list()
+    broker[['Upsert']] <- \(entity, table) {} 
+
+    services <- broker |> ODBC.Storage.Service()
+
+    expected.error <- "ODBC Storage Provider Error: Invalid Type. Expected 'character'."
+
+    entity <- data.frame(Id = 1)
+
+    # When
+    table <- list()
+
+    # Then
+    entity |> services[['Modify']](table) |> expect.error(expected.error)
+  })
 })
 
 describe("When id |> service[['Remove']](table)",{
   it("then id |> broker[['Delete']](table) is called",{
     # Given
     input.table <- 'table'
-    input.id    <- 1
+    input.id    <- uuid::UUIDgenerate()
 
     actual.table <- NULL
     actual.id    <- NULL
@@ -241,5 +509,84 @@ describe("When id |> service[['Remove']](table)",{
     # Then
     actual.table |> expect.equal(expected.table)
     actual.id    |> expect.equal(expected.id)
+  })
+  it('then an exception is thrown if id is NULL',{
+    # Given
+    broker <- list()
+    broker[['Delete']] <- \(id, table) {} 
+
+    services <- broker |> ODBC.Storage.Service()
+
+    expected.error <- 'ODBC Storage Provider Error: id is NULL.'
+
+    # When
+    id <- NULL
+
+    # Then
+    id |> services[['Remove']]('table') |> expect.error(expected.error)
+  })
+  it('then an exception is thrown if id is not character',{
+    # Given
+    broker <- list()
+    broker[['Delete']] <- \(id, table) {} 
+
+    services <- broker |> ODBC.Storage.Service()
+
+    expected.error <- "ODBC Storage Provider Error: Invalid Type. Expected 'character'."
+
+    # When
+    id <- list()
+
+    # Then
+    id |> services[['Remove']]('table') |> expect.error(expected.error)
+  })
+  it('then an exception is thrown if id is invalid identifier',{
+    # Given
+    broker <- list()
+    broker[['Delete']] <- \(id, table) {} 
+
+    services <- broker |> ODBC.Storage.Service()
+
+    expected.error <- "ODBC Storage Provider Error: Invalid identifier. Expected id to be a valid identifier."
+
+    # When
+    id <- 'a'
+
+    # Then
+    id |> services[['Remove']]('table') |> expect.error(expected.error)
+  })
+  it('then an exception is thrown if table is NULL',{
+    # Given
+    broker <- list()
+    broker[['Delete']] <- \(id, table) {} 
+
+    services <- broker |> ODBC.Storage.Service()
+
+    expected.error <- 'ODBC Storage Provider Error: table is NULL.'
+
+    id <- uuid::UUIDgenerate()
+
+    # When
+    table <- NULL
+
+    # Then
+    id |> services[['Remove']](table) |> expect.error(expected.error)
+  })
+  it('then an exception is thrown if table is not characters',{
+    # Given
+    broker <- list()
+    broker[['Delete']] <- \(id, table) {} 
+
+    services <- broker |> ODBC.Storage.Service()
+
+    expected.error <- "ODBC Storage Provider Error: Invalid Type. Expected 'character'."
+
+    id <- uuid::UUIDgenerate()
+
+    # When
+    table <- list()
+
+    # Then
+    id |> services[['Remove']](table) |> expect.error(expected.error)
   })
 })

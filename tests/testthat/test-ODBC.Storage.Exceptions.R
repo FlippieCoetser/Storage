@@ -110,6 +110,34 @@ describe("When exceptions <- ODBC.Storage.Exceptions()",{
     # Then
     exceptions[['QueryIsNull']] |> expect.exist()
   })
+  it('then exceptions contains InvalidType exception',{
+    # Given
+    exceptions <- ODBC.Storage.Exceptions()
+
+    # Then
+    exceptions[['InvalidType']] |> expect.exist()
+  })
+  it('then exceptions contains InvalidRows exception',{
+    # Given
+    exceptions <- ODBC.Storage.Exceptions()
+
+    # Then
+    exceptions[['InvalidRows']] |> expect.exist()
+  })
+  it('then exceptions contains InvalidIdentifier exception',{
+    # Given
+    exceptions <- ODBC.Storage.Exceptions()
+
+    # Then
+    exceptions[['InvalidIdentifier']] |> expect.exist()
+  })
+  it('then exceptions contains IsNULL exception',{
+    # Given
+    exceptions <- ODBC.Storage.Exceptions()
+
+    # Then
+    exceptions[['IsNULL']] |> expect.exist()
+  })
 })
 
 describe("when input |> exception[['ConfigIsNull']]()",{
@@ -497,5 +525,106 @@ describe("when input |> exception[['QueryIsNull']]()",{
 
     # Then
     input |> exception[["QueryIsNull"]]() |> expect_error(expected.error)
+  })
+})
+
+describe("When input |> exception[['InvalidType']](type)", {
+  it("then no exception is thrown if input is FALSE", {
+    # Given
+    exception <- ODBC.Storage.Exceptions()
+    
+    # When
+    input <- FALSE
+    
+    # Then
+    input |> exception[['InvalidType']]() |> expect.no.error()
+  })
+  it("then an exception is thrown if input is TRUE", {
+    # Given
+    exception <- ODBC.Storage.Exceptions()
+    
+    type <- 'data.frame'
+    expected.error <- paste0("ODBC Storage Provider Error: Invalid Type. Expected '", type,"'.")
+    # When
+    input <- TRUE
+    
+    # Then
+    input |> exception[['InvalidType']](type) |> expect.error(expected.error)
+  })
+})
+
+describe("When input |> exception[['InvalidRows']](count)", {
+  it("then no exception is thrown if input is FALSE", {
+    # Given
+    exception <- ODBC.Storage.Exceptions()
+    
+    # When
+    input <- FALSE
+    
+    # Then
+    input |> exception[['InvalidRows']]() |> expect.no.error()
+  })
+  it("then an exception is thrown if input is TRUE", {
+    # Given
+    exception <- ODBC.Storage.Exceptions()
+    
+    count <- 0
+    expected.error <- paste0("ODBC Storage Provider Error: Invalid number of rows. Expected ",count," rows.")
+    # When
+    input <- TRUE
+    
+    # Then
+    input |> exception[['InvalidRows']](count) |> expect.error(expected.error)
+  })
+})
+
+describe("When input |> exception[['InvalidIdentifier']](name)", {
+  it("then no exception is thrown if input is FALSE", {
+    # Given
+    exception <- ODBC.Storage.Exceptions()
+    
+    # When
+    input <- FALSE
+    
+    # Then
+    input |> exception[['InvalidIdentifier']]() |> expect.no.error()
+  })
+  it("then an exception is thrown if input is TRUE", {
+    # Given
+    exception <- ODBC.Storage.Exceptions()
+
+    name <- 'name'
+    
+    expected.error <- paste0("ODBC Storage Provider Error: Invalid identifier. Expected ",name," to be a valid identifier.")
+    # When
+    input <- TRUE
+    
+    # Then
+    input |> exception[['InvalidIdentifier']](name) |> expect.error(expected.error)
+  })
+})
+
+describe("When input |> exception[['IsNULL']](variable)", {
+  it("then no exception is thrown if input is FALSE", {
+    # Given
+    exception <- ODBC.Storage.Exceptions()
+    
+    # When
+    input <- FALSE
+    
+    # Then
+    input |> exception[['IsNULL']]() |> expect.no.error()
+  })
+  it("then an exception is thrown if input is TRUE", {
+    # Given
+    exception <- ODBC.Storage.Exceptions()
+    
+    variable <- 'variable'
+    expected.error <- paste0("ODBC Storage Provider Error: ",variable, " is NULL.")
+    # When
+    input <- TRUE
+    
+    # Then
+    input |> exception[['IsNULL']](variable) |> expect.error(expected.error)
   })
 })

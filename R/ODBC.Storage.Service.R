@@ -9,18 +9,32 @@ ODBC.Storage.Service <- \(broker) {
     query |> broker[['ExecuteQuery']]()
   }
   services[['Add']]             <- \(entity, table) {
+    entity |> validate[['Entity']]()
+    table  |> validate[['Table']]()
+
     entity |> broker[['Insert']](table)
   }
   services[['Retrieve']]        <- \(table, fields) {
+    table |> validate[['Table']]()
+
     table |> broker[['Select']](fields)
   }
   services[['RetrieveWhereId']] <- \(id, table, fields) {
+    id    |> validate[['Id']]()
+    table |> validate[['Table']]()
+
     id |> broker[['SelectWhereId']](table, fields)
   }
   services[['Modify']]          <- \(entity, table) {
+    entity |> validate[['Entity']]()
+    table  |> validate[['Table']]()
+    
     entity |> broker[['Update']](table)
   }
   services[['Remove']]          <- \(id, table) {
+    id    |> validate[['Id']]()
+    table |> validate[['Table']]()
+
     id |> broker[['Delete']](table)
   }
   return(services)
