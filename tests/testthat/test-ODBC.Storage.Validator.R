@@ -359,3 +359,27 @@ describe("When table |> validate[['Table']]()",{
     input |> validate[['Table']]() |> expect.error(expected.error)
   })
 })
+
+describe("When id |> validate[['Identifier']](name)",{
+  it('then no exception is thrown if id is a valid unique identifier',{
+    # Given
+    validate <- ODBC.Storage.Validator()
+
+    valid.id <- uuid::UUIDgenerate()
+    
+    # Then
+    valid.id |> validate[['Identifier']]() |> expect.no.error()
+  })
+  it('then an exception is thrown if id is an invalid identifier',{
+    # Given
+    validate <- ODBC.Storage.Validator()
+
+    name       <- 'id'
+    invalid.id <- '123'
+    
+    expected.error <- "ODBC Storage Provider Error: Invalid identifier. Expected id to be a valid identifier."
+    
+    # Then
+    invalid.id |> validate[['Identifier']](name) |> expect.error(expected.error)
+  })
+})
