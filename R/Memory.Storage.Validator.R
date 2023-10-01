@@ -5,60 +5,31 @@ Memory.Storage.Validator <- \(broker = NULL) {
   validators[['Model']]            <- \(model) {
     model |> 
       validators[['Is.Not.NULL']]('model') |>
-      validators[['IsDataFrame']]()        |>
-      validators[['IsEmpty']]()
+      validators[['Is.Data.Frame']]()      |>
+      validators[['Is.Empty']]()
   }
   validators[['Table']]            <- \(table) {
     table |> 
       validators[['Is.Not.NULL']]('table') |>
-      validators[['IsCharacters']]()
+      validators[['Is.Character']]()
   }
   validators[['Data']]             <- \(data) {
     data |> 
       validators[['Is.Not.NULL']]('data') |>
-      validators[['IsDataFrame']]()   |>
-      validators[['NotEmpty']]()
+      validators[['Is.Data.Frame']]()     |>
+      validators[['Is.Not.Empty']]()
   }
   validators[['Entity']]           <- \(entity) {
     entity |> 
       validators[['Is.Not.NULL']]('entity') |>
-      validators[['IsDataFrame']]()     |>
-      validators[['HasOneRow']]()   
+      validators[['Is.Data.Frame']]()       |>
+      validators[['Has.One.Row']]()   
   }
   validators[['Id']]               <- \(id) {
     id |> 
-      validators[['Is.Not.NULL']]('id')  |>
-      validators[['IsCharacters']]() |>
-      validators[['Identifier']]('id')
-  }
-  validators[['Identifier']]       <- \(id, name) {
-    pattern <- "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
-    pattern |> grepl(id) |> isFALSE() |> exception[['InvalidIdentifier']](name)
-    return(id)
-  }
-  validators[['IsEmpty']]          <- \(input) {
-    input |> nrow() |> (\(x) x != 0)() |> exception[['InvalidRows']](0)
-    return(input)
-  }
-  validators[['HasOneRow']]        <- \(input) {
-    input |> nrow() |> (\(x) x != 1)() |> exception[['InvalidRows']](1)
-    return(input)
-  }
-  validators[['NotEmpty']]         <- \(input) {
-    input |> nrow() |> (\(x) x == 0)() |> exception[['InvalidRows']]('>0')
-    return(input)
-  }
-  validators[['NotNULL']]          <- \(input, name) {
-    input |> is.null() |> exception[['IsNULL']](name)
-    return(input)
-  }
-  validators[['IsDataFrame']]      <- \(input) {
-    input |> is.data.frame() |> isFALSE() |> exception[['InvalidType']]('data.frame')
-    return(input)
-  }
-  validators[['IsCharacters']]     <- \(input) {
-    input |> is.character() |> isFALSE() |> exception[['InvalidType']]('character')
-    return(input)
+      validators[['Is.Not.NULL']]('id') |>
+      validators[['Is.Character']]()    |>
+      validators[['Is.UUID']]('id')
   }
   validators[['NoImplementation']] <- \(input) {
     input |> exception[['NoExecuteQuery']]()

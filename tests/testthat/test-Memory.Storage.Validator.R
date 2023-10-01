@@ -12,48 +12,6 @@ describe("When validators <- Memory.Storage.Validator()",{
     # Then
     validators |> expect.list()
   })
-  it('then validators contains NotNULL validator',{
-    # When
-    validators <- Memory.Storage.Validator()
-    
-    # Then
-    validators[['NotNULL']] |> expect.exist()
-  })
-  it('then validators contains IsDataFrame validator',{
-    # When
-    validators <- Memory.Storage.Validator()
-    
-    # Then
-    validators[['IsDataFrame']] |> expect.exist()
-  })
-  it('then validators contains IsCharacters validator',{
-    # When
-    validators <- Memory.Storage.Validator()
-    
-    # Then
-    validators[['IsCharacters']] |> expect.exist()
-  })
-  it('then validators contains IsEmpty validator',{
-    # When
-    validators <- Memory.Storage.Validator()
-    
-    # Then
-    validators[['IsEmpty']] |> expect.exist()
-  })
-  it('then validators contains HasOneRow validator',{
-    # When
-    validators <- Memory.Storage.Validator()
-    
-    # Then
-    validators[['HasOneRow']] |> expect.exist()
-  })
-  it('then validators contains NotEmpty validator',{
-    # When
-    validators <- Memory.Storage.Validator()
-    
-    # Then
-    validators[['NotEmpty']] |> expect.exist()
-  })
   it('then validators contains Model validator',{
     # When
     validators <- Memory.Storage.Validator()
@@ -89,13 +47,6 @@ describe("When validators <- Memory.Storage.Validator()",{
     # Then
     validators[['Id']] |> expect.exist()
   })
-  it('then validators contains Identifier validator',{
-    # When
-    validators <- Memory.Storage.Validator()
-    
-    # Then
-    validators[['Identifier']] |> expect.exist()
-  })
   it('then validators contains NoImplementation validator',{
    # When
    validators <- Memory.Storage.Validator()
@@ -116,237 +67,6 @@ describe("When validators <- Memory.Storage.Validator()",{
    
    # Then
    validators[['EntityExist']] |> expect.exist()
-  })
-})
-
-describe("When input |> validate[['NotNULL']](name)",{
-  it("then no exception is thrown if input is not NULL",{
-    # Given
-    validate <- Memory.Storage.Validator()
-    
-    # When
-    name  <- 'input'
-    input <- ''
-    
-    # Then
-    input |> validate[['NotNULL']](name) |> expect.no.error()
-  })
-  it("then an exception is thrown if input is NULL",{
-    # Given
-    validate <- Memory.Storage.Validator()
-
-    name <- 'input'
-    expected.error <- paste0('Memory Storage Provider Error: ',name,' is NULL.')
-    
-    # When
-    input <- NULL 
-    
-    # Then
-    input |> validate[['NotNULL']](name) |> expect.error(expected.error)
-  })
-  it("then input is returned if input is not NULL",{
-    # Given
-    validate <- Memory.Storage.Validator()
-    
-    input <- list()
-    
-    expected <- input
-    
-    # When
-    actual <- input |> validate[['NotNULL']]()
-    
-    # Then
-    actual |> expect.equal(expected)
-  })
-})
-
-describe("When input |> validate[['IsEmpty']]()",{
-  it("then no exception is thrown if input is empty data.frame",{
-    # Given
-    validate <- Memory.Storage.Validator()
-    
-    # When
-    input <- data.frame()
-
-    # Then
-    input |> validate[['IsEmpty']]() |> expect.no.error()
-  })
-  it("then an exception is thrown if input is not empty data.frame",{
-    # Given
-    validate <- Memory.Storage.Validator()
-    
-    expected.error <- "Memory Storage Provider Error: Invalid number of rows. Expected 0 rows."
-    
-    # When
-    input <- data.frame(Id = '123')
-    
-    # Then
-    input |> validate[['IsEmpty']]() |> expect.error(expected.error)
-  })
-  it("then input is returned if input is empty data.frame",{
-    # Given
-    validate <- Memory.Storage.Validator()
-    
-    input    <- data.frame()
-    expected <- input
-    
-    # When
-    actual <- input |> validate[['IsEmpty']]()
-    
-    # Then
-    actual |> expect.equal(expected)
-  })
-})
-
-describe("When input |> validate[['HasOneRow']]()",{
-  it("then no exception is thrown if input has one row",{
-    # Given
-    validate <- Memory.Storage.Validator()
-    
-    # When
-    input <- data.frame(Id = '123')  
-    
-    # Then
-    input |> validate[['HasOneRow']]() |> expect.no.error()
-  })
-  it("then an exception is thrown if input does not have one row",{
-    # Given
-    validate <- Memory.Storage.Validator()
-    
-    expected.error <- "Memory Storage Provider Error: Invalid number of rows. Expected 1 rows."
-    
-    # When
-    input <- data.frame(Id = c('123','456'))
-    
-    # Then
-    input |> validate[['HasOneRow']]() |> expect.error(expected.error)
-  })
-  it('then input is returned if input has one row',{
-    # Given
-    validate <- Memory.Storage.Validator()
-    
-    input    <- data.frame(Id = '123')
-    expected <- input
-    
-    # When
-    actual <- input |> validate[['HasOneRow']]()
-    
-    # Then
-    actual |> expect.equal(expected)
-  })
-})
-
-describe("When input |> validate[['NotEmpty']]()",{
-  it("then no exception is thrown if input is not empty",{
-    # Given
-    validate <- Memory.Storage.Validator()
-    
-    # When
-    input <- data.frame(Id = '123')
-    
-    # Then
-    input |> validate[['NotEmpty']]() |> expect.no.error()
-  })
-  it("then an exception is thrown if input is empty",{
-    # Given
-    validate <- Memory.Storage.Validator()
-    
-    expected.error <- 'Memory Storage Provider Error: Invalid number of rows. Expected >0 rows.'
-    
-    # When
-    input <- data.frame()
-    
-    # Then
-    input |> validate[['NotEmpty']]() |> expect.error(expected.error)
-  })
-  it("then input is returned if input is not empty",{
-    # Given
-    validate <- Memory.Storage.Validator()
-    
-    input    <- data.frame(Id = '123')
-    expected <- input
-    
-    # When
-    actual <- input |> validate[['NotEmpty']]()
-    
-    # Then
-    actual |> expect.equal(expected)
-  })
-})
-
-describe("When input |> validate[['IsDataFrame']]()",{
-  it("then no exception is thrown if input is a data.frame",{
-    # Given
-    validate <- Memory.Storage.Validator()
-    
-    # When
-    input <- data.frame()
- 
-    # Then
-    input |> validate[['IsDataFrame']]() |> expect.no.error()
-  })
-  it("then an exception is thrown if input is NULL",{
-    # Given
-    validate <- Memory.Storage.Validator()
-    
-    expected.error <- "Memory Storage Provider Error: Invalid Type. Expected 'data.frame'."
-    
-    # When
-    input <- list()
-    
-    # Then
-    input |> validate[['IsDataFrame']]() |> expect.error(expected.error)
-  })
-  it("then input is returned if input has member",{
-    # Given
-    validate <- Memory.Storage.Validator()
-    
-    input    <- data.frame()
-    expected <- input
-    
-    # When
-    actual <- input |> validate[['IsDataFrame']]()
-    
-    # Then
-    actual |> expect.equal(expected)
-  })
-})
-
-describe("When input |> validate[['IsCharacters']]()",{
-  it("then no exception is thrown if input is characters",{
-    # Given
-    validate <- Memory.Storage.Validator()
-    
-    # When
-    input <- 'test'  
-    
-    # Then
-    input |> validate[['IsCharacters']]() |> expect.no.error()
-  })
-  it("then an exception is thrown if input is not characters",{
-    # Given
-    validate <- Memory.Storage.Validator()
-    
-    expected.error <- "Memory Storage Provider Error: Invalid Type. Expected 'character'."
-    
-    # When
-    input <- 1
-    
-    # Then
-    input |> validate[['IsCharacters']]() |> expect.error(expected.error)
-  })
-  it("then input is returned if input has member",{
-    # Given
-    validate <- Memory.Storage.Validator()
-    
-    input    <- 'test'
-    expected <- input
-    
-    # When
-    actual <- input |> validate[['IsCharacters']]()
-    
-    # Then
-    actual |> expect.equal(expected)
   })
 })
 
@@ -491,7 +211,7 @@ describe("When model |> validate[['Model']]()",{
     # Given
     validate <- Memory.Storage.Validator()
     
-    expected.error <- "Memory Storage Provider Error: Invalid Type. Expected 'data.frame'."
+    expected.error <- "Type.Mismatch: Got 'list' but expected 'data.frame'."
     
     # When
     input.model <- list()
@@ -541,7 +261,7 @@ describe("When table |> validate[['Table']]()",{
     # Given
     validate <- Memory.Storage.Validator()
     
-    expected.error <- "Memory Storage Provider Error: Invalid Type. Expected 'character'."
+    expected.error <- "Type.Mismatch: Got 'numeric' but expected 'character'."
     
     # When
     input <- 1
@@ -568,7 +288,7 @@ describe("When data |> validate[['Data']]()",{
     # Given
     validate <- Memory.Storage.Validator()
     
-    expected.error <- "Memory Storage Provider Error: Invalid Type. Expected 'data.frame'."
+    expected.error <- "Type.Mismatch: Got 'list' but expected 'data.frame'."
     
     # When
     input <- list()
@@ -580,7 +300,7 @@ describe("When data |> validate[['Data']]()",{
     # Given
     validate <- Memory.Storage.Validator()
     
-    expected.error <- "Memory Storage Provider Error: Invalid number of rows. Expected >0 rows."
+    expected.error <- "Rows.Invalid: Got 0 rows but expected >0 rows."
     
     # When
     input <- data.frame()
@@ -607,7 +327,7 @@ describe("When entity |> validate[['Entity']]()",{
     # Given
     validate <- Memory.Storage.Validator()
     
-    expected.error <- "Memory Storage Provider Error: Invalid Type. Expected 'data.frame'."
+    expected.error <- "Type.Mismatch: Got 'list' but expected 'data.frame'."
     
     # When
     input <- list()
@@ -619,7 +339,7 @@ describe("When entity |> validate[['Entity']]()",{
     # Given
     validate <- Memory.Storage.Validator()
     
-    expected.error <- "Memory Storage Provider Error: Invalid number of rows. Expected 1 rows."
+    expected.error <- "Rows.Invalid: Got 0 rows but expected 1 rows."
     
     # When
     input <- data.frame()
@@ -656,7 +376,7 @@ describe("When id |> validate[['Id']]()",{
     # Given
     validate <- Memory.Storage.Validator()
     
-    expected.error <- "Memory Storage Provider Error: Invalid Type. Expected 'character'."
+    expected.error <- "Type.Mismatch: Got 'numeric' but expected 'character'."
     
     # When
     input <- 1
@@ -668,7 +388,7 @@ describe("When id |> validate[['Id']]()",{
     # Given
     validate <- Memory.Storage.Validator()
     
-    expected.error <- "Memory Storage Provider Error: Invalid identifier. Expected id to be a valid identifier."
+    expected.error <- "Identifier.Invalid: 'id' is not a valid UUID."
     
     # When
     input <- ''
@@ -685,50 +405,5 @@ describe("When id |> validate[['Id']]()",{
     
     # Then
     input |> validate[['Id']]() |> expect.no.error()
-  })
-})
-
-describe("When id |> validate[['Identifier']](name)",{
-  it('then no exception is thrown if id is a valid unique identifier',{
-    # Given
-    configuration <- data.frame()
-
-    broker <- configuration |> Memory.Storage.Broker()
-    validator <- broker |> Memory.Storage.Validator()
-
-    valid.id <- uuid::UUIDgenerate()
-    
-    # Then
-    valid.id |> validator[['Identifier']]() |> expect.no.error()
-  })
-  it('then an exception is thrown if id is an invalid identifier',{
-    # Given
-    configuration <- data.frame()
-
-    broker <- configuration |> Memory.Storage.Broker()
-    validator <- broker |> Memory.Storage.Validator()
-
-    name       <- 'id'
-    invalid.id <- 'InvalidIdentifier'
-    
-    expected.error <- paste0('Memory Storage Provider Error: Invalid identifier. Expected ',name,' to be a valid identifier.')
-    
-    # Then
-    invalid.id |> validator[['Identifier']](name) |> expect.error(expected.error)
-  })
-  it('then returns id if id is a valid unique identifier',{
-    # Given
-    configuration <- data.frame()
-
-    broker <- configuration |> Memory.Storage.Broker()
-    validator <- broker |> Memory.Storage.Validator()
-
-    valid.id <- uuid::UUIDgenerate()
-    
-    # When
-    actual <- valid.id |> validator[['Identifier']]()
-    
-    # Then
-    actual |> expect.equal(valid.id)
   })
 })

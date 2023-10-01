@@ -10,40 +10,19 @@ ODBC.Storage.Validator <- \() {
   validators[['Entity']]       <- \(entity) {
     entity |> 
       validators[['Is.Not.NULL']]('entity') |>
-      validators[['IsDataFrame']]()     |>
-      validators[['HasOneRow']]()   
+      validators[['Is.Data.Frame']]()       |>
+      validators[['Has.One.Row']]()   
   }
   validators[['Table']]        <- \(table) {
     table |> 
       validators[['Is.Not.NULL']]('table') |>
-      validators[['IsCharacters']]()
+      validators[['Is.Character']]()
   }
   validators[['Id']]           <- \(id) {
     id |> 
-      validators[['Is.Not.NULL']]('id')  |>
-      validators[['IsCharacters']]() |>
-      validators[['Identifier']]('id')
-  }
-  validators[['NotNULL']]      <- \(input, name) {
-    input |> is.null() |> exception[['IsNULL']](name)
-    return(input)
-  }
-  validators[['IsCharacters']] <- \(input) {
-    input |> is.character() |> isFALSE() |> exception[['InvalidType']]('character')
-    return(input)
-  }
-  validators[['IsDataFrame']]  <- \(input) {
-    input |> is.data.frame() |> isFALSE() |> exception[['InvalidType']]('data.frame')
-    return(input)
-  }
-  validators[['HasOneRow']]    <- \(input) {
-    input |> nrow() |> (\(x) x != 1)() |> exception[['InvalidRows']](1)
-    return(input)
-  }
-  validators[['Identifier']]   <- \(id, name) {
-    pattern <- "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
-    pattern |> grepl(id) |> isFALSE() |> exception[['InvalidIdentifier']](name)
-    return(id)
+      validators[['Is.Not.NULL']]('id') |>
+      validators[['Is.Character']]()    |>
+      validators[['Is.UUID']]('id')
   }
   return(validators)
 }

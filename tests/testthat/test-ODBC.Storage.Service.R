@@ -143,7 +143,7 @@ describe("When entity |> service[['Add']](table)",{
 
     services <- broker |> ODBC.Storage.Service()
 
-    expected.error <- "ODBC Storage Provider Error: Invalid Type. Expected 'data.frame'."
+    expected.error <- "Type.Mismatch: Got 'list' but expected 'data.frame'."
 
     # When
     entity <- list()
@@ -158,7 +158,7 @@ describe("When entity |> service[['Add']](table)",{
 
     services <- broker |> ODBC.Storage.Service()
 
-    expected.error <- "ODBC Storage Provider Error: Invalid number of rows. Expected 1 rows."
+    expected.error <- "Rows.Invalid: Got 0 rows but expected 1 rows."
 
     # When
     entity <- data.frame()
@@ -190,7 +190,7 @@ describe("When entity |> service[['Add']](table)",{
 
     services <- broker |> ODBC.Storage.Service()
 
-    expected.error <- "ODBC Storage Provider Error: Invalid Type. Expected 'character'."
+    expected.error <- "Type.Mismatch: Got 'list' but expected 'character'."
 
     entity <- data.frame(Id = 1)
 
@@ -251,7 +251,7 @@ describe("When table |> service[['Retrieve']](fields)",{
 
     services <- broker |> ODBC.Storage.Service()
 
-    expected.error <- "ODBC Storage Provider Error: Invalid Type. Expected 'character'."
+    expected.error <- "Type.Mismatch: Got 'list' but expected 'character'."
 
     # When
     table <- list()
@@ -316,7 +316,7 @@ describe("When id |> service[['RetrieveWhereId']](table, fields)",{
 
     services <- broker |> ODBC.Storage.Service()
 
-    expected.error <- "ODBC Storage Provider Error: Invalid Type. Expected 'character'."
+    expected.error <- "Type.Mismatch: Got 'list' but expected 'character'."
 
     # When
     id <- list()
@@ -331,7 +331,7 @@ describe("When id |> service[['RetrieveWhereId']](table, fields)",{
 
     services <- broker |> ODBC.Storage.Service()
 
-    expected.error <- "ODBC Storage Provider Error: Invalid identifier. Expected id to be a valid identifier."
+    expected.error <- "Identifier.Invalid: 'id' is not a valid UUID."
 
     # When
     id <- 'a'
@@ -363,7 +363,7 @@ describe("When id |> service[['RetrieveWhereId']](table, fields)",{
 
     services <- broker |> ODBC.Storage.Service()
 
-    expected.error <- "ODBC Storage Provider Error: Invalid Type. Expected 'character'."
+    expected.error <- "Type.Mismatch: Got 'list' but expected 'character'."
 
     id <- uuid::UUIDgenerate()
 
@@ -424,7 +424,7 @@ describe("When entity |> service[['Modify']](table)",{
 
     services <- broker |> ODBC.Storage.Service()
 
-    expected.error <- "ODBC Storage Provider Error: Invalid Type. Expected 'data.frame'."
+    expected.error <- "Type.Mismatch: Got 'list' but expected 'data.frame'."
 
     # When
     entity <- list()
@@ -439,7 +439,7 @@ describe("When entity |> service[['Modify']](table)",{
 
     services <- broker |> ODBC.Storage.Service()
 
-    expected.error <- "ODBC Storage Provider Error: Invalid number of rows. Expected 1 rows."
+    expected.error <- "Rows.Invalid: Got 0 rows but expected 1 rows."
 
     # When
     entity <- data.frame()
@@ -471,7 +471,7 @@ describe("When entity |> service[['Modify']](table)",{
 
     services <- broker |> ODBC.Storage.Service()
 
-    expected.error <- "ODBC Storage Provider Error: Invalid Type. Expected 'character'."
+    expected.error <- "Type.Mismatch: Got 'list' but expected 'character'."
 
     entity <- data.frame(Id = 1)
 
@@ -532,7 +532,7 @@ describe("When id |> service[['Remove']](table)",{
 
     services <- broker |> ODBC.Storage.Service()
 
-    expected.error <- "ODBC Storage Provider Error: Invalid Type. Expected 'character'."
+    expected.error <- "Type.Mismatch: Got 'list' but expected 'character'."
 
     # When
     id <- list()
@@ -547,7 +547,7 @@ describe("When id |> service[['Remove']](table)",{
 
     services <- broker |> ODBC.Storage.Service()
 
-    expected.error <- "ODBC Storage Provider Error: Invalid identifier. Expected id to be a valid identifier."
+    expected.error <- "Identifier.Invalid: 'id' is not a valid UUID."
 
     # When
     id <- 'a'
@@ -579,7 +579,7 @@ describe("When id |> service[['Remove']](table)",{
 
     services <- broker |> ODBC.Storage.Service()
 
-    expected.error <- "ODBC Storage Provider Error: Invalid Type. Expected 'character'."
+    expected.error <- "Type.Mismatch: Got 'list' but expected 'character'."
 
     id <- uuid::UUIDgenerate()
 

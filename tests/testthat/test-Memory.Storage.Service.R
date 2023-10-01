@@ -115,7 +115,7 @@ describe("When model |> service[['CreateTable']](table)",{
 
     model <- list()
 
-    expected.error <- "Memory Storage Provider Error: Invalid Type. Expected 'data.frame'."
+    expected.error <- "Type.Mismatch: Got 'list' but expected 'data.frame'."
 
     # Then
     model |> service[['CreateTable']](table) |> expect.error(expected.error)
@@ -130,7 +130,7 @@ describe("When model |> service[['CreateTable']](table)",{
 
     model <- data.frame(Id =  '123')
 
-    expected.error <- "Memory Storage Provider Error: Invalid number of rows. Expected 0 rows."
+    expected.error <- "Rows.Invalid: Got 1 rows but expected 0 rows."
 
     # Then
     model |> service[['CreateTable']](table) |> expect.error(expected.error)
@@ -172,7 +172,7 @@ describe("When model |> service[['CreateTable']](table)",{
 
     table <- 123
 
-    expected.error <- "Memory Storage Provider Error: Invalid Type. Expected 'character'."
+    expected.error <- "Type.Mismatch: Got 'numeric' but expected 'character'."
 
     # Then
     model |> service[['CreateTable']](table) |> expect.error(expected.error)
@@ -224,7 +224,7 @@ describe("when data |> service[['SeedTable']](table)",{
     table <- 'Todo'
     seed.data  <- list()
 
-    expected.error <- "Memory Storage Provider Error: Invalid Type. Expected 'data.frame'."
+    expected.error <- "Type.Mismatch: Got 'list' but expected 'data.frame'."
 
     # Then
     seed.data |> service[['SeedTable']](table) |> expect.error(expected.error)
@@ -240,7 +240,7 @@ describe("when data |> service[['SeedTable']](table)",{
     table <- 'Todo'
     seed.data  <- data.frame()
 
-    expected.error <- "Memory Storage Provider Error: Invalid number of rows. Expected >0 rows."
+    expected.error <- "Rows.Invalid: Got 0 rows but expected >0 rows."
 
     # Then
     seed.data |> service[['SeedTable']](table) |> expect.error(expected.error)
@@ -272,7 +272,7 @@ describe("when data |> service[['SeedTable']](table)",{
     table <- 123
     seed.data  <- Todo.Mock.Data
 
-    expected.error <- "Memory Storage Provider Error: Invalid Type. Expected 'character'."
+    expected.error <- "Type.Mismatch: Got 'numeric' but expected 'character'."
 
     # Then
     seed.data |> service[['SeedTable']](table) |> expect.error(expected.error)
@@ -343,7 +343,7 @@ describe("When entity |> service[['Add']](table)",{
       Memory.Storage.Broker() |> 
       Memory.Storage.Service()
 
-    expected.error <- "Memory Storage Provider Error: Invalid Type. Expected 'data.frame'."
+    expected.error <- "Type.Mismatch: Got 'list' but expected 'data.frame'."
 
     # Then
     list() |> service[['Add']](table) |> expect.error(expected.error)
@@ -356,7 +356,7 @@ describe("When entity |> service[['Add']](table)",{
       Memory.Storage.Broker() |> 
       Memory.Storage.Service()
 
-    expected.error <- "Memory Storage Provider Error: Invalid number of rows. Expected 1 rows."
+    expected.error <- "Rows.Invalid: Got 0 rows but expected 1 rows."
 
     # Then
     data.frame() |> service[['Add']](table) |> expect.error(expected.error)
@@ -411,7 +411,7 @@ describe("When entity |> service[['Add']](table)",{
       Status = 'New'
     )
 
-    expected.error <- "Memory Storage Provider Error: Invalid Type. Expected 'character'."
+    expected.error <- "Type.Mismatch: Got 'numeric' but expected 'character'."
 
     # Then
     new.entity |> service[['Add']](123) |> expect.error(expected.error)
@@ -478,7 +478,7 @@ describe("When table |> service[['Retrieve']](fields)",{
       Memory.Storage.Broker() |> 
       Memory.Storage.Service()
 
-    expected.error <- "Memory Storage Provider Error: Invalid Type. Expected 'character'."
+    expected.error <- "Type.Mismatch: Got 'numeric' but expected 'character'."
 
     # Then
     123 |> service[['Retrieve']](fields) |> expect.error(expected.error)
@@ -542,7 +542,7 @@ describe("When id |> service[['RetrieveWhereId']](table, fields)",{
       Memory.Storage.Broker() |> 
       Memory.Storage.Service()
 
-    expected.error <- "Memory Storage Provider Error: Invalid Type. Expected 'character'."
+    expected.error <- "Type.Mismatch: Got 'numeric' but expected 'character'."
 
     # Then
     123 |> service[['RetrieveWhereId']](table, fields) |> expect.error(expected.error)
@@ -555,7 +555,7 @@ describe("When id |> service[['RetrieveWhereId']](table, fields)",{
       Memory.Storage.Broker() |> 
       Memory.Storage.Service()
 
-    expected.error <- "Memory Storage Provider Error: Invalid identifier."
+    expected.error <- "Identifier.Invalid: 'id' is not a valid UUID."
 
     # Then
     'InvalidId' |> service[['RetrieveWhereId']](table, fields) |> expect.error(expected.error)
@@ -587,7 +587,7 @@ describe("When id |> service[['RetrieveWhereId']](table, fields)",{
     existing.entity <- Todo.Mock.Data |> tail(1)
     id <- existing.entity[['Id']]
 
-    expected.error <- "Memory Storage Provider Error: Invalid Type. Expected 'character'."
+    expected.error <- "Type.Mismatch: Got 'numeric' but expected 'character'."
 
     # Then
     id |> service[['RetrieveWhereId']](123, fields) |> expect.error(expected.error)
@@ -664,7 +664,7 @@ describe("When entity |> service[['Modify']](table)",{
       Memory.Storage.Broker() |> 
       Memory.Storage.Service()
 
-    expected.error <- "Memory Storage Provider Error: Invalid Type. Expected 'data.frame'."
+    expected.error <- "Type.Mismatch: Got 'list' but expected 'data.frame'."
 
     # Then
     list() |> service[['Modify']](table) |> expect.error(expected.error)
@@ -677,7 +677,7 @@ describe("When entity |> service[['Modify']](table)",{
       Memory.Storage.Broker() |> 
       Memory.Storage.Service()
 
-    expected.error <- "Memory Storage Provider Error: Invalid number of rows. Expected 1 rows."
+    expected.error <- "Rows.Invalid: Got 0 rows but expected 1 rows."
 
     # Then
     data.frame() |> service[['Modify']](table) |> expect.error(expected.error)
@@ -715,7 +715,7 @@ describe("When entity |> service[['Modify']](table)",{
       Status = 'New'
     )
 
-    expected.error <- "Memory Storage Provider Error: Invalid Type. Expected 'character'."
+    expected.error <- "Type.Mismatch: Got 'numeric' but expected 'character'."
 
     # Then
     new.entity |> service[['Modify']](123) |> expect.error(expected.error)
@@ -812,7 +812,7 @@ describe("when id |> service[['Remove']](table)",{
       Memory.Storage.Broker() |> 
       Memory.Storage.Service()
     
-    expected.error <- "Memory Storage Provider Error: Invalid Type. Expected 'character'."
+    expected.error <- "Type.Mismatch: Got 'numeric' but expected 'character'."
 
     # Then
     123 |> service[['Remove']](table) |> expect.error(expected.error)
@@ -825,7 +825,7 @@ describe("when id |> service[['Remove']](table)",{
       Memory.Storage.Broker() |> 
       Memory.Storage.Service()
     
-    expected.error <- "Memory Storage Provider Error: Invalid identifier."
+    expected.error <- "Identifier.Invalid: 'id' is not a valid UUID."
 
     # Then
     'InvalidId' |> service[['Remove']](table) |> expect.error(expected.error)
@@ -867,7 +867,7 @@ describe("when id |> service[['Remove']](table)",{
     new.entity |> broker[['Insert']](table)
     id <- new.entity[['Id']]
     
-    expected.error <- "Memory Storage Provider Error: Invalid Type. Expected 'character'."
+    expected.error <- "Type.Mismatch: Got 'numeric' but expected 'character'."
 
     # Then
     id |> service[['Remove']](123) |> expect.error(expected.error)
