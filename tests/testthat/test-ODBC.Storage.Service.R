@@ -510,4 +510,49 @@ describe("When id |> service[['Remove']](table)",{
     actual.table |> expect.equal(expected.table)
     actual.id    |> expect.equal(expected.id)
   })
+  it('then an exception is thrown if id is NULL',{
+    # Given
+    broker <- list()
+    broker[['Delete']] <- \(id, table) {} 
+
+    services <- broker |> ODBC.Storage.Service()
+
+    expected.error <- 'ODBC Storage Provider Error: id is NULL.'
+
+    # When
+    id <- NULL
+
+    # Then
+    id |> services[['Remove']]('table') |> expect.error(expected.error)
+  })
+  it('then an exception is thrown if id is not character',{
+    # Given
+    broker <- list()
+    broker[['Delete']] <- \(id, table) {} 
+
+    services <- broker |> ODBC.Storage.Service()
+
+    expected.error <- "ODBC Storage Provider Error: Invalid Type. Expected 'character'."
+
+    # When
+    id <- list()
+
+    # Then
+    id |> services[['Remove']]('table') |> expect.error(expected.error)
+  })
+  it('then an exception is thrown if id is invalid identifier',{
+    # Given
+    broker <- list()
+    broker[['Delete']] <- \(id, table) {} 
+
+    services <- broker |> ODBC.Storage.Service()
+
+    expected.error <- "ODBC Storage Provider Error: Invalid identifier. Expected id to be a valid identifier."
+
+    # When
+    id <- 'a'
+
+    # Then
+    id |> services[['Remove']]('table') |> expect.error(expected.error)
+  })
 })
