@@ -395,3 +395,52 @@ describe("When id |> validate[['Identifier']](name)",{
     actual |> expect.equal(valid.id)
   })
 })
+
+describe("When id |> validate[['Id']]()",{
+  it("then an exception is thrown if id is NULL",{
+    # Given
+    validate <- ODBC.Storage.Validator()
+    
+    expected.error <- "ODBC Storage Provider Error: id is NULL."
+    
+    # When
+    input <- NULL 
+    
+    # Then
+    input |> validate[['Id']]() |> expect.error(expected.error)
+  })
+  it("then an exception is thrown if id is not characters",{
+    # Given
+    validate <- ODBC.Storage.Validator()
+    
+    expected.error <- "ODBC Storage Provider Error: Invalid Type. Expected 'character'."
+    
+    # When
+    input <- 1
+    
+    # Then
+    input |> validate[['Id']]() |> expect.error(expected.error)
+  })
+  it("then an exception is thrown if id is invalid identifier",{
+    # Given
+    validate <- ODBC.Storage.Validator()
+    
+    expected.error <- "ODBC Storage Provider Error: Invalid identifier. Expected id to be a valid identifier."
+    
+    # When
+    input <- ''
+    
+    # Then
+    input |> validate[['Id']]() |> expect.error(expected.error)
+  })
+  it('then no exception is thrown if id is valid',{
+    # Given
+    validate <- ODBC.Storage.Validator()
+    
+    # When
+    input <- uuid::UUIDgenerate()
+    
+    # Then
+    input |> validate[['Id']]() |> expect.no.error()
+  })
+})
