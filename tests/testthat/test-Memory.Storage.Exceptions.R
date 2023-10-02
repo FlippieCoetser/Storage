@@ -19,12 +19,12 @@ describe("When exceptions <- Memory.Storage.Exceptions()",{
    # Then
    exceptions[['NoExecute.Query']] |> expect.exist()
   })
-  it('then exceptions contains DuplicateId exception',{
+  it('then exceptions contains Key.Duplicate exception',{
    # When
    exceptions <- Memory.Storage.Exceptions()
    
    # Then
-   exceptions[['DuplicateId']] |> expect.exist()
+   exceptions[['Key.Duplicate']] |> expect.exist()
   })
   it('then exceptions contains Entity.Not.Found exception',{
    # When
@@ -67,7 +67,7 @@ describe("When input |> exception[['NoExecute.Query']]()", {
   })
 })
 
-describe("When input |> exception[['DuplicateId']]()", {
+describe("When input |> exception[['Key.Duplicate']]()", {
   it("then no exception is thrown if input is FALSE", {
     # Given
     exception <- Memory.Storage.Exceptions()
@@ -76,7 +76,7 @@ describe("When input |> exception[['DuplicateId']]()", {
     input <- FALSE
     
     # Then
-    input |> exception[['DuplicateId']]() |> expect.no.error()
+    input |> exception[['Key.Duplicate']]() |> expect.no.error()
   })
   it("then an exception is thrown if input is TRUE", {
     # Given
@@ -87,7 +87,7 @@ describe("When input |> exception[['DuplicateId']]()", {
     input <- TRUE
     
     # Then
-    input |> exception[['DuplicateId']]() |> expect.error(expected.error)
+    input |> exception[['Key.Duplicate']]() |> expect.error(expected.error)
   })
 })
 

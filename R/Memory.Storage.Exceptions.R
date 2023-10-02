@@ -5,7 +5,7 @@ Memory.Storage.Exceptions <- \() {
       stop('Memory Storage Provider Error: Execute.Query not implemented.', call. = FALSE)
     }
   }
-  exceptions[['DuplicateId']]      <- \(invoke) {
+  exceptions[['Key.Duplicate']]      <- \(invoke) {
     if(invoke) {
       stop('Memory Storage Provider Error: Duplicate Id not allowed.', call. = FALSE)
     }
