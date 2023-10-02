@@ -1,5 +1,6 @@
 Memory.Storage.Service <- \(broker) {
   validate.structure <- Memory.Storage.Structure.Validator(broker)
+  validate.logic     <- Memory.Storage.Logic.Validator(broker)
   
   services <- list()
   services[['Create.Table']]    <- \(model, table) {
@@ -22,7 +23,7 @@ Memory.Storage.Service <- \(broker) {
     entity |> validate.structure[['Entity']]()
     table  |> validate.structure[['Table']]()
 
-    table |> validate.structure[['Is.Existing.Table']]()
+    table |> validate.logic[['Is.Existing.Table']]()
 
     entity |> validate.structure[['Is.New.Entity']](table)
     entity |> broker[['Insert']](table)
@@ -30,14 +31,15 @@ Memory.Storage.Service <- \(broker) {
   services[['Retrieve']]        <- \(table, fields) {
     table |> validate.structure[['Table']]()
 
-    table |> validate.structure[['Is.Existing.Table']]()
+    table |> validate.logic[['Is.Existing.Table']]()
+
     table |> broker[['Select']](fields)
   }
   services[['RetrieveWhereId']] <- \(id, table, fields) {
     id    |> validate.structure[['Id']]()
     table |> validate.structure[['Table']]()
 
-    table |> validate.structure[['Is.Existing.Table']]()
+    table |> validate.logic[['Is.Existing.Table']]()
 
     id |> broker[['SelectWhereId']](table, fields)
   }
@@ -45,7 +47,7 @@ Memory.Storage.Service <- \(broker) {
     entity |> validate.structure[['Entity']]()
     table  |> validate.structure[['Table']]()
     
-    table |> validate.structure[['Is.Existing.Table']]()
+    table  |> validate.logic[['Is.Existing.Table']]()
 
     entity |> validate.structure[['Is.Existing.Entity']](table)
     entity |> broker[['Update']](table)
@@ -54,7 +56,7 @@ Memory.Storage.Service <- \(broker) {
     id    |> validate.structure[['Id']]()
     table |> validate.structure[['Table']]()
 
-    table |> validate.structure[['Is.Existing.Table']]()
+    table |> validate.logic[['Is.Existing.Table']]()
     
     id |> broker[['Delete']](table)
   }
