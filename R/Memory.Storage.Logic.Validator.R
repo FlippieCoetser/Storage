@@ -12,5 +12,6 @@ Memory.Storage.Logic.Validator <- \(broker = NULL) {
     (match.count != 0) |> exception[['Key.Duplicate']]()
     return(entity)
   }
+  validators[['Is.Existing.Entity']] <- \() {}
   return(validators)
 }
