@@ -5,7 +5,7 @@
 #' 
 #' @usage NULL
 #' @returns A `list` of functions: 
-#' * `ExecuteQuery(query)`
+#' * `Execute.Query(query)`
 #' * `Add(entity, table)`
 #' * `Retrieve(table, fields)`
 #' * `RetrieveWhereId(id, table, fields)`

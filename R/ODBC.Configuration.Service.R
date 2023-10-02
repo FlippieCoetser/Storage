@@ -2,19 +2,16 @@ ODBC.Configuration.Service <- \(broker) {
   validate <- ODBC.Configuration.Validator()
 
   services <- list()
-  # TODO: Refactor -> Open.Config.File
-  services[['OpenConfigFile']]  <- \() {
-    broker[['OpenConfigFile']]()
+  services[['Open.Config.File']]  <- \() {
+    broker[['Open.Config.File']]()
   }
-  # TODO: Refactor -> Get.Preset.Config
-  services[['GetPresetConfig']] <- \() {
-    broker[['GetPresetConfig']]() |>
-    validate[['PresetConfig']]()
+  services[['Get.Preset.Config']] <- \() {
+    broker[['Get.Preset.Config']]() |>
+    validate[['Preset.Config']]()
   }
-  # TODO: Refactor -> Get.Manual.Config
-  services[['GetManualConfig']] <- \() {
-    broker[['GetManualConfig']]() |>
-    validate[['ManualConfig']]()
+  services[['Get.Manual.Config']] <- \() {
+    broker[['Get.Manual.Config']]() |>
+    validate[['Get.Manual.Config']]()
   }
   return(services)
 }

@@ -2,22 +2,18 @@ Memory.Storage.Broker <- \(configuration = NULL) {
   tables <- list()
 
   operations <- list()
-  # TODO: Refactor -> Create.Table
-  operations[['CreateTable']]   <- \(model, table) {
+  operations[['Create.Table']]  <- \(model, table) {
     tables[[table]] <<- model
     return(NULL)
   }
-  # TODO: Refactor -> Seed.Table
-  operations[['SeedTable']]     <- \(data, table) {
+  operations[['Seed.Table']]    <- \(data, table) {
     tables[[table]] <<- tables[[table]] |> rbind(data)
     return(NULL)
   }
-  # TODO: Refactor -> Get.Table.Names
-  operations[['GetTableNames']] <- \() {
+  operations[['Get.Tables']]    <- \() {
     tables |> names()
   }
-  # TODO: Refactor -> Execute.Query
-  operations[['ExecuteQuery']]  <- \(query) {
+  operations[['Execute.Query']] <- \(query) {
     return(data.frame())
   }
   operations[['Insert']]        <- \(entity, table) {

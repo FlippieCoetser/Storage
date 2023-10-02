@@ -12,12 +12,12 @@ describe("When exceptions <- ODBC.Configuration.Exceptions()",{
     # Then
     exceptions |> expect.list()
   })
-  it("then exceptions contains InvalidConfig exception",{
+  it("then exceptions contains Config.Invalid exception",{
     # When
     exceptions <- ODBC.Configuration.Exceptions()
 
     # Then
-    exceptions[['InvalidConfig']] |> expect.exist()
+    exceptions[['Config.Invalid']] |> expect.exist()
   })
   it("then exceptions contains Configuration exception",{
     # When
@@ -26,100 +26,100 @@ describe("When exceptions <- ODBC.Configuration.Exceptions()",{
     # Then
     exceptions[['Configuration']] |> expect.exist()
   })
-  it("then exceptions contains dsnNotFound exception",{
+  it("then exceptions contains Dsn.Not.Found exception",{
     # When
     exceptions <- ODBC.Configuration.Exceptions()
 
     # Then
-    exceptions[['dsnNotFound']] |> expect.exist()
+    exceptions[['Dsn.Not.Found']] |> expect.exist()
   })
-  it("then exceptions contains driverNotFound exception",{
+  it("then exceptions contains Driver.Not.Found exception",{
     # When
     exceptions <- ODBC.Configuration.Exceptions()
 
     # Then
-    exceptions[['driverNotFound']] |> expect.exist()
+    exceptions[['Driver.Not.Found']] |> expect.exist()
   })
-  it("then exceptions contains serverNotFound exception",{
+  it("then exceptions contains Server.Not.Found exception",{
     # When
     exceptions <- ODBC.Configuration.Exceptions()
 
     # Then
-    exceptions[['serverNotFound']] |> expect.exist()
+    exceptions[['Server.Not.Found']] |> expect.exist()
   })
-  it("then exceptions contains databaseNotFound exception",{
+  it("then exceptions contains Database.Not.Found exception",{
     # When
     exceptions <- ODBC.Configuration.Exceptions()
 
     # Then
-    exceptions[['databaseNotFound']] |> expect.exist()
+    exceptions[['Database.Not.Found']] |> expect.exist()
   })
-  it("then exceptions contains uidNotFound exception",{
+  it("then exceptions contains Uid.Not.Found exception",{
     # When
     exceptions <- ODBC.Configuration.Exceptions()
 
     # Then
-    exceptions[['uidNotFound']] |> expect.exist()
+    exceptions[['Uid.Not.Found']] |> expect.exist()
   })
-  it("then exceptions contains pwdNotFound exception",{
+  it("then exceptions contains Pwd.Not.Found exception",{
     # When
     exceptions <- ODBC.Configuration.Exceptions()
 
     # Then
-    exceptions[['pwdNotFound']] |> expect.exist()
+    exceptions[['Pwd.Not.Found']] |> expect.exist()
   })
-  it("then exceptions contains drvIsNull exception",{
+  it("then exceptions contains Drv.NULL exception",{
     # When
     exceptions <- ODBC.Configuration.Exceptions()
 
     # Then
-    exceptions[['drvIsNull']] |> expect.exist()
+    exceptions[['Drv.NULL']] |> expect.exist()
   })
-  it("then exceptions contains dsnIsNull exception",{
+  it("then exceptions contains Dsn.NULL exception",{
     # When
     exceptions <- ODBC.Configuration.Exceptions()
 
     # Then
-    exceptions[['dsnIsNull']] |> expect.exist()
+    exceptions[['Dsn.NULL']] |> expect.exist()
   })
-  it("then exceptions contains driverIsNull exception",{
+  it("then exceptions contains Driver.NULL exception",{
     # When
     exceptions <- ODBC.Configuration.Exceptions()
 
     # Then
-    exceptions[['driverIsNull']] |> expect.exist()
+    exceptions[['Driver.NULL']] |> expect.exist()
   })
-  it("then exceptions contains serverIsNull exception",{
+  it("then exceptions contains Server.NULL exception",{
     # When
     exceptions <- ODBC.Configuration.Exceptions()
 
     # Then
-    exceptions[['serverIsNull']] |> expect.exist()
+    exceptions[['Server.NULL']] |> expect.exist()
   })
-  it("then exceptions contains databaseIsNull exception",{
+  it("then exceptions contains Database.NULL exception",{
     # When
     exceptions <- ODBC.Configuration.Exceptions()
 
     # Then
-    exceptions[['databaseIsNull']] |> expect.exist()
+    exceptions[['Database.NULL']] |> expect.exist()
   })
-  it('then exceptions contains uidIsNull exception',{
+  it('then exceptions contains Uid.NULL exception',{
     # When
     exceptions <- ODBC.Configuration.Exceptions()
      
     # Then
-    exceptions[['uidIsNull']] |> expect.exist()
+    exceptions[['Uid.NULL']] |> expect.exist()
   })
-  it('then exceptions contains pwdIsNull exception',{
+  it('then exceptions contains Pwd.NULL exception',{
     # When
     exceptions <- ODBC.Configuration.Exceptions()
     
     # Then
-    exceptions[['pwdIsNull']] |> expect.exist()
+    exceptions[['Pwd.NULL']] |> expect.exist()
   })
 })
 
-describe("When input |> exception[['dsnNotFound']]()", {
+describe("When input |> exception[['Dsn.Not.Found']]()", {
   it("then no exception is thrown if input is FALSE", {
     # Given
     exception <- ODBC.Configuration.Exceptions()
@@ -128,7 +128,7 @@ describe("When input |> exception[['dsnNotFound']]()", {
     input <- FALSE
 
     # Then
-    input |> exception[['dsnNotFound']]() |> expect.no.error()
+    input |> exception[['Dsn.Not.Found']]() |> expect.no.error()
   })
   it("then an exception is thrown if input is TRUE",{
     # Given
@@ -140,11 +140,11 @@ describe("When input |> exception[['dsnNotFound']]()", {
     input <- TRUE
 
     # Then
-    input |> exception[['dsnNotFound']]() |> expect.error(expected.error)
+    input |> exception[['Dsn.Not.Found']]() |> expect.error(expected.error)
   })
 })
 
-describe("When input |> exception[['driverNotFound']]()", {
+describe("When input |> exception[['Driver.Not.Found']]()", {
   it("then no exception is thrown if input is FALSE", {
     # Given
     exception <- ODBC.Configuration.Exceptions()
@@ -153,7 +153,7 @@ describe("When input |> exception[['driverNotFound']]()", {
     input <- FALSE
 
     # Then
-    input |> exception[['driverNotFound']]() |> expect.no.error()
+    input |> exception[['Driver.Not.Found']]() |> expect.no.error()
   })
   it("then an exception is thrown if input is TRUE",{
     # Given
@@ -165,11 +165,11 @@ describe("When input |> exception[['driverNotFound']]()", {
     input <- TRUE
 
     # Then
-    input |> exception[['driverNotFound']]() |> expect.error(expected.error)
+    input |> exception[['Driver.Not.Found']]() |> expect.error(expected.error)
   })
 })
 
-describe("When input |> exception[['serverNotFound']]()", {
+describe("When input |> exception[['Server.Not.Found']]()", {
   it("then no exception is thrown if input is FALSE", {
     # Given
     exception <- ODBC.Configuration.Exceptions()
@@ -178,7 +178,7 @@ describe("When input |> exception[['serverNotFound']]()", {
     input <- FALSE
 
     # Then
-    input |> exception[['serverNotFound']]() |> expect.no.error()
+    input |> exception[['Server.Not.Found']]() |> expect.no.error()
   })
   it("then an exception is thrown if input is TRUE",{
     # Given
@@ -190,11 +190,11 @@ describe("When input |> exception[['serverNotFound']]()", {
     input <- TRUE
 
     # Then
-    input |> exception[['serverNotFound']]() |> expect.error(expected.error)
+    input |> exception[['Server.Not.Found']]() |> expect.error(expected.error)
   })
 })
 
-describe("When input |> exception[['databaseNotFound']]()", {
+describe("When input |> exception[['Database.Not.Found']]()", {
   it("then no exception is thrown if input is FALSE", {
     # Given
     exception <- ODBC.Configuration.Exceptions()
@@ -203,7 +203,7 @@ describe("When input |> exception[['databaseNotFound']]()", {
     input <- FALSE
 
     # Then
-    input |> exception[['databaseNotFound']]() |> expect.no.error()
+    input |> exception[['Database.Not.Found']]() |> expect.no.error()
   })
   it("then an exception is thrown if input is TRUE",{
     # Given
@@ -215,11 +215,11 @@ describe("When input |> exception[['databaseNotFound']]()", {
     input <- TRUE
 
     # Then
-    input |> exception[['databaseNotFound']]() |> expect.error(expected.error)
+    input |> exception[['Database.Not.Found']]() |> expect.error(expected.error)
   })
 })
 
-describe("When input |> exception[['uidNotFound']]()", {
+describe("When input |> exception[['Uid.Not.Found']]()", {
   it("then no exception is thrown if input is FALSE", {
     # Given
     exception <- ODBC.Configuration.Exceptions()
@@ -228,7 +228,7 @@ describe("When input |> exception[['uidNotFound']]()", {
     input <- FALSE
 
     # Then
-    input |> exception[['uidNotFound']]() |> expect.no.error()
+    input |> exception[['Uid.Not.Found']]() |> expect.no.error()
   })
   it("then an exception is thrown if input is TRUE",{
     # Given
@@ -240,11 +240,11 @@ describe("When input |> exception[['uidNotFound']]()", {
     input <- TRUE
 
     # Then
-    input |> exception[['uidNotFound']]() |> expect.error(expected.error)
+    input |> exception[['Uid.Not.Found']]() |> expect.error(expected.error)
   })
 })
 
-describe("When input |> exception[['pwdNotFound']]()", {
+describe("When input |> exception[['Pwd.Not.Found']]()", {
   it("then no exception is thrown if input is FALSE", {
     # Given
     exception <- ODBC.Configuration.Exceptions()
@@ -253,7 +253,7 @@ describe("When input |> exception[['pwdNotFound']]()", {
     input <- FALSE
 
     # Then
-    input |> exception[['pwdNotFound']]() |> expect.no.error()
+    input |> exception[['Pwd.Not.Found']]() |> expect.no.error()
   })
   it("then an exception is thrown if input is TRUE",{
     # Given
@@ -265,12 +265,12 @@ describe("When input |> exception[['pwdNotFound']]()", {
     input <- TRUE
 
     # Then
-    input |> exception[['pwdNotFound']]() |> expect.error(expected.error)
+    input |> exception[['Pwd.Not.Found']]() |> expect.error(expected.error)
   })
 })
 
 describe("When error |> exception[['Configuration']]()", {
-  it("then an dsnNotFound exception is thrown if error contains DSN", {
+  it("then an Dsn.Not.Found exception is thrown if error contains DSN", {
     # Given
     exception <- ODBC.Configuration.Exceptions()
 
@@ -282,7 +282,7 @@ describe("When error |> exception[['Configuration']]()", {
     # Then
     configuration.error |> exception[['Configuration']]() |> expect.error(expected.error)
   })
-  it("then an driverNotFound exception is thrown if error contains DRIVER", {
+  it("then an Driver.Not.Found exception is thrown if error contains DRIVER", {
     # Given
     exception <- ODBC.Configuration.Exceptions()
 
@@ -294,7 +294,7 @@ describe("When error |> exception[['Configuration']]()", {
     # Then
     configuration.error |> exception[['Configuration']]() |> expect.error(expected.error)
   })
-  it("then an serverNotFound exception is thrown if error contains SERVER", {
+  it("then an Server.Not.Found exception is thrown if error contains SERVER", {
     # Given
     exception <- ODBC.Configuration.Exceptions()
 
@@ -306,7 +306,7 @@ describe("When error |> exception[['Configuration']]()", {
     # Then
     configuration.error |> exception[['Configuration']]() |> expect.error(expected.error)
   })
-  it("then an databaseNotFound exception is thrown if error contains DATABASE", {
+  it("then an Database.Not.Found exception is thrown if error contains DATABASE", {
     # Given
     exception <- ODBC.Configuration.Exceptions()
 
@@ -318,7 +318,7 @@ describe("When error |> exception[['Configuration']]()", {
     # Then
     configuration.error |> exception[['Configuration']]() |> expect.error(expected.error)
   })
-  it("then an uidNotFound exception is thrown if error contains UID", {
+  it("then an Uid.Not.Found exception is thrown if error contains UID", {
     # Given
     exception <- ODBC.Configuration.Exceptions()
 
@@ -330,7 +330,7 @@ describe("When error |> exception[['Configuration']]()", {
     # Then
     configuration.error |> exception[['Configuration']]() |> expect.error(expected.error)
   })
-  it("then an pwdNotFound exception is thrown if error contains UID", {
+  it("then an Pwd.Not.Found exception is thrown if error contains UID", {
     # Given
     exception <- ODBC.Configuration.Exceptions()
 
@@ -344,7 +344,7 @@ describe("When error |> exception[['Configuration']]()", {
   })
 })
 
-describe("When input |> exception[['drvIsNull']]()", {
+describe("When input |> exception[['Drv.NULL']]()", {
   it("then no exception is thrown if input is FALSE", {
     # Given
     exception <- ODBC.Configuration.Exceptions()
@@ -353,7 +353,7 @@ describe("When input |> exception[['drvIsNull']]()", {
     input <- FALSE
     
     # Then
-    input |> exception[['drvIsNull']]() |> expect.no.error()
+    input |> exception[['Drv.NULL']]() |> expect.no.error()
   })
   it("then an exception is thrown if input is TRUE", {
     # Given
@@ -364,11 +364,11 @@ describe("When input |> exception[['drvIsNull']]()", {
     input <- TRUE
     
     # Then
-    input |> exception[['drvIsNull']]() |> expect.error(expected.error)
+    input |> exception[['Drv.NULL']]() |> expect.error(expected.error)
   })
 })
 
-describe("When input |> exception[['dsnIsNull']]()", {
+describe("When input |> exception[['Dsn.NULL']]()", {
   it("then no exception is thrown if input is FALSE", {
     # Given
     exception <- ODBC.Configuration.Exceptions()
@@ -377,7 +377,7 @@ describe("When input |> exception[['dsnIsNull']]()", {
     input <- FALSE
 
     # Then
-    input |> exception[['dsnIsNull']]() |> expect.no.error()
+    input |> exception[['Dsn.NULL']]() |> expect.no.error()
   })
   it("then an exception is thrown if input is TRUE",{
     # Given
@@ -389,11 +389,11 @@ describe("When input |> exception[['dsnIsNull']]()", {
     input <- TRUE
 
     # Then
-    input |> exception[['dsnIsNull']]() |> expect.error(expected.error)
+    input |> exception[['Dsn.NULL']]() |> expect.error(expected.error)
   })
 })
 
-describe("When input |> exception[['driverIsNull']]()", {
+describe("When input |> exception[['Driver.NULL']]()", {
   it("then no exception is thrown if input is FALSE", {
     # Given
     exception <- ODBC.Configuration.Exceptions()
@@ -402,7 +402,7 @@ describe("When input |> exception[['driverIsNull']]()", {
     input <- FALSE
     
     # Then
-    input |> exception[['driverIsNull']]() |> expect.no.error()
+    input |> exception[['Driver.NULL']]() |> expect.no.error()
   })
   it("then an exception is thrown if input is TRUE", {
     # Given
@@ -413,11 +413,11 @@ describe("When input |> exception[['driverIsNull']]()", {
     input <- TRUE
     
     # Then
-    input |> exception[['driverIsNull']]() |> expect.error(expected.error)
+    input |> exception[['Driver.NULL']]() |> expect.error(expected.error)
   })
 })
 
-describe("When input |> exception[['serverIsNull']]()", {
+describe("When input |> exception[['Server.NULL']]()", {
   it("then no exception is thrown if input is FALSE", {
     # Given
     exception <- ODBC.Configuration.Exceptions()
@@ -426,7 +426,7 @@ describe("When input |> exception[['serverIsNull']]()", {
     input <- FALSE
     
     # Then
-    input |> exception[['serverIsNull']]() |> expect.no.error()
+    input |> exception[['Server.NULL']]() |> expect.no.error()
   })
   it("then an exception is thrown if input is TRUE", {
     # Given
@@ -437,11 +437,11 @@ describe("When input |> exception[['serverIsNull']]()", {
     input <- TRUE
     
     # Then
-    input |> exception[['serverIsNull']]() |> expect.error(expected.error)
+    input |> exception[['Server.NULL']]() |> expect.error(expected.error)
   })
 })
 
-describe("When input |> exception[['databaseIsNull']]()", {
+describe("When input |> exception[['Database.NULL']]()", {
   it("then no exception is thrown if input is FALSE", {
     # Given
     exception <- ODBC.Configuration.Exceptions()
@@ -450,7 +450,7 @@ describe("When input |> exception[['databaseIsNull']]()", {
     input <- FALSE
     
     # Then
-    input |> exception[['databaseIsNull']]() |> expect.no.error()
+    input |> exception[['Database.NULL']]() |> expect.no.error()
   })
   it("then an exception is thrown if input is TRUE", {
     # Given
@@ -461,11 +461,11 @@ describe("When input |> exception[['databaseIsNull']]()", {
     input <- TRUE
     
     # Then
-    input |> exception[['databaseIsNull']]() |> expect.error(expected.error)
+    input |> exception[['Database.NULL']]() |> expect.error(expected.error)
   })
 })
 
-describe("When input |> exception[['uidIsNull']]()", {
+describe("When input |> exception[['Uid.NULL']]()", {
   it("then no exception is thrown if input is FALSE", {
     # Given
     exception <- ODBC.Configuration.Exceptions()
@@ -474,7 +474,7 @@ describe("When input |> exception[['uidIsNull']]()", {
     input <- FALSE
     
     # Then
-    input |> exception[['uidIsNull']]() |> expect.no.error()
+    input |> exception[['Uid.NULL']]() |> expect.no.error()
   })
   it("then an exception is thrown if input is TRUE", {
     # Given
@@ -485,11 +485,11 @@ describe("When input |> exception[['uidIsNull']]()", {
     input <- TRUE
     
     # Then
-    input |> exception[['uidIsNull']]() |> expect.error(expected.error)
+    input |> exception[['Uid.NULL']]() |> expect.error(expected.error)
   })
 })
 
-describe("When input |> exception[['pwdIsNull']]()", {
+describe("When input |> exception[['Pwd.NULL']]()", {
   it("then no exception is thrown if input is FALSE", {
     # Given
     exception <- ODBC.Configuration.Exceptions()
@@ -498,7 +498,7 @@ describe("When input |> exception[['pwdIsNull']]()", {
     input <- FALSE
     
     # Then
-    input |> exception[['pwdIsNull']]() |> expect.no.error()
+    input |> exception[['Pwd.NULL']]() |> expect.no.error()
   })
   it("then an exception is thrown if input is TRUE", {
     # Given
@@ -509,11 +509,11 @@ describe("When input |> exception[['pwdIsNull']]()", {
     input <- TRUE
     
     # Then
-    input |> exception[['pwdIsNull']]() |> expect.error(expected.error)
+    input |> exception[['Pwd.NULL']]() |> expect.error(expected.error)
   })
 })
 
-describe("When input |> exception[['InvalidConfig']]()", {
+describe("When input |> exception[['Config.Invalid']]()", {
   it("then no exception is thrown if input is FALSE", {
     # Given
     exception <- ODBC.Configuration.Exceptions()
@@ -522,7 +522,7 @@ describe("When input |> exception[['InvalidConfig']]()", {
     input <- FALSE
     
     # Then
-    input |> exception[['InvalidConfig']]() |> expect.no.error()
+    input |> exception[['Config.Invalid']]() |> expect.no.error()
   })
   it("then an exception is thrown if input is TRUE", {
     # Given
@@ -533,6 +533,6 @@ describe("When input |> exception[['InvalidConfig']]()", {
     input <- TRUE
     
     # Then
-    input |> exception[['InvalidConfig']]() |> expect.error(expected.error)
+    input |> exception[['Config.Invalid']]() |> expect.error(expected.error)
   })
 })

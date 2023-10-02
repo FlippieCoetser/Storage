@@ -1,93 +1,79 @@
 ODBC.Configuration.Exceptions <- \() {
   exceptions <- list()
-  # TODO: Refactor -> Config.Invalid
-  exceptions[['InvalidConfig']]    <- \(invoke) {
+  exceptions[['Config.Invalid']]     <- \(invoke) {
     if(invoke) {
       stop("Invalid ODBC configuration. Provide valid Preset or Manual configuration.", call. = FALSE)
     }
   }
-  exceptions[['Configuration']]    <- \(error) {
-    'DSN'      |> grepl(error) |> exceptions[['dsnNotFound']]()
-    'DRIVER'   |> grepl(error) |> exceptions[['driverNotFound']]()
-    'SERVER'   |> grepl(error) |> exceptions[['serverNotFound']]()
-    'DATABASE' |> grepl(error) |> exceptions[['databaseNotFound']]()
-    'UID'      |> grepl(error) |> exceptions[['uidNotFound']]()
-    'PWD'      |> grepl(error) |> exceptions[['pwdNotFound']]()
+  exceptions[['Configuration']]      <- \(error) {
+    'DSN'      |> grepl(error) |> exceptions[['Dsn.Not.Found']]()
+    'DRIVER'   |> grepl(error) |> exceptions[['Driver.Not.Found']]()
+    'SERVER'   |> grepl(error) |> exceptions[['Server.Not.Found']]()
+    'DATABASE' |> grepl(error) |> exceptions[['Database.Not.Found']]()
+    'UID'      |> grepl(error) |> exceptions[['Uid.Not.Found']]()
+    'PWD'      |> grepl(error) |> exceptions[['Pwd.Not.Found']]()
   }
-  # TODO: Refactor -> Dsn.Not.Found
-  exceptions[['dsnNotFound']]      <- \(invoke) {
+  exceptions[['Dsn.Not.Found']]      <- \(invoke) {
     if(invoke) {
       stop("No DSN environment variable not found in .Renviron Configuration file.", call. = FALSE)
     }
   }
-  # TODO: Refactor -> Driver.Not.Found
-  exceptions[['driverNotFound']]   <- \(invoke) {
+  exceptions[['Driver.Not.Found']]   <- \(invoke) {
     if(invoke) {
       stop("No DRIVER environment variable not found in .Renviron Configuration file.", call. = FALSE)
     }
   }
-  # TODO: Refactor -> Server.Not.Found
-  exceptions[['serverNotFound']]   <- \(invoke) {
+  exceptions[['Server.Not.Found']]   <- \(invoke) {
     if(invoke) {
       stop("No SERVER environment variable not found in .Renviron Configuration file.", call. = FALSE)
     }
   }
-  # TODO: Refactor -> Database.Not.Found
-  exceptions[['databaseNotFound']] <- \(invoke) {
+  exceptions[['Database.Not.Found']] <- \(invoke) {
     if(invoke) {
       stop("No DATABASE environment variable not found in .Renviron Configuration file.", call. = FALSE)
     }
   }
-  # TODO: Refactor -> Uid.Not.Found
-  exceptions[['uidNotFound']]      <- \(invoke) {
+  exceptions[['Uid.Not.Found']]      <- \(invoke) {
     if(invoke) {
       stop("No UID environment variable not found in .Renviron Configuration file.", call. = FALSE)
     }
   }
-  # TODO: Refactor -> Pwd.Not.Found
-  exceptions[['pwdNotFound']]      <- \(invoke) {
+  exceptions[['Pwd.Not.Found']]      <- \(invoke) {
     if(invoke) {
       stop("No PWD environment variable not found in .Renviron Configuration file.", call. = FALSE)
     }
   }
-  # TODO: Refactor -> Drv.NULL
-  exceptions[['drvIsNull']]        <- \(invoke) {
+  exceptions[['Drv.NULL']]           <- \(invoke) {
     if(invoke) {
       stop("drv is NULL. Valid configuration requires a drv.", call. = FALSE)
     }
   }
-  # TODO: Refactor -> Dsn.NULL
-  exceptions[['dsnIsNull']]        <- \(invoke) {
+  exceptions[['Dsn.NULL']]           <- \(invoke) {
     if(invoke) {
       stop("dsn is NULL. Valid configuration requires a dsn.", call. = FALSE)
     }
   }
-  # TODO: Refactor -> Driver.NULL
-  exceptions[['driverIsNull']]     <- \(invoke) {
+  exceptions[['Driver.NULL']]        <- \(invoke) {
     if(invoke) {
       stop("driver is NULL. Valid configuration requires a driver.", call. = FALSE)
     }
   }
-  # TODO: Refactor -> Server.NULL
-  exceptions[['serverIsNull']]     <- \(invoke) {
+  exceptions[['Server.NULL']]        <- \(invoke) {
     if(invoke) {
       stop("server is NULL. Valid configuration requires a server.", call. = FALSE)
     }
   }
-  # TODO: Refactor -> Database.NULL
-  exceptions[['databaseIsNull']]   <- \(invoke) {
+  exceptions[['Database.NULL']]      <- \(invoke) {
     if(invoke) {
       stop("database is NULL. Valid configuration requires a database.", call. = FALSE)
     }
   }
-  # TODO: Refactor -> Uid.NULL
-  exceptions[['uidIsNull']]        <- \(invoke) {
+  exceptions[['Uid.NULL']]           <- \(invoke) {
     if(invoke) {
       stop("uid is NULL. Valid configuration requires a uid.", call. = FALSE)
     }
   }
-  # TODO: Refactor -> Pwd.NULL
-  exceptions[['pwdIsNull']]        <- \(invoke) {
+  exceptions[['Pwd.NULL']]           <- \(invoke) {
     if(invoke) {
       stop("pwd is NULL. Valid configuration requires a pwd.", call. = FALSE)
     }

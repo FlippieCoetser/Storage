@@ -12,44 +12,44 @@ describe("When exceptions <- Todo.Model.Exceptions()",{
     # Then
     exceptions |> expect.list()
   })
-  it("then exceptions contains TodoIsNull exception",{
+  it("then exceptions contains Todo.NULL exception",{
     # Given
     exceptions <- Todo.Model.Exceptions()
 
     # Then
-    exceptions[["TodoIsNull"]] |> expect.exist()
+    exceptions[["Todo.NULL"]] |> expect.exist()
   })
-  it("then exceptions contains TodoIdIsNull exception",{
+  it("then exceptions contains Todo.Id.NULL exception",{
     # Given
     exceptions <- Todo.Model.Exceptions()
 
     # Then
-    exceptions[["TodoIdIsNull"]] |> expect.exist()
+    exceptions[["Todo.Id.NULL"]] |> expect.exist()
   })
-  it("then exceptions contains TodoTaskIsNull exception",{
+  it("then exceptions contains Todo.Task.NULL exception",{
     # Given
     exceptions <- Todo.Model.Exceptions()
 
     # Then
-    exceptions[["TodoTaskIsNull"]] |> expect.exist()
+    exceptions[["Todo.Task.NULL"]] |> expect.exist()
   })
-  it("then exceptions contains TodoStatusIsNull exception",{
+  it("then exceptions contains Todo.Status.NULL exception",{
     # Given
     exceptions <- Todo.Model.Exceptions()
 
     # Then
-    exceptions[["TodoStatusIsNull"]] |> expect.exist()
+    exceptions[["Todo.Status.NULL"]] |> expect.exist()
   })
   it("then exceptions contains IsIsNull exception",{
     # Given
     exceptions <- Todo.Model.Exceptions()
 
     # Then
-    exceptions[["IdIsNull"]] |> expect.exist()
+    exceptions[["Id.NULL"]] |> expect.exist()
   })
 })
 
-describe("When input |> exception[['TodoIsNull']]()",{
+describe("When input |> exception[['Todo.NULL']]()",{
   it("then no exceptions is thrown if input if FALSE",{
     # Given
     exception <- Todo.Model.Exceptions()
@@ -58,7 +58,7 @@ describe("When input |> exception[['TodoIsNull']]()",{
     input <- FALSE
 
     # Then
-    input |> exception[["TodoIsNull"]]() |> expect.no.error()
+    input |> exception[["Todo.NULL"]]() |> expect.no.error()
   })
   it("then an exceptions is thrown if input is TRUE",{
     # Given
@@ -70,11 +70,11 @@ describe("When input |> exception[['TodoIsNull']]()",{
     input <- TRUE
 
     # Then
-    input |> exception[["TodoIsNull"]]() |> expect.error(excepted.error)
+    input |> exception[["Todo.NULL"]]() |> expect.error(excepted.error)
   })
 })
 
-describe("When input |> exception[['TodoIdIsNull']]()",{
+describe("When input |> exception[['Todo.Id.NULL']]()",{
   it("then no exceptions is thrown if input if FALSE",{
     # Given
     exception <- Todo.Model.Exceptions()
@@ -83,7 +83,7 @@ describe("When input |> exception[['TodoIdIsNull']]()",{
     input <- FALSE
 
     # Then
-    input |> exception[["TodoIdIsNull"]]() |> expect.no.error()
+    input |> exception[["Todo.Id.NULL"]]() |> expect.no.error()
   })
   it("then an exceptions is thrown if input is TRUE",{
     # Given
@@ -95,11 +95,11 @@ describe("When input |> exception[['TodoIdIsNull']]()",{
     input <- TRUE
 
     # Then
-    input |> exception[["TodoIdIsNull"]]() |> expect.error(excepted.error)
+    input |> exception[["Todo.Id.NULL"]]() |> expect.error(excepted.error)
   })
 })
 
-describe("When input |> exception[['TodoTaskIsNull']]()",{
+describe("When input |> exception[['Todo.Task.NULL']]()",{
   it("then no exceptions is thrown if input if FALSE",{
     # Given
     exception <- Todo.Model.Exceptions()
@@ -108,7 +108,7 @@ describe("When input |> exception[['TodoTaskIsNull']]()",{
     input <- FALSE
 
     # Then
-    input |> exception[["TodoTaskIsNull"]]() |> expect.no.error()
+    input |> exception[["Todo.Task.NULL"]]() |> expect.no.error()
   })
   it("then an exceptions is thrown if input is TRUE",{
     # Given
@@ -120,11 +120,11 @@ describe("When input |> exception[['TodoTaskIsNull']]()",{
     input <- TRUE
 
     # Then
-    input |> exception[["TodoTaskIsNull"]]() |> expect.error(excepted.error)
+    input |> exception[["Todo.Task.NULL"]]() |> expect.error(excepted.error)
   })
 })
 
-describe("When input |> exception[['TodoStatusIsNull']]()",{
+describe("When input |> exception[['Todo.Status.NULL']]()",{
   it("then no exceptions is thrown if input if FALSE",{
     # Given
     exception <- Todo.Model.Exceptions()
@@ -133,7 +133,7 @@ describe("When input |> exception[['TodoStatusIsNull']]()",{
     input <- FALSE
 
     # Then
-    input |> exception[["TodoStatusIsNull"]]() |> expect.no.error()
+    input |> exception[["Todo.Status.NULL"]]() |> expect.no.error()
   })
   it("then an exceptions is thrown if input is TRUE",{
     # Given
@@ -145,11 +145,11 @@ describe("When input |> exception[['TodoStatusIsNull']]()",{
     input <- TRUE
 
     # Then
-    input |> exception[["TodoStatusIsNull"]]() |> expect.error(excepted.error)
+    input |> exception[["Todo.Status.NULL"]]() |> expect.error(excepted.error)
   })
 })
 
-describe("When input |> exception[['IdIsNull']]()",{
+describe("When input |> exception[['Id.NULL']]()",{
   it("then no exceptions is thrown if input if FALSE",{
     # Given
     exception <- Todo.Model.Exceptions()
@@ -158,7 +158,7 @@ describe("When input |> exception[['IdIsNull']]()",{
     input <- FALSE
 
     # Then
-    input |> exception[["IdIsNull"]]() |> expect.no.error()
+    input |> exception[["Id.NULL"]]() |> expect.no.error()
   })
   it("then an exceptions is thrown if input is TRUE",{
     # Given
@@ -170,6 +170,6 @@ describe("When input |> exception[['IdIsNull']]()",{
     input <- TRUE
 
     # Then
-    input |> exception[["IdIsNull"]]() |> expect.error(excepted.error)
+    input |> exception[["Id.NULL"]]() |> expect.error(excepted.error)
   })
 })

@@ -8,11 +8,11 @@ Below is an overview of the different functions available on each of the compone
 
 Two utility functions are provided:
 
-1. `OpenConfigFile`  
+1. `Open.Config.File`  
    Opens the `.Renviron` file in your IDE. This function only works when using either VS Code or RStudio.
 
-2. `GetConfig`  
-   Retrieves the configuration parameters from your local `.Renviron` file. By default a preset configuration is assumed when an OS DSN has been set up. A preset type configuration assumes a `DSN`, `UID` and `PWD` variables have been defined in the `.Renviron` file. If no OS DSN has been set up, `GetConfig` can be invoked with `type = 'Manual'` flag. When retrieving configuration parameters using the `type = 'Manual'` flag it is assumed `DRIVER`, `SERVER`, `DATABASE`, `UID`, `PWD` variables have been defined in the `.Renviron` file.
+2. `Get.Config`  
+   Retrieves the configuration parameters from your local `.Renviron` file. By default a preset configuration is assumed when an OS DSN has been set up. A preset type configuration assumes a `DSN`, `UID` and `PWD` variables have been defined in the `.Renviron` file. If no OS DSN has been set up, `Get.Config` can be invoked with `type = 'Manual'` flag. When retrieving configuration parameters using the `type = 'Manual'` flag it is assumed `DRIVER`, `SERVER`, `DATABASE`, `UID`, `PWD` variables have been defined in the `.Renviron` file.
 
 ## Storage Component
 
@@ -24,7 +24,7 @@ Six functions are provided, five of which are common data operations and one fun
 4. `Modify`
 5. `Remove`
 
-Custom data operations can be added using the `ExecuteQuery` function. The `ExecuteQuery` function takes a SQL `query`, passed in as a character data type, and returns a data frame.
+Custom data operations can be added using the `Execute.Query` function. The `Execute.Query` function takes a SQL `query`, passed in as a character data type, and returns a data frame.
 
 ## Todo Data Service
 
@@ -138,7 +138,7 @@ odbc.configurator <- Storage::ODBC.Configurator()
 2. Retrieve the configuration parameters from the local `.Renviron` file
 
 ```r
-configuration <- odbc.configurator[['GetConfig']]()
+configuration <- odbc.configurator[['Get.Config']]()
 ```
 
 3. Create a new instance of `Storage` component.
@@ -161,7 +161,7 @@ data <- data.frame(
   Status = c('New','New','Done')
 )
 
-data |> storage[['SeedTable']](table)
+data |> storage[['Seed.Table']](table)
 ```
 
 2. select a `storage` instance based on your desired data store and create a new `Todo.Service` instance

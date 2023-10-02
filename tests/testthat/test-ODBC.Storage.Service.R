@@ -12,12 +12,12 @@ describe("When services <- ODBC.Storage.Service()",{
     # Then
     services |> expect.list()
   })
-  it("then services contains ExecuteQuery service",{
+  it("then services contains Execute.Query service",{
     # Given
     services <- ODBC.Storage.Service()
 
     # Then
-    services[["ExecuteQuery"]] |> expect.exist()
+    services[["Execute.Query"]] |> expect.exist()
   })
   it("then services contains Add service",{
     # Given
@@ -56,14 +56,14 @@ describe("When services <- ODBC.Storage.Service()",{
   })
 })
 
-describe('When query |> service[["ExecuteQuery"]]()',{
-  it('then broker[["ExecuteQuery"]]() is called with query',{
+describe('When query |> service[["Execute.Query"]]()',{
+  it('then broker[["Execute.Query"]]() is called with query',{
     # Given
     input.query  <- 'SELECT 1'
     actual.query <- NULL
 
     broker   <- list()
-    broker[["ExecuteQuery"]] <- \(query) {
+    broker[["Execute.Query"]] <- \(query) {
       actual.query <<- query
     }
 
@@ -72,7 +72,7 @@ describe('When query |> service[["ExecuteQuery"]]()',{
     expected.query <- input.query
 
     # When
-    input.query |> services[["ExecuteQuery"]]()
+    input.query |> services[["Execute.Query"]]()
 
     # Then
     actual.query |> expect.equal(expected.query)
@@ -80,7 +80,7 @@ describe('When query |> service[["ExecuteQuery"]]()',{
   it('then an exception is thrown is query is NULL',{
     # Given
     broker   <- list()
-    broker[["ExecuteQuery"]] <- \(query) {} 
+    broker[["Execute.Query"]] <- \(query) {} 
 
     services <- broker |> ODBC.Storage.Service()
 
@@ -90,7 +90,7 @@ describe('When query |> service[["ExecuteQuery"]]()',{
     query <- NULL
 
     # Then
-    query |> services[["ExecuteQuery"]]() |> expect.error(expected.error)
+    query |> services[["Execute.Query"]]() |> expect.error(expected.error)
   })
 })
 

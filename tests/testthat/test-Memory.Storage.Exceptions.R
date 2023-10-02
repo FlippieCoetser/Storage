@@ -12,12 +12,12 @@ describe("When exceptions <- Memory.Storage.Exceptions()",{
     # Then
     exceptions |> expect.list()
   })
-  it('then exceptions contains NoExecuteQuery exception',{
+  it('then exceptions contains NoExecute.Query exception',{
    # When
    exceptions <- Memory.Storage.Exceptions()
    
    # Then
-   exceptions[['NoExecuteQuery']] |> expect.exist()
+   exceptions[['NoExecute.Query']] |> expect.exist()
   })
   it('then exceptions contains DuplicateId exception',{
    # When
@@ -26,23 +26,23 @@ describe("When exceptions <- Memory.Storage.Exceptions()",{
    # Then
    exceptions[['DuplicateId']] |> expect.exist()
   })
-  it('then exceptions contains EntityNotFound exception',{
+  it('then exceptions contains Entity.Not.Found exception',{
    # When
    exceptions <- Memory.Storage.Exceptions()
    
    # Then
-   exceptions[['EntityNotFound']] |> expect.exist()
+   exceptions[['Entity.Not.Found']] |> expect.exist()
   })
-  it('then exceptions contains InvalidTable exception',{
+  it('then exceptions contains Table.Invalid exception',{
    # When
    exceptions <- Memory.Storage.Exceptions()
    
    # Then
-   exceptions[['InvalidTable']] |> expect.exist()
+   exceptions[['Table.Invalid']] |> expect.exist()
   })
 })
 
-describe("When input |> exception[['NoExecuteQuery']]()", {
+describe("When input |> exception[['NoExecute.Query']]()", {
   it("then no exception is thrown if input is FALSE", {
     # Given
     exception <- Memory.Storage.Exceptions()
@@ -51,19 +51,19 @@ describe("When input |> exception[['NoExecuteQuery']]()", {
     input <- FALSE
     
     # Then
-    input |> exception[['NoExecuteQuery']]() |> expect.no.error()
+    input |> exception[['NoExecute.Query']]() |> expect.no.error()
   })
   it("then an exception is thrown if input is TRUE", {
     # Given
     exception <- Memory.Storage.Exceptions()
     
-    expected.error <- 'Memory Storage Provider Error: ExecuteQuery not implemented.'
+    expected.error <- 'Memory Storage Provider Error: Execute.Query not implemented.'
     
     # When
     input <- TRUE
     
     # Then
-    input |> exception[['NoExecuteQuery']]() |> expect.error(expected.error)
+    input |> exception[['NoExecute.Query']]() |> expect.error(expected.error)
   })
 })
 
@@ -91,7 +91,7 @@ describe("When input |> exception[['DuplicateId']]()", {
   })
 })
 
-describe("When input |> exception[['InvalidTable']](table)", {
+describe("When input |> exception[['Table.Invalid']](table)", {
   it("then no exception is thrown if input is FALSE", {
     # Given
     exception <- Memory.Storage.Exceptions()
@@ -100,7 +100,7 @@ describe("When input |> exception[['InvalidTable']](table)", {
     input <- FALSE
     
     # Then
-    input |> exception[['InvalidTable']]() |> expect.no.error()
+    input |> exception[['Table.Invalid']]() |> expect.no.error()
   })
   it("then an exception is thrown if input is TRUE", {
     # Given
@@ -113,11 +113,11 @@ describe("When input |> exception[['InvalidTable']](table)", {
     input <- TRUE
     
     # Then
-    input |> exception[['InvalidTable']](invalid.table) |> expect.error(expected.error)
+    input |> exception[['Table.Invalid']](invalid.table) |> expect.error(expected.error)
   })
 })
 
-describe("When input |> exception[['EntityNotFound']]()", {
+describe("When input |> exception[['Entity.Not.Found']]()", {
   it("then no exception is thrown if input is FALSE", {
     # Given
     exception <- Memory.Storage.Exceptions()
@@ -126,7 +126,7 @@ describe("When input |> exception[['EntityNotFound']]()", {
     input <- FALSE
     
     # Then
-    input |> exception[['EntityNotFound']]() |> expect.no.error()
+    input |> exception[['Entity.Not.Found']]() |> expect.no.error()
   })
   it("then an exception is thrown if input is TRUE", {
     # Given
@@ -138,6 +138,6 @@ describe("When input |> exception[['EntityNotFound']]()", {
     input <- TRUE
     
     # Then
-    input |> exception[['EntityNotFound']]() |> expect.error(expected.error)
+    input |> exception[['Entity.Not.Found']]() |> expect.error(expected.error)
   })
 })

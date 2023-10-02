@@ -12,33 +12,33 @@ describe("When operations <- configuration |> Memory.Storage.Broker()",{
     # Then
     operations |> expect.list()
   })
-  it('then operations contains CreateTable operation',{
+  it('then operations contains Create.Table operation',{
     # When
     operations <- Memory.Storage.Broker()
 
     # Then
-    operations[['CreateTable']] |> expect.exist()
+    operations[['Create.Table']] |> expect.exist()
   })
-  it("then operations contains SeedTable operation",{
+  it("then operations contains Seed.Table operation",{
     # When
     operations <- Memory.Storage.Broker()
 
     # Then
-    operations[['SeedTable']] |> expect.exist()
+    operations[['Seed.Table']] |> expect.exist()
   })
-  it("then operations contains GetTableNames operation",{
+  it("then operations contains Get.Tables operation",{
     # When
     operations <- Memory.Storage.Broker()
 
     # Then
-    operations[['GetTableNames']] |> expect.exist()
+    operations[['Get.Tables']] |> expect.exist()
   })
-  it("then operations contains ExecuteQuery operation",{
+  it("then operations contains Execute.Query operation",{
     # When
     operations <- Memory.Storage.Broker()
 
     # Then
-    operations[['ExecuteQuery']] |> expect.exist()
+    operations[['Execute.Query']] |> expect.exist()
   })
   it("then operations contains Insert operation",{
     # When
@@ -77,7 +77,7 @@ describe("When operations <- configuration |> Memory.Storage.Broker()",{
   })
 })
 
-describe("When model |> operation[['CreateTable']](table)",{
+describe("When model |> operation[['Create.Table']](table)",{
   it("then table is created in memory",{
     # Given
     operation <- Memory.Storage.Broker()
@@ -91,14 +91,14 @@ describe("When model |> operation[['CreateTable']](table)",{
     table <- 'Todo'
 
     # When
-    model |> operation[['CreateTable']](table)
+    model |> operation[['Create.Table']](table)
 
     # Then
-    operation[['GetTableNames']]() |> expect.equal(table)
+    operation[['Get.Tables']]() |> expect.equal(table)
   })
 })
 
-describe("when entities |> operation[['SeedTable']](table)",{
+describe("when entities |> operation[['Seed.Table']](table)",{
   it("then entities are inserted into table in memory",{
     # Given
     operation <- configuration |> Memory.Storage.Broker()
@@ -109,7 +109,7 @@ describe("when entities |> operation[['SeedTable']](table)",{
     expected.entities <- seed.entities
 
     # When
-    seed.entities |> operation[['SeedTable']](table)
+    seed.entities |> operation[['Seed.Table']](table)
 
     # Then
     actual.entities <- table |> operation[['Select']]()
@@ -117,30 +117,30 @@ describe("when entities |> operation[['SeedTable']](table)",{
   })
 })
 
-describe("when operation[['GetTableNames']]()",{
+describe("when operation[['Get.Tables']]()",{
   it("then returns data.frame with table names if data in memory has one or more table",{
     # Given
     operation <- Memory.Storage.Broker()
-    Todo.Mock.Data |> operation[['SeedTable']]('Todo')
+    Todo.Mock.Data |> operation[['Seed.Table']]('Todo')
 
     expected.table.names <- 'Todo'
 
     # When
-    actual.table.names <- operation[['GetTableNames']]()
+    actual.table.names <- operation[['Get.Tables']]()
 
     # Then
     actual.table.names |> expect.equal(expected.table.names)
   })
 })
 
-describe("when query |> operation[['ExecuteQuery']]()",{
+describe("when query |> operation[['Execute.Query']]()",{
   it("then an empty data frame is returned",{
     # Given
     operation <- Memory.Storage.Broker()
 
     # When
     query <- "SELECT 1"
-    results <- query |> operation[['ExecuteQuery']]()
+    results <- query |> operation[['Execute.Query']]()
 
     # Then
     results |> expect.data.frame()
@@ -153,7 +153,7 @@ describe("when entity |> operation[['Insert']](table)",{
     configuration <- data.frame()
 
     operation <- configuration |> Memory.Storage.Broker()
-    Todo.Mock.Data |> operation[['SeedTable']]('Todo')
+    Todo.Mock.Data |> operation[['Seed.Table']]('Todo')
 
     new.todo <- data.frame(
       Id     = uuid::UUIDgenerate(),
@@ -181,7 +181,7 @@ describe("when table |> operation[['Select']]()",{
     configuration <- data.frame()
 
     operation <- configuration |> Memory.Storage.Broker()
-    Todo.Mock.Data |> operation[['SeedTable']]('Todo')
+    Todo.Mock.Data |> operation[['Seed.Table']]('Todo')
 
     expected.todos <- Todo.Mock.Data
 
@@ -199,7 +199,7 @@ describe("when id |> operation[['SelectWhereId']](table)",{
     configuration <- data.frame()
 
     operation <- configuration |> Memory.Storage.Broker()
-    Todo.Mock.Data |> operation[['SeedTable']]('Todo')
+    Todo.Mock.Data |> operation[['Seed.Table']]('Todo')
 
     existing.todo <- Todo.Mock.Data |> tail(1)
 
@@ -220,7 +220,7 @@ describe("when entity |> operation[['Update']](table)",{
     configuration <- data.frame()
 
     operation <- configuration |> Memory.Storage.Broker()
-    Todo.Mock.Data |> operation[['SeedTable']]('Todo')
+    Todo.Mock.Data |> operation[['Seed.Table']]('Todo')
 
     new.todo <- data.frame(
       Id     = uuid::UUIDgenerate(),
@@ -252,7 +252,7 @@ describe("when id |> operation[['Delete']](table)",{
     configuration <- data.frame()
 
     operation <- configuration |> Memory.Storage.Broker()
-    Todo.Mock.Data |> operation[['SeedTable']]('Todo')
+    Todo.Mock.Data |> operation[['Seed.Table']]('Todo')
 
     new.todo <- data.frame(
       Id     = uuid::UUIDgenerate(),
