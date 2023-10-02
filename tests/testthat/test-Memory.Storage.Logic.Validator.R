@@ -26,6 +26,13 @@ describe('When validators <- Memory.Storage.Logic.Validator()',{
     # Then
     validators[['Is.New.Entity']] |> expect.exist()
   })
+  it('then validators contains Is.Existing.Entity',{
+    # When
+    validators <- Memory.Storage.Logic.Validator()
+
+    # Then
+    validators[['Is.Existing.Entity']] |> expect.exist()
+  })
 })
 
 describe("When table |> validate[['Is.Existing.Table']]()",{
