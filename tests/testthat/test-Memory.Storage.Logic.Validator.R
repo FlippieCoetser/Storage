@@ -85,3 +85,69 @@ describe("When table |> validate[['Is.Existing.Table']]()",{
     actual.table |> expect.equal(expected.table)
   })
 })
+
+describe("When entity |> validate[['Is.New.Entity']](table)",{
+  it('then no exception is thrown if entity does not exist in memory storage',{
+    # Given
+    table <- 'Todo'
+    
+    configuration <- data.frame()
+
+    broker <- configuration |> Memory.Storage.Broker()
+
+    Todo.Mock.Data |> broker[['Seed.Table']](table)
+
+    validator <- broker |> Memory.Storage.Logic.Validator()
+
+    new.entity <- data.frame(
+      Id = uuid::UUIDgenerate(),
+      Task = 'Task.New',
+      Status = 'New'
+    )
+    
+    # Then
+    new.entity |> validator[['Is.New.Entity']](table) |> expect.no.error()
+  })
+  it("then an exception is thrown if entity exist in memory storage",{
+    # Given
+    configuration <- data.frame()
+
+    broker <- configuration |> Memory.Storage.Broker()
+    Todo.Mock.Data |> broker[['Seed.Table']](table)
+
+    validator <- broker |> Memory.Storage.Logic.Validator()
+
+    existing.entity <- Todo.Mock.Data |> tail(1)
+    
+    expected.error <- 'Memory Storage Provider Error: Duplicate Id not allowed.'
+    
+    # Then
+    existing.entity |> validator[['Is.New.Entity']](table) |> expect.error(expected.error)
+  }) 
+  it('then entity is returned if entity does not exist in memory storage',{
+    # Given
+    table <- 'Todo'
+    
+    configuration <- data.frame()
+
+    broker <- configuration |> Memory.Storage.Broker()
+
+    Todo.Mock.Data |> broker[['Seed.Table']](table)
+
+    validator <- broker |> Memory.Storage.Logic.Validator()
+
+    new.entity <- data.frame(
+      Id = uuid::UUIDgenerate(),
+      Task = 'Task.New',
+      Status = 'New'
+    )
+    
+    expected.entity <- new.entity
+    
+    # When
+    actual.entity <- new.entity |> validator[['Is.New.Entity']](table)
+
+    # Then
+    actual.entity |> expect.equal(expected.entity)
+  }) 
+})
