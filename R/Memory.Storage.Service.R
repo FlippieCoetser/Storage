@@ -1,5 +1,5 @@
 Memory.Storage.Service <- \(broker) {
-  validate  <- Memory.Storage.Validator(broker)
+  validate  <- Memory.Storage.Structure.Validator(broker)
   
   services <- list()
   services[['Create.Table']]    <- \(model, table) {
