@@ -1,69 +1,69 @@
-describe('Memory.Storage.Validator',{
+describe('Memory.Storage.Structure.Validator',{
   it('Exist',{
-    Memory.Storage.Validator |> expect.exist()
+    Memory.Storage.Structure.Validator |> expect.exist()
   })
 })
 
-describe("When validators <- Memory.Storage.Validator()",{
+describe("When validators <- Memory.Storage.Structure.Validator()",{
   it("then validators is a list",{
     # When
-    validators <- Memory.Storage.Validator()
+    validators <- Memory.Storage.Structure.Validator()
     
     # Then
     validators |> expect.list()
   })
   it('then validators contains Model validator',{
     # When
-    validators <- Memory.Storage.Validator()
+    validators <- Memory.Storage.Structure.Validator()
     
     # Then
     validators[['Model']] |> expect.exist()
   })
   it('then validators contains Table validator',{
     # When
-    validators <- Memory.Storage.Validator()
+    validators <- Memory.Storage.Structure.Validator()
     
     # Then
     validators[['Table']] |> expect.exist()
   })
   it('then validators contains Data validator',{
     # When
-    validators <- Memory.Storage.Validator()
+    validators <- Memory.Storage.Structure.Validator()
     
     # Then
     validators[['Data']] |> expect.exist()
   })
   it('then validators contains Entity validator',{
     # When
-    validators <- Memory.Storage.Validator()
+    validators <- Memory.Storage.Structure.Validator()
     
     # Then
     validators[['Entity']] |> expect.exist()
   })
   it('then validators contains Id validator',{
     # When
-    validators <- Memory.Storage.Validator()
+    validators <- Memory.Storage.Structure.Validator()
     
     # Then
     validators[['Id']] |> expect.exist()
   })
   it('then validators contains NoImplementation validator',{
    # When
-   validators <- Memory.Storage.Validator()
+   validators <- Memory.Storage.Structure.Validator()
    
    # Then
    validators[['NoImplementation']] |> expect.exist()
   })
   it('then validators contains Is.New.Entity validator',{
    # When
-   validators <- Memory.Storage.Validator()
+   validators <- Memory.Storage.Structure.Validator()
    
    # Then
    validators[['Is.New.Entity']] |> expect.exist()
   })
   it('then validators contains Is.Existing.Entity validator',{
    # When
-   validators <- Memory.Storage.Validator()
+   validators <- Memory.Storage.Structure.Validator()
    
    # Then
    validators[['Is.Existing.Entity']] |> expect.exist()
@@ -73,7 +73,7 @@ describe("When validators <- Memory.Storage.Validator()",{
 describe("When input |> validate[['NoImplementation']]()",{
   it('then no exception is thrown if input is FALSE',{
     # Given
-    validate <- Memory.Storage.Validator()
+    validate <- Memory.Storage.Structure.Validator()
     
     # When
     input <- FALSE
@@ -83,7 +83,7 @@ describe("When input |> validate[['NoImplementation']]()",{
   })
   it("then an exceptions is thrown if input is TRUE",{
     # Given
-    validators <- Memory.Storage.Validator()
+    validators <- Memory.Storage.Structure.Validator()
     
     expected.error <- 'Memory Storage Provider Error: Execute.Query not implemented.'
     
@@ -103,7 +103,7 @@ describe("When entity |> validate[['Is.New.Entity']](table)",{
     broker <- configuration |> Memory.Storage.Broker()
     Todo.Mock.Data |> broker[['Seed.Table']](table)
 
-    validator <- broker |> Memory.Storage.Validator()
+    validator <- broker |> Memory.Storage.Structure.Validator()
 
     existing.entity <- Todo.Mock.Data |> tail(1)
     
@@ -122,7 +122,7 @@ describe("When entity |> validate[['Is.Existing.Entity']](table)",{
     broker <- configuration |> Memory.Storage.Broker()
     Todo.Mock.Data |> broker[['Seed.Table']](table)
 
-    validator <- broker |> Memory.Storage.Validator()
+    validator <- broker |> Memory.Storage.Structure.Validator()
 
     new.entity <- data.frame(
       Id     = uuid::UUIDgenerate(),
@@ -149,7 +149,7 @@ describe("When table |> validate[['Is.Existing.Table']]()",{
 
     Todo.Mock.Data |> broker[['Seed.Table']](table)
 
-    validator <- broker |> Memory.Storage.Validator()
+    validator <- broker |> Memory.Storage.Structure.Validator()
 
     valid.table <- table
     
@@ -163,7 +163,7 @@ describe("When table |> validate[['Is.Existing.Table']]()",{
     broker <- configuration |> Memory.Storage.Broker()
     Todo.Mock.Data |> broker[['Seed.Table']](table)
 
-    validator <- broker |> Memory.Storage.Validator()
+    validator <- broker |> Memory.Storage.Structure.Validator()
 
     invalid.table <- 'Table.Invalid'
     
@@ -177,7 +177,7 @@ describe("When table |> validate[['Is.Existing.Table']]()",{
 describe("When model |> validate[['Model']]()",{
   it("then no exception is thrown if model is a data.frame",{
     # Given
-    validate <- Memory.Storage.Validator()
+    validate <- Memory.Storage.Structure.Validator()
     
     # When
     input.model <- data.frame()
@@ -187,7 +187,7 @@ describe("When model |> validate[['Model']]()",{
   })
   it("then no exception if thrown if model is a data.frame with 0 rows",{
     # Given
-    validate <- Memory.Storage.Validator()
+    validate <- Memory.Storage.Structure.Validator()
     
     # When
     input.model <- data.frame(Id = character(0), Task = character(0), Status = character(0))
@@ -197,7 +197,7 @@ describe("When model |> validate[['Model']]()",{
   })
   it("then an exception if thrown if model is NULL",{
     # Given
-    validate <- Memory.Storage.Validator()
+    validate <- Memory.Storage.Structure.Validator()
     
     expected.error <- "Argument.NULL: 'model' cannot not be NULL."
     
@@ -209,7 +209,7 @@ describe("When model |> validate[['Model']]()",{
   })
   it("then an exception is thrown if model is not a data.frame",{
     # Given
-    validate <- Memory.Storage.Validator()
+    validate <- Memory.Storage.Structure.Validator()
     
     expected.error <- "Type.Mismatch: Got 'list' but expected 'data.frame'."
     
@@ -221,7 +221,7 @@ describe("When model |> validate[['Model']]()",{
   })
   it("then model is returned if model is valid",{
     # Given
-    validate <- Memory.Storage.Validator()
+    validate <- Memory.Storage.Structure.Validator()
     
     input.model <- data.frame(Id = character(0), Task = character(0), Status = character(0))
     expected.model <- input.model
@@ -237,7 +237,7 @@ describe("When model |> validate[['Model']]()",{
 describe("When table |> validate[['Table']]()",{
   it("then no exception if thrown if table is valid",{
     # Given
-    validate <- Memory.Storage.Validator()
+    validate <- Memory.Storage.Structure.Validator()
     
     # When
     input <- 'test'  
@@ -247,7 +247,7 @@ describe("When table |> validate[['Table']]()",{
   })
   it("then an exception is thrown if table is NULL",{
     # Given
-    validate <- Memory.Storage.Validator()
+    validate <- Memory.Storage.Structure.Validator()
     
     expected.error <- "Argument.NULL: 'table' cannot not be NULL."
     
@@ -259,7 +259,7 @@ describe("When table |> validate[['Table']]()",{
   })
   it('then an exception if thrown if table is not characters',{
     # Given
-    validate <- Memory.Storage.Validator()
+    validate <- Memory.Storage.Structure.Validator()
     
     expected.error <- "Type.Mismatch: Got 'numeric' but expected 'character'."
     
@@ -274,7 +274,7 @@ describe("When table |> validate[['Table']]()",{
 describe("When data |> validate[['Data']]()",{
   it('then an exception is thrown if data is NULL',{
     # Given
-    validate <- Memory.Storage.Validator()
+    validate <- Memory.Storage.Structure.Validator()
     
     expected.error <- "Argument.NULL: 'data' cannot not be NULL."
     
@@ -286,7 +286,7 @@ describe("When data |> validate[['Data']]()",{
   })
   it('then an exception is thrown if data is not data.frame',{
     # Given
-    validate <- Memory.Storage.Validator()
+    validate <- Memory.Storage.Structure.Validator()
     
     expected.error <- "Type.Mismatch: Got 'list' but expected 'data.frame'."
     
@@ -298,7 +298,7 @@ describe("When data |> validate[['Data']]()",{
   })
   it('then an exception is thrown if data is empty data.frame',{
     # Given
-    validate <- Memory.Storage.Validator()
+    validate <- Memory.Storage.Structure.Validator()
     
     expected.error <- "Rows.Invalid: Got 0 rows but expected >0 rows."
     
@@ -313,7 +313,7 @@ describe("When data |> validate[['Data']]()",{
 describe("When entity |> validate[['Entity']]()",{
   it("then an exception is thrown if entity is NULL",{
     # Given
-    validate <- Memory.Storage.Validator()
+    validate <- Memory.Storage.Structure.Validator()
     
     expected.error <- "Argument.NULL: 'entity' cannot not be NULL."
     
@@ -325,7 +325,7 @@ describe("When entity |> validate[['Entity']]()",{
   })
   it("then an exception is thrown if entity is not data.frame",{
     # Given
-    validate <- Memory.Storage.Validator()
+    validate <- Memory.Storage.Structure.Validator()
     
     expected.error <- "Type.Mismatch: Got 'list' but expected 'data.frame'."
     
@@ -337,7 +337,7 @@ describe("When entity |> validate[['Entity']]()",{
   })
   it("then an exception is thrown if entity is empty data.frame",{
     # Given
-    validate <- Memory.Storage.Validator()
+    validate <- Memory.Storage.Structure.Validator()
     
     expected.error <- "Rows.Invalid: Got 0 rows but expected 1 rows."
     
@@ -349,7 +349,7 @@ describe("When entity |> validate[['Entity']]()",{
   })
   it('then no exception is thrown if entity is valid',{
     # Given
-    validate <- Memory.Storage.Validator()
+    validate <- Memory.Storage.Structure.Validator()
     
     # When
     input <- data.frame(Id = '123', Task = 'Task', Status = 'New')
@@ -362,7 +362,7 @@ describe("When entity |> validate[['Entity']]()",{
 describe("When id |> validate[['Id']]()",{
   it("then an exception is thrown if id is NULL",{
     # Given
-    validate <- Memory.Storage.Validator()
+    validate <- Memory.Storage.Structure.Validator()
     
     expected.error <- "Argument.NULL: 'id' cannot not be NULL."
     
@@ -374,7 +374,7 @@ describe("When id |> validate[['Id']]()",{
   })
   it("then an exception is thrown if id is not characters",{
     # Given
-    validate <- Memory.Storage.Validator()
+    validate <- Memory.Storage.Structure.Validator()
     
     expected.error <- "Type.Mismatch: Got 'numeric' but expected 'character'."
     
@@ -386,7 +386,7 @@ describe("When id |> validate[['Id']]()",{
   })
   it("then an exception is thrown if id is invalid identifier",{
     # Given
-    validate <- Memory.Storage.Validator()
+    validate <- Memory.Storage.Structure.Validator()
     
     expected.error <- "Identifier.Invalid: 'id' is not a valid UUID."
     
@@ -398,7 +398,7 @@ describe("When id |> validate[['Id']]()",{
   })
   it('then no exception is thrown if id is valid',{
     # Given
-    validate <- Memory.Storage.Validator()
+    validate <- Memory.Storage.Structure.Validator()
     
     # When
     input <- uuid::UUIDgenerate()
