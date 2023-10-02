@@ -1,14 +1,12 @@
 ODBC.Configuration.Processor <- \(service) {
   processes <- list()
-  # TODO: Refactor -> Open.Config.File
-  processes[['OpenConfigFile']] <- \() {
-    service[['OpenConfigFile']]()
+  processes[['Open.Config.File']] <- \() {
+    service[['Open.Config.File']]()
   }
-  # TODO: Refactor -> Get.Config
-  processes[['GetConfig']] <- \(type = 'Preset') {
+  processes[['Get.Config']]       <- \(type = 'Preset') {
     configuration <- list()
-    configuration[['Preset']] <- \() service[['GetPresetConfig']]()
-    configuration[['Manual']] <- \() service[['GetManualConfig']]()
+    configuration[['Preset']] <- \() service[['Get.Preset.Config']]()
+    configuration[['Manual']] <- \() service[['Get.Manual.Config']]()
     configuration[[type]]()
   }
   return(processes)

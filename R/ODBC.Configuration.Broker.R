@@ -2,31 +2,28 @@ ODBC.Configuration.Broker <- \(environment = Environment::Environment()) {
   exception <- ODBC.Configuration.Exceptions()
 
   operations <- list()
-  # TODO: Refactor -> Open.Config.File
-  operations[['OpenConfigFile']]  <- \() {
-    environment[['OpenConfigFile']]()
+  operations[['Open.Config.File']]  <- \() {
+    environment[['Open.Config.File']]()
   }
-  # TODO: Refactor -> Get.Preset.Config
-  operations[['GetPresetConfig']] <- \() {
+  operations[['Get.Preset.Config']] <- \() {
     tryCatch(
       list(
         drv = odbc::odbc(),
-        dsn = 'DSN' |> environment[['GetEnvVariable']](),
-        uid = 'UID' |> environment[['GetEnvVariable']](),
-        pwd = 'PWD' |> environment[['GetEnvVariable']]()
+        dsn = 'DSN' |> environment[['Get.Env.Variable']](),
+        uid = 'UID' |> environment[['Get.Env.Variable']](),
+        pwd = 'PWD' |> environment[['Get.Env.Variable']]()
       ), 
     error = exception[['Configuration']])
   }
-  # TODO: Refactor -> Get.Manual.Config
-  operations[['GetManualConfig']] <- \() {
+  operations[['Get.Manual.Config']] <- \() {
     tryCatch(
       list(
         drv      = odbc::odbc(),
-        driver   = 'DRIVER'   |> environment[['GetEnvVariable']](),
-        server   = 'SERVER'   |> environment[['GetEnvVariable']](),
-        database = 'DATABASE' |> environment[['GetEnvVariable']](),
-        uid      = 'UID'      |> environment[['GetEnvVariable']](),
-        pwd      = 'PWD'      |> environment[['GetEnvVariable']]()
+        driver   = 'DRIVER'   |> environment[['Get.Env.Variable']](),
+        server   = 'SERVER'   |> environment[['Get.Env.Variable']](),
+        database = 'DATABASE' |> environment[['Get.Env.Variable']](),
+        uid      = 'UID'      |> environment[['Get.Env.Variable']](),
+        pwd      = 'PWD'      |> environment[['Get.Env.Variable']]()
       ), 
     error = exception[['Configuration']])
   }

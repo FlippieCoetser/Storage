@@ -54,7 +54,7 @@ describe("When todo |> service[['Add']]()",{
     # Given
     storage <- configuration |> Storage.Orchestrator('memory')
 
-    Todo.Mock.Data |> storage[['SeedTable']]('Todo')
+    Todo.Mock.Data |> storage[['Seed.Table']]('Todo')
 
     broker  <- storage |> Todo.Broker()
     service <- broker |> Todo.Service()
@@ -78,7 +78,7 @@ describe("When todo |> service[['Add']]()",{
     # Given
     storage <- configuration |> Storage.Orchestrator('memory')
 
-    Todo.Mock.Data |> storage[['SeedTable']]('Todo')
+    Todo.Mock.Data |> storage[['Seed.Table']]('Todo')
 
     broker  <- storage |> Todo.Broker()
     service <- broker |> Todo.Service()
@@ -96,7 +96,7 @@ describe("When todo |> service[['Add']]()",{
     # Given
     storage <- configuration |> Storage.Orchestrator('memory')
 
-    Todo.Mock.Data |> storage[['SeedTable']]('Todo')
+    Todo.Mock.Data |> storage[['Seed.Table']]('Todo')
 
     broker  <- storage |> Todo.Broker()
     service <- broker |> Todo.Service()
@@ -114,7 +114,7 @@ describe("When todo |> service[['Add']]()",{
     # Given
     storage <- configuration |> Storage.Orchestrator('memory')
 
-    Todo.Mock.Data |> storage[['SeedTable']]('Todo')
+    Todo.Mock.Data |> storage[['Seed.Table']]('Todo')
 
     broker  <- storage |> Todo.Broker()
     service <- broker |> Todo.Service()
@@ -135,7 +135,7 @@ describe("When service[['Retrieve']]()",{
     # Given
     storage <- configuration |> Storage.Orchestrator('memory')
 
-    Todo.Mock.Data |> storage[['SeedTable']]('Todo')
+    Todo.Mock.Data |> storage[['Seed.Table']]('Todo')
 
     broker  <- storage |> Todo.Broker()
     service <- broker |> Todo.Service()
@@ -155,7 +155,7 @@ describe("When id |> service[['RetrieveWhereId']]()",{
     # Given
     storage <- configuration |> Storage.Orchestrator('memory')
 
-    Todo.Mock.Data |> storage[['SeedTable']]('Todo')
+    Todo.Mock.Data |> storage[['Seed.Table']]('Todo')
 
     broker  <- storage |> Todo.Broker()
     service <- broker |> Todo.Service()
@@ -175,7 +175,7 @@ describe("When id |> service[['RetrieveWhereId']]()",{
     # Given
     storage <- configuration |> Storage.Orchestrator('memory')
 
-    Todo.Mock.Data |> storage[['SeedTable']]('Todo')
+    Todo.Mock.Data |> storage[['Seed.Table']]('Todo')
 
     broker  <- storage |> Todo.Broker()
     service <- broker |> Todo.Service()
@@ -192,7 +192,7 @@ describe("When todo |> service[['Modify']]()",{
     # Given
     storage <- configuration |> Storage.Orchestrator('memory')
 
-    Todo.Mock.Data |> storage[['SeedTable']]('Todo')
+    Todo.Mock.Data |> storage[['Seed.Table']]('Todo')
 
     broker  <- storage |> Todo.Broker()
     service <- broker |> Todo.Service()
@@ -214,7 +214,7 @@ describe("When todo |> service[['Modify']]()",{
     # Given
     storage <- configuration |> Storage.Orchestrator('memory')
 
-    Todo.Mock.Data |> storage[['SeedTable']]('Todo')
+    Todo.Mock.Data |> storage[['Seed.Table']]('Todo')
 
     broker  <- storage |> Todo.Broker()
     service <- broker |> Todo.Service()
@@ -232,7 +232,7 @@ describe("When todo |> service[['Modify']]()",{
     # Given
     storage <- configuration |> Storage.Orchestrator('memory')
 
-    Todo.Mock.Data |> storage[['SeedTable']]('Todo')
+    Todo.Mock.Data |> storage[['Seed.Table']]('Todo')
 
     broker  <- storage |> Todo.Broker()
     service <- broker |> Todo.Service()
@@ -253,7 +253,7 @@ describe("When id |> service[['Remove']]()",{
     # Given
     storage <- configuration |> Storage.Orchestrator('memory')
 
-    Todo.Mock.Data |> storage[['SeedTable']]('Todo')
+    Todo.Mock.Data |> storage[['Seed.Table']]('Todo')
 
     broker  <- storage |> Todo.Broker()
     service <- broker |> Todo.Service()
@@ -275,7 +275,7 @@ describe("When id |> service[['Remove']]()",{
     # Given
     storage <- configuration |> Storage.Orchestrator('memory')
 
-    Todo.Mock.Data |> storage[['SeedTable']]('Todo')
+    Todo.Mock.Data |> storage[['Seed.Table']]('Todo')
 
     broker  <- storage |> Todo.Broker()
     service <- broker |> Todo.Service()

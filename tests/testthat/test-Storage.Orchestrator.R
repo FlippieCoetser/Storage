@@ -12,19 +12,19 @@ describe("When orchestrations <- configuration |> Storage.Orchestrator()",{
     # Then
     orchestrations |> expect.list()
   })
-  it("then orchestrations contains SeedTable orchestration",{
+  it("then orchestrations contains Seed.Table orchestration",{
     # When
     orchestrations <- configuration |> Storage.Orchestrator()
 
     # Then
-    orchestrations[['SeedTable']] |> expect.exist()
+    orchestrations[['Seed.Table']] |> expect.exist()
   })
-  it("then orchestrations contains ExecuteQuery orchestration",{
+  it("then orchestrations contains Execute.Query orchestration",{
     # When
     orchestrations <- configuration |> Storage.Orchestrator()
 
     # Then
-    orchestrations[['ExecuteQuery']] |> expect.exist()
+    orchestrations[['Execute.Query']] |> expect.exist()
   })
   it("then orchestrations contains Add orchestration",{
     # When
@@ -74,19 +74,19 @@ describe("When configuration |> Storage.Orchestration()",{
   })
 })
 
-describe("when query |> orchestrate[['ExecuteQuery']]()",{
+describe("when query |> orchestrate[['Execute.Query']]()",{
   it("then an exception is thrown if orchestration service instantiated with type equal memory",{
     # Given
     type <- 'memory'
     orchestrate <- configuration |> Storage.Orchestrator(type)
 
-    expected.error <- 'Memory Storage Provider Error: ExecuteQuery not implemented.'
+    expected.error <- 'Memory Storage Provider Error: Execute.Query not implemented.'
 
     # When
     query <- "SELECT 1"
 
     # Then
-    query |> orchestrate[['ExecuteQuery']]() |> expect.error(expected.error)
+    query |> orchestrate[['Execute.Query']]() |> expect.error(expected.error)
   })
   it("then no exception if thrown if orchestration service instantiated with type equal ODBC",{
     skip_if_not(environment == 'local')
@@ -98,7 +98,7 @@ describe("when query |> orchestrate[['ExecuteQuery']]()",{
     query <- "SELECT 1"
 
     # Then
-    query |> orchestrate[['ExecuteQuery']]() |> expect.no.error()
+    query |> orchestrate[['Execute.Query']]() |> expect.no.error()
   })
   it("then no exception is thrown if orchestration service instantiated with no type provided",{
     skip_if_not(environment == 'local')
@@ -109,6 +109,6 @@ describe("when query |> orchestrate[['ExecuteQuery']]()",{
     query <- "SELECT 1"
 
     # Then
-    query |> orchestrate[['ExecuteQuery']]() |> expect.no.error()
+    query |> orchestrate[['Execute.Query']]() |> expect.no.error()
   })
 })

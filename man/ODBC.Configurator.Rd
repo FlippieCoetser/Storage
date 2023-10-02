@@ -6,8 +6,8 @@
 \value{
 A \code{list} of functions:
 \itemize{
-\item \code{OpenConfigFile()}
-\item \code{GetConfig()}
+\item \code{Open.Config.File()}
+\item \code{Get.Config()}
 }
 }
 \description{
@@ -16,9 +16,9 @@ Different data store providers: ODBC, SQL, File System, requires different confi
 
 \code{ODBC.Configurator()} returns a set of functions that can be used to define and retrieve configuration sets required by ODBC Data Sources:
 \itemize{
-\item The first function: \code{OpenConfigFile}, will open an existing or a new empty \code{.Renviron} configuration file in your IDE.
+\item The first function: \code{Open.Config.File}, will open an existing or a new empty \code{.Renviron} configuration file in your IDE.
 User can then review or add environment variables for either a Preset Configuration: OS defined DSN or Manual Configuration.
-\item The second function: \code{GetConfig}, will return a Preset Configuration by default or if type = 'Manual' is passed a Manual Configuration.
+\item The second function: \code{Get.Config}, will return a Preset Configuration by default or if type = 'Manual' is passed a Manual Configuration.
 Independent of the type of configuration retrieved, extensive validation will be performed to ensure all required parameters are available.
 If any parameter is missing, an error message will be thrown with useful information to allows the user to fix the problem.
 }

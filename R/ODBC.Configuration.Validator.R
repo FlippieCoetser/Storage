@@ -2,18 +2,18 @@ ODBC.Configuration.Validator <- \() {
   exception <- ODBC.Configuration.Exceptions()
 
   validations <- list()
-  validations[['Configuration']] <- \(configuration) {
+  validations[['Configuration']]     <- \(configuration) {
     valid.preset.config <- TRUE
     valid.manual.config <- TRUE
 
     tryCatch(
-      configuration |> validations[['PresetConfig']](),
+      configuration |> validations[['Preset.Config']](),
       error = \(...) {
         valid.preset.config <<- FALSE
       }
     )
     tryCatch(
-      configuration |> validations[['ManualConfig']](),
+      configuration |> validations[['Get.Manual.Config']](),
       error = \(...) {
         valid.manual.config <<- FALSE
       }
@@ -21,59 +21,52 @@ ODBC.Configuration.Validator <- \() {
 
     valid.config <- valid.preset.config || valid.manual.config
     if (!valid.config) {
-      TRUE |> exception[['InvalidConfig']]()
+      TRUE |> exception[['Config.Invalid']]()
     }
     return(configuration)
   }
-  validations[['PresetConfig']] <- \(configuration) {
+  validations[['Preset.Config']]     <- \(configuration) {
     configuration |>
-      validations[['HasDrv']]() |>
-      validations[['HasDsn']]() |>
-      validations[['HasUid']]() |>
-      validations[['HasPwd']]()       
+      validations[['Has.Drv']]() |>
+      validations[['Has.Dsn']]() |>
+      validations[['Has.Uid']]() |>
+      validations[['Has.Pwd']]()       
   }
-  validations[['ManualConfig']] <- \(configuration) {
+  validations[['Get.Manual.Config']] <- \(configuration) {
     configuration |>
-      validations[['HasDrv']]()      |>
-      validations[['HasDriver']]()   |>
-      validations[['HasServer']]()   |>
-      validations[['HasDatabase']]() |>
-      validations[['HasUid']]()      |>
-      validations[['HasPwd']]()       
+      validations[['Has.Drv']]()      |>
+      validations[['Has.Driver']]()   |>
+      validations[['Has.Server']]()   |>
+      validations[['Has.Database']]() |>
+      validations[['Has.Uid']]()      |>
+      validations[['Has.Pwd']]()       
   }
-  # TODO: Refactor -> Has.Drv
-  validations[['HasDrv']]       <- \(configuration) {
-    configuration[['drv']] |> is.null() |> exception[['drvIsNull']]()
+  validations[['Has.Drv']]           <- \(configuration) {
+    configuration[['drv']] |> is.null() |> exception[['Drv.NULL']]()
     return(configuration)
   }
-  # TODO: Refactor -> Has.Dsn
-  validations[['HasDsn']]       <- \(configuration) {
-    configuration[['dsn']] |> is.null() |> exception[['dsnIsNull']]()
+  validations[['Has.Dsn']]           <- \(configuration) {
+    configuration[['dsn']] |> is.null() |> exception[['Dsn.NULL']]()
     return(configuration)
   }
-  # TODO: Refactor -> Has.Driver
-  validations[['HasDriver']]    <- \(configuration) {
-    configuration[['driver']] |> is.null() |> exception[['driverIsNull']]()
+  validations[['Has.Driver']]        <- \(configuration) {
+    configuration[['driver']] |> is.null() |> exception[['Driver.NULL']]()
     return(configuration)
   }
-  # TODO: Refactor -> Has.Server
-  validations[['HasServer']]    <- \(configuration) {
-    configuration[['server']] |> is.null() |> exception[['serverIsNull']]()
+  validations[['Has.Server']]        <- \(configuration) {
+    configuration[['server']] |> is.null() |> exception[['Server.NULL']]()
     return(configuration)
   }
-  # TODO: Refactor -> Has.Database
-  validations[['HasDatabase']]  <- \(configuration) {
-    configuration[['database']] |> is.null() |> exception[['databaseIsNull']]()
+  validations[['Has.Database']]      <- \(configuration) {
+    configuration[['database']] |> is.null() |> exception[['Database.NULL']]()
     return(configuration)
   }
-  # TODO: Refactor -> Has.Uid
-  validations[['HasUid']]       <- \(configuration) {
-    configuration[['uid']] |> is.null() |> exception[['uidIsNull']]()
+  validations[['Has.Uid']]           <- \(configuration) {
+    configuration[['uid']] |> is.null() |> exception[['Uid.NULL']]()
     return(configuration)
   }
-  # TODO: Refactor -> Has.Pwd
-  validations[['HasPwd']]       <- \(configuration) {
-    configuration[['pwd']] |> is.null() |> exception[['pwdIsNull']]()
+  validations[['Has.Pwd']]           <- \(configuration) {
+    configuration[['pwd']] |> is.null() |> exception[['Pwd.NULL']]()
     return(configuration)
   }
   return(validations)

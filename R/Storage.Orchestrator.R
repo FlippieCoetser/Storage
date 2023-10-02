@@ -12,26 +12,25 @@ Storage.Orchestrator <- \(configuration, type = 'odbc') {
   service <- services[[type]]()
 
   orchestrations <- list()
-  # TODO: Refactor -> Seed.Table
-  orchestrations[['SeedTable']]         <- \(data, table) {
-    data |> service[['SeedTable']](table)
+  orchestrations[['Seed.Table']]      <- \(data, table) {
+    data |> service[['Seed.Table']](table)
   }
-  orchestrations[['ExecuteQuery']] <- \(query) {
-    query |> service[['ExecuteQuery']]()
+  orchestrations[['Execute.Query']]   <- \(query) {
+    query |> service[['Execute.Query']]()
   }
-  orchestrations[['Add']]       <- \(entity, table) {
+  orchestrations[['Add']]             <- \(entity, table) {
     entity |> service[['Add']](table)
   }
-  orchestrations[['Retrieve']]       <- \(fields, table) {
+  orchestrations[['Retrieve']]        <- \(fields, table) {
     fields |> service[['Retrieve']](table)
   }
-  orchestrations[['RetrieveWhereId']]<- \(fields, table, id) {
+  orchestrations[['RetrieveWhereId']] <- \(fields, table, id) {
     fields |> service[['RetrieveWhereId']](table, id)
   }
-  orchestrations[['Modify']]       <- \(entity, table) {
+  orchestrations[['Modify']]          <- \(entity, table) {
     entity |> service[['Modify']](table)
   }
-  orchestrations[['Remove']]       <- \(id, table) {
+  orchestrations[['Remove']]          <- \(id, table) {
     id |> service[['Remove']](table)
   }
   return(orchestrations)

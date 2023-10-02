@@ -2,36 +2,32 @@ Todo.Model.Validator <- \() {
   exception <- Todo.Model.Exceptions()
 
   validations <- list()
-  validations[['Todo']]      <- \(todo) { 
+  validations[['Todo']]       <- \(todo) { 
     todo |>
-      validations[['TodoExist']]() |>
-      validations[['HasId']]()     |>
-      validations[['HasTask']]()   |>
-      validations[['HasStatus']]()
+      validations[['Todo.Exist']]() |>
+      validations[['Has.Id']]()     |>
+      validations[['Has.Task']]()   |>
+      validations[['Has.Status']]()
     return(todo) 
   }
-  # TODO: Refactor -> Todo.Exist
-  validations[['TodoExist']] <- \(todo) {
-    todo |> is.null() |> exception[['TodoIsNull']]()
+  validations[['Todo.Exist']] <- \(todo) {
+    todo |> is.null() |> exception[['Todo.NULL']]()
     return(todo)
   }
-  # TODO: Refactor -> Has.Id
-  validations[['HasId']]     <- \(todo) {
-    todo[['Id']] |> is.null() |> exception[['TodoIdIsNull']]()
+  validations[['Has.Id']]     <- \(todo) {
+    todo[['Id']] |> is.null() |> exception[['Todo.Id.NULL']]()
     return(todo)
   }
-  # TODO: Refactor -> Has.Task
-  validations[['HasTask']]   <- \(todo) {
-    todo[['Task']] |> is.null() |> exception[['TodoTaskIsNull']]()
+  validations[['Has.Task']]   <- \(todo) {
+    todo[['Task']] |> is.null() |> exception[['Todo.Task.NULL']]()
     return(todo)
   }
-  # TODO: Refactor -> Has.Status
-  validations[['HasStatus']] <- \(todo) {
-    todo[['Status']] |> is.null() |> exception[['TodoStatusIsNull']]()
+  validations[['Has.Status']] <- \(todo) {
+    todo[['Status']] |> is.null() |> exception[['Todo.Status.NULL']]()
     return(todo)
   }
-  validations[['Id']]        <- \(id) {
-    id |> is.null() |> exception[['IdIsNull']]()
+  validations[['Id']]         <- \(id) {
+    id |> is.null() |> exception[['Id.NULL']]()
     return(id)
   }
   return(validations)

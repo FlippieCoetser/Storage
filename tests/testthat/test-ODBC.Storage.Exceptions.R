@@ -12,40 +12,40 @@ describe("When exceptions <- ODBC.Storage.Exceptions()",{
     # Then
     exceptions |> expect.list()
   })
-  it("then exceptions contains ConfigIsNull exception",{
+  it("then exceptions contains Config.NULL exception",{
     # Given
     exceptions <- ODBC.Storage.Exceptions()
 
     # Then
-    exceptions[['ConfigIsNull']] |> expect.exist()
+    exceptions[['Config.NULL']] |> expect.exist()
   })
-  it("then exceptions contains ConfigIsMissing exception",{
+  it("then exceptions contains Config.Missing exception",{
     # Given
     exceptions <- ODBC.Storage.Exceptions()
 
     # Then
-    exceptions[['ConfigIsMissing']] |> expect.exist()
+    exceptions[['Config.Missing']] |> expect.exist()
   })
-  it("then exceptions contains dsnIsNull exception",{
+  it("then exceptions contains Dsn.NULL exception",{
     # Given
     exceptions <- ODBC.Storage.Exceptions()
 
     # Then
-    exceptions[['dsnIsNull']] |> expect.exist()
+    exceptions[['Dsn.NULL']] |> expect.exist()
   })
-  it("then exceptions contains uidIsNull exception",{
+  it("then exceptions contains Uid.NULL exception",{
     # Given
     exceptions <- ODBC.Storage.Exceptions()
 
     # Then
-    exceptions[['uidIsNull']] |> expect.exist()
+    exceptions[['Uid.NULL']] |> expect.exist()
   })
-  it("then exceptions contains pwdIsNull exception",{
+  it("then exceptions contains Pwd.NULL exception",{
     # Given
     exceptions <- ODBC.Storage.Exceptions()
 
     # Then
-    exceptions[['pwdIsNull']] |> expect.exist()
+    exceptions[['Pwd.NULL']] |> expect.exist()
   })
   it("then exceptions contains Connection exception",{
     # Given
@@ -54,26 +54,26 @@ describe("When exceptions <- ODBC.Storage.Exceptions()",{
     # Then
     exceptions[['Connection']] |> expect.exist()
   })
-  it("then exceptions contains ServerUnreachable exception",{
+  it("then exceptions contains Server.Unreachable exception",{
     # Given
     exceptions <- ODBC.Storage.Exceptions()
 
     # Then
-    exceptions[['ServerUnreachable']] |> expect.exist()
+    exceptions[['Server.Unreachable']] |> expect.exist()
   })
-  it("then exceptions contains InvalidDSN exception",{
+  it("then exceptions contains DSN.Invalid exception",{
     # Given
     exceptions <- ODBC.Storage.Exceptions()
 
     # Then
-    exceptions[['InvalidDSN']] |> expect.exist()
+    exceptions[['DSN.Invalid']] |> expect.exist()
   })
-  it("then exceptions contains LoginFailed exception",{
+  it("then exceptions contains Login.Failed exception",{
     # Given
     exceptions <- ODBC.Storage.Exceptions()
 
     # Then
-    exceptions[['LoginFailed']] |> expect.exist()
+    exceptions[['Login.Failed']] |> expect.exist()
   })
   it("then exceptions contains Query exception",{
     # Given
@@ -82,37 +82,37 @@ describe("When exceptions <- ODBC.Storage.Exceptions()",{
     # Then
     exceptions[['Query']] |> expect.exist()
   })
-  it("then exceptions contains DuplicateKey exception",{
+  it("then exceptions contains Key.Duplicate exception",{
     # Given
     exceptions <- ODBC.Storage.Exceptions()
 
     # Then
-    exceptions[['DuplicateKey']] |> expect.exist()
+    exceptions[['Key.Duplicate']] |> expect.exist()
   })
-  it("then exceptions contains NullValue exception",{
+  it("then exceptions contains Value.NULL exception",{
     # Given
     exceptions <- ODBC.Storage.Exceptions()
 
     # Then
-    exceptions[['NullValue']] |> expect.exist()
+    exceptions[['Value.NULL']] |> expect.exist()
   })
-  it("then exceptions contains ConversionFailed exception",{
+  it("then exceptions contains Conversion.Failed exception",{
     # Given
     exceptions <- ODBC.Storage.Exceptions()
 
     # Then
-    exceptions[['ConversionFailed']] |> expect.exist()
+    exceptions[['Conversion.Failed']] |> expect.exist()
   })
-  it('then exceptions contains QueryIsNull exception',{
+  it('then exceptions contains Query.NULL exception',{
     # Given
     exceptions <- ODBC.Storage.Exceptions()
 
     # Then
-    exceptions[['QueryIsNull']] |> expect.exist()
+    exceptions[['Query.NULL']] |> expect.exist()
   })
 })
 
-describe("when input |> exception[['ConfigIsNull']]()",{
+describe("when input |> exception[['Config.NULL']]()",{
   it('then no exception is thrown when input is FALSE',{
     # Given
     exception <- ODBC.Storage.Exceptions()
@@ -121,7 +121,7 @@ describe("when input |> exception[['ConfigIsNull']]()",{
     input <- FALSE
 
     # Then
-    input |> exception[["ConfigIsNull"]]() |> expect_no_error()
+    input |> exception[["Config.NULL"]]() |> expect_no_error()
   })
   it('then an exception is thrown when input is TRUE',{
     # Given
@@ -133,11 +133,11 @@ describe("when input |> exception[['ConfigIsNull']]()",{
     input <- TRUE
 
     # Then
-    input |> exception[["ConfigIsNull"]]() |> expect_error(expected.error)
+    input |> exception[["Config.NULL"]]() |> expect_error(expected.error)
   })
 })
 
-describe("when input |> exception[['ConfigIsMissing']]()",{
+describe("when input |> exception[['Config.Missing']]()",{
   it('then no exception is thrown when input is FALSE',{
     # Given
     exception <- ODBC.Storage.Exceptions()
@@ -146,7 +146,7 @@ describe("when input |> exception[['ConfigIsMissing']]()",{
     input <- FALSE
 
     # Then
-    input |> exception[["ConfigIsMissing"]]() |> expect_no_error()
+    input |> exception[["Config.Missing"]]() |> expect_no_error()
   })
   it('then an exception is thrown when input is TRUE',{
     # Given
@@ -158,7 +158,7 @@ describe("when input |> exception[['ConfigIsMissing']]()",{
     input <- TRUE
 
     # Then
-    input |> exception[["ConfigIsMissing"]]() |> expect_error(expected.error)
+    input |> exception[["Config.Missing"]]() |> expect_error(expected.error)
   })
 })
 
@@ -171,7 +171,7 @@ describe("when input |> exception[['DSNIsNull']]()",{
     input <- FALSE
 
     # Then
-    input |> exception[['dsnIsNull']]() |> expect_no_error()
+    input |> exception[['Dsn.NULL']]() |> expect_no_error()
   })
   it('then an exception is thrown when input is TRUE',{
     # Given
@@ -183,11 +183,11 @@ describe("when input |> exception[['DSNIsNull']]()",{
     input <- TRUE
 
     # Then
-    input |> exception[['dsnIsNull']]() |> expect_error(expected.error)
+    input |> exception[['Dsn.NULL']]() |> expect_error(expected.error)
   })
 })
 
-describe("When input |> exception[['uidIsNull']]()",{
+describe("When input |> exception[['Uid.NULL']]()",{
   it('then no exception is thrown when input is FALSE',{
     # Given
     exception <- ODBC.Storage.Exceptions()
@@ -196,7 +196,7 @@ describe("When input |> exception[['uidIsNull']]()",{
     input <- FALSE
 
     # Then
-    input |> exception[['uidIsNull']]() |> expect_no_error()
+    input |> exception[['Uid.NULL']]() |> expect_no_error()
   })
   it('then an exception is thrown when input is TRUE',{
     # Given
@@ -208,11 +208,11 @@ describe("When input |> exception[['uidIsNull']]()",{
     input <- TRUE
 
     # Then
-    input |> exception[['uidIsNull']]() |> expect_error(expected.error)
+    input |> exception[['Uid.NULL']]() |> expect_error(expected.error)
   })
 })
 
-describe("When input |> exception[['pwdIsNull']]()",{
+describe("When input |> exception[['Pwd.NULL']]()",{
   it('then no exception is thrown when input is FALSE',{
     # Given
     exception <- ODBC.Storage.Exceptions()
@@ -221,7 +221,7 @@ describe("When input |> exception[['pwdIsNull']]()",{
     input <- FALSE
 
     # Then
-    input |> exception[['pwdIsNull']]() |> expect_no_error()
+    input |> exception[['Pwd.NULL']]() |> expect_no_error()
   })
   it('then an exception is thrown when input is TRUE',{
     # Given
@@ -233,7 +233,7 @@ describe("When input |> exception[['pwdIsNull']]()",{
     input <- TRUE
 
     # Then
-    input |> exception[['pwdIsNull']]() |> expect_error(expected.error)
+    input |> exception[['Pwd.NULL']]() |> expect_error(expected.error)
   })    
 })
 
@@ -286,7 +286,7 @@ describe("When input |> exception[['Connection']]()",{
   })
 })
 
-describe("When input |> exception[['ServerUnreachable']]()",{
+describe("When input |> exception[['Server.Unreachable']]()",{
   it('then no exception is thrown when input is FALSE',{
     # Given
     exception <- ODBC.Storage.Exceptions()
@@ -295,7 +295,7 @@ describe("When input |> exception[['ServerUnreachable']]()",{
     input <- FALSE
 
     # Then
-    input |> exception[["ServerUnreachable"]]() |> expect_no_error()
+    input |> exception[["Server.Unreachable"]]() |> expect_no_error()
   })
   it('then an exception is thrown when input is TRUE',{
     # Given
@@ -307,11 +307,11 @@ describe("When input |> exception[['ServerUnreachable']]()",{
     input <- TRUE
 
     # Then
-    input |> exception[["ServerUnreachable"]]() |> expect_error(expected.error)
+    input |> exception[["Server.Unreachable"]]() |> expect_error(expected.error)
   })
 })
 
-describe("When input |> exception[['InvalidDSN']]()",{
+describe("When input |> exception[['DSN.Invalid']]()",{
   it('then no exception is thrown when input is FALSE',{
     # Given
     exception <- ODBC.Storage.Exceptions()
@@ -320,7 +320,7 @@ describe("When input |> exception[['InvalidDSN']]()",{
     input <- FALSE
 
     # Then
-    input |> exception[["InvalidDSN"]]() |> expect_no_error()
+    input |> exception[["DSN.Invalid"]]() |> expect_no_error()
   })
   it('then an exception is thrown when input is TRUE',{
     # Given
@@ -332,11 +332,11 @@ describe("When input |> exception[['InvalidDSN']]()",{
     input <- TRUE
 
     # Then
-    input |> exception[["InvalidDSN"]]() |> expect_error(expected.error)
+    input |> exception[["DSN.Invalid"]]() |> expect_error(expected.error)
   })
 })
 
-describe("When input |> exception[['LoginFailed']]()",{
+describe("When input |> exception[['Login.Failed']]()",{
   it('then no exception is thrown when input is FALSE',{
     # Given
     exception <- ODBC.Storage.Exceptions()
@@ -345,7 +345,7 @@ describe("When input |> exception[['LoginFailed']]()",{
     input <- FALSE
 
     # Then
-    input |> exception[["LoginFailed"]]() |> expect_no_error()
+    input |> exception[["Login.Failed"]]() |> expect_no_error()
   })
   it('then an exception is thrown when input is TRUE',{
     # Given
@@ -357,7 +357,7 @@ describe("When input |> exception[['LoginFailed']]()",{
     input <- TRUE
 
     # Then
-    input |> exception[["LoginFailed"]]() |> expect_error(expected.error)
+    input |> exception[["Login.Failed"]]() |> expect_error(expected.error)
   })
 })
 
@@ -400,7 +400,7 @@ describe("When input |> exception[['Query']]()",{
   })
 })
 
-describe("When input |> exception[['DuplicateKey']]()",{
+describe("When input |> exception[['Key.Duplicate']]()",{
   it('then no exception is thrown when input is FALSE',{
     # Given
     exception <- ODBC.Storage.Exceptions()
@@ -409,7 +409,7 @@ describe("When input |> exception[['DuplicateKey']]()",{
     input <- FALSE
 
     # Then
-    input |> exception[["DuplicateKey"]]() |> expect_no_error()
+    input |> exception[["Key.Duplicate"]]() |> expect_no_error()
   })
   it('then an exception is thrown when input is TRUE',{
     # Given
@@ -421,11 +421,11 @@ describe("When input |> exception[['DuplicateKey']]()",{
     input <- TRUE
 
     # Then
-    input |> exception[["DuplicateKey"]]() |> expect_error(expected.error)
+    input |> exception[["Key.Duplicate"]]() |> expect_error(expected.error)
   })
 })
 
-describe("When input |> exception[['NullValue']]()",{
+describe("When input |> exception[['Value.NULL']]()",{
   it('then no exception is thrown if input is FALSE',{
     # Given
     exception <- ODBC.Storage.Exceptions()
@@ -434,7 +434,7 @@ describe("When input |> exception[['NullValue']]()",{
     input <- FALSE
 
     # Then
-    input |> exception[["NullValue"]]() |> expect_no_error()
+    input |> exception[["Value.NULL"]]() |> expect_no_error()
   })
   it('then an exception is thrown if input is TRUE',{
     # Given
@@ -446,11 +446,11 @@ describe("When input |> exception[['NullValue']]()",{
     input <- TRUE
 
     # Then
-    input |> exception[["NullValue"]]() |> expect_error(expected.error)
+    input |> exception[["Value.NULL"]]() |> expect_error(expected.error)
   })
 })
 
-describe("When input |> exception[['ConversionFailed']]()",{
+describe("When input |> exception[['Conversion.Failed']]()",{
   it('then no exception is thrown if input is FALSE',{
     # Given
     exception <- ODBC.Storage.Exceptions()
@@ -459,7 +459,7 @@ describe("When input |> exception[['ConversionFailed']]()",{
     input <- FALSE
 
     # Then
-    input |> exception[["ConversionFailed"]]() |> expect_no_error()
+    input |> exception[["Conversion.Failed"]]() |> expect_no_error()
   })
   it('then an exception is thrown if input is TRUE',{
     # Given
@@ -471,11 +471,11 @@ describe("When input |> exception[['ConversionFailed']]()",{
     input <- TRUE
 
     # Then
-    input |> exception[["ConversionFailed"]]() |> expect_error(expected.error)
+    input |> exception[["Conversion.Failed"]]() |> expect_error(expected.error)
   })
 })
 
-describe("when input |> exception[['QueryIsNull']]()",{
+describe("when input |> exception[['Query.NULL']]()",{
   it('then no exception is thrown when input is FALSE',{
     # Given
     exception <- ODBC.Storage.Exceptions()
@@ -484,7 +484,7 @@ describe("when input |> exception[['QueryIsNull']]()",{
     input <- FALSE
 
     # Then
-    input |> exception[["QueryIsNull"]]() |> expect_no_error()
+    input |> exception[["Query.NULL"]]() |> expect_no_error()
   })
   it('then an exception is thrown when input is TRUE',{
     # Given
@@ -496,6 +496,6 @@ describe("when input |> exception[['QueryIsNull']]()",{
     input <- TRUE
 
     # Then
-    input |> exception[["QueryIsNull"]]() |> expect_error(expected.error)
+    input |> exception[["Query.NULL"]]() |> expect_error(expected.error)
   })
 })

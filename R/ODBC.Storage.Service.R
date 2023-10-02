@@ -2,12 +2,11 @@ ODBC.Storage.Service <- \(broker) {
   validate <- ODBC.Storage.Validator()
   
   services <- list()
-  # TODO: Refactor -> Execute.Query
-  services[['ExecuteQuery']]    <- \(query) {
+  services[['Execute.Query']]    <- \(query) {
     # TODO: Extensive query validation.
     # Current validation check for NULL only.
     query |> validate[['Query']]()
-    query |> broker[['ExecuteQuery']]()
+    query |> broker[['Execute.Query']]()
   }
   services[['Add']]             <- \(entity, table) {
     entity |> validate[['Entity']]()

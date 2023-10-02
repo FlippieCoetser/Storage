@@ -6,7 +6,7 @@
 \value{
 A \code{list} of functions:
 \itemize{
-\item \code{ExecuteQuery(query)}
+\item \code{Execute.Query(query)}
 \item \code{Add(entity, table)}
 \item \code{Retrieve(table, fields)}
 \item \code{RetrieveWhereId(id, table, fields)}
