@@ -25,7 +25,7 @@ Memory.Storage.Service <- \(broker) {
 
     table  |> validate.logic[['Is.Existing.Table']]()
     entity |> validate.logic[['Is.New.Entity']](table)
-    
+
     entity |> broker[['Insert']](table)
   }
   services[['Retrieve']]        <- \(table, fields) {
@@ -48,8 +48,8 @@ Memory.Storage.Service <- \(broker) {
     table  |> validate.structure[['Table']]()
     
     table  |> validate.logic[['Is.Existing.Table']]()
+    entity |> validate.logic[['Is.Existing.Entity']](table)
 
-    entity |> validate.structure[['Is.Existing.Entity']](table)
     entity |> broker[['Update']](table)
   }
   services[['Remove']]          <- \(id, table) {
