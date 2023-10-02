@@ -12,12 +12,12 @@ describe("When exceptions <- Memory.Storage.Exceptions()",{
     # Then
     exceptions |> expect.list()
   })
-  it('then exceptions contains NoExecute.Query exception',{
+  it('then exceptions contains No.Execute.Query exception',{
    # When
    exceptions <- Memory.Storage.Exceptions()
    
    # Then
-   exceptions[['NoExecute.Query']] |> expect.exist()
+   exceptions[['No.Execute.Query']] |> expect.exist()
   })
   it('then exceptions contains Key.Duplicate exception',{
    # When
@@ -42,7 +42,7 @@ describe("When exceptions <- Memory.Storage.Exceptions()",{
   })
 })
 
-describe("When input |> exception[['NoExecute.Query']]()", {
+describe("When input |> exception[['No.Execute.Query']]()", {
   it("then no exception is thrown if input is FALSE", {
     # Given
     exception <- Memory.Storage.Exceptions()
@@ -51,7 +51,7 @@ describe("When input |> exception[['NoExecute.Query']]()", {
     input <- FALSE
     
     # Then
-    input |> exception[['NoExecute.Query']]() |> expect.no.error()
+    input |> exception[['No.Execute.Query']]() |> expect.no.error()
   })
   it("then an exception is thrown if input is TRUE", {
     # Given
@@ -63,7 +63,7 @@ describe("When input |> exception[['NoExecute.Query']]()", {
     input <- TRUE
     
     # Then
-    input |> exception[['NoExecute.Query']]() |> expect.error(expected.error)
+    input |> exception[['No.Execute.Query']]() |> expect.error(expected.error)
   })
 })
 

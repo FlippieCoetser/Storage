@@ -32,7 +32,7 @@ Memory.Storage.Validator <- \(broker = NULL) {
       validators[['Is.UUID']]('id')
   }
   validators[['NoImplementation']]   <- \(input) {
-    input |> exception[['NoExecute.Query']]()
+    input |> exception[['No.Execute.Query']]()
   }
   validators[['Is.New.Entity']]      <- \(entity, table) {
     match.count <- entity[['Id']] |> broker[['SelectWhereId']](table) |> nrow() 

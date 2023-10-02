@@ -1,6 +1,6 @@
 Memory.Storage.Exceptions <- \() {
   exceptions <- list()
-  exceptions[['NoExecute.Query']]  <- \(invoke) {
+  exceptions[['No.Execute.Query']]  <- \(invoke) {
     if(invoke) {
       stop('Memory Storage Provider Error: Execute.Query not implemented.', call. = FALSE)
     }
