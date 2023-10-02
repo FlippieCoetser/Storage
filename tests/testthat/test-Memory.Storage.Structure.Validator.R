@@ -54,20 +54,6 @@ describe("When validators <- Memory.Storage.Structure.Validator()",{
    # Then
    validators[['NoImplementation']] |> expect.exist()
   })
-  it('then validators contains Is.New.Entity validator',{
-   # When
-   validators <- Memory.Storage.Structure.Validator()
-   
-   # Then
-   validators[['Is.New.Entity']] |> expect.exist()
-  })
-  it('then validators contains Is.Existing.Entity validator',{
-   # When
-   validators <- Memory.Storage.Structure.Validator()
-   
-   # Then
-   validators[['Is.Existing.Entity']] |> expect.exist()
-  })
 })
 
 describe("When input |> validate[['NoImplementation']]()",{
@@ -92,85 +78,6 @@ describe("When input |> validate[['NoImplementation']]()",{
 
     # Then
     input |> validators[['NoImplementation']]() |> expect.error(expected.error)
-  })
-})
-
-describe("When entity |> validate[['Is.New.Entity']](table)",{
-  it("then an exception is thrown if entity exist in memory storage",{
-    # Given
-    configuration <- data.frame()
-
-    broker <- configuration |> Memory.Storage.Broker()
-    Todo.Mock.Data |> broker[['Seed.Table']](table)
-
-    validator <- broker |> Memory.Storage.Structure.Validator()
-
-    existing.entity <- Todo.Mock.Data |> tail(1)
-    
-    expected.error <- 'Memory Storage Provider Error: Duplicate Id not allowed.'
-    
-    # Then
-    existing.entity |> validator[['Is.New.Entity']](table) |> expect.error(expected.error)
-  })  
-})
-
-describe("When entity |> validate[['Is.Existing.Entity']](table)",{
-  it("then an exception is thrown if entity does not exist in memory storage",{
-    # Given
-    configuration <- data.frame()
-
-    broker <- configuration |> Memory.Storage.Broker()
-    Todo.Mock.Data |> broker[['Seed.Table']](table)
-
-    validator <- broker |> Memory.Storage.Structure.Validator()
-
-    new.entity <- data.frame(
-      Id     = uuid::UUIDgenerate(),
-      Task   = 'Task',
-      Status = 'New'
-    )
-    
-    expected.error <- 'Memory Storage Provider Error: Entity not found.'
-    
-    # Then
-    new.entity |> validator[['Is.Existing.Entity']](table) |> expect.error(expected.error)
-  })  
-})
-
-describe("When table |> validate[['Is.Existing.Table']]()",{
-  it("then no exception is thrown if table is a valid table",{
-    # Given
-    table <- 'Todo'
-    
-    configuration <- data.frame()
-
-    broker <- configuration |> Memory.Storage.Broker()
-
-
-    Todo.Mock.Data |> broker[['Seed.Table']](table)
-
-    validator <- broker |> Memory.Storage.Structure.Validator()
-
-    valid.table <- table
-    
-    # Then
-    valid.table |> validator[['Is.Existing.Table']]() |> expect.no.error()
-  })
-  it("then an exception is thrown if table is not a valid table",{
-    # Given
-    configuration <- data.frame()
-
-    broker <- configuration |> Memory.Storage.Broker()
-    Todo.Mock.Data |> broker[['Seed.Table']](table)
-
-    validator <- broker |> Memory.Storage.Structure.Validator()
-
-    invalid.table <- 'Table.Invalid'
-    
-    expected.error <- 'Memory Storage Provider Error: Table.Invalid is not a valid table.'
-    
-    # Then
-    invalid.table |> validator[['Is.Existing.Table']]() |> expect.error(expected.error)
   })
 })
 

@@ -1,4 +1,4 @@
-Memory.Storage.Structure.Validator <- \(broker = NULL) {
+Memory.Storage.Structure.Validator <- \() {
   exception <- Memory.Storage.Exceptions()
 
   validators <- Validate::Validator()
@@ -33,23 +33,6 @@ Memory.Storage.Structure.Validator <- \(broker = NULL) {
   }
   validators[['NoImplementation']]   <- \(input) {
     input |> exception[['No.Execute.Query']]()
-  }
-  validators[['Is.New.Entity']]      <- \(entity, table) {
-    match.count <- entity[['Id']] |> broker[['SelectWhereId']](table) |> nrow() 
-    (match.count != 0) |> exception[['Key.Duplicate']]()
-    return(entity)
-  }
-  validators[['Is.Existing.Entity']] <- \(entity, table) {
-    match.count <- entity[['Id']] |> broker[['SelectWhereId']](table) |> nrow() 
-    (match.count == 0) |> exception[['Entity.Not.Found']]()
-    return(entity)
-  }
-  validators[['Is.Existing.Table']]  <- \(table) {
-    broker[['Get.Tables']]() |> 
-      is.element(table)         |> 
-      isFALSE()                 |> 
-      exception[['Table.Invalid']](table)
-    return(table)
   }
   return(validators)
 }

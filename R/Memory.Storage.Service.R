@@ -1,5 +1,5 @@
 Memory.Storage.Service <- \(broker) {
-  validate.structure <- Memory.Storage.Structure.Validator(broker)
+  validate.structure <- Memory.Storage.Structure.Validator()
   validate.logic     <- Memory.Storage.Logic.Validator(broker)
   
   services <- list()
@@ -30,7 +30,6 @@ Memory.Storage.Service <- \(broker) {
   }
   services[['Retrieve']]        <- \(table, fields) {
     table |> validate.structure[['Table']]()
-
     table |> validate.logic[['Is.Existing.Table']]()
 
     table |> broker[['Select']](fields)
@@ -46,7 +45,7 @@ Memory.Storage.Service <- \(broker) {
   services[['Modify']]          <- \(entity, table) {
     entity |> validate.structure[['Entity']]()
     table  |> validate.structure[['Table']]()
-    
+
     table  |> validate.logic[['Is.Existing.Table']]()
     entity |> validate.logic[['Is.Existing.Entity']](table)
 
@@ -55,7 +54,7 @@ Memory.Storage.Service <- \(broker) {
   services[['Remove']]          <- \(id, table) {
     id    |> validate.structure[['Id']]()
     table |> validate.structure[['Table']]()
-
+    
     table |> validate.logic[['Is.Existing.Table']]()
     
     id |> broker[['Delete']](table)
