@@ -82,3 +82,17 @@ describe("When table |> operate[['Select']]()",{
     entities |> expect.data.frame()
   })
 })
+
+describe("When table |> operate[['Select']](fields)",{
+  it('then a data.frame is returned if table exist in storage',{
+    skip_if_not(environment == 'local')
+    # Given
+    operate <- configuration |> ODBC.Storage.Broker()
+
+    # When
+    entities <- table |> operate[['Select']](fields) 
+    
+    # Then
+    entities |> expect.data.frame()
+  })
+})
