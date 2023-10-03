@@ -11,12 +11,14 @@ ODBC.Storage.Service <- \(broker) {
   services[['Add']]             <- \(entity, table) {
     entity |> validate[['Entity']]()
     table  |> validate[['Table']]()
-    
+
     table  |> validate[['Is.Existing.Table']]()
     entity |> broker[['Insert']](table)
   }
-  services[['Retrieve']]        <- \(table, fields) {
+  services[['Retrieve']]        <- \(table, fields = '*') {
     table |> validate[['Table']]()
+
+    table |> validate[['Is.Existing.Table']]()
 
     table |> broker[['Select']](fields)
   }
