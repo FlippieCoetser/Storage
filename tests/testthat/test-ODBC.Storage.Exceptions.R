@@ -1,10 +1,10 @@
-describe("ODBC.Storage.Exceptions",{
-  it("Exist",{
+describe('ODBC.Storage.Exceptions',{
+  it('Exist',{
     ODBC.Storage.Exceptions |> expect.exist()
   })
 })
 
-describe("When exceptions <- ODBC.Storage.Exceptions()",{
+describe('When exceptions <- ODBC.Storage.Exceptions()',{
   it('then exceptions is a list',{
     # Given
     exceptions <- ODBC.Storage.Exceptions()
@@ -12,91 +12,91 @@ describe("When exceptions <- ODBC.Storage.Exceptions()",{
     # Then
     exceptions |> expect.list()
   })
-  it("then exceptions contains Config.NULL exception",{
+  it('then exceptions contains Config.NULL exception',{
     # Given
     exceptions <- ODBC.Storage.Exceptions()
 
     # Then
     exceptions[['Config.NULL']] |> expect.exist()
   })
-  it("then exceptions contains Config.Missing exception",{
+  it('then exceptions contains Config.Missing exception',{
     # Given
     exceptions <- ODBC.Storage.Exceptions()
 
     # Then
     exceptions[['Config.Missing']] |> expect.exist()
   })
-  it("then exceptions contains Dsn.NULL exception",{
+  it('then exceptions contains Dsn.NULL exception',{
     # Given
     exceptions <- ODBC.Storage.Exceptions()
 
     # Then
     exceptions[['Dsn.NULL']] |> expect.exist()
   })
-  it("then exceptions contains Uid.NULL exception",{
+  it('then exceptions contains Uid.NULL exception',{
     # Given
     exceptions <- ODBC.Storage.Exceptions()
 
     # Then
     exceptions[['Uid.NULL']] |> expect.exist()
   })
-  it("then exceptions contains Pwd.NULL exception",{
+  it('then exceptions contains Pwd.NULL exception',{
     # Given
     exceptions <- ODBC.Storage.Exceptions()
 
     # Then
     exceptions[['Pwd.NULL']] |> expect.exist()
   })
-  it("then exceptions contains Connection exception",{
+  it('then exceptions contains Connection exception',{
     # Given
     exceptions <- ODBC.Storage.Exceptions()
 
     # Then
     exceptions[['Connection']] |> expect.exist()
   })
-  it("then exceptions contains Server.Unreachable exception",{
+  it('then exceptions contains Server.Unreachable exception',{
     # Given
     exceptions <- ODBC.Storage.Exceptions()
 
     # Then
     exceptions[['Server.Unreachable']] |> expect.exist()
   })
-  it("then exceptions contains DSN.Invalid exception",{
+  it('then exceptions contains DSN.Invalid exception',{
     # Given
     exceptions <- ODBC.Storage.Exceptions()
 
     # Then
     exceptions[['DSN.Invalid']] |> expect.exist()
   })
-  it("then exceptions contains Login.Failed exception",{
+  it('then exceptions contains Login.Failed exception',{
     # Given
     exceptions <- ODBC.Storage.Exceptions()
 
     # Then
     exceptions[['Login.Failed']] |> expect.exist()
   })
-  it("then exceptions contains Query exception",{
+  it('then exceptions contains Query exception',{
     # Given
     exceptions <- ODBC.Storage.Exceptions()
 
     # Then
     exceptions[['Query']] |> expect.exist()
   })
-  it("then exceptions contains Key.Duplicate exception",{
+  it('then exceptions contains Key.Duplicate exception',{
     # Given
     exceptions <- ODBC.Storage.Exceptions()
 
     # Then
     exceptions[['Key.Duplicate']] |> expect.exist()
   })
-  it("then exceptions contains Value.NULL exception",{
+  it('then exceptions contains Value.NULL exception',{
     # Given
     exceptions <- ODBC.Storage.Exceptions()
 
     # Then
     exceptions[['Value.NULL']] |> expect.exist()
   })
-  it("then exceptions contains Conversion.Failed exception",{
+  it('then exceptions contains Conversion.Failed exception',{
     # Given
     exceptions <- ODBC.Storage.Exceptions()
 

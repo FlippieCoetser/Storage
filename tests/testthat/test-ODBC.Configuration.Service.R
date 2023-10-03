@@ -1,32 +1,32 @@
-describe("ODBC.Configuration.Service",{
-  it("Exist",{
+describe('ODBC.Configuration.Service',{
+  it('Exist',{
     ODBC.Configuration.Service |> expect.exist()
   })
 })
 
-describe("When services <- broker |> ODBC.Configuration.Service()",{
-  it("then services is a list",{
+describe('When services <- broker |> ODBC.Configuration.Service()',{
+  it('then services is a list',{
     # When
     services <- ODBC.Configuration.Service()
 
     # Then
     services |> expect.list()
   })
-  it("then services contains Open.Config.File service",{
+  it('then services contains Open.Config.File service',{
     # When
     services <- ODBC.Configuration.Service()
 
     # Then
     services[['Open.Config.File']] |> expect.function()
   })
-  it("then services contains Get.Preset.Config service",{
+  it('then services contains Get.Preset.Config service',{
     # When
     services <- ODBC.Configuration.Service()
 
     # Then
     services[['Get.Preset.Config']] |> expect.function()
   })
-  it("then services contains Get.Manual.Config service",{
+  it('then services contains Get.Manual.Config service',{
     # When
     services <- ODBC.Configuration.Service()
 
@@ -60,7 +60,7 @@ describe("When service[['Open.Config.File']]()",{
 })
 
 describe("When configuration <- service[['Get.Preset.Config']]()",{
-  it("then configuration is a list",{
+  it('then configuration is a list',{
     # Given
     broker  <- ODBC.Configuration.Broker()
     service <- broker |> ODBC.Configuration.Service()
@@ -71,7 +71,7 @@ describe("When configuration <- service[['Get.Preset.Config']]()",{
     # Then
     configuration |> expect.list()
   })
-  it("then configuration contains drv",{
+  it('then configuration contains drv',{
     # Given
     broker  <- ODBC.Configuration.Broker()
     service <- broker |> ODBC.Configuration.Service()
@@ -82,7 +82,7 @@ describe("When configuration <- service[['Get.Preset.Config']]()",{
     # Then
     configuration[['drv']] |> expect.exist()
   })
-  it("then configuration contains dsn",{
+  it('then configuration contains dsn',{
     # Given
     broker  <- ODBC.Configuration.Broker()
     service <- broker |> ODBC.Configuration.Service()
@@ -93,7 +93,7 @@ describe("When configuration <- service[['Get.Preset.Config']]()",{
     # Then
     configuration[['dsn']] |> expect.character()
   })
-  it("then configuration contains uid",{
+  it('then configuration contains uid',{
     # Given
     broker  <- ODBC.Configuration.Broker()
     service <- broker |> ODBC.Configuration.Service()
@@ -104,7 +104,7 @@ describe("When configuration <- service[['Get.Preset.Config']]()",{
     # Then
     configuration[['uid']] |> expect.character()
   })
-  it("then configuration contains pwd",{
+  it('then configuration contains pwd',{
     # Given
     broker  <- ODBC.Configuration.Broker()
     service <- broker |> ODBC.Configuration.Service()
@@ -118,7 +118,7 @@ describe("When configuration <- service[['Get.Preset.Config']]()",{
 })
 
 describe("When configuration <- service[['Get.Manual.Config']]()",{
-  it("then configuration is a list",{
+  it('then configuration is a list',{
     # Given
     broker  <- ODBC.Configuration.Broker()
     service <- broker |> ODBC.Configuration.Service()
@@ -129,7 +129,7 @@ describe("When configuration <- service[['Get.Manual.Config']]()",{
     # Then
     configuration |> expect.list()
   })
-  it("then configuration contains drv",{
+  it('then configuration contains drv',{
     # Given
     broker  <- ODBC.Configuration.Broker()
     service <- broker |> ODBC.Configuration.Service()
@@ -140,7 +140,7 @@ describe("When configuration <- service[['Get.Manual.Config']]()",{
     # Then
     configuration[['drv']] |> expect.exist()
   })
-  it("then configuration contains driver",{
+  it('then configuration contains driver',{
     # Given
     broker  <- ODBC.Configuration.Broker()
     service <- broker |> ODBC.Configuration.Service()
@@ -151,7 +151,7 @@ describe("When configuration <- service[['Get.Manual.Config']]()",{
     # Then
     configuration[['driver']] |> expect.character()
   })
-  it("then configuration contains server",{
+  it('then configuration contains server',{
     # Given
     broker  <- ODBC.Configuration.Broker()
     service <- broker |> ODBC.Configuration.Service()
@@ -162,7 +162,7 @@ describe("When configuration <- service[['Get.Manual.Config']]()",{
     # Then
     configuration[['server']] |> expect.character()
   })
-  it("then configuration contains database",{
+  it('then configuration contains database',{
     # Given
     broker  <- ODBC.Configuration.Broker()
     service <- broker |> ODBC.Configuration.Service()
@@ -173,7 +173,7 @@ describe("When configuration <- service[['Get.Manual.Config']]()",{
     # Then
     configuration[['database']] |> expect.character()
   })
-  it("then configuration contains uid",{
+  it('then configuration contains uid',{
     # Given
     broker  <- ODBC.Configuration.Broker()
     service <- broker |> ODBC.Configuration.Service()
@@ -184,7 +184,7 @@ describe("When configuration <- service[['Get.Manual.Config']]()",{
     # Then
     configuration[['uid']] |> expect.character()
   })
-  it("then configuration contains pwd",{
+  it('then configuration contains pwd',{
     # Given
     broker  <- ODBC.Configuration.Broker()
     service <- broker |> ODBC.Configuration.Service()

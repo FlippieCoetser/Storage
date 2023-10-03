@@ -1,46 +1,46 @@
-describe("Todo.Broker",{
-  it("Exist",{
+describe('Todo.Broker',{
+  it('Exist',{
     Todo.Broker |> expect.exist()
   })
 })
 
-describe("When operations <- storage |> Todo.Broker()",{
-  it("then operations is a list",{
+describe('When operations <- storage |> Todo.Broker()',{
+  it('then operations is a list',{
     # When
     operations <- Todo.Broker()
 
     # Then
     operations |> expect.list()
   })
-  it("then operations contains Insert operation",{
+  it('then operations contains Insert operation',{
     # When
     operations <- Todo.Broker()
 
     # Then
     operations[['Insert']] |> expect.exist()
   })
-  it("then operations contains Select operation",{
+  it('then operations contains Select operation',{
     # When
     operations <- Todo.Broker()
 
     # Then
     operations[['Select']] |> expect.exist()
   })
-  it("then operations contains SelectWhereId operation",{
+  it('then operations contains SelectWhereId operation',{
     # When
     operations <- Todo.Broker()
 
     # Then
     operations[['SelectWhereId']] |> expect.exist()
   })
-  it("then operations contains Update operation",{
+  it('then operations contains Update operation',{
     # When
     operations <- Todo.Broker()
 
     # Then
     operations[['Update']] |> expect.exist()
   })
-  it("then operations contains Delete operation",{
+  it('then operations contains Delete operation',{
     # When
     operations <- Todo.Broker()
 
@@ -50,7 +50,7 @@ describe("When operations <- storage |> Todo.Broker()",{
 })
 
 describe("When todo |> operations[['Insert']]()",{
-  it("then todo is inserted into odbc.storage",{
+  it('then todo is inserted into odbc.storage',{
     skip_if_not(environment == 'local')
     # Given
     storage    <- configuration |> Storage.Orchestrator('odbc')
@@ -74,7 +74,7 @@ describe("When todo |> operations[['Insert']]()",{
 
     id |> storage[['Remove']]('Todo')
   })
-  it("then todo is inserted into memory.storage",{
+  it('then todo is inserted into memory.storage',{
     # Given
     storage    <- configuration |> Storage.Orchestrator('memory')
     operations <- storage |> Todo.Broker()
@@ -102,7 +102,7 @@ describe("When todo |> operations[['Insert']]()",{
 })
 
 describe("When operations[['Select']]()",{
-  it("then all todos in odbc.storage is returned",{
+  it('then all todos in odbc.storage is returned',{
     skip_if_not(environment == 'local')
     # Given
     storage    <- configuration |> Storage.Orchestrator('odbc')
@@ -116,7 +116,7 @@ describe("When operations[['Select']]()",{
     # Then
     actual.todos |> expect.equal(expected.todos)
   })
-  it("then all todos in memory.storage is returned",{
+  it('then all todos in memory.storage is returned',{
     # Given
     storage    <- configuration |> Storage.Orchestrator('memory')
     operations <- storage |> Todo.Broker()
@@ -134,7 +134,7 @@ describe("When operations[['Select']]()",{
 })
 
 describe("When id |> operations[['SelectWhereId']]()",{
-  it("then todo with id equal id is returned from odbc.storage",{
+  it('then todo with id equal id is returned from odbc.storage',{
     skip_if_not(environment == 'local')
     # Given
     storage    <- configuration |> Storage.Orchestrator('odbc')
@@ -152,7 +152,7 @@ describe("When id |> operations[['SelectWhereId']]()",{
     # Then
     actual.todo |> expect.equal(expected.todo)
   })
-  it("then todo with id equal id is returned from memory.storage",{
+  it('then todo with id equal id is returned from memory.storage',{
     # Given
     storage    <- configuration |> Storage.Orchestrator('memory')
     operations <- storage |> Todo.Broker()
@@ -174,7 +174,7 @@ describe("When id |> operations[['SelectWhereId']]()",{
 })
 
 describe("When todo |> operations[['Update']]()",{
-  it("then todo in odbc.storage is updated",{
+  it('then todo in odbc.storage is updated',{
     skip_if_not(environment == 'local')
     # Given
     storage    <- configuration |> Storage.Orchestrator('odbc')
@@ -204,7 +204,7 @@ describe("When todo |> operations[['Update']]()",{
 
     id |> storage[['Remove']]('Todo')
   })
-  it("then todo in memory.storage is updated",{
+  it('then todo in memory.storage is updated',{
     # Given
     storage    <- configuration |> Storage.Orchestrator('memory')
     operations <- storage |> Todo.Broker()
@@ -238,7 +238,7 @@ describe("When todo |> operations[['Update']]()",{
 })
 
 describe("When id |> operations[['Delete']]()",{
-  it("then todo with id are removed from odbc.storage",{
+  it('then todo with id are removed from odbc.storage',{
     skip_if_not(environment == 'local')
     # Given
     storage    <- configuration |> Storage.Orchestrator('odbc')
@@ -263,7 +263,7 @@ describe("When id |> operations[['Delete']]()",{
     actual.count <- id |> storage[['RetrieveWhereId']]('Todo', fields) |> nrow()
     actual.count |> expect.equal(expected.count)
   })
-  it("then todo with is are removed from memory.storage",{
+  it('then todo with is are removed from memory.storage',{
     # Given
     storage    <- configuration |> Storage.Orchestrator('memory')
     operations <- storage |> Todo.Broker()

@@ -1,18 +1,18 @@
-describe("ODBC.Storage.Validator",{
-  it("Exist",{
+describe('ODBC.Storage.Validator',{
+  it('Exist',{
     ODBC.Storage.Validator |> expect.exist()
   })
 })
 
-describe("When validators <- ODBC.Storage.Validator()",{
-  it("then validators a list",{
+describe('When validators <- ODBC.Storage.Validator()',{
+  it('then validators a list',{
     # Given
     validators <- ODBC.Storage.Validator()
 
     # Then
     validators |> expect.list()
   })
-  it("then validators contains Query validator",{
+  it('then validators contains Query validator',{
     # Given
     validators <- ODBC.Storage.Validator()
 
@@ -85,7 +85,7 @@ describe('When query |> validate[["Query"]]()',{
 })
 
 describe("When entity |> validate[['Entity']]()",{
-  it("then an exception is thrown if entity is NULL",{
+  it('then an exception is thrown if entity is NULL',{
     # Given
     validate <- ODBC.Storage.Validator()
     
@@ -97,7 +97,7 @@ describe("When entity |> validate[['Entity']]()",{
     # Then
     input |> validate[['Entity']]() |> expect.error(expected.error)
   })
-  it("then an exception is thrown if entity is not data.frame",{
+  it('then an exception is thrown if entity is not data.frame',{
     # Given
     validate <- ODBC.Storage.Validator()
     
@@ -109,7 +109,7 @@ describe("When entity |> validate[['Entity']]()",{
     # Then
     input |> validate[['Entity']]() |> expect.error(expected.error)
   })
-  it("then an exception is thrown if entity is empty data.frame",{
+  it('then an exception is thrown if entity is empty data.frame',{
     # Given
     validate <- ODBC.Storage.Validator()
     
@@ -134,7 +134,7 @@ describe("When entity |> validate[['Entity']]()",{
 })
 
 describe("When table |> validate[['Table']]()",{
-  it("then no exception if thrown if table is valid",{
+  it('then no exception if thrown if table is valid',{
     # Given
     validate <- ODBC.Storage.Validator()
     
@@ -144,7 +144,7 @@ describe("When table |> validate[['Table']]()",{
     # Then
     input |> validate[['Table']]() |> expect.no.error()
   })
-  it("then an exception is thrown if table is NULL",{
+  it('then an exception is thrown if table is NULL',{
     # Given
     validate <- ODBC.Storage.Validator()
     
@@ -171,7 +171,7 @@ describe("When table |> validate[['Table']]()",{
 })
 
 describe("When id |> validate[['Id']]()",{
-  it("then an exception is thrown if id is NULL",{
+  it('then an exception is thrown if id is NULL',{
     # Given
     validate <- ODBC.Storage.Validator()
     
@@ -183,7 +183,7 @@ describe("When id |> validate[['Id']]()",{
     # Then
     input |> validate[['Id']]() |> expect.error(expected.error)
   })
-  it("then an exception is thrown if id is not characters",{
+  it('then an exception is thrown if id is not characters',{
     # Given
     validate <- ODBC.Storage.Validator()
     
@@ -195,7 +195,7 @@ describe("When id |> validate[['Id']]()",{
     # Then
     input |> validate[['Id']]() |> expect.error(expected.error)
   })
-  it("then an exception is thrown if id is invalid identifier",{
+  it('then an exception is thrown if id is invalid identifier',{
     # Given
     validate <- ODBC.Storage.Validator()
     
