@@ -225,3 +225,32 @@ describe("When id |> validate[['Id']]()",{
     input |> validate[['Id']]() |> expect.no.error()
   })
 })
+
+describe("When table |> validate[['Is.Existing.Table']]()",{
+  it('then no exception is thrown if table is a valid table',{
+    # Given
+    table <- 'Todo'
+
+    broker <- configuration |> ODBC.Storage.Broker()
+
+    validator <- broker |> ODBC.Storage.Validator()
+
+    valid.table <- table
+    
+    # Then
+    valid.table |> validator[['Is.Existing.Table']]() |> expect.no.error()
+  })
+  it('then an exception is thrown if table is not a valid table',{
+    # Given
+    broker <- configuration |> ODBC.Storage.Broker()
+
+    validator <- broker |> ODBC.Storage.Validator()
+
+    invalid.table <- 'Invalid'
+    
+    expected.error <- 'ODBC.Storage: Table.Invalid: Invalid is not a valid table.'
+    
+    # Then
+    invalid.table |> validator[['Is.Existing.Table']]() |> expect.error(expected.error)
+  })
+})
