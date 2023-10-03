@@ -20,6 +20,7 @@ ODBC.Storage.Broker <- \(configuration, sql = Query::SQL()) {
 
     return(output)
   }
+  operations[['Get.Tables']]        <- \() {}
   operations[['Insert']]            <- \(entity, table) {
     table |>
     sql[['INSERT']](entity) |>
