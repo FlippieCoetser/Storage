@@ -77,7 +77,7 @@ describe("when query |> operate[['Execute.Query']]()",{
 })
 
 describe("when operate[['Get.Tables']]()",{
-  it('then a vector containing tables names is returned',{
+  it('then a data.frame containing tables names is returned',{
     skip_if_not(environment == 'local')
     # Given
     operate <- configuration |> ODBC.Storage.Broker()
@@ -86,7 +86,7 @@ describe("when operate[['Get.Tables']]()",{
     tables <- operate[['Get.Tables']]() 
 
     # Then
-    tables |> expect.vector()
+    tables |> expect.data.frame()
   })
 })
 
