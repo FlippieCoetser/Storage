@@ -217,6 +217,27 @@ describe("When entity |> service[['Add']](table)",{
     # Then
     entity |> services[['Add']](table) |> expect.error(expected.error)
   })
+  it('then an exception is thrown if table is invalid',{
+    skip_if_not(environment == 'local')
+    # Given
+    broker <- configuration |> ODBC.Storage.Broker()
+
+    services <- broker |> ODBC.Storage.Service()
+
+    expected.error <- "ODBC.Storage: Key.Violation: Duplicate Primary Key not allowed."
+
+    entity <- data.frame(
+      Id = uuid::UUIDgenerate(),
+      Task = 'Task',
+      Status = 'New'
+    )
+
+    # When
+    table <- 'Invalid'
+
+    # Then
+    entity |> services[['Add']](table) |> expect.error(expected.error)
+  })
 })
 
 describe("When table |> service[['Retrieve']](fields)",{
