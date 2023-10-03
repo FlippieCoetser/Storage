@@ -12,12 +12,12 @@ describe('When exceptions <- Memory.Storage.Exceptions()',{
     # Then
     exceptions |> expect.list()
   })
-  it('then exceptions contains No.Execute.Query exception',{
+  it('then exceptions contains Not.Implemented exception',{
    # When
    exceptions <- Memory.Storage.Exceptions()
    
    # Then
-   exceptions[['No.Execute.Query']] |> expect.exist()
+   exceptions[['Not.Implemented']] |> expect.exist()
   })
   it('then exceptions contains Key.Violation exception',{
    # When
@@ -42,7 +42,7 @@ describe('When exceptions <- Memory.Storage.Exceptions()',{
   })
 })
 
-describe("When input |> exception[['No.Execute.Query']]()", {
+describe("When input |> exception[['Not.Implemented']]()", {
   it('then no exception is thrown if input is FALSE', {
     # Given
     exception <- Memory.Storage.Exceptions()
@@ -51,19 +51,19 @@ describe("When input |> exception[['No.Execute.Query']]()", {
     input <- FALSE
     
     # Then
-    input |> exception[['No.Execute.Query']]() |> expect.no.error()
+    input |> exception[['Not.Implemented']]() |> expect.no.error()
   })
   it('then an exception is thrown if input is TRUE', {
     # Given
     exception <- Memory.Storage.Exceptions()
     
-    expected.error <- 'Memory.Storage: Not.Implemented: Execute.Query not implemented.'
+    expected.error <- 'Memory.Storage: Not.Implemented.'
     
     # When
     input <- TRUE
     
     # Then
-    input |> exception[['No.Execute.Query']]() |> expect.error(expected.error)
+    input |> exception[['Not.Implemented']]() |> expect.error(expected.error)
   })
 })
 

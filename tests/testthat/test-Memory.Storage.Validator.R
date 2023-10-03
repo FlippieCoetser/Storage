@@ -47,12 +47,12 @@ describe('When validators <- Memory.Storage.Validator()',{
     # Then
     validators[['Id']] |> expect.exist()
   })
-  it('then validators contains NoImplementation validator',{
+  it('then validators contains Not.Implemented validator',{
    # When
    validators <- Memory.Storage.Validator()
    
    # Then
-   validators[['NoImplementation']] |> expect.exist()
+   validators[['Not.Implemented']] |> expect.exist()
   })
   it('then validators contains Is.New.Entity validator',{
    # When
@@ -70,7 +70,7 @@ describe('When validators <- Memory.Storage.Validator()',{
   })
 })
 
-describe("When input |> validate[['NoImplementation']]()",{
+describe("When input |> validate[['Not.Implemented']]()",{
   it('then no exception is thrown if input is FALSE',{
     # Given
     validate <- Memory.Storage.Validator()
@@ -79,19 +79,19 @@ describe("When input |> validate[['NoImplementation']]()",{
     input <- FALSE
     
     # Then
-    input |> validate[['NoImplementation']]() |> expect.no.error()
+    input |> validate[['Not.Implemented']]() |> expect.no.error()
   })
   it('then an exceptions is thrown if input is TRUE',{
     # Given
     validators <- Memory.Storage.Validator()
     
-    expected.error <- 'Memory.Storage: Not.Implemented: Execute.Query not implemented.'
+    expected.error <- 'Memory.Storage: Not.Implemented.'
     
     # When
     input <- TRUE
 
     # Then
-    input |> validators[['NoImplementation']]() |> expect.error(expected.error)
+    input |> validators[['Not.Implemented']]() |> expect.error(expected.error)
   })
 })
 

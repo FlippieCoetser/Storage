@@ -31,8 +31,8 @@ Memory.Storage.Validator <- \(broker = NULL) {
       validators[['Is.Character']]()    |>
       validators[['Is.UUID']]('id')
   }
-  validators[['NoImplementation']]   <- \(input) {
-    input |> exception[['No.Execute.Query']]()
+  validators[['Not.Implemented']]    <- \(input) {
+    input |> exception[['Not.Implemented']]()
   }
   validators[['Is.New.Entity']]      <- \(entity, table) {
     tryCatch(

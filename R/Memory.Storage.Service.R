@@ -15,7 +15,7 @@ Memory.Storage.Service <- \(broker) {
     data  |> broker[['Seed.Table']](table)
   }
   services[['Execute.Query']]   <- \(...) {
-    TRUE |> validate[['NoImplementation']]()
+    TRUE |> validate[['Not.Implemented']]()
     ...  |> broker[['Execute.Query']]()
   }
   services[['Add']]             <- \(entity, table) {

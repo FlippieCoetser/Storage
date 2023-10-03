@@ -1,8 +1,8 @@
 Memory.Storage.Exceptions <- \() {
   exceptions <- list()
-  exceptions[['No.Execute.Query']]  <- \(invoke) {
+  exceptions[['Not.Implemented']]  <- \(invoke) {
     if(invoke) {
-      stop('Memory.Storage: Not.Implemented: Execute.Query not implemented.', call. = FALSE)
+      stop('Memory.Storage: Not.Implemented.', call. = FALSE)
     }
   }
   exceptions[['Key.Violation']]      <- \(invoke) {

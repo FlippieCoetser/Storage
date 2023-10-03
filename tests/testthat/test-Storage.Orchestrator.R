@@ -80,7 +80,7 @@ describe("when query |> orchestrate[['Execute.Query']]()",{
     type <- 'memory'
     orchestrate <- configuration |> Storage.Orchestrator(type)
 
-    expected.error <- 'Memory.Storage: Not.Implemented: Execute.Query not implemented.'
+    expected.error <- 'Memory.Storage: Not.Implemented.'
 
     # When
     query <- "SELECT 1"
