@@ -31,17 +31,21 @@ Memory.Storage.Validator <- \(broker = NULL) {
       validators[['Is.Character']]()    |>
       validators[['Is.UUID']]('id')
   }
-  validators[['NoImplementation']]   <- \(input) {
-    input |> exception[['No.Execute.Query']]()
+  validators[['Not.Implemented']]    <- \(input) {
+    input |> exception[['Not.Implemented']]()
   }
   validators[['Is.New.Entity']]      <- \(entity, table) {
-    match.count <- entity[['Id']] |> broker[['SelectWhereId']](table) |> nrow() 
-    (match.count != 0) |> exception[['Key.Duplicate']]()
+    tryCatch(
+      entity[['Id']] |> broker[['SelectWhereId']](table) |> validators[['Is.Empty']](),
+      error=\(...) TRUE |> exception[['Key.Violation']]()
+    ) 
     return(entity)
   }
   validators[['Is.Existing.Entity']] <- \(entity, table) {
-    match.count <- entity[['Id']] |> broker[['SelectWhereId']](table) |> nrow() 
-    (match.count == 0) |> exception[['Entity.Not.Found']]()
+    tryCatch(
+      entity[['Id']] |> broker[['SelectWhereId']](table) |> validators[['Has.One.Row']](),
+      error=\(...) TRUE |> exception[['Entity.Not.Found']]()
+    )
     return(entity)
   }
   validators[['Is.Existing.Table']]  <- \(table) {

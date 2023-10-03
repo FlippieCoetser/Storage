@@ -5,49 +5,49 @@ describe('ODBC.Storage.Service',{
 })
 
 describe("When services <- ODBC.Storage.Service()",{
-  it("then services a list",{
+  it('then services a list',{
     # Given
     services <- ODBC.Storage.Service()
 
     # Then
     services |> expect.list()
   })
-  it("then services contains Execute.Query service",{
+  it('then services contains Execute.Query service',{
     # Given
     services <- ODBC.Storage.Service()
 
     # Then
     services[["Execute.Query"]] |> expect.exist()
   })
-  it("then services contains Add service",{
+  it('then services contains Add service',{
     # Given
     services <- ODBC.Storage.Service()
 
     # Then
     services[["Add"]] |> expect.exist()
   })
-  it("then services contains Retrieve service",{
+  it('then services contains Retrieve service',{
     # Given
     services <- ODBC.Storage.Service()
 
     # Then
     services[["Retrieve"]] |> expect.exist()
   })
-  it("then services contains RetrieveWhereId service",{
+  it('then services contains RetrieveWhereId service',{
     # Given
     services <- ODBC.Storage.Service()
 
     # Then
     services[["RetrieveWhereId"]] |> expect.exist()
   })
-  it("then services contains Modify service",{
+  it('then services contains Modify service',{
     # Given
     services <- ODBC.Storage.Service()
 
     # Then
     services[["Modify"]] |> expect.exist()
   })
-  it("then services contains Remove service",{
+  it('then services contains Remove service',{
     # Given
     services <- ODBC.Storage.Service()
 
@@ -121,7 +121,7 @@ describe("When entity |> service[['Add']](table)",{
     actual.entity |> expect.equal(expected.entity)
     actual.table  |> expect.equal(expected.table)
   })
-  it("then an exception is thrown if entity is NULL",{
+  it('then an exception is thrown if entity is NULL',{
     # Given
     broker <- list()
     broker[['Insert']] <- \(entity, table) {} 
@@ -196,6 +196,23 @@ describe("When entity |> service[['Add']](table)",{
 
     # When
     table <- list()
+
+    # Then
+    entity |> services[['Add']](table) |> expect.error(expected.error)
+  })
+  it('then an exception is thrown if entity is not new',{
+    skip_if_not(environment == 'local')
+    # Given
+    broker <- configuration |> ODBC.Storage.Broker()
+
+    services <- broker |> ODBC.Storage.Service()
+
+    expected.error <- "ODBC.Storage: Key.Violation: Duplicate Primary Key not allowed."
+
+    entities <- broker[['Select']](table, fields) 
+
+    # When
+    entity <- entities |> tail(1)
 
     # Then
     entity |> services[['Add']](table) |> expect.error(expected.error)
@@ -402,7 +419,7 @@ describe("When entity |> service[['Modify']](table)",{
     actual.entity |> expect.equal(expected.entity)
     actual.table  |> expect.equal(expected.table)
   })
-  it("then an exception is thrown if entity is NULL",{
+  it('then an exception is thrown if entity is NULL',{
     # Given
     broker <- list()
     broker[['Upsert']] <- \(entity, table) {} 

@@ -15,22 +15,23 @@ Memory.Storage.Service <- \(broker) {
     data  |> broker[['Seed.Table']](table)
   }
   services[['Execute.Query']]   <- \(...) {
-    TRUE |> validate[['NoImplementation']]()
+    TRUE |> validate[['Not.Implemented']]()
     ...  |> broker[['Execute.Query']]()
   }
   services[['Add']]             <- \(entity, table) {
     entity |> validate[['Entity']]()
     table  |> validate[['Table']]()
 
-    table |> validate[['Is.Existing.Table']]()
-
+    table  |> validate[['Is.Existing.Table']]()
     entity |> validate[['Is.New.Entity']](table)
+
     entity |> broker[['Insert']](table)
   }
   services[['Retrieve']]        <- \(table, fields) {
     table |> validate[['Table']]()
 
     table |> validate[['Is.Existing.Table']]()
+
     table |> broker[['Select']](fields)
   }
   services[['RetrieveWhereId']] <- \(id, table, fields) {
@@ -39,15 +40,15 @@ Memory.Storage.Service <- \(broker) {
 
     table |> validate[['Is.Existing.Table']]()
 
-    id |> broker[['SelectWhereId']](table, fields)
+    id    |> broker[['SelectWhereId']](table, fields)
   }
   services[['Modify']]          <- \(entity, table) {
     entity |> validate[['Entity']]()
     table  |> validate[['Table']]()
     
-    table |> validate[['Is.Existing.Table']]()
-
+    table  |> validate[['Is.Existing.Table']]()
     entity |> validate[['Is.Existing.Entity']](table)
+
     entity |> broker[['Update']](table)
   }
   services[['Remove']]          <- \(id, table) {
@@ -56,7 +57,7 @@ Memory.Storage.Service <- \(broker) {
 
     table |> validate[['Is.Existing.Table']]()
     
-    id |> broker[['Delete']](table)
+    id    |> broker[['Delete']](table)
   }
   return(services)
 }

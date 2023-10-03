@@ -4,15 +4,15 @@ describe('ODBC.Configuration.Validator',{
   })
 })
 
-describe("When validators <- ODBC.Configuration.Validator()",{
-  it("then validators is a list",{
+describe('When validators <- ODBC.Configuration.Validator()',{
+  it('then validators is a list',{
     # When
     validators <- ODBC.Configuration.Validator()
 
     # Then
     validators |> expect.list()
   })
-  it("then validators contains Configuration validator",{
+  it('then validators contains Configuration validator',{
     # When
     validators <- ODBC.Configuration.Validator()
 
@@ -33,49 +33,49 @@ describe("When validators <- ODBC.Configuration.Validator()",{
    # Then
    validators[['Get.Manual.Config']] |> expect.exist()
   })
-  it("then validators contains Has.Drv validator",{
+  it('then validators contains Has.Drv validator',{
     # When
     validators <- ODBC.Configuration.Validator()
 
     # Then
     validators[['Has.Drv']] |> expect.exist()
   })
-  it("then validators contains Has.Dsn validator",{
+  it('then validators contains Has.Dsn validator',{
     # When
     validators <- ODBC.Configuration.Validator()
 
     # Then
     validators[['Has.Dsn']] |> expect.exist()
   })
-  it("then validators contains Has.Driver validator",{
+  it('then validators contains Has.Driver validator',{
     # When
     validators <- ODBC.Configuration.Validator()
 
     # Then
     validators[['Has.Driver']] |> expect.exist()
   })
-  it("then validators contains Has.Server validator",{
+  it('then validators contains Has.Server validator',{
     # When
     validators <- ODBC.Configuration.Validator()
 
     # Then
     validators[['Has.Server']] |> expect.exist()
   })
-  it("then validators contains Has.Database validator",{
+  it('then validators contains Has.Database validator',{
     # When
     validators <- ODBC.Configuration.Validator()
 
     # Then
     validators[['Has.Database']] |> expect.exist()
   })
-  it("then validators contains Has.Uid validator",{
+  it('then validators contains Has.Uid validator',{
     # When
     validators <- ODBC.Configuration.Validator()
 
     # Then
     validators[['Has.Uid']] |> expect.exist()
   })
-  it("then validators contains Has.Pwd validator",{
+  it('then validators contains Has.Pwd validator',{
     # When
     validators <- ODBC.Configuration.Validator()
 
@@ -85,7 +85,7 @@ describe("When validators <- ODBC.Configuration.Validator()",{
 })
 
 describe("When configuration |> validate[['Has.Drv']]()",{
-  it("then no exception is thrown if drv is not NULL",{
+  it('then no exception is thrown if drv is not NULL',{
     # Given
     validate <- ODBC.Configuration.Validator()
     
@@ -96,7 +96,7 @@ describe("When configuration |> validate[['Has.Drv']]()",{
     # Then
     input.configuration |> validate[['Has.Drv']]() |> expect.no.error()
   })
-  it("then an exception is thrown if drv is NULL",{
+  it('then an exception is thrown if drv is NULL',{
     # Given
     validate <- ODBC.Configuration.Validator()
     
@@ -109,7 +109,7 @@ describe("When configuration |> validate[['Has.Drv']]()",{
     # Then
     input.configuration |> validate[['Has.Drv']]() |> expect.error(expected.error)
   })
-  it("then configuration is returned if configuration has drv",{
+  it('then configuration is returned if configuration has drv',{
     # Given
     validate <- ODBC.Configuration.Validator()
     
@@ -127,7 +127,7 @@ describe("When configuration |> validate[['Has.Drv']]()",{
 })
 
 describe("When configuration |> validate[['Has.Dsn']]()",{
-  it("then no exception is thrown if dsn is not NULL",{
+  it('then no exception is thrown if dsn is not NULL',{
     # Given
     validate <- ODBC.Configuration.Validator()
     
@@ -138,7 +138,7 @@ describe("When configuration |> validate[['Has.Dsn']]()",{
     # Then
     input.configuration |> validate[['Has.Dsn']]() |> expect.no.error()
   })
-  it("then an exception is thrown if dsn is NULL",{
+  it('then an exception is thrown if dsn is NULL',{
     # Given
     validate <- ODBC.Configuration.Validator()
     
@@ -151,7 +151,7 @@ describe("When configuration |> validate[['Has.Dsn']]()",{
     # Then
     input.configuration |> validate[['Has.Dsn']]() |> expect.error(expected.error)
   })
-  it("then configuration is returned if configuration has dsn",{
+  it('then configuration is returned if configuration has dsn',{
     # Given
     validate <- ODBC.Configuration.Validator()
     
@@ -169,7 +169,7 @@ describe("When configuration |> validate[['Has.Dsn']]()",{
 })
 
 describe("When configuration |> validate[['Has.Driver']]()",{
-  it("then no exception is thrown if driver is not NULL",{
+  it('then no exception is thrown if driver is not NULL',{
     # Given
     validate <- ODBC.Configuration.Validator()
     
@@ -180,7 +180,7 @@ describe("When configuration |> validate[['Has.Driver']]()",{
     # Then
     input.configuration |> validate[['Has.Driver']]() |> expect.no.error()
   })
-  it("then an exception is thrown if driver is NULL",{
+  it('then an exception is thrown if driver is NULL',{
     # Given
     validate <- ODBC.Configuration.Validator()
     
@@ -193,7 +193,7 @@ describe("When configuration |> validate[['Has.Driver']]()",{
     # Then
     input.configuration |> validate[['Has.Driver']]() |> expect.error(expected.error)
   })
-  it("then configuration is returned if configuration has driver",{
+  it('then configuration is returned if configuration has driver',{
     # Given
     validate <- ODBC.Configuration.Validator()
     
@@ -211,7 +211,7 @@ describe("When configuration |> validate[['Has.Driver']]()",{
 })
 
 describe("When configuration |> validate[['Has.Server']]()",{
-  it("then no exception is thrown if server is not NULL",{
+  it('then no exception is thrown if server is not NULL',{
     # Given
     validate <- ODBC.Configuration.Validator()
     
@@ -222,7 +222,7 @@ describe("When configuration |> validate[['Has.Server']]()",{
     # Then
     input.configuration |> validate[['Has.Server']]() |> expect.no.error()
   })
-  it("then an exception is thrown if server is NULL",{
+  it('then an exception is thrown if server is NULL',{
     # Given
     validate <- ODBC.Configuration.Validator()
     
@@ -235,7 +235,7 @@ describe("When configuration |> validate[['Has.Server']]()",{
     # Then
     input.configuration |> validate[['Has.Server']]() |> expect.error(expected.error)
   })
-  it("then configuration is returned if configuration has server",{
+  it('then configuration is returned if configuration has server',{
     # Given
     validate <- ODBC.Configuration.Validator()
     
@@ -253,7 +253,7 @@ describe("When configuration |> validate[['Has.Server']]()",{
 })
 
 describe("When configuration |> validate[['Has.Database']]()",{
-  it("then no exception is thrown if database is not NULL",{
+  it('then no exception is thrown if database is not NULL',{
     # Given
     validate <- ODBC.Configuration.Validator()
     
@@ -264,7 +264,7 @@ describe("When configuration |> validate[['Has.Database']]()",{
     # Then
     input.configuration |> validate[['Has.Database']]() |> expect.no.error()
   })
-  it("then an exception is thrown if database is NULL",{
+  it('then an exception is thrown if database is NULL',{
     # Given
     validate <- ODBC.Configuration.Validator()
     
@@ -277,7 +277,7 @@ describe("When configuration |> validate[['Has.Database']]()",{
     # Then
     input.configuration |> validate[['Has.Database']]() |> expect.error(expected.error)
   })
-  it("then configuration is returned if configuration has database",{
+  it('then configuration is returned if configuration has database',{
     # Given
     validate <- ODBC.Configuration.Validator()
     
@@ -295,7 +295,7 @@ describe("When configuration |> validate[['Has.Database']]()",{
 })
 
 describe("When configuration |> validate[['Has.Uid']]()",{
-  it("then no exception is thrown if uid is not NULL",{
+  it('then no exception is thrown if uid is not NULL',{
     # Given
     validate <- ODBC.Configuration.Validator()
     
@@ -306,7 +306,7 @@ describe("When configuration |> validate[['Has.Uid']]()",{
     # Then
     input.configuration |> validate[['Has.Uid']]() |> expect.no.error()
   })
-  it("then an exception is thrown if uid is NULL",{
+  it('then an exception is thrown if uid is NULL',{
     # Given
     validate <- ODBC.Configuration.Validator()
     
@@ -319,7 +319,7 @@ describe("When configuration |> validate[['Has.Uid']]()",{
     # Then
     input.configuration |> validate[['Has.Uid']]() |> expect.error(expected.error)
   })
-  it("then configuration is returned if configuration has uid",{
+  it('then configuration is returned if configuration has uid',{
     # Given
     validate <- ODBC.Configuration.Validator()
     
@@ -337,7 +337,7 @@ describe("When configuration |> validate[['Has.Uid']]()",{
 })
 
 describe("When configuration |> validate[['Has.Pwd']]()",{
-  it("then no exception is thrown if pwd is not NULL",{
+  it('then no exception is thrown if pwd is not NULL',{
     # Given
     validate <- ODBC.Configuration.Validator()
     
@@ -348,7 +348,7 @@ describe("When configuration |> validate[['Has.Pwd']]()",{
     # Then
     input.configuration |> validate[['Has.Pwd']]() |> expect.no.error()
   })
-  it("then an exception is thrown if pwd is NULL",{
+  it('then an exception is thrown if pwd is NULL',{
     # Given
     validate <- ODBC.Configuration.Validator()
     
@@ -361,7 +361,7 @@ describe("When configuration |> validate[['Has.Pwd']]()",{
     # Then
     input.configuration |> validate[['Has.Pwd']]() |> expect.error(expected.error)
   })
-  it("then configuration is returned if configuration has pwd",{
+  it('then configuration is returned if configuration has pwd',{
     # Given
     validate <- ODBC.Configuration.Validator()
     
@@ -379,7 +379,7 @@ describe("When configuration |> validate[['Has.Pwd']]()",{
 })
 
 describe("When configuration |> validate[['Preset.Config']]()",{
-  it("then no exception is thrown if configuration is valid",{
+  it('then no exception is thrown if configuration is valid',{
     # Given
     validate <- ODBC.Configuration.Validator()
     
@@ -393,7 +393,7 @@ describe("When configuration |> validate[['Preset.Config']]()",{
     # Then
     input.configuration |> validate[['Preset.Config']]() |> expect.no.error()
   })
-  it("then an exception is thrown if configuration has no drv",{
+  it('then an exception is thrown if configuration has no drv',{
     # Given
     validate <- ODBC.Configuration.Validator()
     
@@ -409,7 +409,7 @@ describe("When configuration |> validate[['Preset.Config']]()",{
     # Then
     input.configuration |> validate[['Preset.Config']]() |> expect.error(expected.error)
   })
-  it("then an exception is thrown if configuration has no dsn",{
+  it('then an exception is thrown if configuration has no dsn',{
     # Given
     validate <- ODBC.Configuration.Validator()
     
@@ -425,7 +425,7 @@ describe("When configuration |> validate[['Preset.Config']]()",{
     # Then
     input.configuration |> validate[['Preset.Config']]() |> expect.error(expected.error)
   })
-  it("then an exception is thrown if configuration has no uid",{
+  it('then an exception is thrown if configuration has no uid',{
     # Given
     validate <- ODBC.Configuration.Validator()
     
@@ -441,7 +441,7 @@ describe("When configuration |> validate[['Preset.Config']]()",{
     # Then
     input.configuration |> validate[['Preset.Config']]() |> expect.error(expected.error)
   }) 
-  it("then an exception is thrown if configuration has no pwd",{
+  it('then an exception is thrown if configuration has no pwd',{
     # Given
     validate <- ODBC.Configuration.Validator()
     
@@ -457,7 +457,7 @@ describe("When configuration |> validate[['Preset.Config']]()",{
     # Then
     input.configuration |> validate[['Preset.Config']]() |> expect.error(expected.error)
   })
-  it("then configuration is returned if configuration is valid",{
+  it('then configuration is returned if configuration is valid',{
     # Given
     validate <- ODBC.Configuration.Validator()
     
@@ -478,7 +478,7 @@ describe("When configuration |> validate[['Preset.Config']]()",{
 })
 
 describe("When configuration |> validate[['Get.Manual.Config']]()",{
-  it("then no exception is thrown if configuration is valid",{
+  it('then no exception is thrown if configuration is valid',{
     # Given
     validate <- ODBC.Configuration.Validator()
     
@@ -494,7 +494,7 @@ describe("When configuration |> validate[['Get.Manual.Config']]()",{
     # Then
     input.configuration |> validate[['Get.Manual.Config']]() |> expect.no.error()
   })
-  it("then an exception is thrown if configuration has no drv",{
+  it('then an exception is thrown if configuration has no drv',{
     # Given
     validate <- ODBC.Configuration.Validator()
     
@@ -512,7 +512,7 @@ describe("When configuration |> validate[['Get.Manual.Config']]()",{
     # Then
     input.configuration |> validate[['Get.Manual.Config']]() |> expect.error(expected.error)
   })
-  it("then an exception if thrown if configuration has no driver",{
+  it('then an exception if thrown if configuration has no driver',{
     # Given
     validate <- ODBC.Configuration.Validator()
     
@@ -530,7 +530,7 @@ describe("When configuration |> validate[['Get.Manual.Config']]()",{
     # Then
     input.configuration |> validate[['Get.Manual.Config']]() |> expect.error(expected.error)
   })
-  it("then an exception if thrown if configuration has no server",{
+  it('then an exception if thrown if configuration has no server',{
     # Given
     validate <- ODBC.Configuration.Validator()
     
@@ -548,7 +548,7 @@ describe("When configuration |> validate[['Get.Manual.Config']]()",{
     # Then
     input.configuration |> validate[['Get.Manual.Config']]() |> expect.error(expected.error)
   })
-  it("then an exception if thrown if configuration has no database",{
+  it('then an exception if thrown if configuration has no database',{
     # Given
     validate <- ODBC.Configuration.Validator()
     
@@ -566,7 +566,7 @@ describe("When configuration |> validate[['Get.Manual.Config']]()",{
     # Then
     input.configuration |> validate[['Get.Manual.Config']]() |> expect.error(expected.error)
   })
-  it("then an exception if thrown if configuration has no uid",{
+  it('then an exception if thrown if configuration has no uid',{
     # Given
     validate <- ODBC.Configuration.Validator()
     
@@ -584,7 +584,7 @@ describe("When configuration |> validate[['Get.Manual.Config']]()",{
     # Then
     input.configuration |> validate[['Get.Manual.Config']]() |> expect.error(expected.error)
   })
-  it("then an exception if thrown if configuration has no pwd",{
+  it('then an exception if thrown if configuration has no pwd',{
     # Given
     validate <- ODBC.Configuration.Validator()
     
@@ -602,7 +602,7 @@ describe("When configuration |> validate[['Get.Manual.Config']]()",{
     # Then
     input.configuration |> validate[['Get.Manual.Config']]() |> expect.error(expected.error)
   })
-  it("then configuration is returned if configuration is valid",{
+  it('then configuration is returned if configuration is valid',{
     # Given
     validate <- ODBC.Configuration.Validator()
     
@@ -626,7 +626,7 @@ describe("When configuration |> validate[['Get.Manual.Config']]()",{
 })
 
 describe("When configuration |> validate[['Configuration']]()",{
-  it("then no exception is thrown if configuration is valid Preset configuration",{
+  it('then no exception is thrown if configuration is valid Preset configuration',{
     # Given
     validate <- ODBC.Configuration.Validator()
     
@@ -640,7 +640,7 @@ describe("When configuration |> validate[['Configuration']]()",{
     # Then
     input.configuration |> validate[['Configuration']]() |> expect.no.error()
   })
-  it("then no exception is thrown if configuration is valid Manual configuration",{
+  it('then no exception is thrown if configuration is valid Manual configuration',{
     # Given
     validate <- ODBC.Configuration.Validator()
     
@@ -656,7 +656,7 @@ describe("When configuration |> validate[['Configuration']]()",{
     # Then
     input.configuration |> validate[['Configuration']]() |> expect.no.error()
   })
-  it("then an exception is thrown if configuration is invalid Preset configuration",{
+  it('then an exception is thrown if configuration is invalid Preset configuration',{
     # Given
     validate <- ODBC.Configuration.Validator()
     
@@ -672,7 +672,7 @@ describe("When configuration |> validate[['Configuration']]()",{
     # Then
     input.configuration |> validate[['Configuration']]() |> expect.error(expected.error)
   })
-  it("then an exception is thrown if configuration is invalid Manual configuration",{
+  it('then an exception is thrown if configuration is invalid Manual configuration',{
     # Given
     validate <- ODBC.Configuration.Validator()
     
@@ -690,7 +690,7 @@ describe("When configuration |> validate[['Configuration']]()",{
     # Then
     input.configuration |> validate[['Configuration']]() |> expect.error(expected.error)
   })
-  it("then configuration is returned if configuration is valid Preset configuration",{
+  it('then configuration is returned if configuration is valid Preset configuration',{
     # Given
     validate <- ODBC.Configuration.Validator()
     
@@ -707,7 +707,7 @@ describe("When configuration |> validate[['Configuration']]()",{
     actual.configuration <- expected.configuration |> validate[['Configuration']]() 
     actual.configuration |> expect.equal(expected.configuration)
   })
-  it("then configuration is returned if configuration is valid Manual configuration",{
+  it('then configuration is returned if configuration is valid Manual configuration',{
     # Given
     validate <- ODBC.Configuration.Validator()
     

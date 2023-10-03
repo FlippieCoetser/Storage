@@ -373,7 +373,7 @@ describe("When entity |> service[['Add']](table)",{
 
     existing.entity <- Todo.Mock.Data |> tail(1)
 
-    expected.error <- "Memory Storage Provider Error: Duplicate Id not allowed."
+    expected.error <- "Memory.Storage: Key.Violation: Duplicate Primary Key not allowed."
 
     # Then
     existing.entity |> service[['Add']](table) |> expect.error(expected.error)
@@ -434,7 +434,7 @@ describe("When entity |> service[['Add']](table)",{
     
     invalid.table <- 'Table.Invalid'
 
-    expected.error <- "Memory Storage Provider Error: Table.Invalid is not a valid table."
+    expected.error <- "Memory.Storage: Table.Invalid: Table.Invalid is not a valid table."
 
     # Then
     new.entity |> service[['Add']](invalid.table) |> expect.error(expected.error)
@@ -495,7 +495,7 @@ describe("When table |> service[['Retrieve']](fields)",{
 
     invalid.table <- 'Table.Invalid'
 
-    expected.error <- "Memory Storage Provider Error: Table.Invalid is not a valid table."
+    expected.error <- "Memory.Storage: Table.Invalid: Table.Invalid is not a valid table."
 
     # Then
     invalid.table |> service[['Retrieve']](fields) |> expect.error(expected.error)
@@ -607,7 +607,7 @@ describe("When id |> service[['RetrieveWhereId']](table, fields)",{
 
     invalid.table <- 'Table.Invalid'
 
-    expected.error <- "Memory Storage Provider Error: Table.Invalid is not a valid table."
+    expected.error <- "Memory.Storage: Table.Invalid: Table.Invalid is not a valid table."
 
     # Then
     id |> service[['RetrieveWhereId']](invalid.table, fields) |> expect.error(expected.error)
@@ -615,7 +615,7 @@ describe("When id |> service[['RetrieveWhereId']](table, fields)",{
 })
 
 describe("When entity |> service[['Modify']](table)",{
-  it("then entity is updated in table in data store",{
+  it('then entity is updated in table in data store',{
     # Given
     broker  <- configuration |> Memory.Storage.Broker()
     service <- broker        |> Memory.Storage.Service()
@@ -643,7 +643,7 @@ describe("When entity |> service[['Modify']](table)",{
     actual.entity <- id |> broker[['SelectWhereId']](table, fields)
     actual.entity |> expect.equal.data(expected.entity)
   })
-  it("then an exception is thrown if entity is NULL",{
+  it('then an exception is thrown if entity is NULL',{
     # Given
     configuration <- data.frame()
  
@@ -656,7 +656,7 @@ describe("When entity |> service[['Modify']](table)",{
     # Then
     NULL |> service[['Modify']](table) |> expect.error(expected.error)
   })
-  it("then an exception is thrown if entity is not data.frame",{
+  it('then an exception is thrown if entity is not data.frame',{
     # Given
     configuration <- data.frame()
  
@@ -669,7 +669,7 @@ describe("When entity |> service[['Modify']](table)",{
     # Then
     list() |> service[['Modify']](table) |> expect.error(expected.error)
   })
-  it("then an exception is thrown if entity does not have one row",{
+  it('then an exception is thrown if entity does not have one row',{
     # Given
     configuration <- data.frame()
  
@@ -682,7 +682,7 @@ describe("When entity |> service[['Modify']](table)",{
     # Then
     data.frame() |> service[['Modify']](table) |> expect.error(expected.error)
   })
-  it("then an exception is thrown if table is NULL",{
+  it('then an exception is thrown if table is NULL',{
     # Given
     configuration <- data.frame()
  
@@ -701,7 +701,7 @@ describe("When entity |> service[['Modify']](table)",{
     # Then
     new.entity |> service[['Modify']](NULL) |> expect.error(expected.error)
   })
-  it("then an exception is thrown if table in not characters",{
+  it('then an exception is thrown if table in not characters',{
     # Given
     configuration <- data.frame()
  
@@ -720,7 +720,7 @@ describe("When entity |> service[['Modify']](table)",{
     # Then
     new.entity |> service[['Modify']](123) |> expect.error(expected.error)
   })
-  it("then an exception is thrown if entity does not exist",{
+  it('then an exception is thrown if entity does not exist',{
     # Given
     configuration <- data.frame()
 
@@ -736,12 +736,12 @@ describe("When entity |> service[['Modify']](table)",{
       Status = 'New'
     )
 
-    expected.error <- "Memory Storage Provider Error: Entity not found."
+    expected.error <- "Memory.Storage: Entity.Not.Found: Entity not found in storage."
 
     # Then
     new.entity |> service[['Modify']](table) |> expect.error(expected.error)
   })
-  it("then an exception is thrown if table is invalid",{
+  it('then an exception is thrown if table is invalid',{
     # Given
     configuration <- data.frame()
 
@@ -757,7 +757,7 @@ describe("When entity |> service[['Modify']](table)",{
     updated.entity <- entity
     updated.entity[['Status']] <- 'Updated'
 
-    expected.error <- "Memory Storage Provider Error: Table.Invalid is not a valid table."
+    expected.error <- "Memory.Storage: Table.Invalid: Table.Invalid is not a valid table."
 
     invalid.table <- 'Table.Invalid'
 
@@ -767,7 +767,7 @@ describe("When entity |> service[['Modify']](table)",{
 })
 
 describe("when id |> service[['Remove']](table)",{
-  it("then entity with id in table in data store is deleted",{
+  it('then entity with id in table in data store is deleted',{
     # Given
     broker  <- configuration |> Memory.Storage.Broker()
     service <- broker        |> Memory.Storage.Service()
@@ -872,7 +872,7 @@ describe("when id |> service[['Remove']](table)",{
     # Then
     id |> service[['Remove']](123) |> expect.error(expected.error)
   })
-  it("then an exception is thrown if table is invalid",{
+  it('then an exception is thrown if table is invalid',{
     # Given
     configuration <- data.frame()
 
@@ -887,7 +887,7 @@ describe("when id |> service[['Remove']](table)",{
 
     invalid.table <- 'Table.Invalid'
 
-    expected.error <- "Memory Storage Provider Error: Table.Invalid is not a valid table."
+    expected.error <- "Memory.Storage: Table.Invalid: Table.Invalid is not a valid table."
 
     # Then
     id |> service[['Remove']](invalid.table) |> expect.error(expected.error) 
