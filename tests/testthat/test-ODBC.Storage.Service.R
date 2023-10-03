@@ -224,7 +224,7 @@ describe("When entity |> service[['Add']](table)",{
 
     services <- broker |> ODBC.Storage.Service()
 
-    expected.error <- "ODBC.Storage: Key.Violation: Duplicate Primary Key not allowed."
+    expected.error <- "ODBC.Storage: Table.Invalid: Invalid is not a valid table."
 
     entity <- data.frame(
       Id = uuid::UUIDgenerate(),
