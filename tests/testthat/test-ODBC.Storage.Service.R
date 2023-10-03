@@ -424,6 +424,21 @@ describe("When id |> service[['RetrieveWhereId']](table, fields)",{
     # Then
     id |> services[['RetrieveWhereId']](table, list()) |> expect.error(expected.error)
   })
+  it('then an exception is thrown if table is invalid',{
+    skip_if_not(environment == 'local')
+    # Given
+    broker <- configuration |> ODBC.Storage.Broker()
+
+    services <- broker |> ODBC.Storage.Service()
+
+    invalid.table <- 'Invalid'
+    expected.error <- "ODBC.Storage: Table.Invalid: Invalid is not a valid table."
+
+    id <- uuid::UUIDgenerate()
+
+    # Then
+    id |> services[['RetrieveWhereId']](invalid.table) |> expect.error(expected.error)
+  })
 })
 
 describe("When entity |> service[['Modify']](table)",{
