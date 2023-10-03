@@ -68,3 +68,17 @@ describe("when query |> operate[['Execute.Query']]()",{
     output |> expect.data.frame()
   })
 })
+
+describe("When table |> operate[['Select']]()",{
+  it('then a data.frame is returned if table exist in storage',{
+    skip_if_not(environment == 'local')
+    # Given
+    operate <- configuration |> ODBC.Storage.Broker()
+
+    # When
+    entities <- table |> operate[['Select']]() 
+    
+    # Then
+    entities |> expect.data.frame()
+  })
+})
