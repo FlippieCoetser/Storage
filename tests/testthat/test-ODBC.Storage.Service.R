@@ -298,6 +298,19 @@ describe("When table |> service[['Retrieve']](fields)",{
     table |> services[['Retrieve']](list()) |> expect.error(expected.error)
 
   })
+  it('then an exception is thrown if table is invalid',{
+    skip_if_not(environment == 'local')
+    # Given
+    broker <- configuration |> ODBC.Storage.Broker()
+
+    services <- broker |> ODBC.Storage.Service()
+
+    invalid.table <- 'Invalid'
+    expected.error <- "ODBC.Storage: Table.Invalid: Invalid is not a valid table."
+
+    # Then
+    invalid.table |> services[['Retrieve']]() |> expect.error(expected.error)
+  })
 })
 
 describe("When id |> service[['RetrieveWhereId']](table, fields)",{
