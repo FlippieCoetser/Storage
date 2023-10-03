@@ -1,5 +1,5 @@
 ODBC.Storage.Service <- \(broker) {
-  validate <- ODBC.Storage.Validator()
+  validate <- ODBC.Storage.Validator(broker)
   
   services <- list()
   services[['Execute.Query']]    <- \(query) {
@@ -11,7 +11,8 @@ ODBC.Storage.Service <- \(broker) {
   services[['Add']]             <- \(entity, table) {
     entity |> validate[['Entity']]()
     table  |> validate[['Table']]()
-
+    
+    table  |> validate[['Is.Existing.Table']]()
     entity |> broker[['Insert']](table)
   }
   services[['Retrieve']]        <- \(table, fields) {
