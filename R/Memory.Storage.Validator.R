@@ -35,8 +35,10 @@ Memory.Storage.Validator <- \(broker = NULL) {
     input |> exception[['No.Execute.Query']]()
   }
   validators[['Is.New.Entity']]      <- \(entity, table) {
-    match.count <- entity[['Id']] |> broker[['SelectWhereId']](table) |> nrow() 
-    (match.count != 0) |> exception[['Key.Duplicate']]()
+    tryCatch(
+      entity[['Id']] |> broker[['SelectWhereId']](table) |> validators[['Is.Empty']](),
+      error=\(...) TRUE |> exception[['Key.Duplicate']]()
+    ) 
     return(entity)
   }
   validators[['Is.Existing.Entity']] <- \(entity, table) {
