@@ -547,6 +547,27 @@ describe("When entity |> service[['Modify']](table)",{
     # Then
     entity |> services[['Modify']](table) |> expect.error(expected.error)
   })
+  it('then an exception is thrown if table is invalid',{
+    skip_if_not(environment == 'local')
+    # Given
+    broker <- configuration |> ODBC.Storage.Broker()
+
+    services <- broker |> ODBC.Storage.Service()
+
+    expected.error <- "ODBC.Storage: Table.Invalid: Invalid is not a valid table."
+
+    entity <- data.frame(
+      Id = uuid::UUIDgenerate(),
+      Task = 'Task',
+      Status = 'New'
+    )
+
+    # When
+    table <- 'Invalid'
+
+    # Then
+    entity |> services[['Modify']](table) |> expect.error(expected.error)
+  })
 })
 
 describe("When id |> service[['Remove']](table)",{
