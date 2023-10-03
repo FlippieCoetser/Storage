@@ -24,5 +24,6 @@ ODBC.Storage.Validator <- \() {
       validators[['Is.Character']]()    |>
       validators[['Is.UUID']]('id')
   }
+  validators[['Is.Existing.Table']] <- \() {}
   return(validators)
 }
