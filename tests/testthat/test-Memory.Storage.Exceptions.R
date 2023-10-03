@@ -57,7 +57,7 @@ describe("When input |> exception[['No.Execute.Query']]()", {
     # Given
     exception <- Memory.Storage.Exceptions()
     
-    expected.error <- 'Memory Storage Provider Error: Execute.Query not implemented.'
+    expected.error <- 'Memory.Storage: Not.Implemented: Execute.Query not implemented.'
     
     # When
     input <- TRUE
@@ -108,7 +108,7 @@ describe("When input |> exception[['Table.Invalid']](table)", {
 
     invalid.table <- 'Invalid Table'
     
-    expected.error <- paste0("Memory Storage Provider Error: ", invalid.table, " is not a valid table.")
+    expected.error <- paste0("Memory.Storage: Table.Invalid: ", invalid.table, " is not a valid table.")
     # When
     input <- TRUE
     
@@ -132,7 +132,7 @@ describe("When input |> exception[['Entity.Not.Found']]()", {
     # Given
     exception <- Memory.Storage.Exceptions()
     
-    expected.error <- 'Memory Storage Provider Error: Entity not found.'
+    expected.error <- 'Memory.Storage: Entity.Not.Found: Entity not found in storage.'
     
     # When
     input <- TRUE

@@ -85,7 +85,7 @@ describe("When input |> validate[['NoImplementation']]()",{
     # Given
     validators <- Memory.Storage.Validator()
     
-    expected.error <- 'Memory Storage Provider Error: Execute.Query not implemented.'
+    expected.error <- 'Memory.Storage: Not.Implemented: Execute.Query not implemented.'
     
     # When
     input <- TRUE
@@ -182,7 +182,7 @@ describe("When entity |> validate[['Is.Existing.Entity']](table)",{
       Status = 'New'
     )
     
-    expected.error <- 'Memory Storage Provider Error: Entity not found.'
+    expected.error <- 'Memory.Storage: Entity.Not.Found: Entity not found in storage.'
     
     # Then
     new.entity |> validator[['Is.Existing.Entity']](table) |> expect.error(expected.error)
@@ -235,7 +235,7 @@ describe("When table |> validate[['Is.Existing.Table']]()",{
 
     invalid.table <- 'Table.Invalid'
     
-    expected.error <- 'Memory Storage Provider Error: Table.Invalid is not a valid table.'
+    expected.error <- 'Memory.Storage: Table.Invalid: Table.Invalid is not a valid table.'
     
     # Then
     invalid.table |> validator[['Is.Existing.Table']]() |> expect.error(expected.error)

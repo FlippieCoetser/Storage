@@ -434,7 +434,7 @@ describe("When entity |> service[['Add']](table)",{
     
     invalid.table <- 'Table.Invalid'
 
-    expected.error <- "Memory Storage Provider Error: Table.Invalid is not a valid table."
+    expected.error <- "Memory.Storage: Table.Invalid: Table.Invalid is not a valid table."
 
     # Then
     new.entity |> service[['Add']](invalid.table) |> expect.error(expected.error)
@@ -495,7 +495,7 @@ describe("When table |> service[['Retrieve']](fields)",{
 
     invalid.table <- 'Table.Invalid'
 
-    expected.error <- "Memory Storage Provider Error: Table.Invalid is not a valid table."
+    expected.error <- "Memory.Storage: Table.Invalid: Table.Invalid is not a valid table."
 
     # Then
     invalid.table |> service[['Retrieve']](fields) |> expect.error(expected.error)
@@ -607,7 +607,7 @@ describe("When id |> service[['RetrieveWhereId']](table, fields)",{
 
     invalid.table <- 'Table.Invalid'
 
-    expected.error <- "Memory Storage Provider Error: Table.Invalid is not a valid table."
+    expected.error <- "Memory.Storage: Table.Invalid: Table.Invalid is not a valid table."
 
     # Then
     id |> service[['RetrieveWhereId']](invalid.table, fields) |> expect.error(expected.error)
@@ -736,7 +736,7 @@ describe("When entity |> service[['Modify']](table)",{
       Status = 'New'
     )
 
-    expected.error <- "Memory Storage Provider Error: Entity not found."
+    expected.error <- "Memory.Storage: Entity.Not.Found: Entity not found in storage."
 
     # Then
     new.entity |> service[['Modify']](table) |> expect.error(expected.error)
@@ -757,7 +757,7 @@ describe("When entity |> service[['Modify']](table)",{
     updated.entity <- entity
     updated.entity[['Status']] <- 'Updated'
 
-    expected.error <- "Memory Storage Provider Error: Table.Invalid is not a valid table."
+    expected.error <- "Memory.Storage: Table.Invalid: Table.Invalid is not a valid table."
 
     invalid.table <- 'Table.Invalid'
 
@@ -887,7 +887,7 @@ describe("when id |> service[['Remove']](table)",{
 
     invalid.table <- 'Table.Invalid'
 
-    expected.error <- "Memory Storage Provider Error: Table.Invalid is not a valid table."
+    expected.error <- "Memory.Storage: Table.Invalid: Table.Invalid is not a valid table."
 
     # Then
     id |> service[['Remove']](invalid.table) |> expect.error(expected.error) 
