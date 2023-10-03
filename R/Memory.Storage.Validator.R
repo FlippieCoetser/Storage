@@ -42,8 +42,10 @@ Memory.Storage.Validator <- \(broker = NULL) {
     return(entity)
   }
   validators[['Is.Existing.Entity']] <- \(entity, table) {
-    match.count <- entity[['Id']] |> broker[['SelectWhereId']](table) |> nrow() 
-    (match.count == 0) |> exception[['Entity.Not.Found']]()
+    tryCatch(
+      entity[['Id']] |> broker[['SelectWhereId']](table) |> validators[['Has.One.Row']](),
+      error=\(...) TRUE |> exception[['Entity.Not.Found']]()
+    )
     return(entity)
   }
   validators[['Is.Existing.Table']]  <- \(table) {

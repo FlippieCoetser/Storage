@@ -153,6 +153,20 @@ describe("When entity |> validate[['Is.New.Entity']](table)",{
 })
 
 describe("When entity |> validate[['Is.Existing.Entity']](table)",{
+  it('then no exception is thrown if entity exist in memory storage',{
+    # Given
+    configuration <- data.frame()
+
+    broker <- configuration |> Memory.Storage.Broker()
+    Todo.Mock.Data |> broker[['Seed.Table']](table)
+
+    validator <- broker |> Memory.Storage.Validator()
+
+    new.entity <- Todo.Mock.Data |> tail(1)
+    
+    # Then
+    new.entity |> validator[['Is.Existing.Entity']](table) |> expect.no.error()
+  })
   it("then an exception is thrown if entity does not exist in memory storage",{
     # Given
     configuration <- data.frame()
@@ -172,7 +186,23 @@ describe("When entity |> validate[['Is.Existing.Entity']](table)",{
     
     # Then
     new.entity |> validator[['Is.Existing.Entity']](table) |> expect.error(expected.error)
-  })  
+  })
+  it('then entity is returned if entity exist in memory storage',{
+    # Given
+    configuration <- data.frame()
+
+    broker <- configuration |> Memory.Storage.Broker()
+    Todo.Mock.Data |> broker[['Seed.Table']](table)
+
+    validator <- broker |> Memory.Storage.Validator()
+
+    new.entity <- Todo.Mock.Data |> tail(1)
+    
+    expected.entity <- new.entity
+    
+    # Then
+    new.entity |> validator[['Is.Existing.Entity']](table) |> expect.equal(expected.entity)
+  })
 })
 
 describe("When table |> validate[['Is.Existing.Table']]()",{
