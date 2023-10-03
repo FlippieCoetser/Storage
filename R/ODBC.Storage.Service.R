@@ -13,6 +13,8 @@ ODBC.Storage.Service <- \(broker) {
     table  |> validate[['Table']]()
 
     table  |> validate[['Is.Existing.Table']]()
+    # TODO: entity |> validate[['Is.New.Entity']](table)
+
     entity |> broker[['Insert']](table)
   }
   services[['Retrieve']]        <- \(table, fields = '*') {
@@ -35,6 +37,7 @@ ODBC.Storage.Service <- \(broker) {
     table  |> validate[['Table']]()
 
     table |> validate[['Is.Existing.Table']]()
+    # TODO: entity |> validate[['Is.Existing.Entity']](table)
     
     entity |> broker[['Update']](table)
   }

@@ -48,6 +48,7 @@ Memory.Storage.Validator <- \(broker = NULL) {
     )
     return(entity)
   }
+  # TODO: align with ODBC.Storage.Validator
   validators[['Is.Existing.Table']]  <- \(table) {
     broker[['Get.Tables']]() |> 
       is.element(table)         |> 
