@@ -405,6 +405,18 @@ describe("When input |> exception[['Query']]()",{
     # Then
     input |> exception[["Query"]]() |> expect_error(expected.error)
   })
+  it('then an exception is thrown if input contains Invalid object name',{
+    # Given
+    exception <- ODBC.Storage.Exceptions()
+    
+    expected.error <- "ODBC.Storage: Table.Invalid: Invalid is not a valid table."
+    
+    # When
+    input <- "Invalid object name 'dbo.Invalid'."
+    
+    # Then
+    input |> exception[["Query"]]() |> expect_error(expected.error)
+  })
 })
 
 describe("When input |> exception[['Key.Violation']]()",{
