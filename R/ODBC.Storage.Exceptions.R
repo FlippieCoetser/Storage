@@ -56,6 +56,10 @@ ODBC.Storage.Exceptions <- \() {
 
     'Conversion failed when converting from a character string to uniqueidentifier' |> 
     grepl(error) |> exceptions[["Conversion.Failed"]]()
+
+    table <- sub(".*Invalid object name '[^\\.]+\\.([^']+)'.*", "\\1", error)
+    "Invalid object name 'dbo.Invalid'." |>
+    grepl(error) |> exceptions[["Table.Invalid"]](table)
     
     stop(error, call. = FALSE)
   }
