@@ -79,6 +79,10 @@ ODBC.Storage.Exceptions <- \() {
       stop('Query is null. Provide a Query.', call. = FALSE)
     } 
   }
-  exceptions[['Table.Invalid']]      <- \() {}
+  exceptions[['Table.Invalid']]      <- \(invoke, table) {
+    if(invoke) {
+      stop('ODBC.Storage: Table.Invalid: ', table, ' is not a valid table.', call. = FALSE)
+    }
+  }
   return(exceptions)
 }
