@@ -26,6 +26,13 @@ describe("When operations <- configuration |> ODBC.Storage.Broker()",{
     # Then
     operations[['Execute.Query']] |> expect.exist()
   })
+  it('then operations contains Get.Tables operation',{
+    # When
+    operations <- ODBC.Storage.Broker()
+
+    # Then
+    operations[['Get.Tables']] |> expect.exist()
+  })
 })
 
 describe("when connection <- operate[['Create.Connection']]()",{
