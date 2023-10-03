@@ -82,12 +82,12 @@ describe('When exceptions <- ODBC.Storage.Exceptions()',{
     # Then
     exceptions[['Query']] |> expect.exist()
   })
-  it('then exceptions contains Key.Duplicate exception',{
+  it('then exceptions contains Key.Violation exception',{
     # Given
     exceptions <- ODBC.Storage.Exceptions()
 
     # Then
-    exceptions[['Key.Duplicate']] |> expect.exist()
+    exceptions[['Key.Violation']] |> expect.exist()
   })
   it('then exceptions contains Value.NULL exception',{
     # Given
@@ -366,7 +366,7 @@ describe("When input |> exception[['Query']]()",{
     # Given
     exception <- ODBC.Storage.Exceptions()
     
-    expected.error <- 'SQL Error: Duplicate Id not allowed'
+    expected.error <- "ODBC.Storage: Key.Violation: Duplicate Primary Key not allowed."
     
     # When
     input <- 'Violation of PRIMARY KEY constraint'
@@ -400,7 +400,7 @@ describe("When input |> exception[['Query']]()",{
   })
 })
 
-describe("When input |> exception[['Key.Duplicate']]()",{
+describe("When input |> exception[['Key.Violation']]()",{
   it('then no exception is thrown when input is FALSE',{
     # Given
     exception <- ODBC.Storage.Exceptions()
@@ -409,19 +409,19 @@ describe("When input |> exception[['Key.Duplicate']]()",{
     input <- FALSE
 
     # Then
-    input |> exception[["Key.Duplicate"]]() |> expect_no_error()
+    input |> exception[["Key.Violation"]]() |> expect_no_error()
   })
   it('then an exception is thrown when input is TRUE',{
     # Given
     exception <- ODBC.Storage.Exceptions()
 
-    expected.error <- 'SQL Error: Duplicate Id not allowed'
+    expected.error <- "ODBC.Storage: Key.Violation: Duplicate Primary Key not allowed."
 
     # When
     input <- TRUE
 
     # Then
-    input |> exception[["Key.Duplicate"]]() |> expect_error(expected.error)
+    input |> exception[["Key.Violation"]]() |> expect_error(expected.error)
   })
 })
 

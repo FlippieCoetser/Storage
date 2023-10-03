@@ -200,6 +200,23 @@ describe("When entity |> service[['Add']](table)",{
     # Then
     entity |> services[['Add']](table) |> expect.error(expected.error)
   })
+  it('then an exception is thrown if entity is not new',{
+    skip_if_not(environment == 'local')
+    # Given
+    broker <- configuration |> ODBC.Storage.Broker()
+
+    services <- broker |> ODBC.Storage.Service()
+
+    expected.error <- "ODBC.Storage: Key.Violation: Duplicate Primary Key not allowed."
+
+    entities <- broker[['Select']](table, fields) 
+
+    # When
+    entity <- entities |> tail(1)
+
+    # Then
+    entity |> services[['Add']](table) |> expect.error(expected.error)
+  })
 })
 
 describe("When table |> service[['Retrieve']](fields)",{

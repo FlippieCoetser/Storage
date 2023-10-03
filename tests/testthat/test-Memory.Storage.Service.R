@@ -373,7 +373,7 @@ describe("When entity |> service[['Add']](table)",{
 
     existing.entity <- Todo.Mock.Data |> tail(1)
 
-    expected.error <- "Memory Storage Provider Error: Duplicate Id not allowed."
+    expected.error <- "Memory.Storage: Key.Violation: Duplicate Primary Key not allowed."
 
     # Then
     existing.entity |> service[['Add']](table) |> expect.error(expected.error)

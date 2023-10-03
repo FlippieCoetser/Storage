@@ -49,7 +49,7 @@ ODBC.Storage.Exceptions <- \() {
   }
   exceptions[["Query"]]              <- \(error) {
     'Violation of PRIMARY KEY constraint' |> 
-    grepl(error) |> exceptions[["Key.Duplicate"]]()
+    grepl(error) |> exceptions[["Key.Violation"]]()
 
     'Cannot insert the value NULL into column' |>
     grepl(error) |> exceptions[["Value.NULL"]]()
@@ -59,9 +59,9 @@ ODBC.Storage.Exceptions <- \() {
     
     stop(error, call. = FALSE)
   }
-  exceptions[["Key.Duplicate"]]      <- \(invoke) {
+  exceptions[["Key.Violation"]]      <- \(invoke) {
     if (invoke) { 
-      stop("SQL Error: Duplicate Id not allowed", call. = FALSE) 
+      stop("ODBC.Storage: Key.Violation: Duplicate Primary Key not allowed.", call. = FALSE) 
     }
   }
   exceptions[['Value.NULL']]         <- \(invoke) {

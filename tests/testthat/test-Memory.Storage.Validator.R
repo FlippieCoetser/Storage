@@ -125,7 +125,7 @@ describe("When entity |> validate[['Is.New.Entity']](table)",{
 
     existing.entity <- Todo.Mock.Data |> tail(1)
     
-    expected.error <- 'Memory Storage Provider Error: Duplicate Id not allowed.'
+    expected.error <- "Memory.Storage: Key.Violation: Duplicate Primary Key not allowed."
     
     # Then
     existing.entity |> validator[['Is.New.Entity']](table) |> expect.error(expected.error)

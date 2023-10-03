@@ -19,12 +19,12 @@ describe('When exceptions <- Memory.Storage.Exceptions()',{
    # Then
    exceptions[['No.Execute.Query']] |> expect.exist()
   })
-  it('then exceptions contains Key.Duplicate exception',{
+  it('then exceptions contains Key.Violation exception',{
    # When
    exceptions <- Memory.Storage.Exceptions()
    
    # Then
-   exceptions[['Key.Duplicate']] |> expect.exist()
+   exceptions[['Key.Violation']] |> expect.exist()
   })
   it('then exceptions contains Entity.Not.Found exception',{
    # When
@@ -67,7 +67,7 @@ describe("When input |> exception[['No.Execute.Query']]()", {
   })
 })
 
-describe("When input |> exception[['Key.Duplicate']]()", {
+describe("When input |> exception[['Key.Violation']]()", {
   it('then no exception is thrown if input is FALSE', {
     # Given
     exception <- Memory.Storage.Exceptions()
@@ -76,18 +76,18 @@ describe("When input |> exception[['Key.Duplicate']]()", {
     input <- FALSE
     
     # Then
-    input |> exception[['Key.Duplicate']]() |> expect.no.error()
+    input |> exception[['Key.Violation']]() |> expect.no.error()
   })
   it('then an exception is thrown if input is TRUE', {
     # Given
     exception <- Memory.Storage.Exceptions()
     
-    expected.error <- 'Memory Storage Provider Error: Duplicate Id not allowed.'
+    expected.error <- "Memory.Storage: Key.Violation: Duplicate Primary Key not allowed."
     # When
     input <- TRUE
     
     # Then
-    input |> exception[['Key.Duplicate']]() |> expect.error(expected.error)
+    input |> exception[['Key.Violation']]() |> expect.error(expected.error)
   })
 })
 
