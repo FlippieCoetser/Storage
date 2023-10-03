@@ -115,3 +115,22 @@ describe("When id |> operate[['SelectWhereId']](table)",{
     actual.entity |> expect.data.frame()
   })
 })
+
+describe("When id |> operate[['SelectWhereId']](table, fields)",{
+  it('then a data.frame is returned if table exist in storage',{
+    skip_if_not(environment == 'local')
+    # Given
+    operate <- configuration |> ODBC.Storage.Broker()
+
+    existing.entities <- table |> operate[['Select']]()
+    existing.entity   <- existing.entities |> tail(1)
+
+    id <- existing.entity[['Id']]
+
+    # When
+    actual.entity <- id |> operate[['SelectWhereId']](table, fields) 
+    
+    # Then
+    actual.entity |> expect.data.frame()
+  })
+})
