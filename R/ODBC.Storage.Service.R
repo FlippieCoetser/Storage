@@ -42,6 +42,8 @@ ODBC.Storage.Service <- \(broker) {
     id    |> validate[['Id']]()
     table |> validate[['Table']]()
 
+    table |> validate[['Is.Existing.Table']]()
+
     id |> broker[['Delete']](table)
   }
   return(services)
