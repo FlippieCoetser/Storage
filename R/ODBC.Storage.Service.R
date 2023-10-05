@@ -1,5 +1,5 @@
 ODBC.Storage.Service <- \(broker) {
-  validate <- ODBC.Storage.Validator()
+  validate <- ODBC.Storage.Validator(broker)
   
   services <- list()
   services[['Execute.Query']]    <- \(query) {
@@ -12,28 +12,40 @@ ODBC.Storage.Service <- \(broker) {
     entity |> validate[['Entity']]()
     table  |> validate[['Table']]()
 
+    table  |> validate[['Is.Existing.Table']]()
+    # TODO: entity |> validate[['Is.New.Entity']](table)
+
     entity |> broker[['Insert']](table)
   }
-  services[['Retrieve']]        <- \(table, fields) {
+  services[['Retrieve']]        <- \(table, fields = '*') {
     table |> validate[['Table']]()
+
+    table |> validate[['Is.Existing.Table']]()
 
     table |> broker[['Select']](fields)
   }
-  services[['RetrieveWhereId']] <- \(id, table, fields) {
+  services[['RetrieveWhereId']] <- \(id, table, fields = '*') {
     id    |> validate[['Id']]()
     table |> validate[['Table']]()
+
+    table |> validate[['Is.Existing.Table']]()
 
     id |> broker[['SelectWhereId']](table, fields)
   }
   services[['Modify']]          <- \(entity, table) {
     entity |> validate[['Entity']]()
     table  |> validate[['Table']]()
+
+    table  |> validate[['Is.Existing.Table']]()
+    # TODO: entity |> validate[['Is.Existing.Entity']](table)
     
     entity |> broker[['Update']](table)
   }
   services[['Remove']]          <- \(id, table) {
     id    |> validate[['Id']]()
     table |> validate[['Table']]()
+
+    table |> validate[['Is.Existing.Table']]()
 
     id |> broker[['Delete']](table)
   }

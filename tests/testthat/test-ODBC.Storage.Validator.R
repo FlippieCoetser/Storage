@@ -47,6 +47,13 @@ describe('When validators <- ODBC.Storage.Validator()',{
     # Then
     validators[["Id"]] |> expect.exist()
   })
+  it('then validators contains Is.Existing.Table validator',{
+    # Given
+    validators <- ODBC.Storage.Validator()
+
+    # Then
+    validators[["Is.Existing.Table"]] |> expect.exist()
+  })
 })
 
 describe('When query |> validate[["Query"]]()',{
@@ -216,5 +223,36 @@ describe("When id |> validate[['Id']]()",{
     
     # Then
     input |> validate[['Id']]() |> expect.no.error()
+  })
+})
+
+describe("When table |> validate[['Is.Existing.Table']]()",{
+  it('then no exception is thrown if table is a valid table',{
+    skip_if_not(environment == 'local')
+    # Given
+    table <- 'Todo'
+
+    broker <- configurator[["Get.Config"]]() |> ODBC.Storage.Broker()
+
+    validator <- broker |> ODBC.Storage.Validator()
+
+    valid.table <- table
+    
+    # Then
+    valid.table |> validator[['Is.Existing.Table']]() |> expect.no.error()
+  })
+  it('then an exception is thrown if table is not a valid table',{
+    skip_if_not(environment == 'local')
+    # Given
+    broker <- configurator[["Get.Config"]]() |> ODBC.Storage.Broker()
+
+    validator <- broker |> ODBC.Storage.Validator()
+
+    invalid.table <- 'Invalid'
+    
+    expected.error <- 'ODBC.Storage: Table.Invalid: Invalid is not a valid table.'
+    
+    # Then
+    invalid.table |> validator[['Is.Existing.Table']]() |> expect.error(expected.error)
   })
 })

@@ -110,6 +110,13 @@ describe('When exceptions <- ODBC.Storage.Exceptions()',{
     # Then
     exceptions[['Query.NULL']] |> expect.exist()
   })
+  it('then exceptions contains Table.Invalid exception',{
+    # Given
+    exceptions <- ODBC.Storage.Exceptions()
+
+    # Then
+    exceptions[['Table.Invalid']] |> expect.exist()
+  })
 })
 
 describe("when input |> exception[['Config.NULL']]()",{
@@ -398,6 +405,18 @@ describe("When input |> exception[['Query']]()",{
     # Then
     input |> exception[["Query"]]() |> expect_error(expected.error)
   })
+  it('then an exception is thrown if input contains Invalid object name',{
+    # Given
+    exception <- ODBC.Storage.Exceptions()
+    
+    expected.error <- "ODBC.Storage: Table.Invalid: Invalid is not a valid table."
+    
+    # When
+    input <- "Invalid object name 'dbo.Invalid'."
+    
+    # Then
+    input |> exception[["Query"]]() |> expect_error(expected.error)
+  })
 })
 
 describe("When input |> exception[['Key.Violation']]()",{
@@ -497,5 +516,31 @@ describe("when input |> exception[['Query.NULL']]()",{
 
     # Then
     input |> exception[["Query.NULL"]]() |> expect_error(expected.error)
+  })
+})
+
+describe("When input |> exception[['Table.Invalid']]()", {
+  it("then no exception is thrown if input is FALSE", {
+    # Given
+    exception <- ODBC.Storage.Exceptions()
+    
+    # When
+    input <- FALSE
+    
+    # Then
+    input |> exception[['Table.Invalid']]() |> expect.no.error()
+  })
+  it("then an exception is thrown if input is TRUE", {
+    # Given
+    exception <- ODBC.Storage.Exceptions()
+    
+    invalid.table  <- "Invalid Table"
+    expected.error <- paste0("ODBC.Storage: Table.Invalid: ", invalid.table, " is not a valid table.")
+
+    # When
+    input <- TRUE
+    
+    # Then
+    input |> exception[['Table.Invalid']](invalid.table) |> expect.error(expected.error)
   })
 })

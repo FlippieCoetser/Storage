@@ -20,6 +20,10 @@ ODBC.Storage.Broker <- \(configuration, sql = Query::SQL()) {
 
     return(output)
   }
+  operations[['Get.Tables']]        <- \() {
+    query <- "SELECT TABLE_NAME as name FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE'"
+    query |> operations[['Execute.Query']]()
+  }
   operations[['Insert']]            <- \(entity, table) {
     table |>
     sql[['INSERT']](entity) |>
