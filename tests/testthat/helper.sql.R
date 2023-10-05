@@ -3,8 +3,6 @@ configurator  <-
   ODBC.Configuration.Service() |>
   ODBC.Configuration.Processor()
   
-configuration <- configurator[["Get.Config"]]()
-
 sql           <- Query::SQL()
 sql.utilities <- Query::SQL.Utilities()
 sql.functions <- Query::SQL.Functions()

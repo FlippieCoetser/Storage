@@ -36,7 +36,7 @@ ODBC.Storage.Service <- \(broker) {
     entity |> validate[['Entity']]()
     table  |> validate[['Table']]()
 
-    table |> validate[['Is.Existing.Table']]()
+    table  |> validate[['Is.Existing.Table']]()
     # TODO: entity |> validate[['Is.Existing.Entity']](table)
     
     entity |> broker[['Update']](table)

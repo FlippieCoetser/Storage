@@ -231,7 +231,7 @@ describe("When table |> validate[['Is.Existing.Table']]()",{
     # Given
     table <- 'Todo'
 
-    broker <- configuration |> ODBC.Storage.Broker()
+    broker <- configurator[["Get.Config"]]() |> ODBC.Storage.Broker()
 
     validator <- broker |> ODBC.Storage.Validator()
 
@@ -242,7 +242,7 @@ describe("When table |> validate[['Is.Existing.Table']]()",{
   })
   it('then an exception is thrown if table is not a valid table',{
     # Given
-    broker <- configuration |> ODBC.Storage.Broker()
+    broker <- configurator[["Get.Config"]]() |> ODBC.Storage.Broker()
 
     validator <- broker |> ODBC.Storage.Validator()
 
