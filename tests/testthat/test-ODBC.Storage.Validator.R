@@ -228,6 +228,7 @@ describe("When id |> validate[['Id']]()",{
 
 describe("When table |> validate[['Is.Existing.Table']]()",{
   it('then no exception is thrown if table is a valid table',{
+    skip_if_not(environment == 'local')
     # Given
     table <- 'Todo'
 
@@ -241,6 +242,7 @@ describe("When table |> validate[['Is.Existing.Table']]()",{
     valid.table |> validator[['Is.Existing.Table']]() |> expect.no.error()
   })
   it('then an exception is thrown if table is not a valid table',{
+    skip_if_not(environment == 'local')
     # Given
     broker <- configurator[["Get.Config"]]() |> ODBC.Storage.Broker()
 
