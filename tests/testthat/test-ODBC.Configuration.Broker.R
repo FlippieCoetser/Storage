@@ -99,6 +99,8 @@ describe("When configuration <- operation[['Get.Preset.Config']]()",{
 
     expect.error <- "No DSN environment variable not found in .Renviron Configuration file."
 
+    cache <- 'DSN' |> environment[['Get.Env.Variable']]()
+
     # When
     'DSN' |> environment[['Clear.Env.Variable']]()
 
@@ -106,7 +108,7 @@ describe("When configuration <- operation[['Get.Preset.Config']]()",{
     operation[['Get.Preset.Config']]() |> expect.error(expect.error)
 
     # Then
-    'DSN' |> environment[['Cache.Env.Variable']]('DSN')
+    'DSN' |> environment[['Cache.Env.Variable']](cache)
   })
   it('then an exception is thrown is no UID found in .Renviron',{
     skip_if_not(environment == 'local')
@@ -116,6 +118,8 @@ describe("When configuration <- operation[['Get.Preset.Config']]()",{
 
     expect.error <- "No UID environment variable not found in .Renviron Configuration file."
 
+    cache <- 'UID' |> environment[['Get.Env.Variable']]()
+
     # When
     'UID' |> environment[['Clear.Env.Variable']]()
 
@@ -123,7 +127,7 @@ describe("When configuration <- operation[['Get.Preset.Config']]()",{
     operation[['Get.Preset.Config']]() |> expect.error(expect.error)
 
     # Then
-    'UID' |> environment[['Cache.Env.Variable']]('UID')
+    'UID' |> environment[['Cache.Env.Variable']](cache)
   })
   it('then an exception is thrown is no PWD found in .Renviron',{
     skip_if_not(environment == 'local')
@@ -133,6 +137,8 @@ describe("When configuration <- operation[['Get.Preset.Config']]()",{
 
     expect.error <- "No PWD environment variable not found in .Renviron Configuration file."
 
+    cache <- 'PWD' |> environment[['Get.Env.Variable']]()
+
     # When
     'PWD' |> environment[['Clear.Env.Variable']]()
 
@@ -140,7 +146,7 @@ describe("When configuration <- operation[['Get.Preset.Config']]()",{
     operation[['Get.Preset.Config']]() |> expect.error(expect.error)
 
     # Then
-    'PWD' |> environment[['Cache.Env.Variable']]('PWD')
+    'PWD' |> environment[['Cache.Env.Variable']](cache)
   })
 })
 
@@ -230,6 +236,8 @@ describe("When configuration <- operation[['Get.Manual.Config']]()",{
 
     expect.error <- "No DRIVER environment variable not found in .Renviron Configuration file."
 
+    cache <- 'DRIVER' |> environment[['Get.Env.Variable']]()
+
     # When
     'DRIVER' |> environment[['Clear.Env.Variable']]()
 
@@ -237,7 +245,7 @@ describe("When configuration <- operation[['Get.Manual.Config']]()",{
     operation[['Get.Manual.Config']]() |> expect.error(expect.error)
 
     # Then
-    'DRIVER' |> environment[['Cache.Env.Variable']]('DRIVER')
+    'DRIVER' |> environment[['Cache.Env.Variable']](cache)
   })
   it('then an exception is thrown is no SERVER found in .Renviron',{
     skip_if_not(environment == 'local')
@@ -247,6 +255,8 @@ describe("When configuration <- operation[['Get.Manual.Config']]()",{
 
     expect.error <- "No SERVER environment variable not found in .Renviron Configuration file."
 
+    cache <- 'SERVER' |> environment[['Get.Env.Variable']]()
+
     # When
     'SERVER' |> environment[['Clear.Env.Variable']]()
 
@@ -254,7 +264,7 @@ describe("When configuration <- operation[['Get.Manual.Config']]()",{
     operation[['Get.Manual.Config']]() |> expect.error(expect.error)
 
     # Then
-    'SERVER' |> environment[['Cache.Env.Variable']]('SERVER')
+    'SERVER' |> environment[['Cache.Env.Variable']](cache)
   })
   it('then an exception is thrown is no DATABASE found in .Renviron',{
     skip_if_not(environment == 'local')
@@ -264,6 +274,8 @@ describe("When configuration <- operation[['Get.Manual.Config']]()",{
 
     expect.error <- "No DATABASE environment variable not found in .Renviron Configuration file."
 
+    cache <- 'DATABASE' |> environment[['Get.Env.Variable']]()
+
     # When
     'DATABASE' |> environment[['Clear.Env.Variable']]()
 
@@ -271,7 +283,7 @@ describe("When configuration <- operation[['Get.Manual.Config']]()",{
     operation[['Get.Manual.Config']]() |> expect.error(expect.error)
 
     # Then
-    'DATABASE' |> environment[['Cache.Env.Variable']]('DATABASE')
+    'DATABASE' |> environment[['Cache.Env.Variable']](cache)
   })
   it('then an exception is thrown is no UID found in .Renviron',{
     skip_if_not(environment == 'local')
@@ -281,6 +293,8 @@ describe("When configuration <- operation[['Get.Manual.Config']]()",{
 
     expect.error <- "No UID environment variable not found in .Renviron Configuration file."
 
+    cache <- 'UID' |> environment[['Get.Env.Variable']]()
+
     # When
     'UID' |> environment[['Clear.Env.Variable']]()
 
@@ -288,7 +302,7 @@ describe("When configuration <- operation[['Get.Manual.Config']]()",{
     operation[['Get.Manual.Config']]() |> expect.error(expect.error)
 
     # Then
-    'UID' |> environment[['Cache.Env.Variable']]('UID')
+    'UID' |> environment[['Cache.Env.Variable']](cache)
   })
   it('then an exception is thrown is no PWD found in .Renviron',{
     skip_if_not(environment == 'local')
@@ -298,6 +312,8 @@ describe("When configuration <- operation[['Get.Manual.Config']]()",{
 
     expect.error <- "No PWD environment variable not found in .Renviron Configuration file."
 
+    cache <- 'PWD' |> environment[['Get.Env.Variable']]()
+
     # When
     'PWD' |> environment[['Clear.Env.Variable']]()
 
@@ -305,6 +321,6 @@ describe("When configuration <- operation[['Get.Manual.Config']]()",{
     operation[['Get.Manual.Config']]() |> expect.error(expect.error)
 
     # Then
-    'PWD' |> environment[['Cache.Env.Variable']]('PWD')
+    'PWD' |> environment[['Cache.Env.Variable']](cache)
   })
 })

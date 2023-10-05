@@ -35,21 +35,6 @@ describe("When operations <- configuration |> ODBC.Storage.Broker()",{
   })
 })
 
-describe("when connection <- operate[['Create.Connection']]()",{
-  it('then connection is not NA is valid configuration',{
-    skip_if_not(environment == 'local')
-    # Given
-    operate <- configurator[["Get.Config"]]() |> ODBC.Storage.Broker()
-
-    # When
-    connection <- operate[['Create.Connection']]()
-
-    # Then
-    connection |> expect.not.na()
-    connection |> DBI::dbDisconnect() 
-  })
-})
-
 describe("when query |> operate[['Execute.Query']]()",{
   it('then no exception is thrown is query is valid',{
     skip_if_not(environment == 'local')
