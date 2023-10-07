@@ -1,3 +1,4 @@
 Todo.Model <- \() data.frame(
-  Id    = character(0)
+  Id    = character(0),
+  Task  = character(0)
 )
