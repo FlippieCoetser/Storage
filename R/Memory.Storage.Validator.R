@@ -46,13 +46,11 @@ Memory.Storage.Validator <- \(broker = NULL) {
       error=\(...) TRUE |> exception[['Entity.Not.Found']]()
     )
   }
-  validators[['Is.Existing.Table']]  <- \(table) {
-    tables <- broker[['Get.Tables']]()
-    tables[['name']]    |> 
-      is.element(table) |> 
-      isFALSE()         |> 
-      exception[['Table.Invalid']](table)
-    return(table)
+  validators[['Is.Existing.Table']]  <- \(table, name = NULL) {
+    tryCatch(
+      table |> validators[['Has.One.Row']](),
+      error=\(...) TRUE |> exception[['Table.Invalid']](name)
+    )
   }
   return(validators)
 }
