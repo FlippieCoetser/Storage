@@ -40,9 +40,9 @@ Memory.Storage.Validator <- \(broker = NULL) {
       error=\(...) TRUE |> exception[['Key.Violation']]()
     ) 
   }
-  validators[['Is.Existing.Entity']] <- \(entity, table) {
+  validators[['Is.Existing.Entity']] <- \(entity) {
     tryCatch(
-      entity[['Id']] |> broker[['SelectWhereId']](table) |> validators[['Has.One.Row']](),
+      entity |> validators[['Has.One.Row']](),
       error=\(...) TRUE |> exception[['Entity.Not.Found']]()
     )
     return(entity)
