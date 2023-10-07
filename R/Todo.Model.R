@@ -1,3 +1,4 @@
 Todo.Model <- \(task) data.frame(
-  Id = uuid::UUIDgenerate()
+  Id = uuid::UUIDgenerate(),
+  Task = task
 )
