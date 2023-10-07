@@ -89,11 +89,13 @@ describe("When model |> operation[['Create.Table']](table)",{
     )
     table <- 'Todo'
 
+    expected.tables <- data.frame(name = table)
+
     # When
     model |> operation[['Create.Table']](table)
 
     # Then
-    operation[['Get.Tables']]() |> expect.equal(table)
+    operation[['Get.Tables']]() |> expect.equal(expected.tables)
   })
 })
 
