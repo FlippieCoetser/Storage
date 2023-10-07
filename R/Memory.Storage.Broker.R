@@ -12,7 +12,7 @@ Memory.Storage.Broker <- \(configuration = NULL) {
   }
   # TODO: Return as data.frame with name column
   operations[['Get.Tables']]    <- \() {
-    tables |> names()
+    tables |> names() |> (\(name) data.frame(name = name))()
   }
   operations[['Execute.Query']] <- \(query) {
     return(data.frame())
