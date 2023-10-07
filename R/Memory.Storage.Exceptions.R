@@ -5,7 +5,7 @@ Memory.Storage.Exceptions <- \() {
       stop('Memory.Storage: Not.Implemented.', call. = FALSE)
     }
   }
-  exceptions[['Key.Violation']]      <- \(invoke) {
+  exceptions[['Key.Violation']]    <- \(invoke) {
     if(invoke) {
       stop('Memory.Storage: Key.Violation: Duplicate Primary Key not allowed.', call. = FALSE)
     }
