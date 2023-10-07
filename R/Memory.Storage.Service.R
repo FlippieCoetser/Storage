@@ -1,6 +1,9 @@
 Memory.Storage.Service <- \(broker) {
-  validate <- Memory.Storage.Validator(broker)
-  
+  validate <- Memory.Storage.Validator()
+
+  filter.tables   <- \(table) broker[['Get.Tables']]() |> subset(name == table)
+  filter.entities <- \(entity, table) entity[['Id']] |> broker[['SelectWhereId']](table)
+    
   services <- list()
   services[['Create.Table']]    <- \(model, table) {
     model |> validate[['Model']]()
@@ -22,15 +25,15 @@ Memory.Storage.Service <- \(broker) {
     entity |> validate[['Entity']]()
     table  |> validate[['Table']]()
 
-    table  |> validate[['Is.Existing.Table']]()
-    entity |> validate[['Is.New.Entity']](table)
+    table  |> filter.tables() |> validate[['Is.Existing.Table']](table)
+    entity |> filter.entities(table) |> validate[['Is.New.Entity']]()
 
     entity |> broker[['Insert']](table)
   }
   services[['Retrieve']]        <- \(table, fields) {
     table |> validate[['Table']]()
 
-    table |> validate[['Is.Existing.Table']]()
+    table |> filter.tables() |> validate[['Is.Existing.Table']](table)
 
     table |> broker[['Select']](fields)
   }
@@ -38,16 +41,16 @@ Memory.Storage.Service <- \(broker) {
     id    |> validate[['Id']]()
     table |> validate[['Table']]()
 
-    table |> validate[['Is.Existing.Table']]()
+    table |> filter.tables() |> validate[['Is.Existing.Table']](table)
 
     id    |> broker[['SelectWhereId']](table, fields)
   }
   services[['Modify']]          <- \(entity, table) {
     entity |> validate[['Entity']]()
     table  |> validate[['Table']]()
-    
-    table  |> validate[['Is.Existing.Table']]()
-    entity |> validate[['Is.Existing.Entity']](table)
+
+    table  |> filter.tables() |> validate[['Is.Existing.Table']](table)
+    entity |> filter.entities(table) |> validate[['Is.Existing.Entity']]()
 
     entity |> broker[['Update']](table)
   }
@@ -55,7 +58,7 @@ Memory.Storage.Service <- \(broker) {
     id    |> validate[['Id']]()
     table |> validate[['Table']]()
 
-    table |> validate[['Is.Existing.Table']]()
+    table |> filter.tables() |> validate[['Is.Existing.Table']](table)
     
     id    |> broker[['Delete']](table)
   }

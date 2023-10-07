@@ -298,16 +298,14 @@ describe("When query |> services[['Execute.Query']]()",{
 describe("When entity |> service[['Add']](table)",{
   it("then entity is Add table in data store",{
     # Given
-    broker  <- configuration |> Memory.Storage.Broker()
-    service <- broker        |> Memory.Storage.Service()
+    broker  <- Memory.Storage.Broker()
+    service <- broker |> Memory.Storage.Service()
 
-    Todo.Mock.Data |> service[['Seed.Table']](table)
+    table <- 'Todo'
 
-    new.entity <- data.frame(
-      Id     = uuid::UUIDgenerate(),
-      Task   = 'Task',
-      Status = 'New'
-    )
+    Todo.Mock.Data |> broker[['Seed.Table']](table)
+
+    new.entity <- 'Task' |> Todo()
     
     expected.entity <- new.entity
 
@@ -318,7 +316,7 @@ describe("When entity |> service[['Add']](table)",{
     actual.entity <- new.entity[['Id']] |> broker[['SelectWhereId']](table, fields)
     actual.entity |> expect.equal.data(expected.entity)
 
-    new.entity[['Id']] |> broker[['Delete']]('Todo')
+    new.entity[['Id']] |> broker[['Delete']](table)
   })
   it('then an exception is thrown if entity is NULL',{
     # Given
@@ -416,11 +414,11 @@ describe("When entity |> service[['Add']](table)",{
   })
   it("then an exception is thrown if table is invalid",{
     # Given
-    configuration <- data.frame()
-
-    service <- configuration  |> 
+    service <-  
       Memory.Storage.Broker() |> 
       Memory.Storage.Service()
+
+    table <- 'Todo'
 
     Todo.Mock.Data |> service[['Seed.Table']](table)
 
@@ -430,9 +428,9 @@ describe("When entity |> service[['Add']](table)",{
       Status = 'New'
     )
     
-    invalid.table <- 'Table.Invalid'
+    invalid.table <- 'Invalid'
 
-    expected.error <- "Memory.Storage: Table.Invalid: Table.Invalid is not a valid table."
+    expected.error <- "Memory.Storage: Table.Invalid: Invalid is not a valid table."
 
     # Then
     new.entity |> service[['Add']](invalid.table) |> expect.error(expected.error)

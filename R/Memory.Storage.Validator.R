@@ -1,4 +1,4 @@
-Memory.Storage.Validator <- \(broker = NULL) {
+Memory.Storage.Validator <- \() {
   exception <- Memory.Storage.Exceptions()
 
   validators <- Validate::Validator()
