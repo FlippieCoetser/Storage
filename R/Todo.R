@@ -1,4 +1,4 @@
-Todo.Model <- \(task) data.frame(
+Todo <- \(task) data.frame(
   Id = uuid::UUIDgenerate(),
   Task = task,
   Status = 'New'

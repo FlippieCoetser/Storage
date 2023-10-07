@@ -102,7 +102,7 @@ describe("When model |> operation[['Create.Table']](table)",{
 describe("when entities |> operation[['Seed.Table']](table)",{
   it("then entities are inserted into table in memory",{
     # Given
-    operation <- configuration |> Memory.Storage.Broker()
+    operation <- Memory.Storage.Broker()
 
     table <- 'Todo'
 
@@ -122,9 +122,12 @@ describe("when operation[['Get.Tables']]()",{
   it("then returns data.frame with table names if data in memory has one or more table",{
     # Given
     operation <- Memory.Storage.Broker()
-    Todo.Mock.Data |> operation[['Seed.Table']]('Todo')
 
-    expected.table.names <- data.frame(name = 'Todo')
+    table <- 'Todo'
+
+    Todo.Mock.Data |> operation[['Seed.Table']](table)
+
+    expected.table.names <- data.frame(name = table)
 
     # When
     actual.table.names <- operation[['Get.Tables']]()
@@ -139,8 +142,9 @@ describe("when query |> operation[['Execute.Query']]()",{
     # Given
     operation <- Memory.Storage.Broker()
 
+    query   <- "SELECT 1"
+
     # When
-    query <- "SELECT 1"
     results <- query |> operation[['Execute.Query']]()
 
     # Then
@@ -151,10 +155,11 @@ describe("when query |> operation[['Execute.Query']]()",{
 describe("when entity |> operation[['Insert']](table)",{
   it("then entity is inserted into memory data",{
     # Given
-    configuration <- data.frame()
+    operation <- Memory.Storage.Broker()
 
-    operation <- configuration |> Memory.Storage.Broker()
-    Todo.Mock.Data |> operation[['Seed.Table']]('Todo')
+    table <- 'Todo'
+    
+    Todo.Mock.Data |> operation[['Seed.Table']](table)
 
     new.todo <- data.frame(
       Id     = uuid::UUIDgenerate(),

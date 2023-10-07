@@ -1,16 +1,16 @@
-describe('Todo.Model',{
+describe('Todo',{
   it('Exist',{
-    Todo.Model |> expect.exist()
+    Todo |> expect.exist()
   })
 })
 
-describe("When model <- task |> Todo.Model()",{
+describe("When model <- task |> Todo()",{
   it("then model is a data.frame",{
     # Given 
     task <- 'Task'
 
     # When
-    model <- task |> Todo.Model()
+    model <- task |> Todo()
 
     # Then
     model |> expect.data.frame()
@@ -20,7 +20,7 @@ describe("When model <- task |> Todo.Model()",{
     task <- 'Task'
 
     # When
-    model <- task |> Todo.Model()
+    model <- task |> Todo()
 
     # Then
     model[['Id']] |> expect.exist()
@@ -30,7 +30,7 @@ describe("When model <- task |> Todo.Model()",{
     task <- 'Task'
 
     # When
-    model <- task |> Todo.Model()
+    model <- task |> Todo()
 
     # Then
     model[['Task']] |> expect.exist()
@@ -41,7 +41,7 @@ describe("When model <- task |> Todo.Model()",{
     task <- 'Task'
 
     # When
-    model <- task |> Todo.Model()
+    model <- task |> Todo()
 
     # Then
     model[['Status']] |> expect.exist()
