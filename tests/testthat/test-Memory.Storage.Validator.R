@@ -142,40 +142,27 @@ describe("When entity |> validate[['Is.Existing.Entity']]()",{
   })
 })
 
-describe("When table |> validate[['Is.Existing.Table']]()",{
-  it("then no exception is thrown if table is a valid table",{
+describe("When table |> validate[['Is.Existing.Table']](name)",{
+  it("then no exception is thrown if table is not empty data.frame",{
     # Given
-    table <- 'Todo'
-    
-    configuration <- data.frame()
+    validator <- Memory.Storage.Validator()
 
-    broker <- configuration |> Memory.Storage.Broker()
-
-
-    Todo.Mock.Data |> broker[['Seed.Table']](table)
-
-    validator <- broker |> Memory.Storage.Validator()
-
-    valid.table <- table
+    table <- data.frame(name = 'Todo')
     
     # Then
-    valid.table |> validator[['Is.Existing.Table']]() |> expect.no.error()
+    table |> validator[['Is.Existing.Table']]() |> expect.no.error()
   })
-  it("then an exception is thrown if table is not a valid table",{
+  it("then an exception is thrown if table is empty data.frame",{
     # Given
-    configuration <- data.frame()
+    validator <- Memory.Storage.Validator()
 
-    broker <- configuration |> Memory.Storage.Broker()
-    Todo.Mock.Data |> broker[['Seed.Table']](table)
-
-    validator <- broker |> Memory.Storage.Validator()
-
-    invalid.table <- 'Table.Invalid'
+    empty.table <- data.frame()
+    name <- 'Invalid'
     
-    expected.error <- 'Memory.Storage: Table.Invalid: Table.Invalid is not a valid table.'
+    expected.error <- 'Memory.Storage: Table.Invalid: Invalid is not a valid table.'
     
     # Then
-    invalid.table |> validator[['Is.Existing.Table']]() |> expect.error(expected.error)
+    empty.table |> validator[['Is.Existing.Table']](name) |> expect.error(expected.error)
   })
 })
 
