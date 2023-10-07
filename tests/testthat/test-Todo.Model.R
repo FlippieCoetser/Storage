@@ -25,4 +25,15 @@ describe("When model <- task |> Todo.Model()",{
     # Then
     model[['Id']] |> expect.exist()
   })
+  it("then model has 'Task' columns with value task",{
+    # Given 
+    task <- 'Task'
+
+    # When
+    model <- task |> Todo.Model()
+
+    # Then
+    model[['Task']] |> expect.exist()
+    model[['Task']] |> expect.equal(task)
+  })
 })
