@@ -4,71 +4,71 @@ describe('Memory.Storage.Broker',{
   })
 })
 
-describe('When operations <- configuration |> Memory.Storage.Broker()',{
-  it('then operations is a list',{
+describe("When operations <- Memory.Storage.Broker()",{
+  it("then operations is a list",{
     # When
     operations <- Memory.Storage.Broker()
 
     # Then
     operations |> expect.list()
   })
-  it('then operations contains Create.Table operation',{
+  it("then operations contains 'Create.Table' operation",{
     # When
     operations <- Memory.Storage.Broker()
 
     # Then
     operations[['Create.Table']] |> expect.exist()
   })
-  it('then operations contains Seed.Table operation',{
+  it("then operations contains 'Seed.Table' operation",{
     # When
     operations <- Memory.Storage.Broker()
 
     # Then
     operations[['Seed.Table']] |> expect.exist()
   })
-  it('then operations contains Get.Tables operation',{
+  it("then operations contains 'Get.Tables' operation",{
     # When
     operations <- Memory.Storage.Broker()
 
     # Then
     operations[['Get.Tables']] |> expect.exist()
   })
-  it('then operations contains Execute.Query operation',{
+  it("then operations contains 'Execute.Query' operation",{
     # When
     operations <- Memory.Storage.Broker()
 
     # Then
     operations[['Execute.Query']] |> expect.exist()
   })
-  it('then operations contains Insert operation',{
+  it("then operations contains 'Insert' operation",{
     # When
     operations <- Memory.Storage.Broker()
 
     # Then
     operations[['Insert']] |> expect.exist()
   })
-  it('then operations contains Select operation',{
+  it("then operations contains 'Select' operation",{
     # When
     operations <- Memory.Storage.Broker()
 
     # Then
     operations[['Select']] |> expect.exist()
   })
-  it('then operations contains SelectWhereId operation',{
+  it("then operations contains 'SelectWhereId' operation",{
     # When
     operations <- Memory.Storage.Broker()
 
     # Then
     operations[['SelectWhereId']] |> expect.exist()
   })
-  it('then operations contains Update operation',{
+  it("then operations contains 'Update' operation",{
     # When
     operations <- Memory.Storage.Broker()
 
     # Then
     operations[['Update']] |> expect.exist()
   })
-  it('then operations contains Delete operation',{
+  it("then operations contains 'Delete' operation",{
     # When
     operations <- Memory.Storage.Broker()
 
@@ -78,7 +78,7 @@ describe('When operations <- configuration |> Memory.Storage.Broker()',{
 })
 
 describe("When model |> operation[['Create.Table']](table)",{
-  it('then table is created in memory',{
+  it("then table is created in memory",{
     # Given
     operation <- Memory.Storage.Broker()
 
@@ -98,7 +98,7 @@ describe("When model |> operation[['Create.Table']](table)",{
 })
 
 describe("when entities |> operation[['Seed.Table']](table)",{
-  it('then entities are inserted into table in memory',{
+  it("then entities are inserted into table in memory",{
     # Given
     operation <- configuration |> Memory.Storage.Broker()
 
@@ -117,12 +117,12 @@ describe("when entities |> operation[['Seed.Table']](table)",{
 })
 
 describe("when operation[['Get.Tables']]()",{
-  it('then returns data.frame with table names if data in memory has one or more table',{
+  it("then returns data.frame with table names if data in memory has one or more table",{
     # Given
     operation <- Memory.Storage.Broker()
     Todo.Mock.Data |> operation[['Seed.Table']]('Todo')
 
-    expected.table.names <- 'Todo'
+    expected.table.names <- data.frame(name = 'Todo')
 
     # When
     actual.table.names <- operation[['Get.Tables']]()
@@ -133,7 +133,7 @@ describe("when operation[['Get.Tables']]()",{
 })
 
 describe("when query |> operation[['Execute.Query']]()",{
-  it('then an empty data frame is returned',{
+  it("then an empty data frame is returned",{
     # Given
     operation <- Memory.Storage.Broker()
 
@@ -147,7 +147,7 @@ describe("when query |> operation[['Execute.Query']]()",{
 })
 
 describe("when entity |> operation[['Insert']](table)",{
-  it('then entity is inserted into memory data',{
+  it("then entity is inserted into memory data",{
     # Given
     configuration <- data.frame()
 
@@ -175,7 +175,7 @@ describe("when entity |> operation[['Insert']](table)",{
 })
 
 describe("when table |> operation[['Select']]()",{
-  it('then all entities are returned from memory data',{
+  it("then all entities are returned from memory data",{
     # Given
     configuration <- data.frame()
 
@@ -193,7 +193,7 @@ describe("when table |> operation[['Select']]()",{
 })
 
 describe("when id |> operation[['SelectWhereId']](table)",{
-  it('then entity is returned from memory data',{
+  it("then entity is returned from memory data",{
     # Given
     configuration <- data.frame()
 
@@ -214,7 +214,7 @@ describe("when id |> operation[['SelectWhereId']](table)",{
 })
 
 describe("when entity |> operation[['Update']](table)",{
-  it('then entity is updated in table in memory data',{
+  it("then entity is updated in table in memory data",{
     # Given
     configuration <- data.frame()
 
@@ -246,7 +246,7 @@ describe("when entity |> operation[['Update']](table)",{
 })
 
 describe("when id |> operation[['Delete']](table)",{
-  it('then entity with matching id is deleted from table in memory data if exist',{
+  it("then entity with matching id is deleted from table in memory data if exist",{
     # Given
     configuration <- data.frame()
 
