@@ -88,7 +88,7 @@ describe("When model |> service[['Create.Table']](table)",{
     # Then
     broker[['Get.Tables']]() |> expect.equal(expected.tables)
   })
-  it('then an exception is thrown if model is NULL',{
+  it("then an exception is thrown if model is NULL",{
     # Given
     service <-
       Memory.Storage.Broker() |> 
@@ -101,7 +101,7 @@ describe("When model |> service[['Create.Table']](table)",{
     # Then
     model |> service[['Create.Table']](table) |> expect.error(expected.error)
   })
-  it('then an exception is thrown if model is not data.frame',{
+  it("then an exception is thrown if model is not data.frame",{
     # Given
     service <- 
       Memory.Storage.Broker() |> 
@@ -114,7 +114,7 @@ describe("When model |> service[['Create.Table']](table)",{
     # Then
     model |> service[['Create.Table']](table) |> expect.error(expected.error)
   })
-  it('then an exception is thrown if model is not empty data.frame',{
+  it("then an exception is thrown if model is not empty data.frame",{
     # Given
     service <-
       Memory.Storage.Broker() |> 
@@ -127,7 +127,7 @@ describe("When model |> service[['Create.Table']](table)",{
     # Then
     model |> service[['Create.Table']](table) |> expect.error(expected.error)
   })
-  it('then an exception is thrown if table is NULL',{
+  it("then an exception is thrown if table is NULL",{
     # Given
     service <- 
       Memory.Storage.Broker() |> 
@@ -141,7 +141,7 @@ describe("When model |> service[['Create.Table']](table)",{
     # Then
     model |> service[['Create.Table']](table) |> expect.error(expected.error)
   })
-  it('then an exception is thrown if table is not characters',{
+  it("then an exception is thrown if table is not characters",{
     # Given
     service <- 
       Memory.Storage.Broker() |> 
@@ -190,7 +190,7 @@ describe("when data |> service[['Seed.Table']](table)",{
     # Then
     seed.data |> service[['Seed.Table']](table) |> expect.error(expected.error)
   })
-  it('then an exception is thrown if data is not data.frame',{
+  it("then an exception is thrown if data is not data.frame",{
     # Given
     service <- 
       Memory.Storage.Broker() |> 
@@ -204,7 +204,7 @@ describe("when data |> service[['Seed.Table']](table)",{
     # Then
     seed.data |> service[['Seed.Table']](table) |> expect.error(expected.error)
   })
-  it('then an exception is thrown if data is empty data.frame',{
+  it("then an exception is thrown if data is empty data.frame",{
     # Given
     service <- 
       Memory.Storage.Broker() |> 
@@ -218,7 +218,7 @@ describe("when data |> service[['Seed.Table']](table)",{
     # Then
     seed.data |> service[['Seed.Table']](table) |> expect.error(expected.error)
   })
-  it('then an exception is thrown if table is NULL',{
+  it("then an exception is thrown if table is NULL",{
     # Given
     service <-
       Memory.Storage.Broker() |> 
@@ -232,7 +232,7 @@ describe("when data |> service[['Seed.Table']](table)",{
     # Then
     seed.data |> service[['Seed.Table']](table) |> expect.error(expected.error)
   })
-  it('then an exception is thrown if table is not characters',{
+  it("then an exception is thrown if table is not characters",{
     # Given
     service <- 
       Memory.Storage.Broker() |> 
@@ -287,7 +287,7 @@ describe("When entity |> service[['Add']](table)",{
 
     new.entity[['Id']] |> broker[['Delete']](table)
   })
-  it('then an exception is thrown if entity is NULL',{
+  it("then an exception is thrown if entity is NULL",{
     # Given
     service <-
       Memory.Storage.Broker() |> 
@@ -298,7 +298,7 @@ describe("When entity |> service[['Add']](table)",{
     # Then
     NULL |> service[['Add']](table) |> expect.error(expected.error)
   })
-  it('then an exception is thrown if entity is not data.frame',{
+  it("then an exception is thrown if entity is not data.frame",{
     # Given
     service <- 
       Memory.Storage.Broker() |> 
@@ -309,7 +309,7 @@ describe("When entity |> service[['Add']](table)",{
     # Then
     list() |> service[['Add']](table) |> expect.error(expected.error)
   })
-  it('then an exception is thrown if entity does not have one row',{
+  it("then an exception is thrown if entity does not have one row",{
     # Given
     service <-
       Memory.Storage.Broker() |> 
@@ -335,7 +335,7 @@ describe("When entity |> service[['Add']](table)",{
     # Then
     existing.entity |> service[['Add']](table) |> expect.error(expected.error)
   })
-  it('then an exception is thrown if table is NULL',{
+  it("then an exception is thrown if table is NULL",{
     # Given
     service <- 
       Memory.Storage.Broker() |> 
@@ -348,7 +348,7 @@ describe("When entity |> service[['Add']](table)",{
     # Then
     new.entity |> service[['Add']](NULL) |> expect.error(expected.error)
   })
-  it('then an exception is thrown if table is not characters',{
+  it("then an exception is thrown if table is not characters",{
     # Given
     service <- 
       Memory.Storage.Broker() |> 
@@ -398,7 +398,7 @@ describe("When table |> service[['Retrieve']](fields)",{
     # Then
     actual.entities |> expect.equal.data(expected.entities)
   })
-  it('then an exception is thrown if table is NULL',{
+  it("then an exception is thrown if table is NULL",{
     # Given
     service <- 
       Memory.Storage.Broker() |> 
@@ -409,7 +409,7 @@ describe("When table |> service[['Retrieve']](fields)",{
     # Then
     NULL |> service[['Retrieve']](fields) |> expect.error(expected.error)
   })
-  it('then an exception is thrown if table is not characters',{
+  it("then an exception is thrown if table is not characters",{
     # Given
     service <- 
       Memory.Storage.Broker() |> 
@@ -456,7 +456,7 @@ describe("When id |> service[['RetrieveWhereId']](table, fields)",{
     # Then
     actual.entity |> expect.equal.data(expected.entity)
   })
-  it('then an exception is thrown if id is NULL',{
+  it("then an exception is thrown if id is NULL",{
     # Given
     service <- 
       Memory.Storage.Broker() |> 
@@ -467,7 +467,7 @@ describe("When id |> service[['RetrieveWhereId']](table, fields)",{
     # Then
     NULL |> service[['RetrieveWhereId']](table, fields) |> expect.error(expected.error)
   })
-  it('then an exception is thrown if id is not characters',{
+  it("then an exception is thrown if id is not characters",{
     # Given
     service <- 
       Memory.Storage.Broker() |> 
@@ -478,7 +478,7 @@ describe("When id |> service[['RetrieveWhereId']](table, fields)",{
     # Then
     123 |> service[['RetrieveWhereId']](table, fields) |> expect.error(expected.error)
   })
-  it('then an exception is thrown if id is invalid identifier',{
+  it("then an exception is thrown if id is invalid identifier",{
     # Given
     service <- 
       Memory.Storage.Broker() |> 
@@ -489,7 +489,7 @@ describe("When id |> service[['RetrieveWhereId']](table, fields)",{
     # Then
     'InvalidId' |> service[['RetrieveWhereId']](table, fields) |> expect.error(expected.error)
   })
-  it('then an exception is thrown if table is NULL',{
+  it("then an exception is thrown if table is NULL",{
     # Given
     service <-  
       Memory.Storage.Broker() |> 
@@ -503,7 +503,7 @@ describe("When id |> service[['RetrieveWhereId']](table, fields)",{
     # Then
     id |> service[['RetrieveWhereId']](NULL, fields) |> expect.error(expected.error)
   })
-  it('then an exception is thrown if table is not characters',{
+  it("then an exception is thrown if table is not characters",{
     # Given
     service <- 
       Memory.Storage.Broker() |> 
@@ -538,7 +538,7 @@ describe("When id |> service[['RetrieveWhereId']](table, fields)",{
 })
 
 describe("When entity |> service[['Modify']](table)",{
-  it('then entity is updated in table in data store',{
+  it("then entity is updated in table in data store",{
     # Given
     broker  <- Memory.Storage.Broker()
     service <- broker |> Memory.Storage.Service()
@@ -562,7 +562,7 @@ describe("When entity |> service[['Modify']](table)",{
     actual.entity <- id |> broker[['SelectWhereId']](table, fields)
     actual.entity |> expect.equal.data(expected.entity)
   })
-  it('then an exception is thrown if entity is NULL',{
+  it("then an exception is thrown if entity is NULL",{
     # Given
     service <-
       Memory.Storage.Broker() |> 
@@ -573,7 +573,7 @@ describe("When entity |> service[['Modify']](table)",{
     # Then
     NULL |> service[['Modify']](table) |> expect.error(expected.error)
   })
-  it('then an exception is thrown if entity is not data.frame',{
+  it("then an exception is thrown if entity is not data.frame",{
     # Given
     service <- 
       Memory.Storage.Broker() |> 
@@ -584,7 +584,7 @@ describe("When entity |> service[['Modify']](table)",{
     # Then
     list() |> service[['Modify']](table) |> expect.error(expected.error)
   })
-  it('then an exception is thrown if entity does not have one row',{
+  it("then an exception is thrown if entity does not have one row",{
     # Given
     service <- 
       Memory.Storage.Broker() |> 
@@ -595,7 +595,7 @@ describe("When entity |> service[['Modify']](table)",{
     # Then
     data.frame() |> service[['Modify']](table) |> expect.error(expected.error)
   })
-  it('then an exception is thrown if table is NULL',{
+  it("then an exception is thrown if table is NULL",{
     # Given
     service <- 
       Memory.Storage.Broker() |> 
@@ -608,7 +608,7 @@ describe("When entity |> service[['Modify']](table)",{
     # Then
     new.entity |> service[['Modify']](NULL) |> expect.error(expected.error)
   })
-  it('then an exception is thrown if table in not characters',{
+  it("then an exception is thrown if table in not characters",{
     # Given
     service <- 
       Memory.Storage.Broker() |> 
@@ -621,7 +621,7 @@ describe("When entity |> service[['Modify']](table)",{
     # Then
     new.entity |> service[['Modify']](123) |> expect.error(expected.error)
   })
-  it('then an exception is thrown if entity does not exist',{
+  it("then an exception is thrown if entity does not exist",{
     # Given
     service <-
       Memory.Storage.Broker() |>
@@ -636,7 +636,7 @@ describe("When entity |> service[['Modify']](table)",{
     # Then
     new.entity |> service[['Modify']](table) |> expect.error(expected.error)
   })
-  it('then an exception is thrown if table is invalid',{
+  it("then an exception is thrown if table is invalid",{
     # Given
     service <- 
       Memory.Storage.Broker() |> 
@@ -660,7 +660,7 @@ describe("When entity |> service[['Modify']](table)",{
 })
 
 describe("when id |> service[['Remove']](table)",{
-  it('then entity with id in table in data store is deleted',{
+  it("then entity with id in table in data store is deleted",{
     # Given
     broker  <- Memory.Storage.Broker()
     service <- broker |> Memory.Storage.Service()
@@ -680,7 +680,7 @@ describe("when id |> service[['Remove']](table)",{
     # Then
     id |> broker[['SelectWhereId']](table, fields) |> expect.rows(expected.rows)
   })
-  it('then an exception is thrown if id is NULL',{
+  it("then an exception is thrown if id is NULL",{
     # Given
     service <-
       Memory.Storage.Broker() |> 
@@ -691,7 +691,7 @@ describe("when id |> service[['Remove']](table)",{
     # Then
     NULL |> service[['Remove']](table) |> expect.error(expected.error)
   })
-  it('then an exception is thrown if id is not characters',{
+  it("then an exception is thrown if id is not characters",{
     # Given
     service <- 
       Memory.Storage.Broker() |> 
@@ -702,7 +702,7 @@ describe("when id |> service[['Remove']](table)",{
     # Then
     123 |> service[['Remove']](table) |> expect.error(expected.error)
   })
-  it('then an exception is thrown if id is invalid identifier',{
+  it("then an exception is thrown if id is invalid identifier",{
     # Given
     service <- 
       Memory.Storage.Broker() |> 
@@ -713,7 +713,7 @@ describe("when id |> service[['Remove']](table)",{
     # Then
     'InvalidId' |> service[['Remove']](table) |> expect.error(expected.error)
   })
-  it('then an exception is thrown if table is NULL',{
+  it("then an exception is thrown if table is NULL",{
     # Given
     broker  <- Memory.Storage.Broker()
     service <- broker |> Memory.Storage.Service()
@@ -730,7 +730,7 @@ describe("when id |> service[['Remove']](table)",{
     # Then
     id |> service[['Remove']](NULL) |> expect.error(expected.error)
   })
-  it('then an exception is thrown if table is not characters',{
+  it("then an exception is thrown if table is not characters",{
     # Given
     broker  <- Memory.Storage.Broker()
     service <- broker |> Memory.Storage.Service()
@@ -747,7 +747,7 @@ describe("when id |> service[['Remove']](table)",{
     # Then
     id |> service[['Remove']](123) |> expect.error(expected.error)
   })
-  it('then an exception is thrown if table is invalid',{
+  it("then an exception is thrown if table is invalid",{
     # Given
     service <- 
       Memory.Storage.Broker() |> 
