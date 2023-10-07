@@ -34,12 +34,11 @@ Memory.Storage.Validator <- \(broker = NULL) {
   validators[['Not.Implemented']]    <- \(input) {
     input |> exception[['Not.Implemented']]()
   }
-  validators[['Is.New.Entity']]      <- \(entity, table) {
+  validators[['Is.New.Entity']]      <- \(entity) {
     tryCatch(
-      entity[['Id']] |> broker[['SelectWhereId']](table) |> validators[['Is.Empty']](),
+      entity |> validators[['Is.Empty']](),
       error=\(...) TRUE |> exception[['Key.Violation']]()
     ) 
-    return(entity)
   }
   validators[['Is.Existing.Entity']] <- \(entity, table) {
     tryCatch(
@@ -48,11 +47,11 @@ Memory.Storage.Validator <- \(broker = NULL) {
     )
     return(entity)
   }
-  # TODO: align with ODBC.Storage.Validator
   validators[['Is.Existing.Table']]  <- \(table) {
-    broker[['Get.Tables']]() |> 
-      is.element(table)         |> 
-      isFALSE()                 |> 
+    tables <- broker[['Get.Tables']]()
+    tables[['name']]    |> 
+      is.element(table) |> 
+      isFALSE()         |> 
       exception[['Table.Invalid']](table)
     return(table)
   }
