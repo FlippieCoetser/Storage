@@ -5,28 +5,28 @@ describe('ODBC.Storage.Broker',{
 })
 
 describe("When operations <- configuration |> ODBC.Storage.Broker()",{
-  it('then operations is a list',{
+  it("then operations is a list",{
     # When
     operations <- ODBC.Storage.Broker()
 
     # Then
     operations |> expect.list()
   })
-  it('then operations contains Create.Connection operation',{
+  it("then operations contains 'Create.Connection' operation",{
     # When
     operations <- ODBC.Storage.Broker()
 
     # Then
     operations[['Create.Connection']] |> expect.exist()
   })
-  it('then operations contains Execute.Query operation',{
+  it("then operations contains 'Execute.Query' operation",{
     # When
     operations <- ODBC.Storage.Broker()
 
     # Then
     operations[['Execute.Query']] |> expect.exist()
   })
-  it('then operations contains Get.Tables operation',{
+  it("then operations contains 'Get.Tables' operation",{
     # When
     operations <- ODBC.Storage.Broker()
 
@@ -36,7 +36,7 @@ describe("When operations <- configuration |> ODBC.Storage.Broker()",{
 })
 
 describe("when query |> operate[['Execute.Query']]()",{
-  it('then no exception is thrown is query is valid',{
+  it("then no exception is thrown is query is valid",{
     skip_if_not(environment == 'local')
     # Given
     operate <- configurator[["Get.Config"]]() |> ODBC.Storage.Broker()
@@ -46,7 +46,7 @@ describe("when query |> operate[['Execute.Query']]()",{
     # Then
     query |> operate[['Execute.Query']]() |> expect.no.error()
   })
-  it('then a data.frame is returned if query is valid',{
+  it("then a data.frame is returned if query is valid",{
     skip_if_not(environment == 'local')
     # Given
     operate <- configurator[["Get.Config"]]() |> ODBC.Storage.Broker()
@@ -62,7 +62,7 @@ describe("when query |> operate[['Execute.Query']]()",{
 })
 
 describe("when operate[['Get.Tables']]()",{
-  it('then a data.frame containing tables names is returned',{
+  it("then a data.frame containing tables names is returned",{
     skip_if_not(environment == 'local')
     # Given
     operate <- configurator[["Get.Config"]]() |> ODBC.Storage.Broker()
@@ -76,7 +76,7 @@ describe("when operate[['Get.Tables']]()",{
 })
 
 describe("When table |> operate[['Select']]()",{
-  it('then a data.frame is returned if table exist in storage',{
+  it("then a data.frame is returned if table exist in storage",{
     skip_if_not(environment == 'local')
     # Given
     operate <- configurator[["Get.Config"]]() |> ODBC.Storage.Broker()
@@ -90,7 +90,7 @@ describe("When table |> operate[['Select']]()",{
 })
 
 describe("When table |> operate[['Select']](fields)",{
-  it('then a data.frame is returned if table exist in storage',{
+  it("then a data.frame is returned if table exist in storage",{
     skip_if_not(environment == 'local')
     # Given
     operate <- configurator[["Get.Config"]]() |> ODBC.Storage.Broker()
@@ -104,7 +104,7 @@ describe("When table |> operate[['Select']](fields)",{
 })
 
 describe("When id |> operate[['SelectWhereId']](table)",{
-  it('then a data.frame is returned if table exist in storage',{
+  it("then a data.frame is returned if table exist in storage",{
     skip_if_not(environment == 'local')
     # Given
     operate <- configurator[["Get.Config"]]() |> ODBC.Storage.Broker()
@@ -123,7 +123,7 @@ describe("When id |> operate[['SelectWhereId']](table)",{
 })
 
 describe("When id |> operate[['SelectWhereId']](table, fields)",{
-  it('then a data.frame is returned if table exist in storage',{
+  it("then a data.frame is returned if table exist in storage",{
     skip_if_not(environment == 'local')
     # Given
     operate <- configurator[["Get.Config"]]() |> ODBC.Storage.Broker()

@@ -4,22 +4,22 @@ describe('ODBC.Configuration.Processor',{
   })
 })
 
-describe('When processes <- ODBC.Configuration.Processor()',{
-  it('then processes is a list',{
+describe("When processes <- ODBC.Configuration.Processor()",{
+  it("then processes is a list",{
     # When
     processes <- ODBC.Configuration.Processor()
 
     # Then
     processes |> expect.list()
   })
-  it('then processes contains Open.Config.File process',{
+  it("then processes contains Open.Config.File process",{
     # When
     processes <- ODBC.Configuration.Processor()
 
     # Then
     processes[['Open.Config.File']] |> expect.function()
   })
-  it('then processes contains Get.Config process',{
+  it("then processes contains Get.Config process",{
     # When
     processes <- ODBC.Configuration.Processor()
 
@@ -54,7 +54,7 @@ describe("When process[['Open.Config.File']]()",{
 })
 
 describe("When type |> process[['Get.Config']]()",{
-  it('then a preset configuration is returned if type is Preset',{
+  it("then a preset configuration is returned if type is Preset",{
     # Given
     validate <- ODBC.Configuration.Validator()
 
@@ -71,7 +71,7 @@ describe("When type |> process[['Get.Config']]()",{
     # Then
     configuration |> validate[['Preset.Config']]() |> expect.no.error()
   })
-  it('then a manual configuration is returned if type is Manual',{
+  it("then a manual configuration is returned if type is Manual",{
     # Given
     validate <- ODBC.Configuration.Validator()
 
@@ -88,7 +88,7 @@ describe("When type |> process[['Get.Config']]()",{
     # Then
     configuration |> validate[['Get.Manual.Config']]() |> expect.no.error()
   })
-  it('then a preset configuration is returned if not type is provided',{
+  it("then a preset configuration is returned if not type is provided",{
     # Given
     validate <- ODBC.Configuration.Validator()
 

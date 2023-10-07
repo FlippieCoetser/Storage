@@ -4,43 +4,43 @@ describe('Todo.Service',{
   })
 })
 
-describe('When services <- Todo.Service()',{
-  it('then services is a list',{
+describe("When services <- Todo.Service()",{
+  it("then services is a list",{
     # When
     services <- Todo.Service()
 
     # Then
     services |> expect.list()
   })
-  it('then services contains Add service',{
+  it("then services contains 'Add' service",{
     # When
     services <- Todo.Service()
 
     # Then
     services[['Add']] |> expect.exist()
   })
-  it('then services contains Retrieve service',{
+  it("then services contains 'Retrieve' service",{
     # When
     services <- Todo.Service()
 
     # Then
     services[['Retrieve']] |> expect.exist()
   })
-  it('then services contains RetrieveWhereId service',{
+  it("then services contains 'RetrieveWhereId' service",{
     # When
     services <- Todo.Service()
 
     # Then
     services[['RetrieveWhereId']] |> expect.exist()
   })
-  it('then services contains Modify service',{
+  it("then services contains 'Modify' service",{
     # When
     services <- Todo.Service()
 
     # Then
     services[['Modify']] |> expect.exist()
   })
-  it('then services contains Remove service',{
+  it("then services contains 'Remove' service",{
     # When
     services <- Todo.Service()
 
@@ -50,7 +50,7 @@ describe('When services <- Todo.Service()',{
 })
 
 describe("When todo |> service[['Add']]()",{
-  it('then todo is added inserted into memory.storage',{
+  it("then todo is added inserted into memory.storage",{
     # Given
     storage <- configuration |> Storage.Orchestrator('memory')
 
@@ -74,7 +74,7 @@ describe("When todo |> service[['Add']]()",{
     actual.todo <- new.todo[['Id']] |> broker[['SelectWhereId']]()
     actual.todo |> expect.equal.data(expected.todo)
   })
-  it('then an exception is thrown if todo has no Id',{
+  it("then an exception is thrown if todo has no Id",{
     # Given
     storage <- configuration |> Storage.Orchestrator('memory')
 
@@ -92,7 +92,7 @@ describe("When todo |> service[['Add']]()",{
     # Then
     new.todo |> service[['Add']]() |> expect.error()
   })
-  it('then an exception is thrown if todo has no Task',{
+  it("then an exception is thrown if todo has no Task",{
     # Given
     storage <- configuration |> Storage.Orchestrator('memory')
 
@@ -110,7 +110,7 @@ describe("When todo |> service[['Add']]()",{
     # Then
     new.todo |> service[['Add']]() |> expect.error()
   })
-  it('then an exception is thrown if todo has no Status',{
+  it("then an exception is thrown if todo has no Status",{
     # Given
     storage <- configuration |> Storage.Orchestrator('memory')
 
@@ -131,7 +131,7 @@ describe("When todo |> service[['Add']]()",{
 })
 
 describe("When service[['Retrieve']]()",{
-  it('then all todos are returned from memory.storage',{
+  it("then all todos are returned from memory.storage",{
     # Given
     storage <- configuration |> Storage.Orchestrator('memory')
 
@@ -151,7 +151,7 @@ describe("When service[['Retrieve']]()",{
 })
 
 describe("When id |> service[['RetrieveWhereId']]()",{
-  it('then todo is returned from memory.storage',{
+  it("then todo is returned from memory.storage",{
     # Given
     storage <- configuration |> Storage.Orchestrator('memory')
 
@@ -171,7 +171,7 @@ describe("When id |> service[['RetrieveWhereId']]()",{
     # Then
     actual.todo |> expect.equal.data(expected.todo)
   })
-  it('then an exception is thrown if Id null',{
+  it("then an exception is thrown if Id null",{
     # Given
     storage <- configuration |> Storage.Orchestrator('memory')
 
@@ -188,7 +188,7 @@ describe("When id |> service[['RetrieveWhereId']]()",{
 })
 
 describe("When todo |> service[['Modify']]()",{
-  it('then todo is updated in memory.storage',{
+  it("then todo is updated in memory.storage",{
     # Given
     storage <- configuration |> Storage.Orchestrator('memory')
 
@@ -210,7 +210,7 @@ describe("When todo |> service[['Modify']]()",{
     actual.todo <- id |> service[['RetrieveWhereId']]()
     actual.todo |> expect.equal.data(expected.todo)
   })
-  it('then an exception is thrown if todo has no Id',{
+  it("then an exception is thrown if todo has no Id",{
     # Given
     storage <- configuration |> Storage.Orchestrator('memory')
 
@@ -228,7 +228,7 @@ describe("When todo |> service[['Modify']]()",{
     # Then
     todo |> service[['Modify']]() |> expect.error()
   })
-  it('then an exception is thrown if todo has not Task',{
+  it("then an exception is thrown if todo has not Task",{
     # Given
     storage <- configuration |> Storage.Orchestrator('memory')
 
@@ -249,7 +249,7 @@ describe("When todo |> service[['Modify']]()",{
 })
 
 describe("When id |> service[['Remove']]()",{
-  it('then todo is deleted from memory.storage',{
+  it("then todo is deleted from memory.storage",{
     # Given
     storage <- configuration |> Storage.Orchestrator('memory')
 
@@ -271,7 +271,7 @@ describe("When id |> service[['Remove']]()",{
     actual.todo <- id |> broker[['SelectWhereId']]()
     actual.todo |> expect.rows(expected.count)
   })
-  it('then an exception is thrown if Id null',{
+  it("then an exception is thrown if Id null",{
     # Given
     storage <- configuration |> Storage.Orchestrator('memory')
 

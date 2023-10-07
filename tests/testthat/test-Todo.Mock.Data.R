@@ -4,22 +4,22 @@ describe('Todo.Mock.Data',{
   })
 })
 
-describe('When data <- Todo.Mock.Data',{
-  it('then data contains Id column',{
+describe("When data <- Todo.Mock.Data",{
+  it("then data contains Id column",{
     # When
     data <- Todo.Mock.Data
 
     # Then
     data[['Id']] |> expect.exist()
   })
-  it('then data contains Task column',{
+  it("then data contains Task column",{
     # When
     data <- Todo.Mock.Data
 
     # Then
     data[['Task']] |> expect.exist()
   })
-  it('then data contains Status column',{
+  it("then data contains Status column",{
     # When
     data <- Todo.Mock.Data
 
