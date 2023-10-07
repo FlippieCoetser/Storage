@@ -82,11 +82,7 @@ describe("When model |> operation[['Create.Table']](table)",{
     # Given
     operation <- Memory.Storage.Broker()
 
-    model <- data.frame(
-      Id     = character(0),
-      Task   = character(0),
-      Status = character(0)
-    )
+    model <- Todo.Model()
     table <- 'Todo'
 
     expected.tables <- data.frame(name = table)
@@ -158,123 +154,116 @@ describe("when entity |> operation[['Insert']](table)",{
     operation <- Memory.Storage.Broker()
 
     table <- 'Todo'
-    
+
     Todo.Mock.Data |> operation[['Seed.Table']](table)
 
-    new.todo <- data.frame(
-      Id     = uuid::UUIDgenerate(),
-      Task   = 'Task',
-      Status = 'New'
-    )
-    id <- new.todo[['Id']]
+    new.entity <- 'Task' |> Todo()
+    id         <- new.entity[['Id']]
 
-    expected.todo <- new.todo
+    expected.entity <- new.entity
 
     # When
-    new.todo |> operation[['Insert']]('Todo')
+    new.entity |> operation[['Insert']](table)
 
     # Then
-    actual.todo <- id |> operation[['SelectWhereId']]('Todo')
-    actual.todo |> expect.equal.data(expected.todo)
+    actual.entity <- id |> operation[['SelectWhereId']](table)
+    actual.entity |> expect.equal.data(expected.entity)
 
-    id |> operation[['Delete']]('Todo')
+    id |> operation[['Delete']](table)
   })
 })
 
 describe("when table |> operation[['Select']]()",{
   it("then all entities are returned from memory data",{
     # Given
-    configuration <- data.frame()
+    operation <- Memory.Storage.Broker()
 
-    operation <- configuration |> Memory.Storage.Broker()
-    Todo.Mock.Data |> operation[['Seed.Table']]('Todo')
+    table <- 'Todo'
 
-    expected.todos <- Todo.Mock.Data
+    Todo.Mock.Data |> operation[['Seed.Table']](table)
+
+    expected.entities <- Todo.Mock.Data
 
     # When
-    actual.todos <- 'Todo' |> operation[['Select']]()
+    actual.entities <- table |> operation[['Select']]()
 
     # Then
-    actual.todos |> expect.equal.data(expected.todos)
+    actual.entities |> expect.equal.data(expected.entities)
   })
 })
 
 describe("when id |> operation[['SelectWhereId']](table)",{
   it("then entity is returned from memory data",{
     # Given
-    configuration <- data.frame()
+    operation <- Memory.Storage.Broker()
 
-    operation <- configuration |> Memory.Storage.Broker()
-    Todo.Mock.Data |> operation[['Seed.Table']]('Todo')
+    table <- 'Todo'
 
-    existing.todo <- Todo.Mock.Data |> tail(1)
+    Todo.Mock.Data |> operation[['Seed.Table']](table)
 
-    expected.todo <- existing.todo
-    id            <- existing.todo[['Id']]
+    existing.entity <- Todo.Mock.Data |> tail(1)
+
+    expected.entity <- existing.entity
+    id              <- existing.entity[['Id']]
 
     # When
-    actual.todo <- id |> operation[['SelectWhereId']]('Todo')
+    actual.entity <- id |> operation[['SelectWhereId']](table)
 
     # Then
-    actual.todo |> expect.equal.data(expected.todo)
+    actual.entity |> expect.equal.data(expected.entity)
   })
 })
 
 describe("when entity |> operation[['Update']](table)",{
   it("then entity is updated in table in memory data",{
     # Given
-    configuration <- data.frame()
+    operation <- Memory.Storage.Broker()
 
-    operation <- configuration |> Memory.Storage.Broker()
-    Todo.Mock.Data |> operation[['Seed.Table']]('Todo')
+    table <- 'Todo'
 
-    new.todo <- data.frame(
-      Id     = uuid::UUIDgenerate(),
-      Task   = 'Task',
-      Status = 'New'
-    )
-    new.todo |> operation[['Insert']]('Todo')
-    id <- new.todo[['Id']]
+    Todo.Mock.Data |> operation[['Seed.Table']](table)
 
-    updated.todo <- new.todo
-    updated.todo[['Status']] <- 'Updated'
+    new.entity <- 'Task' |> Todo()
+    new.entity |> operation[['Insert']](table)
 
-    expected.todo <- updated.todo
+    id <- new.entity[['Id']]
+
+    updated.entity <- new.entity
+    updated.entity[['Status']] <- 'Updated'
+
+    expected.entity <- updated.entity
 
     # When
-    updated.todo |> operation[['Update']]('Todo')
+    updated.entity |> operation[['Update']](table)
 
     # Then
-    actual.todo <- id |> operation[['SelectWhereId']]('Todo')
-    actual.todo |> expect.equal.data(expected.todo)
+    actual.entity <- id |> operation[['SelectWhereId']](table)
+    actual.entity |> expect.equal.data(expected.entity)
 
-    id |> operation[['Delete']]('Todo')
+    id |> operation[['Delete']](table)
   })
 })
 
 describe("when id |> operation[['Delete']](table)",{
   it("then entity with matching id is deleted from table in memory data if exist",{
     # Given
-    configuration <- data.frame()
+    operation <- Memory.Storage.Broker()
 
-    operation <- configuration |> Memory.Storage.Broker()
-    Todo.Mock.Data |> operation[['Seed.Table']]('Todo')
+    table <- 'Todo'
 
-    new.todo <- data.frame(
-      Id     = uuid::UUIDgenerate(),
-      Task   = 'Task',
-      Status = 'New'
-    )
-    new.todo |> operation[['Insert']]('Todo')
-    id <- new.todo[['Id']]
+    Todo.Mock.Data |> operation[['Seed.Table']](table)
 
-    expected.todos <- Todo.Mock.Data
+    new.entity <- 'Task' |> Todo()
+    new.entity |> operation[['Insert']](table)
+    id <- new.entity[['Id']]
+
+    expected.entities <- Todo.Mock.Data
 
     # When
-    id |> operation[['Delete']]('Todo')
+    id |> operation[['Delete']](table)
 
     # Then
-    actual.todos <- 'Todo' |> operation[['Select']]()
-    actual.todos |> expect.equal.data(expected.todos)
+    actual.entities <- table |> operation[['Select']]()
+    actual.entities |> expect.equal.data(expected.entities)
   })
 })
