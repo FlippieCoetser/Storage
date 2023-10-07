@@ -1,11 +1,11 @@
 ODBC.Storage.Exceptions <- \() {
   exceptions <- list()
-  exceptions[["Config.NULL"]]        <- \(invoke) {
+  exceptions[['Config.NULL']]        <- \(invoke) {
     if (invoke) {
       stop("Configuration provided is null. Provide valid configuration", call. = FALSE)
     }
   }
-  exceptions[["Config.Missing"]]     <- \(invoke) {
+  exceptions[['Config.Missing']]     <- \(invoke) {
     if (invoke) {
       stop("No configuration provided but required. Provide configuration", call. = FALSE)
     }
@@ -25,29 +25,29 @@ ODBC.Storage.Exceptions <- \() {
       stop("Configuration has no PWD. Add PWD to configuration", call. = FALSE)
     }
   }
-  exceptions[["Connection"]]         <- \(error) {
+  exceptions[['Connection']]         <- \(error) {
     '08001'  |> grepl(error) |> exceptions[["Server.Unreachable"]]()
     'IM002'  |> grepl(error) |> exceptions[["DSN.Invalid"]]()
     '28000'  |> grepl(error) |> exceptions[["Login.Failed"]]()
 
     return(NA)
   }
-  exceptions[["Server.Unreachable"]] <- \(invoke) {
+  exceptions[['Server.Unreachable']] <- \(invoke) {
     if (invoke) { 
       stop("TCP Provider: Timeout error, Try again!", call. = FALSE) 
     }
   }
-  exceptions[["DSN.Invalid"]]        <- \(invoke) {
+  exceptions[['DSN.Invalid']]        <- \(invoke) {
     if (invoke) { 
       stop("ODBC Driver: Invalid DSN", call. = FALSE) 
     }
   }
-  exceptions[["Login.Failed"]]       <- \(invoke) {
+  exceptions[['Login.Failed']]       <- \(invoke) {
     if (invoke) { 
       stop("ODBC Driver: Login Failed, check credentials", call. = FALSE) 
     }
   }
-  exceptions[["Query"]]              <- \(error) {
+  exceptions[['Query']]              <- \(error) {
     'Violation of PRIMARY KEY constraint' |> 
     grepl(error) |> exceptions[["Key.Violation"]]()
 
@@ -63,7 +63,7 @@ ODBC.Storage.Exceptions <- \() {
     
     stop(error, call. = FALSE)
   }
-  exceptions[["Key.Violation"]]      <- \(invoke) {
+  exceptions[['Key.Violation']]      <- \(invoke) {
     if (invoke) { 
       stop("ODBC.Storage: Key.Violation: Duplicate Primary Key not allowed.", call. = FALSE) 
     }
