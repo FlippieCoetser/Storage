@@ -1,1 +1,3 @@
-Todo.Model <- \(task) data.frame()
+Todo.Model <- \(task) data.frame(
+  Id = uuid::UUIDgenerate()
+)
