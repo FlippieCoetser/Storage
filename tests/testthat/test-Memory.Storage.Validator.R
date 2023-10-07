@@ -120,55 +120,25 @@ describe("When entity |> validate[['Is.New.Entity']]()",{
 })
 
 describe("When entity |> validate[['Is.Existing.Entity']](table)",{
-  it("then no exception is thrown if entity exist in memory storage",{
+  it("then no exception is thrown if entity is not empty data.frame",{
     # Given
-    configuration <- data.frame()
+    validator <- Memory.Storage.Validator()
 
-    broker <- configuration |> Memory.Storage.Broker()
-    Todo.Mock.Data |> broker[['Seed.Table']](table)
-
-    validator <- broker |> Memory.Storage.Validator()
-
-    new.entity <- Todo.Mock.Data |> tail(1)
+    entity <- 'Task' |> Todo()
     
     # Then
-    new.entity |> validator[['Is.Existing.Entity']](table) |> expect.no.error()
+    entity |> validator[['Is.Existing.Entity']]() |> expect.no.error()
   })
-  it("then an exception is thrown if entity does not exist in memory storage",{
+  it("then an exception is thrown if entity is empty data.frame",{
     # Given
-    configuration <- data.frame()
+    validator <- Memory.Storage.Validator()
 
-    broker <- configuration |> Memory.Storage.Broker()
-    Todo.Mock.Data |> broker[['Seed.Table']](table)
-
-    validator <- broker |> Memory.Storage.Validator()
-
-    new.entity <- data.frame(
-      Id     = uuid::UUIDgenerate(),
-      Task   = 'Task',
-      Status = 'New'
-    )
+    empty.entity <- data.frame()
     
     expected.error <- 'Memory.Storage: Entity.Not.Found: Entity not found in storage.'
     
     # Then
-    new.entity |> validator[['Is.Existing.Entity']](table) |> expect.error(expected.error)
-  })
-  it("then entity is returned if entity exist in memory storage",{
-    # Given
-    configuration <- data.frame()
-
-    broker <- configuration |> Memory.Storage.Broker()
-    Todo.Mock.Data |> broker[['Seed.Table']](table)
-
-    validator <- broker |> Memory.Storage.Validator()
-
-    new.entity <- Todo.Mock.Data |> tail(1)
-    
-    expected.entity <- new.entity
-    
-    # Then
-    new.entity |> validator[['Is.Existing.Entity']](table) |> expect.equal(expected.entity)
+    empty.entity |> validator[['Is.Existing.Entity']]() |> expect.error(expected.error)
   })
 })
 
