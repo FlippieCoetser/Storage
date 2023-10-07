@@ -4,36 +4,36 @@ describe('Memory.Storage.Exceptions',{
   })
 })
 
-describe('When exceptions <- Memory.Storage.Exceptions()',{
-  it('then exceptions is a list',{
+describe("When exceptions <- Memory.Storage.Exceptions()",{
+  it("then exceptions is a list",{
     # When
     exceptions <- Memory.Storage.Exceptions()
 
     # Then
     exceptions |> expect.list()
   })
-  it('then exceptions contains Not.Implemented exception',{
+  it("then exceptions contains 'Not.Implemented' exception",{
    # When
    exceptions <- Memory.Storage.Exceptions()
    
    # Then
    exceptions[['Not.Implemented']] |> expect.exist()
   })
-  it('then exceptions contains Key.Violation exception',{
+  it("then exceptions contains 'Key.Violation' exception",{
    # When
    exceptions <- Memory.Storage.Exceptions()
    
    # Then
    exceptions[['Key.Violation']] |> expect.exist()
   })
-  it('then exceptions contains Entity.Not.Found exception',{
+  it("then exceptions contains 'Entity.Not.Found' exception",{
    # When
    exceptions <- Memory.Storage.Exceptions()
    
    # Then
    exceptions[['Entity.Not.Found']] |> expect.exist()
   })
-  it('then exceptions contains Table.Invalid exception',{
+  it("then exceptions contains 'Table.Invalid' exception",{
    # When
    exceptions <- Memory.Storage.Exceptions()
    
@@ -43,7 +43,7 @@ describe('When exceptions <- Memory.Storage.Exceptions()',{
 })
 
 describe("When input |> exception[['Not.Implemented']]()", {
-  it('then no exception is thrown if input is FALSE', {
+  it("then no exception is thrown if input is FALSE", {
     # Given
     exception <- Memory.Storage.Exceptions()
     
@@ -53,7 +53,7 @@ describe("When input |> exception[['Not.Implemented']]()", {
     # Then
     input |> exception[['Not.Implemented']]() |> expect.no.error()
   })
-  it('then an exception is thrown if input is TRUE', {
+  it("then an exception is thrown if input is TRUE", {
     # Given
     exception <- Memory.Storage.Exceptions()
     
@@ -68,7 +68,7 @@ describe("When input |> exception[['Not.Implemented']]()", {
 })
 
 describe("When input |> exception[['Key.Violation']]()", {
-  it('then no exception is thrown if input is FALSE', {
+  it("then no exception is thrown if input is FALSE", {
     # Given
     exception <- Memory.Storage.Exceptions()
     
@@ -78,7 +78,7 @@ describe("When input |> exception[['Key.Violation']]()", {
     # Then
     input |> exception[['Key.Violation']]() |> expect.no.error()
   })
-  it('then an exception is thrown if input is TRUE', {
+  it("then an exception is thrown if input is TRUE", {
     # Given
     exception <- Memory.Storage.Exceptions()
     
@@ -92,7 +92,7 @@ describe("When input |> exception[['Key.Violation']]()", {
 })
 
 describe("When input |> exception[['Table.Invalid']](table)", {
-  it('then no exception is thrown if input is FALSE', {
+  it("then no exception is thrown if input is FALSE", {
     # Given
     exception <- Memory.Storage.Exceptions()
     
@@ -102,7 +102,7 @@ describe("When input |> exception[['Table.Invalid']](table)", {
     # Then
     input |> exception[['Table.Invalid']]() |> expect.no.error()
   })
-  it('then an exception is thrown if input is TRUE', {
+  it("then an exception is thrown if input is TRUE", {
     # Given
     exception <- Memory.Storage.Exceptions()
 
@@ -118,7 +118,7 @@ describe("When input |> exception[['Table.Invalid']](table)", {
 })
 
 describe("When input |> exception[['Entity.Not.Found']]()", {
-  it('then no exception is thrown if input is FALSE', {
+  it("then no exception is thrown if input is FALSE", {
     # Given
     exception <- Memory.Storage.Exceptions()
     
@@ -128,7 +128,7 @@ describe("When input |> exception[['Entity.Not.Found']]()", {
     # Then
     input |> exception[['Entity.Not.Found']]() |> expect.no.error()
   })
-  it('then an exception is thrown if input is TRUE', {
+  it("then an exception is thrown if input is TRUE", {
     # Given
     exception <- Memory.Storage.Exceptions()
     
