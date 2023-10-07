@@ -1,1 +1,1 @@
-Todo.Model <- \() {}
+Todo.Model <- \(task) data.frame()
