@@ -36,4 +36,15 @@ describe("When model <- task |> Todo.Model()",{
     model[['Task']] |> expect.exist()
     model[['Task']] |> expect.equal(task)
   })
+  it("then model has 'Status' column with default value new",{
+    # Given 
+    task <- 'Task'
+
+    # When
+    model <- task |> Todo.Model()
+
+    # Then
+    model[['Status']] |> expect.exist()
+    model[['Status']] |> expect.equal('New')
+  })
 })
