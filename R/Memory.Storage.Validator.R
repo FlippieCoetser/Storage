@@ -45,7 +45,6 @@ Memory.Storage.Validator <- \(broker = NULL) {
       entity |> validators[['Has.One.Row']](),
       error=\(...) TRUE |> exception[['Entity.Not.Found']]()
     )
-    return(entity)
   }
   validators[['Is.Existing.Table']]  <- \(table) {
     tables <- broker[['Get.Tables']]()
