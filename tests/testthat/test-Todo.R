@@ -4,47 +4,47 @@ describe('Todo',{
   })
 })
 
-describe("When model <- task |> Todo()",{
-  it("then model is a data.frame",{
+describe("When todo <- task |> Todo()",{
+  it("then todo is a data.frame",{
     # Given 
     task <- 'Task'
 
     # When
-    model <- task |> Todo()
+    todo <- task |> Todo()
 
     # Then
-    model |> expect.data.frame()
+    todo |> expect.data.frame()
   })
-  it("then model has 'Id' column",{
+  it("then todo has 'Id' column",{
     # Given 
     task <- 'Task'
 
     # When
-    model <- task |> Todo()
+    todo <- task |> Todo()
 
     # Then
-    model[['Id']] |> expect.exist()
+    todo[['Id']] |> expect.exist()
   })
-  it("then model has 'Task' columns with value task",{
+  it("then todo has 'Task' columns with value task",{
     # Given 
     task <- 'Task'
 
     # When
-    model <- task |> Todo()
+    todo <- task |> Todo()
 
     # Then
-    model[['Task']] |> expect.exist()
-    model[['Task']] |> expect.equal(task)
+    todo[['Task']] |> expect.exist()
+    todo[['Task']] |> expect.equal(task)
   })
-  it("then model has 'Status' column with default value new",{
+  it("then todo has 'Status' column with default value new",{
     # Given 
     task <- 'Task'
 
     # When
-    model <- task |> Todo()
+    todo <- task |> Todo()
 
     # Then
-    model[['Status']] |> expect.exist()
-    model[['Status']] |> expect.equal('New')
+    todo[['Status']] |> expect.exist()
+    todo[['Status']] |> expect.equal('New')
   })
 })
