@@ -106,7 +106,7 @@ describe("When entity |> validate[['Is.New.Entity']]()",{
     # Then
     empty.entity |> validator[['Is.New.Entity']]() |> expect.no.error()
   })
-  it("then an exception is thrown if entity is not empty",{
+  it("then an exception is thrown if entity is not empty data.frame",{
     # Given
     validator <- Memory.Storage.Validator()
 
@@ -119,7 +119,7 @@ describe("When entity |> validate[['Is.New.Entity']]()",{
   }) 
 })
 
-describe("When entity |> validate[['Is.Existing.Entity']](table)",{
+describe("When entity |> validate[['Is.Existing.Entity']]()",{
   it("then no exception is thrown if entity is not empty data.frame",{
     # Given
     validator <- Memory.Storage.Validator()
