@@ -90,9 +90,7 @@ describe("When model |> service[['Create.Table']](table)",{
   })
   it('then an exception is thrown if model is NULL',{
     # Given
-    configuration <- data.frame()
-
-    service <- configuration |> 
+    service <-
       Memory.Storage.Broker() |> 
       Memory.Storage.Service()
 
@@ -105,9 +103,7 @@ describe("When model |> service[['Create.Table']](table)",{
   })
   it('then an exception is thrown if model is not data.frame',{
     # Given
-    configuration <- data.frame()
-
-    service <- configuration |> 
+    service <- 
       Memory.Storage.Broker() |> 
       Memory.Storage.Service()
 
@@ -120,9 +116,7 @@ describe("When model |> service[['Create.Table']](table)",{
   })
   it('then an exception is thrown if model is not empty data.frame',{
     # Given
-    configuration <- data.frame()
-
-    service <- configuration |> 
+    service <-
       Memory.Storage.Broker() |> 
       Memory.Storage.Service()
 
@@ -135,18 +129,11 @@ describe("When model |> service[['Create.Table']](table)",{
   })
   it('then an exception is thrown if table is NULL',{
     # Given
-    configuration <- data.frame()
-
-    service <- configuration |> 
+    service <- 
       Memory.Storage.Broker() |> 
       Memory.Storage.Service()
 
-    model <- data.frame(
-      Id     = character(0),
-      Task   = character(0),
-      Status = character(0)
-    )
-
+    model <- Todo.Model()
     table <- NULL
 
     expected.error <- "Argument.NULL: 'table' cannot not be NULL."
@@ -156,17 +143,11 @@ describe("When model |> service[['Create.Table']](table)",{
   })
   it('then an exception is thrown if table is not characters',{
     # Given
-    configuration <- data.frame()
-
-    service <- configuration |> 
+    service <- 
       Memory.Storage.Broker() |> 
       Memory.Storage.Service()
 
-    model <- data.frame(
-      Id     = character(0),
-      Task   = character(0),
-      Status = character(0)
-    )
+    model <- Todo.Model()
 
     table <- 123
 
@@ -180,8 +161,8 @@ describe("When model |> service[['Create.Table']](table)",{
 describe("when data |> service[['Seed.Table']](table)",{
   it("then data are inserted into table in memory",{
     # Given
-    broker  <- configuration |> Memory.Storage.Broker()
-    service <- broker        |> Memory.Storage.Service()
+    broker  <- Memory.Storage.Broker()
+    service <- broker |> Memory.Storage.Service()
 
     table <- 'Todo'
 
@@ -197,9 +178,7 @@ describe("when data |> service[['Seed.Table']](table)",{
   })
   it("then an exception is thrown if data is NULL",{
     # Given
-    configuration <- data.frame()
-
-    service <- configuration |> 
+    service <-
       Memory.Storage.Broker() |> 
       Memory.Storage.Service()
 
@@ -213,9 +192,7 @@ describe("when data |> service[['Seed.Table']](table)",{
   })
   it('then an exception is thrown if data is not data.frame',{
     # Given
-    configuration <- data.frame()
-
-    service <- configuration |> 
+    service <- 
       Memory.Storage.Broker() |> 
       Memory.Storage.Service()
 
@@ -229,9 +206,7 @@ describe("when data |> service[['Seed.Table']](table)",{
   })
   it('then an exception is thrown if data is empty data.frame',{
     # Given
-    configuration <- data.frame()
-
-    service <- configuration |> 
+    service <- 
       Memory.Storage.Broker() |> 
       Memory.Storage.Service()
 
@@ -245,9 +220,7 @@ describe("when data |> service[['Seed.Table']](table)",{
   })
   it('then an exception is thrown if table is NULL',{
     # Given
-    configuration <- data.frame()
-
-    service <- configuration |> 
+    service <-
       Memory.Storage.Broker() |> 
       Memory.Storage.Service()
 
@@ -261,9 +234,7 @@ describe("when data |> service[['Seed.Table']](table)",{
   })
   it('then an exception is thrown if table is not characters',{
     # Given
-    configuration <- data.frame()
-
-    service <- configuration |> 
+    service <- 
       Memory.Storage.Broker() |> 
       Memory.Storage.Service()
 
@@ -280,9 +251,7 @@ describe("when data |> service[['Seed.Table']](table)",{
 describe("When query |> services[['Execute.Query']]()",{
   it("then an exception is thrown",{
     # Given
-    configuration <- data.frame()
-
-    services <- configuration |> 
+    services <- 
       Memory.Storage.Broker() |> 
       Memory.Storage.Service()
 
@@ -320,9 +289,7 @@ describe("When entity |> service[['Add']](table)",{
   })
   it('then an exception is thrown if entity is NULL',{
     # Given
-    configuration <- data.frame()
-
-    service <- configuration |> 
+    service <-
       Memory.Storage.Broker() |> 
       Memory.Storage.Service()
 
@@ -333,9 +300,7 @@ describe("When entity |> service[['Add']](table)",{
   })
   it('then an exception is thrown if entity is not data.frame',{
     # Given
-    configuration <- data.frame()
-
-    service <- configuration |> 
+    service <- 
       Memory.Storage.Broker() |> 
       Memory.Storage.Service()
 
@@ -346,9 +311,7 @@ describe("When entity |> service[['Add']](table)",{
   })
   it('then an exception is thrown if entity does not have one row',{
     # Given
-    configuration <- data.frame()
-
-    service <- configuration |> 
+    service <-
       Memory.Storage.Broker() |> 
       Memory.Storage.Service()
 
@@ -359,9 +322,7 @@ describe("When entity |> service[['Add']](table)",{
   })
   it("then an exception is thrown if entity is not new",{
     # Given
-    configuration <- data.frame()
-
-    service  <- configuration |> 
+    service  <- 
       Memory.Storage.Broker() |> 
       Memory.Storage.Service()
        
@@ -376,17 +337,11 @@ describe("When entity |> service[['Add']](table)",{
   })
   it('then an exception is thrown if table is NULL',{
     # Given
-    configuration <- data.frame()
-
-    service <- configuration |> 
+    service <- 
       Memory.Storage.Broker() |> 
       Memory.Storage.Service()
 
-    new.entity <- data.frame(
-      Id     = uuid::UUIDgenerate(),
-      Task   = 'Task',
-      Status = 'New'
-    )
+    new.entity <- 'Task' |> Todo()
 
     expected.error <- "Argument.NULL: 'table' cannot not be NULL."
 
@@ -395,17 +350,11 @@ describe("When entity |> service[['Add']](table)",{
   })
   it('then an exception is thrown if table is not characters',{
     # Given
-    configuration <- data.frame()
-
-    service <- configuration |> 
+    service <- 
       Memory.Storage.Broker() |> 
       Memory.Storage.Service()
 
-    new.entity <- data.frame(
-      Id     = uuid::UUIDgenerate(),
-      Task   = 'Task',
-      Status = 'New'
-    )
+    new.entity <- 'Task' |> Todo()
 
     expected.error <- "Type.Mismatch: Got 'numeric' but expected 'character'."
 
@@ -422,11 +371,7 @@ describe("When entity |> service[['Add']](table)",{
 
     Todo.Mock.Data |> service[['Seed.Table']](table)
 
-    new.entity <- data.frame(
-      Id     = uuid::UUIDgenerate(),
-      Task   = 'Task',
-      Status = 'New'
-    )
+    new.entity <- 'Task' |> Todo()
     
     invalid.table <- 'Invalid'
 
@@ -440,7 +385,7 @@ describe("When entity |> service[['Add']](table)",{
 describe("When table |> service[['Retrieve']](fields)",{
   it("then all entities in table in data store is returned",{
     # Given
-    broker  <- configuration |> Memory.Storage.Broker()
+    broker  <- Memory.Storage.Broker()
     service <- broker        |> Memory.Storage.Service()
 
     Todo.Mock.Data |> service[['Seed.Table']](table)
@@ -455,9 +400,7 @@ describe("When table |> service[['Retrieve']](fields)",{
   })
   it('then an exception is thrown if table is NULL',{
     # Given
-    configuration <- data.frame()
-
-    service <- configuration  |> 
+    service <- 
       Memory.Storage.Broker() |> 
       Memory.Storage.Service()
 
@@ -468,9 +411,7 @@ describe("When table |> service[['Retrieve']](fields)",{
   })
   it('then an exception is thrown if table is not characters',{
     # Given
-    configuration <- data.frame()
-
-    service <- configuration  |> 
+    service <- 
       Memory.Storage.Broker() |> 
       Memory.Storage.Service()
 
@@ -481,9 +422,7 @@ describe("When table |> service[['Retrieve']](fields)",{
   })
   it("then an exception is thrown if table is invalid",{
     # Given
-    configuration <- data.frame()
- 
-    service <- configuration  |> 
+    service <-  
       Memory.Storage.Broker() |> 
       Memory.Storage.Service()
 
@@ -501,7 +440,7 @@ describe("When table |> service[['Retrieve']](fields)",{
 describe("When id |> service[['RetrieveWhereId']](table, fields)",{
   it("then entity with id in table in data store is returned",{
     # Given
-    broker  <- configuration |> Memory.Storage.Broker()
+    broker  <- Memory.Storage.Broker()
     service <- broker        |> Memory.Storage.Service()
 
     Todo.Mock.Data |> service[['Seed.Table']](table)
@@ -519,9 +458,7 @@ describe("When id |> service[['RetrieveWhereId']](table, fields)",{
   })
   it('then an exception is thrown if id is NULL',{
     # Given
-    configuration <- data.frame()
- 
-    service <- configuration  |> 
+    service <- 
       Memory.Storage.Broker() |> 
       Memory.Storage.Service()
 
@@ -532,9 +469,7 @@ describe("When id |> service[['RetrieveWhereId']](table, fields)",{
   })
   it('then an exception is thrown if id is not characters',{
     # Given
-    configuration <- data.frame()
- 
-    service <- configuration  |> 
+    service <- 
       Memory.Storage.Broker() |> 
       Memory.Storage.Service()
 
@@ -545,9 +480,7 @@ describe("When id |> service[['RetrieveWhereId']](table, fields)",{
   })
   it('then an exception is thrown if id is invalid identifier',{
     # Given
-    configuration <- data.frame()
- 
-    service <- configuration  |> 
+    service <- 
       Memory.Storage.Broker() |> 
       Memory.Storage.Service()
 
@@ -558,9 +491,7 @@ describe("When id |> service[['RetrieveWhereId']](table, fields)",{
   })
   it('then an exception is thrown if table is NULL',{
     # Given
-    configuration <- data.frame()
- 
-    service <- configuration  |> 
+    service <-  
       Memory.Storage.Broker() |> 
       Memory.Storage.Service()
 
@@ -574,9 +505,7 @@ describe("When id |> service[['RetrieveWhereId']](table, fields)",{
   })
   it('then an exception is thrown if table is not characters',{
     # Given
-    configuration <- data.frame()
- 
-    service <- configuration  |> 
+    service <- 
       Memory.Storage.Broker() |> 
       Memory.Storage.Service()
 
@@ -590,9 +519,7 @@ describe("When id |> service[['RetrieveWhereId']](table, fields)",{
   })
   it("then an exception is thrown if table is invalid",{
     # Given
-    configuration <- data.frame()
- 
-    service <- configuration  |> 
+    service <-  
       Memory.Storage.Broker() |> 
       Memory.Storage.Service()
 
@@ -613,16 +540,12 @@ describe("When id |> service[['RetrieveWhereId']](table, fields)",{
 describe("When entity |> service[['Modify']](table)",{
   it('then entity is updated in table in data store',{
     # Given
-    broker  <- configuration |> Memory.Storage.Broker()
-    service <- broker        |> Memory.Storage.Service()
+    broker  <- Memory.Storage.Broker()
+    service <- broker |> Memory.Storage.Service()
 
     Todo.Mock.Data |> service[['Seed.Table']](table)
 
-    new.entity <- data.frame(
-      Id     = uuid::UUIDgenerate(),
-      Task   = 'Task',
-      Status = 'New'
-    )
+    new.entity <- 'Task' |> Todo()
 
     new.entity |> broker[['Insert']](table)
     id <- new.entity[['Id']]
@@ -641,9 +564,7 @@ describe("When entity |> service[['Modify']](table)",{
   })
   it('then an exception is thrown if entity is NULL',{
     # Given
-    configuration <- data.frame()
- 
-    service <- configuration  |> 
+    service <-
       Memory.Storage.Broker() |> 
       Memory.Storage.Service()
 
@@ -654,9 +575,7 @@ describe("When entity |> service[['Modify']](table)",{
   })
   it('then an exception is thrown if entity is not data.frame',{
     # Given
-    configuration <- data.frame()
- 
-    service <- configuration  |> 
+    service <- 
       Memory.Storage.Broker() |> 
       Memory.Storage.Service()
 
@@ -667,9 +586,7 @@ describe("When entity |> service[['Modify']](table)",{
   })
   it('then an exception is thrown if entity does not have one row',{
     # Given
-    configuration <- data.frame()
- 
-    service <- configuration  |> 
+    service <- 
       Memory.Storage.Broker() |> 
       Memory.Storage.Service()
 
@@ -680,17 +597,11 @@ describe("When entity |> service[['Modify']](table)",{
   })
   it('then an exception is thrown if table is NULL',{
     # Given
-    configuration <- data.frame()
- 
-    service <- configuration  |> 
+    service <- 
       Memory.Storage.Broker() |> 
       Memory.Storage.Service()
 
-    new.entity <- data.frame(
-      Id     = uuid::UUIDgenerate(),
-      Task   = 'Task',
-      Status = 'New'
-    )
+    new.entity <- 'Task' |> Todo()
 
     expected.error <- "Argument.NULL: 'table' cannot not be NULL."
 
@@ -699,17 +610,11 @@ describe("When entity |> service[['Modify']](table)",{
   })
   it('then an exception is thrown if table in not characters',{
     # Given
-    configuration <- data.frame()
- 
-    service <- configuration  |> 
+    service <- 
       Memory.Storage.Broker() |> 
       Memory.Storage.Service()
 
-    new.entity <- data.frame(
-      Id     = uuid::UUIDgenerate(),
-      Task   = 'Task',
-      Status = 'New'
-    )
+    new.entity <- 'Task' |> Todo()
 
     expected.error <- "Type.Mismatch: Got 'numeric' but expected 'character'."
 
@@ -718,19 +623,13 @@ describe("When entity |> service[['Modify']](table)",{
   })
   it('then an exception is thrown if entity does not exist',{
     # Given
-    configuration <- data.frame()
-
-    service <- configuration  |> 
+    service <-
       Memory.Storage.Broker() |>
       Memory.Storage.Service()
 
     Todo.Mock.Data |> service[['Seed.Table']](table)
 
-    new.entity <- data.frame(
-      Id     = uuid::UUIDgenerate(),
-      Task   = 'Task',
-      Status = 'New'
-    )
+    new.entity <- 'Task' |> Todo()
 
     expected.error <- "Memory.Storage: Entity.Not.Found: Entity not found in storage."
 
@@ -739,9 +638,7 @@ describe("When entity |> service[['Modify']](table)",{
   })
   it('then an exception is thrown if table is invalid',{
     # Given
-    configuration <- data.frame()
-
-    service <- configuration  |> 
+    service <- 
       Memory.Storage.Broker() |> 
       Memory.Storage.Service()
 
@@ -765,16 +662,12 @@ describe("When entity |> service[['Modify']](table)",{
 describe("when id |> service[['Remove']](table)",{
   it('then entity with id in table in data store is deleted',{
     # Given
-    broker  <- configuration |> Memory.Storage.Broker()
-    service <- broker        |> Memory.Storage.Service()
+    broker  <- Memory.Storage.Broker()
+    service <- broker |> Memory.Storage.Service()
 
     Todo.Mock.Data |> service[['Seed.Table']](table)
 
-    new.entity <- data.frame(
-      Id     = uuid::UUIDgenerate(),
-      Task   = 'Task',
-      Status = 'New'
-    )
+    new.entity <- 'Task' |> Todo()
 
     new.entity |> broker[['Insert']](table)
     id <- new.entity[['Id']]
@@ -789,9 +682,7 @@ describe("when id |> service[['Remove']](table)",{
   })
   it('then an exception is thrown if id is NULL',{
     # Given
-    configuration <- data.frame()
- 
-    service <- configuration  |> 
+    service <-
       Memory.Storage.Broker() |> 
       Memory.Storage.Service()
     
@@ -802,9 +693,7 @@ describe("when id |> service[['Remove']](table)",{
   })
   it('then an exception is thrown if id is not characters',{
     # Given
-    configuration <- data.frame()
- 
-    service <- configuration  |> 
+    service <- 
       Memory.Storage.Broker() |> 
       Memory.Storage.Service()
     
@@ -815,9 +704,7 @@ describe("when id |> service[['Remove']](table)",{
   })
   it('then an exception is thrown if id is invalid identifier',{
     # Given
-    configuration <- data.frame()
- 
-    service <- configuration  |> 
+    service <- 
       Memory.Storage.Broker() |> 
       Memory.Storage.Service()
     
@@ -828,16 +715,12 @@ describe("when id |> service[['Remove']](table)",{
   })
   it('then an exception is thrown if table is NULL',{
     # Given
-    broker  <- configuration |> Memory.Storage.Broker()
-    service <- broker        |> Memory.Storage.Service()
+    broker  <- Memory.Storage.Broker()
+    service <- broker |> Memory.Storage.Service()
 
     Todo.Mock.Data |> service[['Seed.Table']](table)
 
-    new.entity <- data.frame(
-      Id     = uuid::UUIDgenerate(),
-      Task   = 'Task',
-      Status = 'New'
-    )
+    new.entity <- 'Task' |> Todo()
 
     new.entity |> broker[['Insert']](table)
     id <- new.entity[['Id']]
@@ -849,16 +732,12 @@ describe("when id |> service[['Remove']](table)",{
   })
   it('then an exception is thrown if table is not characters',{
     # Given
-    broker  <- configuration |> Memory.Storage.Broker()
-    service <- broker        |> Memory.Storage.Service()
+    broker  <- Memory.Storage.Broker()
+    service <- broker |> Memory.Storage.Service()
 
     Todo.Mock.Data |> service[['Seed.Table']](table)
 
-    new.entity <- data.frame(
-      Id     = uuid::UUIDgenerate(),
-      Task   = 'Task',
-      Status = 'New'
-    )
+    new.entity <- 'Task' |> Todo()
 
     new.entity |> broker[['Insert']](table)
     id <- new.entity[['Id']]
@@ -870,9 +749,7 @@ describe("when id |> service[['Remove']](table)",{
   })
   it('then an exception is thrown if table is invalid',{
     # Given
-    configuration <- data.frame()
-
-    service <- configuration  |> 
+    service <- 
       Memory.Storage.Broker() |> 
       Memory.Storage.Service()
 
