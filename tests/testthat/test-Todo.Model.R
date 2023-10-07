@@ -28,4 +28,12 @@ describe("When model <- Todo.Model()",{
     model[['Task']] |> expect.exist()
     model[['Task']] |> expect.character()
   })
+  it("then model has Status column of type character",{
+    # When
+    model <- Todo.Model()
+
+    # Then
+    model[['Status']] |> expect.exist()
+    model[['Status']] |> expect.character()
+  })
 })
