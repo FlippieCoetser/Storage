@@ -1,1 +1,1 @@
-Todo.Model <- \() {}
+Todo.Model <- \() data.frame()
