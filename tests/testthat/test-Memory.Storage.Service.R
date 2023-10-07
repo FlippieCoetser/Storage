@@ -73,22 +73,20 @@ describe("When services <- Memory.Storage.Service()",{
 describe("When model |> service[['Create.Table']](table)",{
   it("then table is created in memory",{
     # Given
-    broker  <- configuration |> Memory.Storage.Broker()
-    service <- broker        |> Memory.Storage.Service()
+    broker  <- Memory.Storage.Broker()
 
-    model <- data.frame(
-      Id     = character(0),
-      Task   = character(0),
-      Status = character(0)
-    )
+    service <- broker |> Memory.Storage.Service()
 
+    model <- Todo.Model()
     table <- 'Todo'
+
+    expected.tables <- data.frame(name = table)
 
     # When
     model |> service[['Create.Table']](table)
 
     # Then
-    broker[['Get.Tables']]() |> expect.equal(table)
+    broker[['Get.Tables']]() |> expect.equal(expected.tables)
   })
   it('then an exception is thrown if model is NULL',{
     # Given

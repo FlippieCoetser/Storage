@@ -10,7 +10,6 @@ Memory.Storage.Broker <- \(configuration = NULL) {
     tables[[table]] <<- tables[[table]] |> rbind(data)
     return(NULL)
   }
-  # TODO: Return as data.frame with name column
   operations[['Get.Tables']]    <- \() {
     tables |> names() |> (\(name) data.frame(name = name))()
   }
