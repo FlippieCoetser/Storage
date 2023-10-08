@@ -1,20 +1,17 @@
 ODBC.Storage.Broker <- \(configuration, sql = Query::SQL()) {
   exception  <- ODBC.Storage.Exceptions()
 
-  operations <- list()
-  operations[['Create.Connection']] <- \() {
-    tryCatch(
-      DBI::dbConnect |> do.call(configuration),
-      error=exception[['Connection']]
-    )
+  create.connection  <- \(configuration) {
+    DBI::dbConnect |> do.call(configuration) |> 
+      tryCatch(error=exception[['Connection']])
   }
+
+  operations <- list()
   operations[['Execute.Query']]     <- \(query) {
-    connection <- operations[['Create.Connection']]()
+    connection <- configuration |> create.connection()
     
-    output <- tryCatch(
-        connection |> DBI::dbGetQuery(query),
-        error = exception[['Query']]
-    )
+    output <- connection |> DBI::dbGetQuery(query) |> 
+      tryCatch(error = exception[['Query']])
 
     connection |> DBI::dbDisconnect()
 

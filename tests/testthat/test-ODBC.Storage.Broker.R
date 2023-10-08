@@ -12,13 +12,6 @@ describe("When operations <- configuration |> ODBC.Storage.Broker()",{
     # Then
     operations |> expect.list()
   })
-  it("then operations contains 'Create.Connection' operation",{
-    # When
-    operations <- ODBC.Storage.Broker()
-
-    # Then
-    operations[['Create.Connection']] |> expect.exist()
-  })
   it("then operations contains 'Execute.Query' operation",{
     # When
     operations <- ODBC.Storage.Broker()
