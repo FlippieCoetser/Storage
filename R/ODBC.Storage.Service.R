@@ -30,7 +30,7 @@ ODBC.Storage.Service <- \(broker) {
     id    |> validate[['Id']]()
     table |> validate[['Table']]()
 
-    table  |> filter.tables() |> validate[['Is.Existing.Table']](table)
+    table |> filter.tables() |> validate[['Is.Existing.Table']](table)
 
     id |> broker[['SelectWhereId']](table, fields)
   }
