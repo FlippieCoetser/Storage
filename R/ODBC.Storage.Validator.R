@@ -1,4 +1,4 @@
-ODBC.Storage.Validator <- \(broker = NULL) {
+ODBC.Storage.Validator <- \() {
   exception <- ODBC.Storage.Exceptions()
 
   validators <- Validate::Validator()
@@ -24,10 +24,9 @@ ODBC.Storage.Validator <- \(broker = NULL) {
       validators[['Is.Character']]()    |>
       validators[['Is.UUID']]('id')
   }
-  validators[['Is.Existing.Table']] <- \(table) {
-    tables <- broker[['Get.Tables']]() 
-    any(tables[['name']] == table) |> isFALSE() |> exception[['Table.Invalid']](table)
-    return(table)
+  validators[['Is.Existing.Table']] <- \(table, name = NULL) {
+    table |> validators[['Has.One.Row']]() |> 
+      tryCatch(error=\(...) TRUE |> exception[['Table.Invalid']](name))
   }
   return(validators)
 }

@@ -226,33 +226,26 @@ describe("When id |> validate[['Id']]()",{
   })
 })
 
-describe("When table |> validate[['Is.Existing.Table']]()",{
-  it("then no exception is thrown if table is a valid table",{
-    skip_if_not(environment == 'local')
+describe("When table |> validate[['Is.Existing.Table']](name)",{
+  it("then no exception is thrown if table is not empty data.frame",{
     # Given
-    table <- 'Todo'
+    validator <- ODBC.Storage.Validator()
 
-    broker <- configurator[["Get.Config"]]() |> ODBC.Storage.Broker()
-
-    validator <- broker |> ODBC.Storage.Validator()
-
-    valid.table <- table
+    table <- data.frame(name = 'Todo')
     
     # Then
-    valid.table |> validator[['Is.Existing.Table']]() |> expect.no.error()
+    table |> validator[['Is.Existing.Table']]() |> expect.no.error()
   })
-  it("then an exception is thrown if table is not a valid table",{
-    skip_if_not(environment == 'local')
+  it("then an exception is thrown if table is empty data.frame",{
     # Given
-    broker <- configurator[["Get.Config"]]() |> ODBC.Storage.Broker()
+    validator <- ODBC.Storage.Validator()
 
-    validator <- broker |> ODBC.Storage.Validator()
-
-    invalid.table <- 'Invalid'
+    empty.table <- data.frame()
+    name <- 'Invalid'
     
     expected.error <- 'ODBC.Storage: Table.Invalid: Invalid is not a valid table.'
     
     # Then
-    invalid.table |> validator[['Is.Existing.Table']]() |> expect.error(expected.error)
+    empty.table |> validator[['Is.Existing.Table']](name) |> expect.error(expected.error)
   })
 })

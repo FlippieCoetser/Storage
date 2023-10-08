@@ -1,5 +1,7 @@
 ODBC.Storage.Service <- \(broker) {
-  validate <- ODBC.Storage.Validator(broker)
+  validate <- ODBC.Storage.Validator()
+
+  filter.tables   <- \(table) broker[['Get.Tables']]() |> subset(name == table)
   
   services <- list()
   services[['Execute.Query']]    <- \(query) {
@@ -12,7 +14,7 @@ ODBC.Storage.Service <- \(broker) {
     entity |> validate[['Entity']]()
     table  |> validate[['Table']]()
 
-    table  |> validate[['Is.Existing.Table']]()
+    table  |> filter.tables() |> validate[['Is.Existing.Table']](table)
     # TODO: entity |> validate[['Is.New.Entity']](table)
 
     entity |> broker[['Insert']](table)
@@ -20,7 +22,7 @@ ODBC.Storage.Service <- \(broker) {
   services[['Retrieve']]        <- \(table, fields = '*') {
     table |> validate[['Table']]()
 
-    table |> validate[['Is.Existing.Table']]()
+    table  |> filter.tables() |> validate[['Is.Existing.Table']](table)
 
     table |> broker[['Select']](fields)
   }
@@ -28,7 +30,7 @@ ODBC.Storage.Service <- \(broker) {
     id    |> validate[['Id']]()
     table |> validate[['Table']]()
 
-    table |> validate[['Is.Existing.Table']]()
+    table  |> filter.tables() |> validate[['Is.Existing.Table']](table)
 
     id |> broker[['SelectWhereId']](table, fields)
   }
@@ -36,7 +38,7 @@ ODBC.Storage.Service <- \(broker) {
     entity |> validate[['Entity']]()
     table  |> validate[['Table']]()
 
-    table  |> validate[['Is.Existing.Table']]()
+    table  |> filter.tables() |> validate[['Is.Existing.Table']](table)
     # TODO: entity |> validate[['Is.Existing.Entity']](table)
     
     entity |> broker[['Update']](table)
@@ -45,7 +47,7 @@ ODBC.Storage.Service <- \(broker) {
     id    |> validate[['Id']]()
     table |> validate[['Table']]()
 
-    table |> validate[['Is.Existing.Table']]()
+    table  |> filter.tables() |> validate[['Is.Existing.Table']](table)
 
     id |> broker[['Delete']](table)
   }
