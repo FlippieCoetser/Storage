@@ -1,4 +1,4 @@
-environment <- 'ENVIRONMENT' |> Sys.getenv()
+environment <- 'ENVIRONMENT' |> Sys.getenv() |> tryCatch(error = \(e) return('other')) 
 
 expect.exist      <- \(actual) actual |> is.null() |> expect_equal(FALSE) 
 expect.true       <- \(actual) actual |> expect_equal(TRUE)
