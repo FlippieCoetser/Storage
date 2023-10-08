@@ -6,6 +6,7 @@ describe('Storage.Orchestrator',{
 
 describe("When orchestrations <- configuration |> Storage.Orchestrator()",{
   it("then orchestrations is a list",{
+    skip_if_not(environment == 'local')
     # When
     orchestrations <- configurator[["Get.Config"]]() |> Storage.Orchestrator()
 
@@ -13,6 +14,7 @@ describe("When orchestrations <- configuration |> Storage.Orchestrator()",{
     orchestrations |> expect.list()
   })
   it("then orchestrations contains 'Seed.Table' orchestration",{
+    skip_if_not(environment == 'local')
     # When
     orchestrations <- configurator[["Get.Config"]]() |> Storage.Orchestrator()
 
@@ -20,6 +22,7 @@ describe("When orchestrations <- configuration |> Storage.Orchestrator()",{
     orchestrations[['Seed.Table']] |> expect.exist()
   })
   it("then orchestrations contains 'Execute.Query' orchestration",{
+    skip_if_not(environment == 'local')
     # When
     orchestrations <- configurator[["Get.Config"]]() |> Storage.Orchestrator()
 
@@ -27,6 +30,7 @@ describe("When orchestrations <- configuration |> Storage.Orchestrator()",{
     orchestrations[['Execute.Query']] |> expect.exist()
   })
   it("then orchestrations contains 'Add' orchestration",{
+    skip_if_not(environment == 'local')
     # When
     orchestrations <- configurator[["Get.Config"]]() |> Storage.Orchestrator()
 
@@ -34,6 +38,7 @@ describe("When orchestrations <- configuration |> Storage.Orchestrator()",{
     orchestrations[['Add']] |> expect.exist()
   })
   it("then orchestrations contains 'Retrieve' orchestration",{
+    skip_if_not(environment == 'local')
     # When
     orchestrations <- configurator[["Get.Config"]]() |> Storage.Orchestrator()
 
@@ -41,6 +46,7 @@ describe("When orchestrations <- configuration |> Storage.Orchestrator()",{
     orchestrations[['Retrieve']] |> expect.exist()
   })
   it("then orchestrations contains 'RetrieveWhereId' orchestration",{
+    skip_if_not(environment == 'local')
     # When
     orchestrations <- configurator[["Get.Config"]]() |> Storage.Orchestrator()
 
@@ -48,6 +54,7 @@ describe("When orchestrations <- configuration |> Storage.Orchestrator()",{
     orchestrations[['RetrieveWhereId']] |> expect.exist()
   })
   it("then orchestrations contains 'Modify' orchestration",{
+    skip_if_not(environment == 'local')
     # When
     orchestrations <- configurator[["Get.Config"]]() |> Storage.Orchestrator()
 
@@ -55,6 +62,7 @@ describe("When orchestrations <- configuration |> Storage.Orchestrator()",{
     orchestrations[['Modify']] |> expect.exist()
   })
   it("then orchestrations contains 'Remove' orchestration",{
+    skip_if_not(environment == 'local')
     # When
     orchestrations <- configurator[["Get.Config"]]() |> Storage.Orchestrator()
 
