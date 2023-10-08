@@ -1,6 +1,6 @@
 # Storage
 
-(https://flippiecoetser.r-universe.dev/badges/Storage)
+![r-universe](https://flippiecoetser.r-universe.dev/badges/Storage)
 
 This R Package provides a common interface for performing data operations on various data stores. Currently, an `memory` and `odbc` driver based `Storage` is supported. To configure an `odbc` driver-based data store, a `ODBC.Configurator` is made available to retrieve the required configuration parameters from a local `.Renviron` file. Lastly, a `Todo.Service`, is provided as an example of how to use the `Storage` component can be injected into a data service.
 
