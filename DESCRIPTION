@@ -1,8 +1,8 @@
 Package: Storage
 Title: Data Access Layer
-Version: 0.0.0.9007
+Version: 0.0.0.9008
 Authors@R: 
-    person(given = "Philippus",
+    person(given = "Flippie",
            family = "Coetser",
            role = c("aut", "cre"),
            email = "flippie.coetser@gmail.com",
@@ -13,19 +13,17 @@ Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
-Author: Philippus Coetser [aut, cre] (<https://orcid.org/0000-0003-0549-9245>)
-Maintainer: Philippus Coetser <flippie.coetser@gmail.com>
 Imports:
     Validate, 
     Environment,
     Query,
     DBI,
-    odbc
+    odbc,
+    uuid
 Remotes: 
     FlippieCoetser/Validate,
     FlippieCoetser/Environment,
     FlippieCoetser/Query
 Suggests: 
     testthat (>= 3.0.0),
-    uuid
 Config/testthat/edition: 3
