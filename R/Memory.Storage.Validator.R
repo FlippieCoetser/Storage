@@ -35,22 +35,16 @@ Memory.Storage.Validator <- \() {
     input |> exception[['Not.Implemented']]()
   }
   validators[['Is.New.Entity']]      <- \(entity) {
-    tryCatch(
-      entity |> validators[['Is.Empty']](),
-      error=\(...) TRUE |> exception[['Key.Violation']]()
-    ) 
+    entity |> validators[['Is.Empty']]() |> 
+      tryCatch(error=\(...) TRUE |> exception[['Key.Violation']]()) 
   }
   validators[['Is.Existing.Entity']] <- \(entity) {
-    tryCatch(
-      entity |> validators[['Has.One.Row']](),
-      error=\(...) TRUE |> exception[['Entity.Not.Found']]()
-    )
+    entity |> validators[['Has.One.Row']]() |> 
+      tryCatch(error=\(...) TRUE |> exception[['Entity.Not.Found']]())
   }
   validators[['Is.Existing.Table']]  <- \(table, name = NULL) {
-    tryCatch(
-      table |> validators[['Has.One.Row']](),
-      error=\(...) TRUE |> exception[['Table.Invalid']](name)
-    )
+    table |> validators[['Has.One.Row']]() |> 
+      tryCatch(error=\(...) TRUE |> exception[['Table.Invalid']](name))
   }
   return(validators)
 }

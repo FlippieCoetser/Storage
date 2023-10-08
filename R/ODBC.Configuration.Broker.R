@@ -6,26 +6,22 @@ ODBC.Configuration.Broker <- \(environment = Environment::Environment()) {
     environment[['Open.Config.File']]()
   }
   operations[['Get.Preset.Config']] <- \() {
-    tryCatch(
-      list(
-        drv = odbc::odbc(),
-        dsn = 'DSN' |> environment[['Get.Env.Variable']](),
-        uid = 'UID' |> environment[['Get.Env.Variable']](),
-        pwd = 'PWD' |> environment[['Get.Env.Variable']]()
-      ), 
-    error = exception[['Configuration']])
+    list(
+      drv = odbc::odbc(),
+      dsn = 'DSN' |> environment[['Get.Env.Variable']](),
+      uid = 'UID' |> environment[['Get.Env.Variable']](),
+      pwd = 'PWD' |> environment[['Get.Env.Variable']]()
+    ) |> tryCatch(error = exception[['Configuration']])
   }
   operations[['Get.Manual.Config']] <- \() {
-    tryCatch(
-      list(
-        drv      = odbc::odbc(),
-        driver   = 'DRIVER'   |> environment[['Get.Env.Variable']](),
-        server   = 'SERVER'   |> environment[['Get.Env.Variable']](),
-        database = 'DATABASE' |> environment[['Get.Env.Variable']](),
-        uid      = 'UID'      |> environment[['Get.Env.Variable']](),
-        pwd      = 'PWD'      |> environment[['Get.Env.Variable']]()
-      ), 
-    error = exception[['Configuration']])
+    list(
+      drv      = odbc::odbc(),
+      driver   = 'DRIVER'   |> environment[['Get.Env.Variable']](),
+      server   = 'SERVER'   |> environment[['Get.Env.Variable']](),
+      database = 'DATABASE' |> environment[['Get.Env.Variable']](),
+      uid      = 'UID'      |> environment[['Get.Env.Variable']](),
+      pwd      = 'PWD'      |> environment[['Get.Env.Variable']]()
+    ) |> tryCatch(error = exception[['Configuration']])
   }
   return(operations)
 }

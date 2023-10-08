@@ -6,18 +6,11 @@ ODBC.Configuration.Validator <- \() {
     valid.preset.config <- TRUE
     valid.manual.config <- TRUE
 
-    tryCatch(
-      configuration |> validations[['Preset.Config']](),
-      error = \(...) {
-        valid.preset.config <<- FALSE
-      }
-    )
-    tryCatch(
-      configuration |> validations[['Get.Manual.Config']](),
-      error = \(...) {
-        valid.manual.config <<- FALSE
-      }
-    )
+    configuration |> validations[['Preset.Config']]() |> 
+      tryCatch(error = \(...) { valid.preset.config <<- FALSE })
+
+    configuration |> validations[['Get.Manual.Config']]() |>
+      tryCatch(error = \(...) { valid.manual.config <<- FALSE })
 
     valid.config <- valid.preset.config || valid.manual.config
     if (!valid.config) {
