@@ -26,6 +26,41 @@ describe("When operations <- configuration |> ODBC.Storage.Broker()",{
     # Then
     operations[['Get.Tables']] |> expect.exist()
   })
+  it("then operations contains 'Insert' operation",{
+    # When
+    operations <- ODBC.Storage.Broker()
+
+    # Then
+    operations[['Insert']] |> expect.exist()
+  })
+  it("then operations contains 'Select' operation",{
+    # When
+    operations <- ODBC.Storage.Broker()
+
+    # Then
+    operations[['Select']] |> expect.exist()
+  })
+  it("then operations contains 'SelectWhereId' operation",{
+    # When
+    operations <- ODBC.Storage.Broker()
+
+    # Then
+    operations[['SelectWhereId']] |> expect.exist()
+  })
+  it("then operations contains 'Update' operation",{
+    # When
+    operations <- ODBC.Storage.Broker()
+
+    # Then
+    operations[['Update']] |> expect.exist()
+  })
+  it("then operations contains 'Delete' operation",{
+    # When
+    operations <- ODBC.Storage.Broker()
+
+    # Then
+    operations[['Delete']] |> expect.exist()
+  })
 })
 
 describe("when query |> operate[['Execute.Query']]()",{
