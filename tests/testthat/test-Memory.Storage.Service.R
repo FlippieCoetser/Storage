@@ -282,10 +282,10 @@ describe("When entity |> service[['Add']](table)",{
     new.entity |> service[['Add']](table)
 
     # Then
-    actual.entity <- new.entity[['Id']] |> broker[['SelectWhereId']](table, fields)
+    actual.entity <- new.entity[['id']] |> broker[['SelectWhereId']](table, fields)
     actual.entity |> expect.equal.data(expected.entity)
 
-    new.entity[['Id']] |> broker[['Delete']](table)
+    new.entity[['id']] |> broker[['Delete']](table)
   })
   it("then an exception is thrown if entity is NULL",{
     # Given
@@ -448,7 +448,7 @@ describe("When id |> service[['RetrieveWhereId']](table, fields)",{
     existing.entity <- Todo.Mock.Data |> tail(1)
     expected.entity <- existing.entity
 
-    id <- existing.entity[['Id']]
+    id <- existing.entity[['id']]
 
     # When
     actual.entity <- id |> service[['RetrieveWhereId']](table, fields)
@@ -496,7 +496,7 @@ describe("When id |> service[['RetrieveWhereId']](table, fields)",{
       Memory.Storage.Service()
 
     existing.entity <- Todo.Mock.Data |> tail(1)
-    id <- existing.entity[['Id']]
+    id <- existing.entity[['id']]
 
     expected.error <- "Argument.NULL: 'table' cannot not be NULL."
 
@@ -510,7 +510,7 @@ describe("When id |> service[['RetrieveWhereId']](table, fields)",{
       Memory.Storage.Service()
 
     existing.entity <- Todo.Mock.Data |> tail(1)
-    id <- existing.entity[['Id']]
+    id <- existing.entity[['id']]
 
     expected.error <- "Type.Mismatch: Got 'numeric' but expected 'character'."
 
@@ -526,7 +526,7 @@ describe("When id |> service[['RetrieveWhereId']](table, fields)",{
     Todo.Mock.Data |> service[['Seed.Table']](table)
 
     existing.entity <- Todo.Mock.Data |> tail(1)
-    id <- existing.entity[['Id']]
+    id <- existing.entity[['id']]
 
     invalid.table <- 'Table.Invalid'
 
@@ -548,10 +548,10 @@ describe("When entity |> service[['Modify']](table)",{
     new.entity <- 'Task' |> Todo()
 
     new.entity |> broker[['Insert']](table)
-    id <- new.entity[['Id']]
+    id <- new.entity[['id']]
 
     updated.entity <- new.entity
-    updated.entity[['Status']] <- 'Updated'
+    updated.entity[['status']] <- 'Updated'
 
     expected.entity <- updated.entity
 
@@ -645,10 +645,10 @@ describe("When entity |> service[['Modify']](table)",{
     Todo.Mock.Data |> service[['Seed.Table']](table)
 
     entity <- Todo.Mock.Data |> tail(1)
-    id     <- entity[['Id']]
+    id     <- entity[['id']]
 
     updated.entity <- entity
-    updated.entity[['Status']] <- 'Updated'
+    updated.entity[['status']] <- 'Updated'
 
     expected.error <- "Memory.Storage: Table.Invalid: Table.Invalid is not a valid table."
 
@@ -670,7 +670,7 @@ describe("when id |> service[['Remove']](table)",{
     new.entity <- 'Task' |> Todo()
 
     new.entity |> broker[['Insert']](table)
-    id <- new.entity[['Id']]
+    id <- new.entity[['id']]
 
     expected.rows <- 0
 
@@ -723,7 +723,7 @@ describe("when id |> service[['Remove']](table)",{
     new.entity <- 'Task' |> Todo()
 
     new.entity |> broker[['Insert']](table)
-    id <- new.entity[['Id']]
+    id <- new.entity[['id']]
     
     expected.error <- "Argument.NULL: 'table' cannot not be NULL."
 
@@ -740,7 +740,7 @@ describe("when id |> service[['Remove']](table)",{
     new.entity <- 'Task' |> Todo()
 
     new.entity |> broker[['Insert']](table)
-    id <- new.entity[['Id']]
+    id <- new.entity[['id']]
     
     expected.error <- "Type.Mismatch: Got 'numeric' but expected 'character'."
 
@@ -756,7 +756,7 @@ describe("when id |> service[['Remove']](table)",{
     Todo.Mock.Data |> service[['Seed.Table']](table)
 
     entity <- Todo.Mock.Data |> tail(1)
-    id     <- entity[['Id']]
+    id     <- entity[['id']]
 
     invalid.table <- 'Table.Invalid'
 

@@ -15,15 +15,15 @@ Todo.Model.Validator <- \() {
     return(todo)
   }
   validations[['Has.Id']]     <- \(todo) {
-    todo[['Id']] |> is.null() |> exception[['Todo.Id.NULL']]()
+    todo[['id']] |> is.null() |> exception[['Todo.Id.NULL']]()
     return(todo)
   }
   validations[['Has.Task']]   <- \(todo) {
-    todo[['Task']] |> is.null() |> exception[['Todo.Task.NULL']]()
+    todo[['task']] |> is.null() |> exception[['Todo.Task.NULL']]()
     return(todo)
   }
   validations[['Has.Status']] <- \(todo) {
-    todo[['Status']] |> is.null() |> exception[['Todo.Status.NULL']]()
+    todo[['status']] |> is.null() |> exception[['Todo.Status.NULL']]()
     return(todo)
   }
   validations[['Id']]         <- \(id) {

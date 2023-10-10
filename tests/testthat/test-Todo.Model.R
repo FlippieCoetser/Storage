@@ -13,28 +13,28 @@ describe("When model <- Todo.Model()",{
     model |> expect.data.frame()
     model |> expect.empty()
   })
-  it("then model has 'Id' column of type character",{
+  it("then model has 'id' column of type character",{
     # When
     model <- Todo.Model()
 
     # Then
-    model[['Id']] |> expect.exist()
-    model[['Id']] |> expect.character()
+    model[['id']] |> expect.exist()
+    model[['id']] |> expect.character()
   })
-  it("then model has 'Task' column of type character",{
+  it("then model has 'task' column of type character",{
     # When
     model <- Todo.Model()
 
     # Then
-    model[['Task']] |> expect.exist()
-    model[['Task']] |> expect.character()
+    model[['task']] |> expect.exist()
+    model[['task']] |> expect.character()
   })
-  it("then model has 'Status' column of type character",{
+  it("then model has 'status' column of type character",{
     # When
     model <- Todo.Model()
 
     # Then
-    model[['Status']] |> expect.exist()
-    model[['Status']] |> expect.character()
+    model[['status']] |> expect.exist()
+    model[['status']] |> expect.character()
   })
 })

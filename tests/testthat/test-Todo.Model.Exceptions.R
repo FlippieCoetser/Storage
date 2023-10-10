@@ -89,7 +89,7 @@ describe("When input |> exception[['Todo.Id.NULL']]()",{
     # Given
     exception <- Todo.Model.Exceptions()
 
-    excepted.error <- 'Todo has no Id'
+    excepted.error <- 'Todo has no id'
 
     # When
     input <- TRUE
@@ -114,7 +114,7 @@ describe("When input |> exception[['Todo.Task.NULL']]()",{
     # Given
     exception <- Todo.Model.Exceptions()
 
-    excepted.error <- 'Todo has no Task'
+    excepted.error <- 'Todo has no task'
 
     # When
     input <- TRUE
@@ -139,7 +139,7 @@ describe("When input |> exception[['Todo.Status.NULL']]()",{
     # Given
     exception <- Todo.Model.Exceptions()
 
-    excepted.error <- 'Todo has no Status'
+    excepted.error <- 'Todo has no status'
 
     # When
     input <- TRUE
@@ -164,7 +164,7 @@ describe("When input |> exception[['Id.NULL']]()",{
     # Given
     exception <- Todo.Model.Exceptions()
 
-    excepted.error <- 'Id is null. Provide an Id.'
+    excepted.error <- 'Id is null. Provide an id.'
 
     # When
     input <- TRUE

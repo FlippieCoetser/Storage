@@ -1,5 +1,5 @@
 Todo <- \(task) data.frame(
-  Id = uuid::UUIDgenerate(),
-  Task = task,
-  Status = 'New'
+  id = uuid::UUIDgenerate(),
+  task = task,
+  status = 'New'
 )

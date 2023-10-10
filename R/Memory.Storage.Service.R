@@ -2,7 +2,7 @@ Memory.Storage.Service <- \(broker) {
   validate <- Memory.Storage.Validator()
 
   filter.tables   <- \(table) broker[['Get.Tables']]() |> subset(name == table)
-  filter.entities <- \(entity, table) entity[['Id']] |> broker[['SelectWhereId']](table)
+  filter.entities <- \(entity, table) entity[['id']] |> broker[['SelectWhereId']](table)
     
   services <- list()
   services[['Create.Table']]    <- \(model, table) {

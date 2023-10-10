@@ -37,20 +37,20 @@ ODBC.Storage.Broker <- \(configuration, sql = Query::SQL()) {
     fields |>
       sql[['SELECT']]()        |>
       sql[['FROM']](table)     |>
-      sql[['WHERE']]('Id', id) |>
+      sql[['WHERE']]('id', id) |>
       operations[['Execute.Query']]()
   }
   operations[['Update']]            <- \(entity, table) {       
     table |>
     sql[['UPDATE']]()     |>
     sql[['SET']](entity)    |>
-    sql[['WHERE']]('Id', entity[['Id']]) |>
+    sql[['WHERE']]('id', entity[['id']]) |>
     operations[['Execute.Query']]()
   }
   operations[['Delete']]            <- \(id, table) {
     sql[['DELETE']]()        |>
     sql[['FROM']](table)     |>
-    sql[['WHERE']]('Id', id) |>
+    sql[['WHERE']]('id', id) |>
     operations[['Execute.Query']]()
   }
   return(operations)

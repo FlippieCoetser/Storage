@@ -111,10 +111,10 @@ describe("When entity |> service[['Add']](table)",{
     entity |> services[['Add']](table)
 
     # Then
-    actual.entity <- entity[['Id']] |> broker[['SelectWhereId']](table, fields)
+    actual.entity <- entity[['id']] |> broker[['SelectWhereId']](table, fields)
     actual.entity |> expect.equal(expected.entity)
 
-    entity[['Id']] |> broker[['Delete']](table)
+    entity[['id']] |> broker[['Delete']](table)
   })
   it("then an exception is thrown if entity is NULL",{
     # Given
@@ -307,7 +307,7 @@ describe("When id |> service[['RetrieveWhereId']](table, fields)",{
     existing.entities <- table |> broker[['Select']](fields)
     existing.entity   <- existing.entities |> tail(1)
 
-    id <- existing.entity[['Id']]
+    id <- existing.entity[['id']]
 
     expected.entity <- existing.entity
 
@@ -421,16 +421,11 @@ describe("When entity |> service[['Modify']](table)",{
 
     services <- broker |> ODBC.Storage.Service()
 
-    new.entity <- data.frame(
-      Id = uuid::UUIDgenerate(),
-      Task = 'Task',
-      Status = 'New'
-    )
-
+    new.entity <- 'Task' |> Todo()
     new.entity |> broker[['Insert']](table)
 
     updated.entity <- new.entity
-    updated.entity[['Status']] <- 'Updated'
+    updated.entity[['status']] <- 'Updated'
 
     expected.entity <- updated.entity
 
@@ -438,10 +433,10 @@ describe("When entity |> service[['Modify']](table)",{
     updated.entity |> services[['Modify']](table)
 
     # Then
-    retrieved.entity <- updated.entity[['Id']] |> broker[['SelectWhereId']](table, fields)
+    retrieved.entity <- updated.entity[['id']] |> broker[['SelectWhereId']](table, fields)
     retrieved.entity |> expect.equal(expected.entity)
 
-    updated.entity[['Id']] |> broker[['Delete']](table)
+    updated.entity[['id']] |> broker[['Delete']](table)
   })
   it("then an exception is thrown if entity is NULL",{
     # Given

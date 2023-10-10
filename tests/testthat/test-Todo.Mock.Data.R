@@ -10,20 +10,20 @@ describe("When data <- Todo.Mock.Data",{
     data <- Todo.Mock.Data
 
     # Then
-    data[['Id']] |> expect.exist()
+    data[['id']] |> expect.exist()
   })
   it("then data contains Task column",{
     # When
     data <- Todo.Mock.Data
 
     # Then
-    data[['Task']] |> expect.exist()
+    data[['task']] |> expect.exist()
   })
   it("then data contains Status column",{
     # When
     data <- Todo.Mock.Data
 
     # Then
-    data[['Status']] |> expect.exist()
+    data[['status']] |> expect.exist()
   })
 })

@@ -140,7 +140,7 @@ describe("When id |> operate[['SelectWhereId']](table)",{
     existing.entities <- table |> operate[['Select']]()
     existing.entity   <- existing.entities |> tail(1)
 
-    id <- existing.entity[['Id']]
+    id <- existing.entity[['id']]
 
     # When
     actual.entity <- id |> operate[['SelectWhereId']](table) 
@@ -159,7 +159,7 @@ describe("When id |> operate[['SelectWhereId']](table, fields)",{
     existing.entities <- table |> operate[['Select']]()
     existing.entity   <- existing.entities |> tail(1)
 
-    id <- existing.entity[['Id']]
+    id <- existing.entity[['id']]
 
     # When
     actual.entity <- id |> operate[['SelectWhereId']](table, fields) 

@@ -59,11 +59,7 @@ describe("When todo |> service[['Add']]()",{
     broker  <- storage |> Todo.Broker()
     service <- broker |> Todo.Service()
 
-    new.todo <- data.frame(
-      Id     = uuid::UUIDgenerate(),
-      Task   = "Task",
-      Status = "New"
-    )
+    new.todo <- 'Task' |> Todo()
 
     expected.todo <- new.todo
     
@@ -71,10 +67,10 @@ describe("When todo |> service[['Add']]()",{
     new.todo |> service[['Add']]()
 
     # Then
-    actual.todo <- new.todo[['Id']] |> broker[['SelectWhereId']]()
+    actual.todo <- new.todo[['id']] |> broker[['SelectWhereId']]()
     actual.todo |> expect.equal.data(expected.todo)
   })
-  it("then an exception is thrown if todo has no Id",{
+  it("then an exception is thrown if todo has no id",{
     # Given
     storage <- configuration |> Storage.Orchestrator('memory')
 
@@ -84,15 +80,15 @@ describe("When todo |> service[['Add']]()",{
     service <- broker |> Todo.Service()
 
     new.todo <- list(
-      Id     = NULL,
-      Task   = "Task",
-      Status = "New"
+      id     = NULL,
+      task   = "Task",
+      status = "New"
     )
 
     # Then
     new.todo |> service[['Add']]() |> expect.error()
   })
-  it("then an exception is thrown if todo has no Task",{
+  it("then an exception is thrown if todo has no task",{
     # Given
     storage <- configuration |> Storage.Orchestrator('memory')
 
@@ -102,15 +98,15 @@ describe("When todo |> service[['Add']]()",{
     service <- broker |> Todo.Service()
 
     new.todo <- list(
-      Id     = uuid::UUIDgenerate(),
-      Task   = NULL,
-      Status = "New"
+      id     = uuid::UUIDgenerate(),
+      task   = NULL,
+      status = "New"
     )
 
     # Then
     new.todo |> service[['Add']]() |> expect.error()
   })
-  it("then an exception is thrown if todo has no Status",{
+  it("then an exception is thrown if todo has no status",{
     # Given
     storage <- configuration |> Storage.Orchestrator('memory')
 
@@ -120,9 +116,9 @@ describe("When todo |> service[['Add']]()",{
     service <- broker |> Todo.Service()
 
     new.todo <- list(
-      Id     = uuid::UUIDgenerate(),
-      Task   = "Task",
-      Status = NULL
+      id     = uuid::UUIDgenerate(),
+      task   = "Task",
+      status = NULL
     )
 
     # Then
@@ -163,7 +159,7 @@ describe("When id |> service[['RetrieveWhereId']]()",{
     expected.todos <- broker[['Select']]()
     expected.todo <- expected.todos |> tail(1)
 
-    id <- expected.todo[['Id']]
+    id <- expected.todo[['id']]
 
     # When
     actual.todo <- id |> service[['RetrieveWhereId']]()
@@ -171,7 +167,7 @@ describe("When id |> service[['RetrieveWhereId']]()",{
     # Then
     actual.todo |> expect.equal.data(expected.todo)
   })
-  it("then an exception is thrown if Id null",{
+  it("then an exception is thrown if id null",{
     # Given
     storage <- configuration |> Storage.Orchestrator('memory')
 
@@ -199,9 +195,9 @@ describe("When todo |> service[['Modify']]()",{
 
     expected.todos <- broker[['Select']]()
     expected.todo  <- expected.todos |> tail(1)
-    expected.todo[['Task']] <- "Updated"
+    expected.todo[['task']] <- "Updated"
 
-    id <- expected.todo[['Id']]
+    id <- expected.todo[['id']]
 
     # When
     expected.todo |> service[['Modify']]()
@@ -210,7 +206,7 @@ describe("When todo |> service[['Modify']]()",{
     actual.todo <- id |> service[['RetrieveWhereId']]()
     actual.todo |> expect.equal.data(expected.todo)
   })
-  it("then an exception is thrown if todo has no Id",{
+  it("then an exception is thrown if todo has no id",{
     # Given
     storage <- configuration |> Storage.Orchestrator('memory')
 
@@ -220,15 +216,15 @@ describe("When todo |> service[['Modify']]()",{
     service <- broker |> Todo.Service()
 
     todo <- list(
-      Id     = NULL,
-      Task   = "Task",
-      Status = "New"
+      id     = NULL,
+      task   = "Task",
+      status = "New"
     )
 
     # Then
     todo |> service[['Modify']]() |> expect.error()
   })
-  it("then an exception is thrown if todo has not Task",{
+  it("then an exception is thrown if todo has not task",{
     # Given
     storage <- configuration |> Storage.Orchestrator('memory')
 
@@ -238,9 +234,9 @@ describe("When todo |> service[['Modify']]()",{
     service <- broker |> Todo.Service()
 
     todo <- list(
-      Id     = uuid::UUIDgenerate(),
-      Task   = NULL,
-      Status = "New"
+      id     = uuid::UUIDgenerate(),
+      task   = NULL,
+      status = "New"
     )
 
     # Then
@@ -262,7 +258,7 @@ describe("When id |> service[['Remove']]()",{
     expected.todo  <- expected.todos |> tail(1)
     expected.count <- 0
 
-    id <- expected.todo[['Id']]
+    id <- expected.todo[['id']]
 
     # When
     id |> service[['Remove']]()
@@ -271,7 +267,7 @@ describe("When id |> service[['Remove']]()",{
     actual.todo <- id |> broker[['SelectWhereId']]()
     actual.todo |> expect.rows(expected.count)
   })
-  it("then an exception is thrown if Id null",{
+  it("then an exception is thrown if id null",{
     # Given
     storage <- configuration |> Storage.Orchestrator('memory')
 

@@ -24,15 +24,15 @@ Memory.Storage.Broker <- \(configuration = NULL) {
     tables[[table]]
   }
   operations[['SelectWhereId']] <- \(id, table, fields = '*') {
-    tables[[table]][tables[[table]][['Id']] == id,]
+    tables[[table]][tables[[table]][['id']] == id,]
   }
   operations[['Update']]        <- \(entity, table) {
-    condition <- tables[[table]][['Id']] == entity[['Id']]
+    condition <- tables[[table]][['id']] == entity[['id']]
     tables[[table]][condition,] <<- entity
     return(data.frame())      
   }
   operations[['Delete']]        <- \(id, table) {
-    condition <- tables[[table]][['Id']] != id
+    condition <- tables[[table]][['id']] != id
     tables[[table]] <<- tables[[table]][condition,]
     return(data.frame())
   }

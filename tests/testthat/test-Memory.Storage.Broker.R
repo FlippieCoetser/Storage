@@ -158,7 +158,7 @@ describe("when entity |> operation[['Insert']](table)",{
     Todo.Mock.Data |> operation[['Seed.Table']](table)
 
     new.entity <- 'Task' |> Todo()
-    id         <- new.entity[['Id']]
+    id         <- new.entity[['id']]
 
     expected.entity <- new.entity
 
@@ -204,7 +204,7 @@ describe("when id |> operation[['SelectWhereId']](table)",{
     existing.entity <- Todo.Mock.Data |> tail(1)
 
     expected.entity <- existing.entity
-    id              <- existing.entity[['Id']]
+    id              <- existing.entity[['id']]
 
     # When
     actual.entity <- id |> operation[['SelectWhereId']](table)
@@ -226,10 +226,10 @@ describe("when entity |> operation[['Update']](table)",{
     new.entity <- 'Task' |> Todo()
     new.entity |> operation[['Insert']](table)
 
-    id <- new.entity[['Id']]
+    id <- new.entity[['id']]
 
     updated.entity <- new.entity
-    updated.entity[['Status']] <- 'Updated'
+    updated.entity[['status']] <- 'Updated'
 
     expected.entity <- updated.entity
 
@@ -255,7 +255,7 @@ describe("when id |> operation[['Delete']](table)",{
 
     new.entity <- 'Task' |> Todo()
     new.entity |> operation[['Insert']](table)
-    id <- new.entity[['Id']]
+    id <- new.entity[['id']]
 
     expected.entities <- Todo.Mock.Data
 

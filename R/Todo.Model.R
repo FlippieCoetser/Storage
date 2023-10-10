@@ -1,5 +1,5 @@
 Todo.Model <- \() data.frame(
-  Id     = character(0),
-  Task   = character(0),
-  Status = character(0)
+  id     = character(0),
+  task   = character(0),
+  status = character(0)
 )

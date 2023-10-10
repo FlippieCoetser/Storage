@@ -15,7 +15,7 @@ describe("When todo <- task |> Todo()",{
     # Then
     todo |> expect.data.frame()
   })
-  it("then todo has 'Id' column",{
+  it("then todo has 'id' column",{
     # Given 
     task <- 'Task'
 
@@ -23,9 +23,9 @@ describe("When todo <- task |> Todo()",{
     todo <- task |> Todo()
 
     # Then
-    todo[['Id']] |> expect.exist()
+    todo[['id']] |> expect.exist()
   })
-  it("then todo has 'Task' columns with value task",{
+  it("then todo has 'task' columns with value task",{
     # Given 
     task <- 'Task'
 
@@ -33,10 +33,10 @@ describe("When todo <- task |> Todo()",{
     todo <- task |> Todo()
 
     # Then
-    todo[['Task']] |> expect.exist()
-    todo[['Task']] |> expect.equal(task)
+    todo[['task']] |> expect.exist()
+    todo[['task']] |> expect.equal(task)
   })
-  it("then todo has 'Status' column with default value new",{
+  it("then todo has 'status' column with default value new",{
     # Given 
     task <- 'Task'
 
@@ -44,7 +44,7 @@ describe("When todo <- task |> Todo()",{
     todo <- task |> Todo()
 
     # Then
-    todo[['Status']] |> expect.exist()
-    todo[['Status']] |> expect.equal('New')
+    todo[['status']] |> expect.exist()
+    todo[['status']] |> expect.equal('New')
   })
 })

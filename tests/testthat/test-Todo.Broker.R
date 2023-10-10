@@ -56,12 +56,8 @@ describe("When todo |> operations[['Insert']]()",{
     storage    <- configurator[["Get.Config"]]() |> Storage.Orchestrator('odbc')
     operations <- storage |> Todo.Broker()
 
-    new.todo <- data.frame(
-      Id     = uuid::UUIDgenerate(),
-      Task   = 'Task',
-      Status = 'New'
-    )
-    id <- new.todo[['Id']]
+    new.todo <- 'Task' |> Todo()
+    id <- new.todo[['id']]
 
     expected.todo <- new.todo  
 
@@ -81,12 +77,8 @@ describe("When todo |> operations[['Insert']]()",{
 
     Todo.Mock.Data |> storage[['Seed.Table']]('Todo')
 
-    new.todo <- data.frame(
-      Id     = uuid::UUIDgenerate(),
-      Task   = 'Task',
-      Status = 'New'
-    )
-    id <- new.todo[['Id']]
+    new.todo <- 'Task' |> Todo()
+    id <- new.todo[['id']]
 
     expected.todo <- new.todo |> as.data.frame()
 
@@ -142,7 +134,7 @@ describe("When id |> operations[['SelectWhereId']]()",{
 
     existing.todos <- 'Todo' |> storage[['Retrieve']](fields)
     existing.todo  <- existing.todos |> tail(1)
-    existing.id    <- existing.todo[['Id']]
+    existing.id    <- existing.todo[['id']]
 
     expected.todo <- existing.id |> storage[['RetrieveWhereId']]('Todo', fields)
 
@@ -161,7 +153,7 @@ describe("When id |> operations[['SelectWhereId']]()",{
 
     existing.todos <- 'Todo' |> storage[['Retrieve']](fields)
     existing.todo  <- existing.todos |> tail(1)
-    existing.id    <- existing.todo[['Id']]
+    existing.id    <- existing.todo[['id']]
 
     expected.todo <- existing.id |> storage[['RetrieveWhereId']]('Todo', fields)
 
@@ -180,18 +172,14 @@ describe("When todo |> operations[['Update']]()",{
     storage    <- configurator[["Get.Config"]]() |> Storage.Orchestrator('odbc')
     operations <- storage |> Todo.Broker()
 
-    new.todo <- data.frame(
-      Id     = uuid::UUIDgenerate(),
-      Task   = 'Task',
-      Status = 'New'
-    )
+    new.todo <- 'Task' |> Todo()
 
     new.todo |> storage[['Add']]('Todo')
 
     updated.todo <- new.todo |> as.data.frame()
-    updated.todo[['Status']] <- 'Done'
+    updated.todo[['status']] <- 'Done'
 
-    id <- updated.todo[['Id']]
+    id <- updated.todo[['id']]
 
     expected.todo <- updated.todo
 
@@ -211,18 +199,14 @@ describe("When todo |> operations[['Update']]()",{
 
     Todo.Mock.Data |> storage[['Seed.Table']]('Todo')
 
-    new.todo <- data.frame(
-      Id     = uuid::UUIDgenerate(),
-      Task   = 'Task',
-      Status = 'New'
-    )
+    new.todo <- 'Task' |> Todo()
 
     new.todo |> storage[['Add']]('Todo')
 
     updated.todo <- new.todo |> as.data.frame()
-    updated.todo[['Status']] <- 'Done'
+    updated.todo[['status']] <- 'Done'
 
-    id <- updated.todo[['Id']]
+    id <- updated.todo[['id']]
 
     expected.todo <- updated.todo
 
@@ -244,15 +228,11 @@ describe("When id |> operations[['Delete']]()",{
     storage    <- configurator[["Get.Config"]]() |> Storage.Orchestrator('odbc')
     operations <- storage |> Todo.Broker()
 
-    new.todo <- data.frame(
-      Id     = uuid::UUIDgenerate(),
-      Task   = 'Task',
-      Status = 'New'
-    )
+    new.todo <- 'Task' |> Todo()
 
     new.todo |> storage[['Add']]('Todo')
 
-    id <- new.todo[['Id']]
+    id <- new.todo[['id']]
 
     expected.count <- 0
 
@@ -270,15 +250,10 @@ describe("When id |> operations[['Delete']]()",{
 
     Todo.Mock.Data |> storage[['Seed.Table']]('Todo')
 
-    new.todo <- data.frame(
-      Id     = uuid::UUIDgenerate(),
-      Task   = 'Task',
-      Status = 'New'
-    )
-
+    new.todo <- 'Task' |> Todo()
     new.todo |> storage[['Add']]('Todo')
 
-    id <- new.todo[['Id']]
+    id <- new.todo[['id']]
 
     expected.count <- 0
 

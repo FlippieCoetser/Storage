@@ -85,33 +85,33 @@ describe("When todo |> validate[['Todo.Exist']]()",{
 })
 
 describe("When todo |> validate[['Has.Id']]()",{
-  it("then todo is returned if todo has an Id",{
+  it("then todo is returned if todo has an id",{
     # Given
     validate <- Todo.Model.Validator()
 
     # When
     todo <- list()
-    todo[['Id']] <- 1
+    todo[['id']] <- 1
 
     # Then
     todo |> validate[["Has.Id"]]() |> expect.equal(todo)
   })
-  it("then no exception is thrown if todo has an Id",{
+  it("then no exception is thrown if todo has an id",{
     # Given
     validate <- Todo.Model.Validator()
 
     # When
     todo <- list()
-    todo[['Id']] <- 1
+    todo[['id']] <- 1
 
     # Then
     todo |> validate[["Has.Id"]]() |> expect.no.error()
   })
-  it("then an exception is thrown if todo has no Id",{
+  it("then an exception is thrown if todo has no id",{
     # Given
     validate <- Todo.Model.Validator()
 
-    excepted.error <- "Todo has no Id"
+    excepted.error <- "Todo has no id"
 
     # When
     todo <- list()
@@ -122,33 +122,33 @@ describe("When todo |> validate[['Has.Id']]()",{
 })
 
 describe("When todo |> validate[['Has.Task']]()",{
-  it("then todo is returned if todo has an Task",{
+  it("then todo is returned if todo has an task",{
     # Given
     validate <- Todo.Model.Validator()
 
     # When
     todo <- list()
-    todo[['Task']] <- 'task'
+    todo[['task']] <- 'task'
 
     # Then
     todo |> validate[["Has.Task"]]() |> expect.equal(todo)
   })
-  it("then no exception is thrown if todo has an Task",{
+  it("then no exception is thrown if todo has an task",{
     # Given
     validate <- Todo.Model.Validator()
 
     # When
     todo <- list()
-    todo[['Task']] <- 'task'
+    todo[['task']] <- 'task'
 
     # Then
     todo |> validate[["Has.Task"]]() |> expect.no.error()
   })
-  it("then an exception is thrown if todo has no Task",{
+  it("then an exception is thrown if todo has no task",{
     # Given
     validate <- Todo.Model.Validator()
 
-    excepted.error <- "Todo has no Task"
+    excepted.error <- "Todo has no task"
 
     # When
     todo <- list()
@@ -159,33 +159,33 @@ describe("When todo |> validate[['Has.Task']]()",{
 })
 
 describe("When todo |> validate[['Has.Status']]()",{
-  it("then todo is returned if todo has an Status",{
+  it("then todo is returned if todo has an status",{
     # Given
     validate <- Todo.Model.Validator()
 
     # When
     todo <- list()
-    todo[['Status']] <- 'Status'
+    todo[['status']] <- 'status'
 
     # Then
     todo |> validate[["Has.Status"]]() |> expect.equal(todo)
   })
-  it("then no exception is thrown if todo has an Status",{
+  it("then no exception is thrown if todo has an status",{
     # Given
     validate <- Todo.Model.Validator()
 
     # When
     todo <- list()
-    todo[['Status']] <- 'Status'
+    todo[['status']] <- 'status'
 
     # Then
     todo |> validate[["Has.Status"]]() |> expect.no.error()
   })
-  it("then an exception is thrown if todo has no Status",{
+  it("then an exception is thrown if todo has no status",{
     # Given
     validate <- Todo.Model.Validator()
 
-    excepted.error <- "Todo has no Status"
+    excepted.error <- "Todo has no status"
 
     # When
     todo <- list()
@@ -202,9 +202,9 @@ describe("When todo |> validate[['Todo']]()",{
 
     # When
     todo <- list()
-    todo[['Id']] <- 1
-    todo[['Task']] <- 'task'
-    todo[['Status']] <- 'Status'
+    todo[['id']] <- 1
+    todo[['task']] <- 'task'
+    todo[['status']] <- 'Status'
 
     # Then
     todo |> validate[["Todo"]]() |> expect.equal(todo)
@@ -215,9 +215,9 @@ describe("When todo |> validate[['Todo']]()",{
 
     # When
     todo <- list()
-    todo[['Id']] <- 1
-    todo[['Task']] <- 'task'
-    todo[['Status']] <- 'Status'
+    todo[['id']] <- 1
+    todo[['task']] <- 'task'
+    todo[['status']] <- 'Status'
 
     # Then
     todo |> validate[["Todo"]]() |> expect.no.error()
@@ -234,44 +234,44 @@ describe("When todo |> validate[['Todo']]()",{
     # Then
     todo |> validate[["Todo"]]() |> expect.error(excepted.error)
   })
-  it("then an exception is thrown if todo has no Id",{
+  it("then an exception is thrown if todo has no id",{
     # Given
     validate <- Todo.Model.Validator()
 
-    excepted.error <- "Todo has no Id"
+    excepted.error <- "Todo has no id"
 
     # When
     todo <- list()
-    todo[['Task']] <- 'task'
-    todo[['Status']] <- 'Status'
+    todo[['task']] <- 'task'
+    todo[['status']] <- 'Status'
 
     # Then
     todo |> validate[["Todo"]]() |> expect.error(excepted.error)
   })
-  it("then an exception is thrown if todo has no Task",{
+  it("then an exception is thrown if todo has no task",{
     # Given
     validate <- Todo.Model.Validator()
 
-    excepted.error <- "Todo has no Task"
+    excepted.error <- "Todo has no task"
 
     # When
     todo <- list()
-    todo[['Id']] <- 1
-    todo[['Status']] <- 'Status'
+    todo[['id']] <- 1
+    todo[['status']] <- 'Status'
 
     # Then
     todo |> validate[["Todo"]]() |> expect.error(excepted.error)
   })
-  it("then an exception is thrown if todo has no Status",{
+  it("then an exception is thrown if todo has no status",{
     # Given
     validate <- Todo.Model.Validator()
 
-    excepted.error <- "Todo has no Status"
+    excepted.error <- "Todo has no status"
 
     # When
     todo <- list()
-    todo[['Id']] <- 1
-    todo[['Task']] <- 'task'
+    todo[['id']] <- 1
+    todo[['task']] <- 'task'
 
     # Then
     todo |> validate[["Todo"]]() |> expect.error(excepted.error)
@@ -303,7 +303,7 @@ describe("When id |> validate[['Id']]()",{
     # Given
     validate <- Todo.Model.Validator()
 
-    expected.error <- 'Id is null. Provide an Id.'
+    expected.error <- 'Id is null. Provide an id.'
 
     # When
     id <- NULL
