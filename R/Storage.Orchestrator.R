@@ -21,11 +21,11 @@ Storage.Orchestrator <- \(configuration, type = 'odbc') {
   orchestrations[['Add']]             <- \(entity, table) {
     entity |> service[['Add']](table)
   }
-  orchestrations[['Retrieve']]        <- \(fields, table) {
-    fields |> service[['Retrieve']](table)
+  orchestrations[['Retrieve']]        <- \(table, fields = '*') {
+    table |> service[['Retrieve']](fields)
   }
-  orchestrations[['RetrieveWhereId']] <- \(fields, table, id) {
-    fields |> service[['RetrieveWhereId']](table, id)
+  orchestrations[['RetrieveWhereId']] <- \(id, table, fields = '*') {
+    id |> service[['RetrieveWhereId']](table,fields)
   }
   orchestrations[['Modify']]          <- \(entity, table) {
     entity |> service[['Modify']](table)
