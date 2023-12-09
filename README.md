@@ -90,7 +90,7 @@ install.packages("path_to_file/tar_gz_file", repos = NULL, type = "source")
 
 There are two ways to load the package:
 
-1. User the library function to load all available components into the global namespace
+1. Use the library function to load all available components into the global namespace
 2. Create a new instance of a component using the package namespace
 
 ### User Global Namespace
@@ -113,7 +113,7 @@ Storage::Todo.Service()
 
 # Usage
 
-Using the `Todo.Service` component two uses cases will be demonstrated, one using a `memory` data store and the other using an `odbc` data store.
+Using the `Todo.Service` component, two use cases will be demonstrated, one using a `memory` data store and the other using an `odbc` data store.
 
 ## Initialize
 
