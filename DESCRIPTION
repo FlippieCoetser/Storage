@@ -1,6 +1,6 @@
 Package: Storage
 Title: Data Access Layer
-Version: 0.0.1.0001
+Version: 0.0.1.0002
 Authors@R: 
     person(given = "Flippie",
            family = "Coetser",
