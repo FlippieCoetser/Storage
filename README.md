@@ -2,7 +2,7 @@
 
 ![r-universe](https://flippiecoetser.r-universe.dev/badges/Storage)
 
-This R Package provides a common interface for performing data operations on various data stores. Currently, an `memory` and `odbc` driver based `Storage` is supported. To configure an `odbc` driver-based data store, a `ODBC.Configurator` is made available to retrieve the required configuration parameters from a local `.Renviron` file. Lastly, a `Todo.Service`, is provided as an example of how to use the `Storage` component can be injected into a data service.
+This R Package provides a standard interface for performing data operations on various data stores. Currently, a `memory` and `odbc` driver-based `Storage` is supported. To configure an `odbc` driver-based data store, an `ODBC.Configurator` is available to retrieve the required configuration parameters from a local `.Renviron` file. Lastly, this package includes an example service in which a `Storage` instance is injected into to enable persistence.
 
 Below is an overview of the different functions available on each of the components:
 
@@ -90,7 +90,7 @@ install.packages("path_to_file/tar_gz_file", repos = NULL, type = "source")
 
 There are two ways to load the package:
 
-1. User the library function to load all available components into the global namespace
+1. Use the library function to load all available components into the global namespace
 2. Create a new instance of a component using the package namespace
 
 ### User Global Namespace
@@ -113,7 +113,7 @@ Storage::Todo.Service()
 
 # Usage
 
-Using the `Todo.Service` component two uses cases will be demonstrated, one using a `memory` data store and the other using an `odbc` data store.
+Using the `Todo.Service` component, two use cases will be demonstrated, one using a `memory` data store and the other using an `odbc` data store.
 
 ## Initialize
 
