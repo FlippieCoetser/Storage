@@ -1,66 +1,66 @@
 Memory.Storage.Service <- \(broker) {
   validate <- Memory.Storage.Validator()
 
-  filter.tables   <- \(table) broker[['Get.Tables']]() |> subset(name == table)
-  filter.entities <- \(entity, table) entity[['id']] |> broker[['SelectWhereId']](table)
+  filter.tables   <- \(table) broker[['get.tables']]() |> subset(name == table)
+  filter.entities <- \(entity, table) entity[['id']] |> broker[['select.where.Id']](table)
     
   services <- list()
-  services[['Create.Table']]    <- \(model, table) {
+  services[['create.table']]    <- \(model, table) {
     model |> validate[['Model']]()
     table |> validate[['Table']]()
 
-    model |> broker[['Create.Table']](table)
+    model |> broker[['create.table']](table)
   }
-  services[['Seed.Table']]      <- \(data, table) {
+  services[['seed.table']]      <- \(data, table) {
     data  |> validate[['Data']]()
     table |> validate[['Table']]()
 
-    data  |> broker[['Seed.Table']](table)
+    data  |> broker[['seed.table']](table)
   }
-  services[['Execute.Query']]   <- \(...) {
-    TRUE |> validate[['Not.Implemented']]()
-    ...  |> broker[['Execute.Query']]()
+  services[['execute.query']]   <- \(...) {
+    TRUE |> validate[['not.implemented']]()
+    ...  |> broker[['execute.query']]()
   }
-  services[['Add']]             <- \(entity, table) {
+  services[['add']]             <- \(entity, table) {
     entity |> validate[['Entity']]()
     table  |> validate[['Table']]()
 
-    table  |> filter.tables() |> validate[['Is.Existing.Table']](table)
-    entity |> filter.entities(table) |> validate[['Is.New.Entity']]()
+    table  |> filter.tables() |> validate[['is.existing.table']](table)
+    entity |> filter.entities(table) |> validate[['is.new.entity']]()
 
-    entity |> broker[['Insert']](table)
+    entity |> broker[['insert']](table)
   }
-  services[['Retrieve']]        <- \(table, fields) {
+  services[['retrieve']]        <- \(table, fields) {
     table |> validate[['Table']]()
 
-    table |> filter.tables() |> validate[['Is.Existing.Table']](table)
+    table |> filter.tables() |> validate[['is.existing.table']](table)
 
-    table |> broker[['Select']](fields)
+    table |> broker[['select']](fields)
   }
-  services[['RetrieveWhereId']] <- \(id, table, fields) {
+  services[['retrieve.where.id']] <- \(id, table, fields) {
     id    |> validate[['Id']]()
     table |> validate[['Table']]()
 
-    table |> filter.tables() |> validate[['Is.Existing.Table']](table)
+    table |> filter.tables() |> validate[['is.existing.table']](table)
 
-    id    |> broker[['SelectWhereId']](table, fields)
+    id    |> broker[['select.where.Id']](table, fields)
   }
-  services[['Modify']]          <- \(entity, table) {
+  services[['modify']]          <- \(entity, table) {
     entity |> validate[['Entity']]()
     table  |> validate[['Table']]()
 
-    table  |> filter.tables() |> validate[['Is.Existing.Table']](table)
-    entity |> filter.entities(table) |> validate[['Is.Existing.Entity']]()
+    table  |> filter.tables() |> validate[['is.existing.table']](table)
+    entity |> filter.entities(table) |> validate[['is.existing.entity']]()
 
-    entity |> broker[['Update']](table)
+    entity |> broker[['update']](table)
   }
-  services[['Remove']]          <- \(id, table) {
+  services[['remove']]          <- \(id, table) {
     id    |> validate[['Id']]()
     table |> validate[['Table']]()
 
-    table |> filter.tables() |> validate[['Is.Existing.Table']](table)
+    table |> filter.tables() |> validate[['is.existing.table']](table)
     
-    id    |> broker[['Delete']](table)
+    id    |> broker[['delete']](table)
   }
   return(services)
 }

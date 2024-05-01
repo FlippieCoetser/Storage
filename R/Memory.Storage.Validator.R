@@ -1,50 +1,50 @@
 Memory.Storage.Validator <- \() {
-  exception <- Memory.Storage.Exceptions()
+  exception <- Memory.Storage.Validation.Exceptions()
 
   validators <- Validate::Validator()
   validators[['Model']]              <- \(model) {
     model |> 
-      validators[['Is.Not.NULL']]('model') |>
-      validators[['Is.Data.Frame']]()      |>
-      validators[['Is.Empty']]()
+      validators[['is.not.NULL']]('model') |>
+      validators[['is.data.frame']]()      |>
+      validators[['is.empty']]()
   }
   validators[['Table']]              <- \(table) {
     table |> 
-      validators[['Is.Not.NULL']]('table') |>
-      validators[['Is.Character']]()
+      validators[['is.not.NULL']]('table') |>
+      validators[['is.character']]()
   }
   validators[['Data']]               <- \(data) {
     data |> 
-      validators[['Is.Not.NULL']]('data') |>
-      validators[['Is.Data.Frame']]()     |>
-      validators[['Is.Not.Empty']]()
+      validators[['is.not.NULL']]('data') |>
+      validators[['is.data.frame']]()     |>
+      validators[['is.not.empty']]()
   }
   validators[['Entity']]             <- \(entity) {
     entity |> 
-      validators[['Is.Not.NULL']]('entity') |>
-      validators[['Is.Data.Frame']]()       |>
-      validators[['Has.One.Row']]()   
+      validators[['is.not.NULL']]('entity') |>
+      validators[['is.data.frame']]()       |>
+      validators[['has.one.row']]()   
   }
   validators[['Id']]                 <- \(id) {
     id |> 
-      validators[['Is.Not.NULL']]('id') |>
-      validators[['Is.Character']]()    |>
-      validators[['Is.UUID']]('id')
+      validators[['is.not.NULL']]('id') |>
+      validators[['is.character']]()    |>
+      validators[['is.UUID']]('id')
   }
-  validators[['Not.Implemented']]    <- \(input) {
-    input |> exception[['Not.Implemented']]()
+  validators[['not.implemented']]    <- \(input) {
+    input |> exception[['not.implemented']]()
   }
-  validators[['Is.New.Entity']]      <- \(entity) {
-    entity |> validators[['Is.Empty']]() |> 
-      tryCatch(error=\(...) TRUE |> exception[['Key.Violation']]()) 
+  validators[['is.new.entity']]      <- \(entity) {
+    entity |> validators[['is.empty']]() |> 
+      tryCatch(error=\(...) TRUE |> exception[['key.violation']]()) 
   }
-  validators[['Is.Existing.Entity']] <- \(entity) {
-    entity |> validators[['Has.One.Row']]() |> 
-      tryCatch(error=\(...) TRUE |> exception[['Entity.Not.Found']]())
+  validators[['is.existing.entity']] <- \(entity) {
+    entity |> validators[['has.one.row']]() |> 
+      tryCatch(error=\(...) TRUE |> exception[['entity.not.found']]())
   }
-  validators[['Is.Existing.Table']]  <- \(table, name = NULL) {
-    table |> validators[['Has.One.Row']]() |> 
-      tryCatch(error=\(...) TRUE |> exception[['Table.Invalid']](name))
+  validators[['is.existing.table']]  <- \(table, name = NULL) {
+    table |> validators[['has.one.row']]() |> 
+      tryCatch(error=\(...) TRUE |> exception[['table.invalid']](name))
   }
   return(validators)
 }

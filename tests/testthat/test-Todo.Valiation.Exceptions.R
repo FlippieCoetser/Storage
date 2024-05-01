@@ -1,48 +1,48 @@
-describe('Todo.Model.Exceptions',{
+describe('Todo.Validation.Exceptions',{
   it('Exist',{
-    Todo.Model.Exceptions |> expect.exist()
+    Todo.Validation.Exceptions |> expect.exist()
   })
 })
 
-describe("When exceptions <- Todo.Model.Exceptions()",{
+describe("When exceptions <- Todo.Validation.Exceptions()",{
   it("then exceptions is a list",{
     # Given
-    exceptions <- Todo.Model.Exceptions()
+    exceptions <- Todo.Validation.Exceptions()
 
     # Then
     exceptions |> expect.list()
   })
   it("then exceptions contains 'Todo.NULL' exception",{
     # Given
-    exceptions <- Todo.Model.Exceptions()
+    exceptions <- Todo.Validation.Exceptions()
 
     # Then
     exceptions[["Todo.NULL"]] |> expect.exist()
   })
   it("then exceptions contains 'Todo.Id.NULL' exception",{
     # Given
-    exceptions <- Todo.Model.Exceptions()
+    exceptions <- Todo.Validation.Exceptions()
 
     # Then
     exceptions[["Todo.Id.NULL"]] |> expect.exist()
   })
   it("then exceptions contains 'Todo.Task.NULL' exception",{
     # Given
-    exceptions <- Todo.Model.Exceptions()
+    exceptions <- Todo.Validation.Exceptions()
 
     # Then
     exceptions[["Todo.Task.NULL"]] |> expect.exist()
   })
   it("then exceptions contains 'Todo.Status.NULL' exception",{
     # Given
-    exceptions <- Todo.Model.Exceptions()
+    exceptions <- Todo.Validation.Exceptions()
 
     # Then
     exceptions[["Todo.Status.NULL"]] |> expect.exist()
   })
   it("then exceptions contains 'IsIsNull' exception",{
     # Given
-    exceptions <- Todo.Model.Exceptions()
+    exceptions <- Todo.Validation.Exceptions()
 
     # Then
     exceptions[["Id.NULL"]] |> expect.exist()
@@ -52,7 +52,7 @@ describe("When exceptions <- Todo.Model.Exceptions()",{
 describe("When input |> exception[['Todo.NULL']]()",{
   it("then no exceptions is thrown if input if FALSE",{
     # Given
-    exception <- Todo.Model.Exceptions()
+    exception <- Todo.Validation.Exceptions()
 
     # When
     input <- FALSE
@@ -62,7 +62,7 @@ describe("When input |> exception[['Todo.NULL']]()",{
   })
   it("then an exceptions is thrown if input is TRUE",{
     # Given
-    exception <- Todo.Model.Exceptions()
+    exception <- Todo.Validation.Exceptions()
 
     excepted.error <- "Successful validation requires a Todo"
 
@@ -77,7 +77,7 @@ describe("When input |> exception[['Todo.NULL']]()",{
 describe("When input |> exception[['Todo.Id.NULL']]()",{
   it("then no exceptions is thrown if input if FALSE",{
     # Given
-    exception <- Todo.Model.Exceptions()
+    exception <- Todo.Validation.Exceptions()
 
     # When
     input <- FALSE
@@ -87,7 +87,7 @@ describe("When input |> exception[['Todo.Id.NULL']]()",{
   })
   it("then an exceptions is thrown if input is TRUE",{
     # Given
-    exception <- Todo.Model.Exceptions()
+    exception <- Todo.Validation.Exceptions()
 
     excepted.error <- 'Todo has no id'
 
@@ -102,7 +102,7 @@ describe("When input |> exception[['Todo.Id.NULL']]()",{
 describe("When input |> exception[['Todo.Task.NULL']]()",{
   it("then no exceptions is thrown if input if FALSE",{
     # Given
-    exception <- Todo.Model.Exceptions()
+    exception <- Todo.Validation.Exceptions()
 
     # When
     input <- FALSE
@@ -112,7 +112,7 @@ describe("When input |> exception[['Todo.Task.NULL']]()",{
   })
   it("then an exceptions is thrown if input is TRUE",{
     # Given
-    exception <- Todo.Model.Exceptions()
+    exception <- Todo.Validation.Exceptions()
 
     excepted.error <- 'Todo has no task'
 
@@ -127,7 +127,7 @@ describe("When input |> exception[['Todo.Task.NULL']]()",{
 describe("When input |> exception[['Todo.Status.NULL']]()",{
   it("then no exceptions is thrown if input if FALSE",{
     # Given
-    exception <- Todo.Model.Exceptions()
+    exception <- Todo.Validation.Exceptions()
 
     # When
     input <- FALSE
@@ -137,7 +137,7 @@ describe("When input |> exception[['Todo.Status.NULL']]()",{
   })
   it("then an exceptions is thrown if input is TRUE",{
     # Given
-    exception <- Todo.Model.Exceptions()
+    exception <- Todo.Validation.Exceptions()
 
     excepted.error <- 'Todo has no status'
 
@@ -152,7 +152,7 @@ describe("When input |> exception[['Todo.Status.NULL']]()",{
 describe("When input |> exception[['Id.NULL']]()",{
   it("then no exceptions is thrown if input if FALSE",{
     # Given
-    exception <- Todo.Model.Exceptions()
+    exception <- Todo.Validation.Exceptions()
 
     # When
     input <- FALSE
@@ -162,7 +162,7 @@ describe("When input |> exception[['Id.NULL']]()",{
   })
   it("then an exceptions is thrown if input is TRUE",{
     # Given
-    exception <- Todo.Model.Exceptions()
+    exception <- Todo.Validation.Exceptions()
 
     excepted.error <- 'Id is null. Provide an id.'
 

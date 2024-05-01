@@ -1,4 +1,4 @@
-ODBC.Storage.Exceptions <- \() {
+ODBC.Storage.Validation.Exceptions <- \() {
   exceptions <- list()
   exceptions[['Config.NULL']]        <- \(invoke) {
     if (invoke) {
@@ -10,17 +10,17 @@ ODBC.Storage.Exceptions <- \() {
       stop("No configuration provided but required. Provide configuration", call. = FALSE)
     }
   }
-  exceptions[['Dsn.NULL']]           <- \(invoke) {
+  exceptions[['DSN.NULL']]           <- \(invoke) {
     if (invoke) { 
       stop("Configuration has no DSN. Add DSN to configuration", call. = FALSE) 
     }
   }
-  exceptions[['Uid.NULL']]           <- \(invoke) {
+  exceptions[['UID.NULL']]           <- \(invoke) {
     if (invoke) {
       stop("Configuration has no UID. Add UID to configuration", call. = FALSE)
     }
   }
-  exceptions[['Pwd.NULL']]           <- \(invoke) {
+  exceptions[['PWD.NULL']]           <- \(invoke) {
     if (invoke) {
       stop("Configuration has no PWD. Add PWD to configuration", call. = FALSE)
     }
@@ -49,7 +49,7 @@ ODBC.Storage.Exceptions <- \() {
   }
   exceptions[['Query']]              <- \(error) {
     'Violation of PRIMARY KEY constraint' |> 
-    grepl(error) |> exceptions[["Key.Violation"]]()
+    grepl(error) |> exceptions[["key.violation"]]()
 
     'Cannot insert the value NULL into column' |>
     grepl(error) |> exceptions[["Value.NULL"]]()
@@ -59,13 +59,13 @@ ODBC.Storage.Exceptions <- \() {
 
     table <- sub(".*Invalid object name '[^\\.]+\\.([^']+)'.*", "\\1", error)
     "Invalid object name 'dbo.Invalid'." |>
-    grepl(error) |> exceptions[["Table.Invalid"]](table)
+    grepl(error) |> exceptions[["table.invalid"]](table)
     
     stop(error, call. = FALSE)
   }
-  exceptions[['Key.Violation']]      <- \(invoke) {
+  exceptions[['key.violation']]      <- \(invoke) {
     if (invoke) { 
-      stop("ODBC.Storage: Key.Violation: Duplicate Primary Key not allowed.", call. = FALSE) 
+      stop("ODBC.Storage: key.violation: Duplicate Primary Key not allowed.", call. = FALSE) 
     }
   }
   exceptions[['Value.NULL']]         <- \(invoke) {
@@ -83,9 +83,9 @@ ODBC.Storage.Exceptions <- \() {
       stop('Query is null. Provide a Query.', call. = FALSE)
     } 
   }
-  exceptions[['Table.Invalid']]      <- \(invoke, table) {
+  exceptions[['table.invalid']]      <- \(invoke, table) {
     if(invoke) {
-      stop('ODBC.Storage: Table.Invalid: ', table, ' is not a valid table.', call. = FALSE)
+      stop('ODBC.Storage: table.invalid: ', table, ' is not a valid table.', call. = FALSE)
     }
   }
   return(exceptions)

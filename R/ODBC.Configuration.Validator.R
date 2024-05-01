@@ -1,65 +1,65 @@
 ODBC.Configuration.Validator <- \() {
-  exception <- ODBC.Configuration.Exceptions()
+  exception <- ODBC.Configuration.Validation.Exceptions()
 
   validations <- list()
   validations[['Configuration']]     <- \(configuration) {
     valid.preset.config <- TRUE
     valid.manual.config <- TRUE
 
-    configuration |> validations[['Preset.Config']]() |> 
+    configuration |> validations[['preset.config']]() |> 
       tryCatch(error = \(...) { valid.preset.config <<- FALSE })
 
-    configuration |> validations[['Get.Manual.Config']]() |>
+    configuration |> validations[['manual.config']]() |>
       tryCatch(error = \(...) { valid.manual.config <<- FALSE })
 
     valid.config <- valid.preset.config || valid.manual.config
     if (!valid.config) {
-      TRUE |> exception[['Config.Invalid']]()
+      TRUE |> exception[['config.invalid']]()
     }
     return(configuration)
   }
-  validations[['Preset.Config']]     <- \(configuration) {
+  validations[['preset.config']]     <- \(configuration) {
     configuration |>
-      validations[['Has.Drv']]() |>
-      validations[['Has.Dsn']]() |>
-      validations[['Has.Uid']]() |>
-      validations[['Has.Pwd']]()       
+      validations[['has.drv']]() |>
+      validations[['has.dsn']]() |>
+      validations[['has.uid']]() |>
+      validations[['has.pwd']]()       
   }
-  validations[['Get.Manual.Config']] <- \(configuration) {
+  validations[['manual.config']] <- \(configuration) {
     configuration |>
-      validations[['Has.Drv']]()      |>
-      validations[['Has.Driver']]()   |>
-      validations[['Has.Server']]()   |>
-      validations[['Has.Database']]() |>
-      validations[['Has.Uid']]()      |>
-      validations[['Has.Pwd']]()       
+      validations[['has.drv']]()      |>
+      validations[['has.driver']]()   |>
+      validations[['has.server']]()   |>
+      validations[['has.database']]() |>
+      validations[['has.uid']]()      |>
+      validations[['has.pwd']]()       
   }
-  validations[['Has.Drv']]           <- \(configuration) {
-    configuration[['drv']] |> is.null() |> exception[['Drv.NULL']]()
+  validations[['has.drv']]           <- \(configuration) {
+    configuration[['drv']] |> is.null() |> exception[['drv.NULL']]()
     return(configuration)
   }
-  validations[['Has.Dsn']]           <- \(configuration) {
-    configuration[['dsn']] |> is.null() |> exception[['Dsn.NULL']]()
+  validations[['has.dsn']]           <- \(configuration) {
+    configuration[['dsn']] |> is.null() |> exception[['dsn.NULL']]()
     return(configuration)
   }
-  validations[['Has.Driver']]        <- \(configuration) {
-    configuration[['driver']] |> is.null() |> exception[['Driver.NULL']]()
+  validations[['has.driver']]        <- \(configuration) {
+    configuration[['driver']] |> is.null() |> exception[['driver.NULL']]()
     return(configuration)
   }
-  validations[['Has.Server']]        <- \(configuration) {
-    configuration[['server']] |> is.null() |> exception[['Server.NULL']]()
+  validations[['has.server']]        <- \(configuration) {
+    configuration[['server']] |> is.null() |> exception[['server.NULL']]()
     return(configuration)
   }
-  validations[['Has.Database']]      <- \(configuration) {
-    configuration[['database']] |> is.null() |> exception[['Database.NULL']]()
+  validations[['has.database']]      <- \(configuration) {
+    configuration[['database']] |> is.null() |> exception[['database.NULL']]()
     return(configuration)
   }
-  validations[['Has.Uid']]           <- \(configuration) {
-    configuration[['uid']] |> is.null() |> exception[['Uid.NULL']]()
+  validations[['has.uid']]           <- \(configuration) {
+    configuration[['uid']] |> is.null() |> exception[['uid.NULL']]()
     return(configuration)
   }
-  validations[['Has.Pwd']]           <- \(configuration) {
-    configuration[['pwd']] |> is.null() |> exception[['Pwd.NULL']]()
+  validations[['has.pwd']]           <- \(configuration) {
+    configuration[['pwd']] |> is.null() |> exception[['pwd.NULL']]()
     return(configuration)
   }
   return(validations)

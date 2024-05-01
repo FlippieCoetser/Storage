@@ -1,5 +1,7 @@
 environment <- 'ENVIRONMENT' |> Sys.getenv() |> tryCatch(error = \(e) return('other')) 
 
+readRenviron(path.expand("~/.Renviron"))
+
 expect.exist      <- \(actual) actual |> is.null() |> expect_equal(FALSE) 
 expect.true       <- \(actual) actual |> expect_equal(TRUE)
 expect.false      <- \(actual) actual |> expect_equal(FALSE)

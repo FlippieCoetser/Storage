@@ -1,5 +1,5 @@
 ODBC.Storage.Broker <- \(configuration, sql = Query::SQL()) {
-  exception  <- ODBC.Storage.Exceptions()
+  exception  <- ODBC.Storage.Validation.Exceptions()
 
   create.connection  <- \(configuration) {
     DBI::dbConnect |> do.call(configuration) |> 
@@ -7,7 +7,7 @@ ODBC.Storage.Broker <- \(configuration, sql = Query::SQL()) {
   }
 
   operations <- list()
-  operations[['Execute.Query']]     <- \(query) {
+  operations[['execute.query']]     <- \(query) {
     connection <- configuration |> create.connection()
     
     output <- connection |> DBI::dbGetQuery(query) |> 
@@ -17,41 +17,41 @@ ODBC.Storage.Broker <- \(configuration, sql = Query::SQL()) {
 
     return(output)
   }
-  operations[['Get.Tables']]        <- \() {
+  operations[['get.tables']]        <- \() {
     query <- "SELECT TABLE_NAME as name FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE'"
-    query |> operations[['Execute.Query']]()
+    query |> operations[['execute.query']]()
   }
-  operations[['Insert']]            <- \(entity, table) {
+  operations[['insert']]            <- \(entity, table) {
     table |>
     sql[['INSERT']](entity) |>
     sql[['VALUES']](entity) |>
-    operations[['Execute.Query']]()
+    operations[['execute.query']]()
   }
-  operations[['Select']]            <- \(table, fields = '*') {
+  operations[['select']]            <- \(table, fields = '*') {
     fields |>
     sql[['SELECT']]()    |>
     sql[['FROM']](table) |>
-    operations[['Execute.Query']]()
+    operations[['execute.query']]()
   }
-  operations[['SelectWhereId']]     <- \(id, table, fields = '*') {
+  operations[['select.where.Id']]     <- \(id, table, fields = '*') {
     fields |>
       sql[['SELECT']]()        |>
       sql[['FROM']](table)     |>
       sql[['WHERE']]('id', id) |>
-      operations[['Execute.Query']]()
+      operations[['execute.query']]()
   }
-  operations[['Update']]            <- \(entity, table) {       
+  operations[['update']]            <- \(entity, table) {       
     table |>
     sql[['UPDATE']]()     |>
     sql[['SET']](entity)    |>
     sql[['WHERE']]('id', entity[['id']]) |>
-    operations[['Execute.Query']]()
+    operations[['execute.query']]()
   }
-  operations[['Delete']]            <- \(id, table) {
+  operations[['delete']]            <- \(id, table) {
     sql[['DELETE']]()        |>
     sql[['FROM']](table)     |>
     sql[['WHERE']]('id', id) |>
-    operations[['Execute.Query']]()
+    operations[['execute.query']]()
   }
   return(operations)
 }

@@ -12,26 +12,26 @@ Storage.Orchestrator <- \(configuration, type = 'odbc') {
   service <- services[[type]]()
 
   orchestrations <- list()
-  orchestrations[['Seed.Table']]      <- \(data, table) {
-    data |> service[['Seed.Table']](table)
+  orchestrations[['seed.table']]      <- \(data, table) {
+    data |> service[['seed.table']](table)
   }
-  orchestrations[['Execute.Query']]   <- \(query) {
-    query |> service[['Execute.Query']]()
+  orchestrations[['execute.query']]   <- \(query) {
+    query |> service[['execute.query']]()
   }
-  orchestrations[['Add']]             <- \(entity, table) {
-    entity |> service[['Add']](table)
+  orchestrations[['add']]             <- \(entity, table) {
+    entity |> service[['add']](table)
   }
-  orchestrations[['Retrieve']]        <- \(table, fields = '*') {
-    table |> service[['Retrieve']](fields)
+  orchestrations[['retrieve']]        <- \(table, fields = '*') {
+    table |> service[['retrieve']](fields)
   }
-  orchestrations[['RetrieveWhereId']] <- \(id, table, fields = '*') {
-    id |> service[['RetrieveWhereId']](table,fields)
+  orchestrations[['retrieve.where.id']] <- \(id, table, fields = '*') {
+    id |> service[['retrieve.where.id']](table,fields)
   }
-  orchestrations[['Modify']]          <- \(entity, table) {
-    entity |> service[['Modify']](table)
+  orchestrations[['modify']]          <- \(entity, table) {
+    entity |> service[['modify']](table)
   }
-  orchestrations[['Remove']]          <- \(id, table) {
-    id |> service[['Remove']](table)
+  orchestrations[['remove']]          <- \(id, table) {
+    id |> service[['remove']](table)
   }
   return(orchestrations)
 }

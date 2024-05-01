@@ -12,157 +12,157 @@ describe("When operations <- configuration |> ODBC.Storage.Broker()",{
     # Then
     operations |> expect.list()
   })
-  it("then operations contains 'Execute.Query' operation",{
+  it("then operations contains 'execute.query' operation",{
     # When
     operations <- ODBC.Storage.Broker()
 
     # Then
-    operations[['Execute.Query']] |> expect.exist()
+    operations[['execute.query']] |> expect.exist()
   })
-  it("then operations contains 'Get.Tables' operation",{
+  it("then operations contains 'get.tables' operation",{
     # When
     operations <- ODBC.Storage.Broker()
 
     # Then
-    operations[['Get.Tables']] |> expect.exist()
+    operations[['get.tables']] |> expect.exist()
   })
-  it("then operations contains 'Insert' operation",{
+  it("then operations contains 'insert' operation",{
     # When
     operations <- ODBC.Storage.Broker()
 
     # Then
-    operations[['Insert']] |> expect.exist()
+    operations[['insert']] |> expect.exist()
   })
-  it("then operations contains 'Select' operation",{
+  it("then operations contains 'select' operation",{
     # When
     operations <- ODBC.Storage.Broker()
 
     # Then
-    operations[['Select']] |> expect.exist()
+    operations[['select']] |> expect.exist()
   })
-  it("then operations contains 'SelectWhereId' operation",{
+  it("then operations contains 'select.where.Id' operation",{
     # When
     operations <- ODBC.Storage.Broker()
 
     # Then
-    operations[['SelectWhereId']] |> expect.exist()
+    operations[['select.where.Id']] |> expect.exist()
   })
-  it("then operations contains 'Update' operation",{
+  it("then operations contains 'update' operation",{
     # When
     operations <- ODBC.Storage.Broker()
 
     # Then
-    operations[['Update']] |> expect.exist()
+    operations[['update']] |> expect.exist()
   })
-  it("then operations contains 'Delete' operation",{
+  it("then operations contains 'delete' operation",{
     # When
     operations <- ODBC.Storage.Broker()
 
     # Then
-    operations[['Delete']] |> expect.exist()
+    operations[['delete']] |> expect.exist()
   })
 })
 
-describe("when query |> operate[['Execute.Query']]()",{
+describe("when query |> operate[['execute.query']]()",{
   it("then no exception is thrown is query is valid",{
     skip_if_not(environment == 'local')
     # Given
-    operate <- configurator[["Get.Config"]]() |> ODBC.Storage.Broker()
+    operate <- configurator[["get.config"]]() |> ODBC.Storage.Broker()
 
     query <- "SELECT 1"
 
     # Then
-    query |> operate[['Execute.Query']]() |> expect.no.error()
+    query |> operate[['execute.query']]() |> expect.no.error()
   })
   it("then a data.frame is returned if query is valid",{
     skip_if_not(environment == 'local')
     # Given
-    operate <- configurator[["Get.Config"]]() |> ODBC.Storage.Broker()
+    operate <- configurator[["get.config"]]() |> ODBC.Storage.Broker()
 
     query <- "SELECT 1"
 
     # When
-    output <- query |> operate[['Execute.Query']]() 
+    output <- query |> operate[['execute.query']]() 
 
     # Then
     output |> expect.data.frame()
   })
 })
 
-describe("when operate[['Get.Tables']]()",{
+describe("when operate[['get.tables']]()",{
   it("then a data.frame containing tables names is returned",{
     skip_if_not(environment == 'local')
     # Given
-    operate <- configurator[["Get.Config"]]() |> ODBC.Storage.Broker()
+    operate <- configurator[["get.config"]]() |> ODBC.Storage.Broker()
 
     # When
-    tables <- operate[['Get.Tables']]() 
+    tables <- operate[['get.tables']]() 
 
     # Then
     tables |> expect.data.frame()
   })
 })
 
-describe("When table |> operate[['Select']]()",{
+describe("When table |> operate[['select']]()",{
   it("then a data.frame is returned if table exist in storage",{
     skip_if_not(environment == 'local')
     # Given
-    operate <- configurator[["Get.Config"]]() |> ODBC.Storage.Broker()
+    operate <- configurator[["get.config"]]() |> ODBC.Storage.Broker()
 
     # When
-    entities <- table |> operate[['Select']]() 
+    entities <- table |> operate[['select']]() 
     
     # Then
     entities |> expect.data.frame()
   })
 })
 
-describe("When table |> operate[['Select']](fields)",{
+describe("When table |> operate[['select']](fields)",{
   it("then a data.frame is returned if table exist in storage",{
     skip_if_not(environment == 'local')
     # Given
-    operate <- configurator[["Get.Config"]]() |> ODBC.Storage.Broker()
+    operate <- configurator[["get.config"]]() |> ODBC.Storage.Broker()
 
     # When
-    entities <- table |> operate[['Select']](fields) 
+    entities <- table |> operate[['select']](fields) 
     
     # Then
     entities |> expect.data.frame()
   })
 })
 
-describe("When id |> operate[['SelectWhereId']](table)",{
+describe("When id |> operate[['select.where.Id']](table)",{
   it("then a data.frame is returned if table exist in storage",{
     skip_if_not(environment == 'local')
     # Given
-    operate <- configurator[["Get.Config"]]() |> ODBC.Storage.Broker()
+    operate <- configurator[["get.config"]]() |> ODBC.Storage.Broker()
 
-    existing.entities <- table |> operate[['Select']]()
+    existing.entities <- table |> operate[['select']]()
     existing.entity   <- existing.entities |> tail(1)
 
     id <- existing.entity[['id']]
 
     # When
-    actual.entity <- id |> operate[['SelectWhereId']](table) 
+    actual.entity <- id |> operate[['select.where.Id']](table) 
     
     # Then
     actual.entity |> expect.data.frame()
   })
 })
 
-describe("When id |> operate[['SelectWhereId']](table, fields)",{
+describe("When id |> operate[['select.where.Id']](table, fields)",{
   it("then a data.frame is returned if table exist in storage",{
     skip_if_not(environment == 'local')
     # Given
-    operate <- configurator[["Get.Config"]]() |> ODBC.Storage.Broker()
+    operate <- configurator[["get.config"]]() |> ODBC.Storage.Broker()
 
-    existing.entities <- table |> operate[['Select']]()
+    existing.entities <- table |> operate[['select']]()
     existing.entity   <- existing.entities |> tail(1)
 
     id <- existing.entity[['id']]
 
     # When
-    actual.entity <- id |> operate[['SelectWhereId']](table, fields) 
+    actual.entity <- id |> operate[['select.where.Id']](table, fields) 
     
     # Then
     actual.entity |> expect.data.frame()

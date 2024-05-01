@@ -2,16 +2,16 @@ ODBC.Configuration.Service <- \(broker) {
   validate <- ODBC.Configuration.Validator()
 
   services <- list()
-  services[['Open.Config.File']]  <- \() {
-    broker[['Open.Config.File']]()
+  services[['open.config.file']]  <- \() {
+    broker[['open.config.file']]()
   }
-  services[['Get.Preset.Config']] <- \() {
-    broker[['Get.Preset.Config']]() |>
-    validate[['Preset.Config']]()
+  services[['get.preset.config']] <- \() {
+    broker[['get.preset.config']]() |>
+    validate[['preset.config']]()
   }
-  services[['Get.Manual.Config']] <- \() {
-    broker[['Get.Manual.Config']]() |>
-    validate[['Get.Manual.Config']]()
+  services[['get.manual.config']] <- \() {
+    broker[['get.manual.config']]() |>
+    validate[['manual.config']]()
   }
   return(services)
 }

@@ -12,58 +12,58 @@ describe("When services <- ODBC.Storage.Service()",{
     # Then
     services |> expect.list()
   })
-  it("then services contains 'Execute.Query' service",{
+  it("then services contains 'execute.query' service",{
     # Given
     services <- ODBC.Storage.Service()
 
     # Then
-    services[["Execute.Query"]] |> expect.exist()
+    services[["execute.query"]] |> expect.exist()
   })
-  it("then services contains 'Add' service",{
+  it("then services contains 'add' service",{
     # Given
     services <- ODBC.Storage.Service()
 
     # Then
-    services[["Add"]] |> expect.exist()
+    services[["add"]] |> expect.exist()
   })
-  it("then services contains 'Retrieve' service",{
+  it("then services contains 'retrieve' service",{
     # Given
     services <- ODBC.Storage.Service()
 
     # Then
-    services[["Retrieve"]] |> expect.exist()
+    services[["retrieve"]] |> expect.exist()
   })
-  it("then services contains 'RetrieveWhereId' service",{
+  it("then services contains 'retrieve.where.id' service",{
     # Given
     services <- ODBC.Storage.Service()
 
     # Then
-    services[["RetrieveWhereId"]] |> expect.exist()
+    services[["retrieve.where.id"]] |> expect.exist()
   })
-  it("then services contains 'Modify' service",{
+  it("then services contains 'modify' service",{
     # Given
     services <- ODBC.Storage.Service()
 
     # Then
-    services[["Modify"]] |> expect.exist()
+    services[["modify"]] |> expect.exist()
   })
-  it("then services contains 'Remove' service",{
+  it("then services contains 'remove' service",{
     # Given
     services <- ODBC.Storage.Service()
 
     # Then
-    services[["Remove"]] |> expect.exist()
+    services[["remove"]] |> expect.exist()
   })
 })
 
-describe("When query |> service[['Execute.Query']]()",{
-  it("then broker[['Execute.Query']]() is called with query",{
+describe("When query |> service[['execute.query']]()",{
+  it("then broker[['execute.query']]() is called with query",{
     # Given
     input.query  <- 'SELECT 1'
     actual.query <- NULL
 
     broker   <- list()
-    broker[["Execute.Query"]] <- \(query) {
+    broker[["execute.query"]] <- \(query) {
       actual.query <<- query
     }
 
@@ -72,7 +72,7 @@ describe("When query |> service[['Execute.Query']]()",{
     expected.query <- input.query
 
     # When
-    input.query |> services[["Execute.Query"]]()
+    input.query |> services[["execute.query"]]()
 
     # Then
     actual.query |> expect.equal(expected.query)
@@ -80,7 +80,7 @@ describe("When query |> service[['Execute.Query']]()",{
   it("then an exception is thrown is query is NULL",{
     # Given
     broker   <- list()
-    broker[["Execute.Query"]] <- \(query) {} 
+    broker[["execute.query"]] <- \(query) {} 
 
     services <- broker |> ODBC.Storage.Service()
 
@@ -90,36 +90,36 @@ describe("When query |> service[['Execute.Query']]()",{
     query <- NULL
 
     # Then
-    query |> services[["Execute.Query"]]() |> expect.error(expected.error)
+    query |> services[["execute.query"]]() |> expect.error(expected.error)
   })
 })
 
-describe("When entity |> service[['Add']](table)",{
+describe("When entity |> service[['add']](table)",{
   it("then entity is added to storage",{
     skip_if_not(environment == 'local')
     # Given
-    broker <- configurator[['Get.Config']]() |> ODBC.Storage.Broker()
+    broker <- configurator[['get.config']]() |> ODBC.Storage.Broker()
 
     services <- broker |> ODBC.Storage.Service()
 
-    entity <- 'Task' |> Todo()
+    entity <- 'Task' |> Todo.Model()
 
     expected.entity <- entity
     expected.table  <- table
 
     # When
-    entity |> services[['Add']](table)
+    entity |> services[['add']](table)
 
     # Then
-    actual.entity <- entity[['id']] |> broker[['SelectWhereId']](table, fields)
+    actual.entity <- entity[['id']] |> broker[['select.where.Id']](table, fields)
     actual.entity |> expect.equal(expected.entity)
 
-    entity[['id']] |> broker[['Delete']](table)
+    entity[['id']] |> broker[['delete']](table)
   })
   it("then an exception is thrown if entity is NULL",{
     # Given
     broker <- list()
-    broker[['Insert']] <- \(entity, table) {} 
+    broker[['insert']] <- \(entity, table) {} 
 
     services <- broker |> ODBC.Storage.Service()
 
@@ -129,12 +129,12 @@ describe("When entity |> service[['Add']](table)",{
     entity <- NULL
 
     # Then
-    entity |> services[['Add']](table) |> expect.error(expected.error)
+    entity |> services[['add']](table) |> expect.error(expected.error)
   })
   it("then an exception is thrown if entity is not a data.frame",{
     # Given
     broker <- list()
-    broker[['Insert']] <- \(entity, table) {} 
+    broker[['insert']] <- \(entity, table) {} 
 
     services <- broker |> ODBC.Storage.Service()
 
@@ -144,12 +144,12 @@ describe("When entity |> service[['Add']](table)",{
     entity <- list()
 
     # Then
-    entity |> services[['Add']](table) |> expect.error(expected.error)
+    entity |> services[['add']](table) |> expect.error(expected.error)
   })
   it("then an exception is thrown if entity does not have one row",{
     # Given
     broker <- list()
-    broker[['Insert']] <- \(entity, table) {} 
+    broker[['insert']] <- \(entity, table) {} 
 
     services <- broker |> ODBC.Storage.Service()
 
@@ -159,12 +159,12 @@ describe("When entity |> service[['Add']](table)",{
     entity <- data.frame()
 
     # Then
-    entity |> services[['Add']](table) |> expect.error(expected.error)
+    entity |> services[['add']](table) |> expect.error(expected.error)
   })
   it("then an exception is thrown if table is NULL",{
     # Given
     broker <- list()
-    broker[['Insert']] <- \(entity, table) {} 
+    broker[['insert']] <- \(entity, table) {} 
 
     services <- broker |> ODBC.Storage.Service()
 
@@ -176,12 +176,12 @@ describe("When entity |> service[['Add']](table)",{
     table <- NULL
 
     # Then
-    entity |> services[['Add']](table) |> expect.error(expected.error)
+    entity |> services[['add']](table) |> expect.error(expected.error)
   })
   it("then an exception is thrown if table is not characters",{
     # Given
     broker <- list()
-    broker[['Insert']] <- \(entity, table) {} 
+    broker[['insert']] <- \(entity, table) {} 
 
     services <- broker |> ODBC.Storage.Service()
 
@@ -193,33 +193,33 @@ describe("When entity |> service[['Add']](table)",{
     table <- list()
 
     # Then
-    entity |> services[['Add']](table) |> expect.error(expected.error)
+    entity |> services[['add']](table) |> expect.error(expected.error)
   })
   it("then an exception is thrown if entity is not new",{
     skip_if_not(environment == 'local')
     # Given
-    broker <- configurator[["Get.Config"]]() |> ODBC.Storage.Broker()
+    broker <- configurator[["get.config"]]() |> ODBC.Storage.Broker()
 
     services <- broker |> ODBC.Storage.Service()
 
-    expected.error <- "ODBC.Storage: Key.Violation: Duplicate Primary Key not allowed."
+    expected.error <- "ODBC.Storage: key.violation: Duplicate Primary Key not allowed."
 
-    entities <- broker[['Select']](table, fields) 
+    entities <- broker[['select']](table, fields) 
 
     # When
     entity <- entities |> tail(1)
 
     # Then
-    entity |> services[['Add']](table) |> expect.error(expected.error)
+    entity |> services[['add']](table) |> expect.error(expected.error)
   })
   it("then an exception is thrown if table is invalid",{
     skip_if_not(environment == 'local')
     # Given
-    broker <- configurator[["Get.Config"]]() |> ODBC.Storage.Broker()
+    broker <- configurator[["get.config"]]() |> ODBC.Storage.Broker()
 
     services <- broker |> ODBC.Storage.Service()
 
-    expected.error <- "ODBC.Storage: Table.Invalid: Invalid is not a valid table."
+    expected.error <- "ODBC.Storage: table.invalid: Invalid is not a valid table."
 
     entity <- data.frame(
       Id = uuid::UUIDgenerate(),
@@ -231,29 +231,29 @@ describe("When entity |> service[['Add']](table)",{
     table <- 'Invalid'
 
     # Then
-    entity |> services[['Add']](table) |> expect.error(expected.error)
+    entity |> services[['add']](table) |> expect.error(expected.error)
   })
 })
 
-describe("When table |> service[['Retrieve']](fields)",{
+describe("When table |> service[['retrieve']](fields)",{
   it("then a data.frame is returned from storage",{
     skip_if_not(environment == 'local')
     # Given
-    broker <- configurator[["Get.Config"]]() |> ODBC.Storage.Broker()
+    broker <- configurator[["get.config"]]() |> ODBC.Storage.Broker()
 
     services <- broker |> ODBC.Storage.Service()
 
     # When
-    retrieved.entities <- table |> services[['Retrieve']](fields)
+    retrieved.entities <- table |> services[['retrieve']](fields)
 
     # Then
-    actual.entities <- table |> broker[['Select']](fields)
+    actual.entities <- table |> broker[['select']](fields)
     actual.entities |> expect.equal(retrieved.entities)
   })
   it("then an exception is thrown if table is NULL",{
     # Given
     broker <- list()
-    broker[['Select']] <- \(table, fields) {} 
+    broker[['select']] <- \(table, fields) {} 
 
     services <- broker |> ODBC.Storage.Service()
 
@@ -263,12 +263,12 @@ describe("When table |> service[['Retrieve']](fields)",{
     table <- NULL
 
     # Then
-    table |> services[['Retrieve']](list()) |> expect.error(expected.error)
+    table |> services[['retrieve']](list()) |> expect.error(expected.error)
   })
   it("then an exception is thrown if table is not characters",{
     # Given
     broker <- list()
-    broker[['Select']] <- \(table, fields) {} 
+    broker[['select']] <- \(table, fields) {} 
 
     services <- broker |> ODBC.Storage.Service()
 
@@ -278,33 +278,33 @@ describe("When table |> service[['Retrieve']](fields)",{
     table <- list()
 
     # Then
-    table |> services[['Retrieve']](list()) |> expect.error(expected.error)
+    table |> services[['retrieve']](list()) |> expect.error(expected.error)
 
   })
   it("then an exception is thrown if table is invalid",{
     skip_if_not(environment == 'local')
     # Given
-    broker <- configurator[["Get.Config"]]() |> ODBC.Storage.Broker()
+    broker <- configurator[["get.config"]]() |> ODBC.Storage.Broker()
 
     services <- broker |> ODBC.Storage.Service()
 
     invalid.table <- 'Invalid'
-    expected.error <- "ODBC.Storage: Table.Invalid: Invalid is not a valid table."
+    expected.error <- "ODBC.Storage: table.invalid: Invalid is not a valid table."
 
     # Then
-    invalid.table |> services[['Retrieve']]() |> expect.error(expected.error)
+    invalid.table |> services[['retrieve']]() |> expect.error(expected.error)
   })
 })
 
-describe("When id |> service[['RetrieveWhereId']](table, fields)",{
+describe("When id |> service[['retrieve.where.id']](table, fields)",{
   it("then entity wit id is returned from storage",{
     skip_if_not(environment == 'local')
     # Given
-    broker <- configurator[["Get.Config"]]() |> ODBC.Storage.Broker()
+    broker <- configurator[["get.config"]]() |> ODBC.Storage.Broker()
 
     services <- broker |> ODBC.Storage.Service()
     
-    existing.entities <- table |> broker[['Select']](fields)
+    existing.entities <- table |> broker[['select']](fields)
     existing.entity   <- existing.entities |> tail(1)
 
     id <- existing.entity[['id']]
@@ -312,7 +312,7 @@ describe("When id |> service[['RetrieveWhereId']](table, fields)",{
     expected.entity <- existing.entity
 
     # When
-    retrieved.entity <- id |> services[['RetrieveWhereId']](table, fields)
+    retrieved.entity <- id |> services[['retrieve.where.id']](table, fields)
 
     # Then
     retrieved.entity |> expect.equal.data(expected.entity)
@@ -320,7 +320,7 @@ describe("When id |> service[['RetrieveWhereId']](table, fields)",{
   it("then an exception is thrown if id is NULL",{
     # Given
     broker <- list()
-    broker[['SelectWhereId']] <- \(id, table, fields) {} 
+    broker[['select.where.Id']] <- \(id, table, fields) {} 
 
     services <- broker |> ODBC.Storage.Service()
 
@@ -330,12 +330,12 @@ describe("When id |> service[['RetrieveWhereId']](table, fields)",{
     id <- NULL
 
     # Then
-    id |> services[['RetrieveWhereId']](table, list()) |> expect.error(expected.error)
+    id |> services[['retrieve.where.id']](table, list()) |> expect.error(expected.error)
   })
   it("then an exception is thrown if id is not character",{
     # Given
     broker <- list()
-    broker[['SelectWhereId']] <- \(id, table, fields) {} 
+    broker[['select.where.Id']] <- \(id, table, fields) {} 
 
     services <- broker |> ODBC.Storage.Service()
 
@@ -345,12 +345,12 @@ describe("When id |> service[['RetrieveWhereId']](table, fields)",{
     id <- list()
 
     # Then
-    id |> services[['RetrieveWhereId']](table, list()) |> expect.error(expected.error)
+    id |> services[['retrieve.where.id']](table, list()) |> expect.error(expected.error)
   })
   it("then an exception is thrown if id in invalid identifier",{
     # Given
     broker <- list()
-    broker[['SelectWhereId']] <- \(id, table, fields) {} 
+    broker[['select.where.Id']] <- \(id, table, fields) {} 
 
     services <- broker |> ODBC.Storage.Service()
 
@@ -360,12 +360,12 @@ describe("When id |> service[['RetrieveWhereId']](table, fields)",{
     id <- 'a'
 
     # Then
-    id |> services[['RetrieveWhereId']](table, list()) |> expect.error(expected.error)
+    id |> services[['retrieve.where.id']](table, list()) |> expect.error(expected.error)
   })
   it("then an exception is thrown if table is NULL",{
     # Given
     broker <- list()
-    broker[['SelectWhereId']] <- \(id, table, fields) {} 
+    broker[['select.where.Id']] <- \(id, table, fields) {} 
 
     services <- broker |> ODBC.Storage.Service()
 
@@ -377,12 +377,12 @@ describe("When id |> service[['RetrieveWhereId']](table, fields)",{
     table <- NULL
 
     # Then
-    id |> services[['RetrieveWhereId']](table, list()) |> expect.error(expected.error)
+    id |> services[['retrieve.where.id']](table, list()) |> expect.error(expected.error)
   })
   it("then an exception is thrown if table is not characters",{
     # Given
     broker <- list()
-    broker[['SelectWhereId']] <- \(id, table, fields) {} 
+    broker[['select.where.Id']] <- \(id, table, fields) {} 
 
     services <- broker |> ODBC.Storage.Service()
 
@@ -394,35 +394,35 @@ describe("When id |> service[['RetrieveWhereId']](table, fields)",{
     table <- list()
 
     # Then
-    id |> services[['RetrieveWhereId']](table, list()) |> expect.error(expected.error)
+    id |> services[['retrieve.where.id']](table, list()) |> expect.error(expected.error)
   })
   it("then an exception is thrown if table is invalid",{
     skip_if_not(environment == 'local')
     # Given
-    broker <- configurator[["Get.Config"]]() |> ODBC.Storage.Broker()
+    broker <- configurator[["get.config"]]() |> ODBC.Storage.Broker()
 
     services <- broker |> ODBC.Storage.Service()
 
     invalid.table <- 'Invalid'
-    expected.error <- "ODBC.Storage: Table.Invalid: Invalid is not a valid table."
+    expected.error <- "ODBC.Storage: table.invalid: Invalid is not a valid table."
 
     id <- uuid::UUIDgenerate()
 
     # Then
-    id |> services[['RetrieveWhereId']](invalid.table) |> expect.error(expected.error)
+    id |> services[['retrieve.where.id']](invalid.table) |> expect.error(expected.error)
   })
 })
 
-describe("When entity |> service[['Modify']](table)",{
+describe("When entity |> service[['modify']](table)",{
   it("then entity with matching Id is updated in storage",{
     skip_if_not(environment == 'local')
     # Given
-    broker <- configurator[["Get.Config"]]() |> ODBC.Storage.Broker()
+    broker <- configurator[["get.config"]]() |> ODBC.Storage.Broker()
 
     services <- broker |> ODBC.Storage.Service()
 
-    new.entity <- 'Task' |> Todo()
-    new.entity |> broker[['Insert']](table)
+    new.entity <- 'Task' |> Todo.Model()
+    new.entity |> broker[['insert']](table)
 
     updated.entity <- new.entity
     updated.entity[['status']] <- 'Updated'
@@ -430,13 +430,13 @@ describe("When entity |> service[['Modify']](table)",{
     expected.entity <- updated.entity
 
     # When
-    updated.entity |> services[['Modify']](table)
+    updated.entity |> services[['modify']](table)
 
     # Then
-    retrieved.entity <- updated.entity[['id']] |> broker[['SelectWhereId']](table, fields)
+    retrieved.entity <- updated.entity[['id']] |> broker[['select.where.Id']](table, fields)
     retrieved.entity |> expect.equal(expected.entity)
 
-    updated.entity[['id']] |> broker[['Delete']](table)
+    updated.entity[['id']] |> broker[['delete']](table)
   })
   it("then an exception is thrown if entity is NULL",{
     # Given
@@ -451,7 +451,7 @@ describe("When entity |> service[['Modify']](table)",{
     entity <- NULL
 
     # Then
-    entity |> services[['Modify']](table) |> expect.error(expected.error)
+    entity |> services[['modify']](table) |> expect.error(expected.error)
   })
   it("then an exception is thrown if entity is not a data.frame",{
     # Given
@@ -466,7 +466,7 @@ describe("When entity |> service[['Modify']](table)",{
     entity <- list()
 
     # Then
-    entity |> services[['Modify']](table) |> expect.error(expected.error)
+    entity |> services[['modify']](table) |> expect.error(expected.error)
   })
   it("then an exception is thrown if entity does not have one row",{
     # Given
@@ -481,7 +481,7 @@ describe("When entity |> service[['Modify']](table)",{
     entity <- data.frame()
 
     # Then
-    entity |> services[['Modify']](table) |> expect.error(expected.error)
+    entity |> services[['modify']](table) |> expect.error(expected.error)
   })
   it("then an exception is thrown if table is NULL",{
     # Given
@@ -498,7 +498,7 @@ describe("When entity |> service[['Modify']](table)",{
     table <- NULL
 
     # Then
-    entity |> services[['Modify']](table) |> expect.error(expected.error)
+    entity |> services[['modify']](table) |> expect.error(expected.error)
   })
   it("then an exception is thrown if table is not characters",{
     # Given
@@ -515,16 +515,16 @@ describe("When entity |> service[['Modify']](table)",{
     table <- list()
 
     # Then
-    entity |> services[['Modify']](table) |> expect.error(expected.error)
+    entity |> services[['modify']](table) |> expect.error(expected.error)
   })
   it("then an exception is thrown if table is invalid",{
     skip_if_not(environment == 'local')
     # Given
-    broker <- configurator[["Get.Config"]]() |> ODBC.Storage.Broker()
+    broker <- configurator[["get.config"]]() |> ODBC.Storage.Broker()
 
     services <- broker |> ODBC.Storage.Service()
 
-    expected.error <- "ODBC.Storage: Table.Invalid: Invalid is not a valid table."
+    expected.error <- "ODBC.Storage: table.invalid: Invalid is not a valid table."
 
     entity <- data.frame(
       Id = uuid::UUIDgenerate(),
@@ -536,15 +536,15 @@ describe("When entity |> service[['Modify']](table)",{
     table <- 'Invalid'
 
     # Then
-    entity |> services[['Modify']](table) |> expect.error(expected.error)
+    entity |> services[['modify']](table) |> expect.error(expected.error)
   })
 })
 
-describe("When id |> service[['Remove']](table)",{
+describe("When id |> service[['remove']](table)",{
   it("then entity with matching id is delete from storage",{
     skip_if_not(environment == 'local')
     # Given
-    broker <- configurator[["Get.Config"]]() |> ODBC.Storage.Broker()
+    broker <- configurator[["get.config"]]() |> ODBC.Storage.Broker()
 
     services <- broker |> ODBC.Storage.Service()
 
@@ -554,23 +554,23 @@ describe("When id |> service[['Remove']](table)",{
       Status = 'New'
     )
 
-    new.entity |> broker[['Insert']](table)
+    new.entity |> broker[['insert']](table)
 
     existing.entity <- new.entity
 
     deleted.entity <- existing.entity
 
     # When
-    existing.entity[['Id']] |> services[['Remove']](table)
+    existing.entity[['Id']] |> services[['remove']](table)
 
     # Then
-    retrieved.entity <- deleted.entity[['Id']] |> broker[['SelectWhereId']](table, fields)
+    retrieved.entity <- deleted.entity[['Id']] |> broker[['select.where.Id']](table, fields)
     retrieved.entity |> expect.rows(0)
   })
   it("then an exception is thrown if id is NULL",{
     # Given
     broker <- list()
-    broker[['Delete']] <- \(id, table) {} 
+    broker[['delete']] <- \(id, table) {} 
 
     services <- broker |> ODBC.Storage.Service()
 
@@ -580,12 +580,12 @@ describe("When id |> service[['Remove']](table)",{
     id <- NULL
 
     # Then
-    id |> services[['Remove']](table) |> expect.error(expected.error)
+    id |> services[['remove']](table) |> expect.error(expected.error)
   })
   it("then an exception is thrown if id is not character",{
     # Given
     broker <- list()
-    broker[['Delete']] <- \(id, table) {} 
+    broker[['delete']] <- \(id, table) {} 
 
     services <- broker |> ODBC.Storage.Service()
 
@@ -595,12 +595,12 @@ describe("When id |> service[['Remove']](table)",{
     id <- list()
 
     # Then
-    id |> services[['Remove']](table) |> expect.error(expected.error)
+    id |> services[['remove']](table) |> expect.error(expected.error)
   })
   it("then an exception is thrown if id is invalid identifier",{
     # Given
     broker <- list()
-    broker[['Delete']] <- \(id, table) {} 
+    broker[['delete']] <- \(id, table) {} 
 
     services <- broker |> ODBC.Storage.Service()
 
@@ -610,12 +610,12 @@ describe("When id |> service[['Remove']](table)",{
     id <- 'a'
 
     # Then
-    id |> services[['Remove']](table) |> expect.error(expected.error)
+    id |> services[['remove']](table) |> expect.error(expected.error)
   })
   it("then an exception is thrown if table is NULL",{
     # Given
     broker <- list()
-    broker[['Delete']] <- \(id, table) {} 
+    broker[['delete']] <- \(id, table) {} 
 
     services <- broker |> ODBC.Storage.Service()
 
@@ -627,12 +627,12 @@ describe("When id |> service[['Remove']](table)",{
     table <- NULL
 
     # Then
-    id |> services[['Remove']](table) |> expect.error(expected.error)
+    id |> services[['remove']](table) |> expect.error(expected.error)
   })
   it("then an exception is thrown if table is not characters",{
     # Given
     broker <- list()
-    broker[['Delete']] <- \(id, table) {} 
+    broker[['delete']] <- \(id, table) {} 
 
     services <- broker |> ODBC.Storage.Service()
 
@@ -644,16 +644,16 @@ describe("When id |> service[['Remove']](table)",{
     table <- list()
 
     # Then
-    id |> services[['Remove']](table) |> expect.error(expected.error)
+    id |> services[['remove']](table) |> expect.error(expected.error)
   })
   it("then an exception is thrown if table is invalid",{
     skip_if_not(environment == 'local')
     # Given
-    broker <- configurator[["Get.Config"]]() |> ODBC.Storage.Broker()
+    broker <- configurator[["get.config"]]() |> ODBC.Storage.Broker()
 
     services <- broker |> ODBC.Storage.Service()
 
-    expected.error <- "ODBC.Storage: Table.Invalid: Invalid is not a valid table."
+    expected.error <- "ODBC.Storage: table.invalid: Invalid is not a valid table."
 
     id <- uuid::UUIDgenerate()
 
@@ -661,6 +661,6 @@ describe("When id |> service[['Remove']](table)",{
     table <- 'Invalid'
 
     # Then
-    id |> services[['Remove']](table) |> expect.error(expected.error)
+    id |> services[['remove']](table) |> expect.error(expected.error)
   })
 })
