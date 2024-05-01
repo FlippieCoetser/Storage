@@ -6,38 +6,38 @@
 #' 
 #' @usage NULL
 #' @returns A `list` of functions: 
-#' * `Add(todo)`
-#' * `Retrieve(...)`
-#' * `RetrieveWhereId(id)`
-#' * `Modify(todo)`
-#' * `Remove(id)`
+#' * `add(todo)`
+#' * `retrieve(...)`
+#' * `retrieve.where.id(id)`
+#' * `modify(todo)`
+#' * `remove(id)`
 #' @export
 Todo.Service <- \(broker) {
-  validate <- Todo.Model.Validator()
+  validate <- Todo.Validator()
   
   services <- list()
-  services[['Add']]             <- \(todo) {
+  services[['add']]             <- \(todo) {
     todo |> validate[['Todo']]()
-    todo |> broker[['Insert']]()
+    todo |> broker[['insert']]()
   }
-  services[['Retrieve']]        <- \(...) {
-    ... |> broker[['Select']]()
+  services[['retrieve']]        <- \(...) {
+    ... |> broker[['select']]()
   }
-  services[['RetrieveWhereId']] <- \(id) {
+  services[['retrieve.where.id']] <- \(id) {
     # TODO: Extensive id pattern validation.
     # Current validation check for NULL only.
     id |> validate[['Id']]()
-    id |> broker[['SelectWhereId']]()
+    id |> broker[['select.where.Id']]()
   }
-  services[['Modify']]          <- \(todo) {
+  services[['modify']]          <- \(todo) {
     todo |> validate[['Todo']]()
-    todo |> broker[['Update']]()
+    todo |> broker[['update']]()
   }
-  services[['Remove']]          <- \(id) {
+  services[['remove']]          <- \(id) {
     # TODO: Extensive id pattern validation.
     # Current validation check for NULL only.
     id |> validate[['Id']]()
-    id |> broker[['Delete']]()
+    id |> broker[['delete']]()
   }
   return(services)
 }

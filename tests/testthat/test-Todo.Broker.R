@@ -12,98 +12,98 @@ describe("When operations <- storage |> Todo.Broker()",{
     # Then
     operations |> expect.list()
   })
-  it("then operations contains 'Insert' operation",{
+  it("then operations contains 'insert' operation",{
     # When
     operations <- Todo.Broker()
 
     # Then
-    operations[['Insert']] |> expect.exist()
+    operations[['insert']] |> expect.exist()
   })
-  it("then operations contains 'Select' operation",{
+  it("then operations contains 'select' operation",{
     # When
     operations <- Todo.Broker()
 
     # Then
-    operations[['Select']] |> expect.exist()
+    operations[['select']] |> expect.exist()
   })
-  it("then operations contains 'SelectWhereId' operation",{
+  it("then operations contains 'select.where.Id' operation",{
     # When
     operations <- Todo.Broker()
 
     # Then
-    operations[['SelectWhereId']] |> expect.exist()
+    operations[['select.where.Id']] |> expect.exist()
   })
-  it("then operations contains 'Update' operation",{
+  it("then operations contains 'update' operation",{
     # When
     operations <- Todo.Broker()
 
     # Then
-    operations[['Update']] |> expect.exist()
+    operations[['update']] |> expect.exist()
   })
-  it("then operations contains 'Delete' operation",{
+  it("then operations contains 'delete' operation",{
     # When
     operations <- Todo.Broker()
 
     # Then
-    operations[['Delete']] |> expect.exist()
+    operations[['delete']] |> expect.exist()
   })
 })
 
-describe("When todo |> operations[['Insert']]()",{
+describe("When todo |> operations[['insert']]()",{
   it("then todo is inserted into odbc.storage",{
     skip_if_not(environment == 'local')
     # Given
-    storage    <- configurator[["Get.Config"]]() |> Storage.Orchestrator('odbc')
+    storage    <- configurator[["get.config"]]() |> Storage.Orchestrator('odbc')
     operations <- storage |> Todo.Broker()
 
-    new.todo <- 'Task' |> Todo()
+    new.todo <- 'Task' |> Todo.Model()
     id <- new.todo[['id']]
 
     expected.todo <- new.todo  
 
     # When
-    new.todo |> operations[['Insert']]()
+    new.todo |> operations[['insert']]()
 
     # Then
-    actual.todo <- id |> storage[['RetrieveWhereId']]('Todo', fields)
+    actual.todo <- id |> storage[['retrieve.where.id']]('Todo', fields)
     actual.todo |> expect.equal(expected.todo)
 
-    id |> storage[['Remove']]('Todo')
+    id |> storage[['remove']]('Todo')
   })
   it("then todo is inserted into memory.storage",{
     # Given
     storage    <- configuration |> Storage.Orchestrator('memory')
     operations <- storage |> Todo.Broker()
 
-    Todo.Mock.Data |> storage[['Seed.Table']]('Todo')
+    Todos |> storage[['seed.table']]('Todo')
 
-    new.todo <- 'Task' |> Todo()
+    new.todo <- 'Task' |> Todo.Model()
     id <- new.todo[['id']]
 
     expected.todo <- new.todo |> as.data.frame()
 
     # When
-    new.todo |> operations[['Insert']]()
+    new.todo |> operations[['insert']]()
 
     # Then
-    actual.todo <- id |> storage[['RetrieveWhereId']]('Todo', fields)
+    actual.todo <- id |> storage[['retrieve.where.id']]('Todo', fields)
     actual.todo |> expect.equal.data(expected.todo)
 
-    id |> storage[['Remove']]('Todo')
+    id |> storage[['remove']]('Todo')
   })
 })
 
-describe("When operations[['Select']]()",{
+describe("When operations[['select']]()",{
   it("then all todos in odbc.storage is returned",{
     skip_if_not(environment == 'local')
     # Given
-    storage    <- configurator[["Get.Config"]]() |> Storage.Orchestrator('odbc')
+    storage    <- configurator[["get.config"]]() |> Storage.Orchestrator('odbc')
     operations <- storage |> Todo.Broker()
 
-    expected.todos <- 'Todo' |> storage[['Retrieve']](fields)
+    expected.todos <- 'Todo' |> storage[['retrieve']](fields)
 
     # When
-    actual.todos <- operations[['Select']]()
+    actual.todos <- operations[['select']]()
 
     # Then
     actual.todos |> expect.equal(expected.todos)
@@ -113,33 +113,33 @@ describe("When operations[['Select']]()",{
     storage    <- configuration |> Storage.Orchestrator('memory')
     operations <- storage |> Todo.Broker()
 
-    Todo.Mock.Data |> storage[['Seed.Table']]('Todo')
+    Todos |> storage[['seed.table']]('Todo')
 
-    expected.todos <- 'Todo' |> storage[['Retrieve']](fields)
+    expected.todos <- 'Todo' |> storage[['retrieve']](fields)
 
     # When
-    actual.todos <- operations[['Select']]()
+    actual.todos <- operations[['select']]()
 
     # Then
     actual.todos |> expect.equal(expected.todos)
   })
 })
 
-describe("When id |> operations[['SelectWhereId']]()",{
+describe("When id |> operations[['select.where.Id']]()",{
   it("then todo with id equal id is returned from odbc.storage",{
     skip_if_not(environment == 'local')
     # Given
-    storage    <- configurator[["Get.Config"]]() |> Storage.Orchestrator('odbc')
+    storage    <- configurator[["get.config"]]() |> Storage.Orchestrator('odbc')
     operations <- storage |> Todo.Broker()
 
-    existing.todos <- 'Todo' |> storage[['Retrieve']](fields)
+    existing.todos <- 'Todo' |> storage[['retrieve']](fields)
     existing.todo  <- existing.todos |> tail(1)
     existing.id    <- existing.todo[['id']]
 
-    expected.todo <- existing.id |> storage[['RetrieveWhereId']]('Todo', fields)
+    expected.todo <- existing.id |> storage[['retrieve.where.id']]('Todo', fields)
 
     # When
-    actual.todo <- existing.id |> operations[['SelectWhereId']]()
+    actual.todo <- existing.id |> operations[['select.where.Id']]()
 
     # Then
     actual.todo |> expect.equal(expected.todo)
@@ -149,32 +149,32 @@ describe("When id |> operations[['SelectWhereId']]()",{
     storage    <- configuration |> Storage.Orchestrator('memory')
     operations <- storage |> Todo.Broker()
 
-    Todo.Mock.Data |> storage[['Seed.Table']]('Todo')
+    Todos |> storage[['seed.table']]('Todo')
 
-    existing.todos <- 'Todo' |> storage[['Retrieve']](fields)
+    existing.todos <- 'Todo' |> storage[['retrieve']](fields)
     existing.todo  <- existing.todos |> tail(1)
     existing.id    <- existing.todo[['id']]
 
-    expected.todo <- existing.id |> storage[['RetrieveWhereId']]('Todo', fields)
+    expected.todo <- existing.id |> storage[['retrieve.where.id']]('Todo', fields)
 
     # When
-    actual.todo <- existing.id |> operations[['SelectWhereId']]()
+    actual.todo <- existing.id |> operations[['select.where.Id']]()
 
     # Then
     actual.todo |> expect.equal(expected.todo)
   })
 })
 
-describe("When todo |> operations[['Update']]()",{
+describe("When todo |> operations[['update']]()",{
   it("then todo in odbc.storage is updated",{
     skip_if_not(environment == 'local')
     # Given
-    storage    <- configurator[["Get.Config"]]() |> Storage.Orchestrator('odbc')
+    storage    <- configurator[["get.config"]]() |> Storage.Orchestrator('odbc')
     operations <- storage |> Todo.Broker()
 
-    new.todo <- 'Task' |> Todo()
+    new.todo <- 'Task' |> Todo.Model()
 
-    new.todo |> storage[['Add']]('Todo')
+    new.todo |> storage[['add']]('Todo')
 
     updated.todo <- new.todo |> as.data.frame()
     updated.todo[['status']] <- 'Done'
@@ -184,24 +184,24 @@ describe("When todo |> operations[['Update']]()",{
     expected.todo <- updated.todo
 
     # When
-    updated.todo |> operations[['Update']]()
+    updated.todo |> operations[['update']]()
 
     # Then
-    actual.todo <- id |> storage[['RetrieveWhereId']]('Todo', fields)
+    actual.todo <- id |> storage[['retrieve.where.id']]('Todo', fields)
     actual.todo |> expect.equal(expected.todo)
 
-    id |> storage[['Remove']]('Todo')
+    id |> storage[['remove']]('Todo')
   })
   it("then todo in memory.storage is updated",{
     # Given
     storage    <- configuration |> Storage.Orchestrator('memory')
     operations <- storage |> Todo.Broker()
 
-    Todo.Mock.Data |> storage[['Seed.Table']]('Todo')
+    Todos |> storage[['seed.table']]('Todo')
 
-    new.todo <- 'Task' |> Todo()
+    new.todo <- 'Task' |> Todo.Model()
 
-    new.todo |> storage[['Add']]('Todo')
+    new.todo |> storage[['add']]('Todo')
 
     updated.todo <- new.todo |> as.data.frame()
     updated.todo[['status']] <- 'Done'
@@ -211,36 +211,36 @@ describe("When todo |> operations[['Update']]()",{
     expected.todo <- updated.todo
 
     # When
-    updated.todo |> operations[['Update']]()
+    updated.todo |> operations[['update']]()
 
     # Then
-    actual.todo <- id |> storage[['RetrieveWhereId']]('Todo', fields)
+    actual.todo <- id |> storage[['retrieve.where.id']]('Todo', fields)
     actual.todo |> expect.equal.data(expected.todo)
 
-    id |> storage[['Remove']]('Todo')
+    id |> storage[['remove']]('Todo')
   })
 })
 
-describe("When id |> operations[['Delete']]()",{
+describe("When id |> operations[['delete']]()",{
   it("then todo with id are removed from odbc.storage",{
     skip_if_not(environment == 'local')
     # Given
-    storage    <- configurator[["Get.Config"]]() |> Storage.Orchestrator('odbc')
+    storage    <- configurator[["get.config"]]() |> Storage.Orchestrator('odbc')
     operations <- storage |> Todo.Broker()
 
-    new.todo <- 'Task' |> Todo()
+    new.todo <- 'Task' |> Todo.Model()
 
-    new.todo |> storage[['Add']]('Todo')
+    new.todo |> storage[['add']]('Todo')
 
     id <- new.todo[['id']]
 
     expected.count <- 0
 
     # When
-    id |> operations[['Delete']]()
+    id |> operations[['delete']]()
 
     # Then
-    actual.count <- id |> storage[['RetrieveWhereId']]('Todo', fields) |> nrow()
+    actual.count <- id |> storage[['retrieve.where.id']]('Todo', fields) |> nrow()
     actual.count |> expect.equal(expected.count)
   })
   it("then todo with is are removed from memory.storage",{
@@ -248,20 +248,20 @@ describe("When id |> operations[['Delete']]()",{
     storage    <- configuration |> Storage.Orchestrator('memory')
     operations <- storage |> Todo.Broker()
 
-    Todo.Mock.Data |> storage[['Seed.Table']]('Todo')
+    Todos |> storage[['seed.table']]('Todo')
 
-    new.todo <- 'Task' |> Todo()
-    new.todo |> storage[['Add']]('Todo')
+    new.todo <- 'Task' |> Todo.Model()
+    new.todo |> storage[['add']]('Todo')
 
     id <- new.todo[['id']]
 
     expected.count <- 0
 
     # When
-    id |> operations[['Delete']]()
+    id |> operations[['delete']]()
 
     # Then
-    actual.count <- id |> storage[['RetrieveWhereId']]('Todo', fields) |> nrow()
+    actual.count <- id |> storage[['retrieve.where.id']]('Todo', fields) |> nrow()
     actual.count |> expect.equal(expected.count)
   })
 })

@@ -6,12 +6,12 @@
 \value{
 A \code{list} of functions:
 \itemize{
-\item \code{Execute.Query(query)}
-\item \code{Add(entity, table)}
-\item \code{Retrieve(table, fields)}
-\item \code{RetrieveWhereId(id, table, fields)}
-\item \code{Modify(entity, table)}
-\item \code{Remove(id, table)}
+\item \code{execute.query(query)}
+\item \code{add(entity, table)}
+\item \code{retrieve(table, fields)}
+\item \code{retrieve.where.id(id, table, fields)}
+\item \code{modify(entity, table)}
+\item \code{remove(id, table)}
 }
 }
 \description{

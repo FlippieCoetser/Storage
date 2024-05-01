@@ -1,4 +1,4 @@
-Todo.Model.Exceptions <- \() {
+Todo.Validation.Exceptions <- \() {
   exceptions <- list()
   exceptions[['Todo.NULL']]        <- \(invoke) {
     if (invoke) { stop('Successful validation requires a Todo', call. = FALSE)}

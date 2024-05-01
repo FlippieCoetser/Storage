@@ -12,29 +12,29 @@ describe("When processes <- ODBC.Configuration.Processor()",{
     # Then
     processes |> expect.list()
   })
-  it("then processes contains Open.Config.File process",{
+  it("then processes contains open.config.file process",{
     # When
     processes <- ODBC.Configuration.Processor()
 
     # Then
-    processes[['Open.Config.File']] |> expect.function()
+    processes[['open.config.file']] |> expect.function()
   })
-  it("then processes contains Get.Config process",{
+  it("then processes contains get.config process",{
     # When
     processes <- ODBC.Configuration.Processor()
 
     # Then
-    processes[['Get.Config']] |> expect.function()
+    processes[['get.config']] |> expect.function()
   })
 })
 
-describe("When process[['Open.Config.File']]()",{
-  it("Then service[['Open.Config.File']]() is called once",{
+describe("When process[['open.config.file']]()",{
+  it("Then service[['open.config.file']]() is called once",{
     # Given
     call.count <- 0
 
     service <- ODBC.Configuration.Broker() |> ODBC.Configuration.Service()
-    service[['Open.Config.File']] <- \() {
+    service[['open.config.file']] <- \() {
       call.count <<- call.count + 1
     }
 
@@ -46,14 +46,14 @@ describe("When process[['Open.Config.File']]()",{
     call.count |> expect.equal(before.call.count)
 
     # When
-    processor[['Open.Config.File']]()
+    processor[['open.config.file']]()
 
     # Then
     call.count |> expect.equal(after.call.count)
   })
 })
 
-describe("When type |> process[['Get.Config']]()",{
+describe("When type |> process[['get.config']]()",{
   it("then a preset configuration is returned if type is Preset",{
     skip_if_not(environment == 'local')
     # Given
@@ -67,10 +67,10 @@ describe("When type |> process[['Get.Config']]()",{
     type <- 'Preset'
 
     # When
-    configuration <- type |> processor[['Get.Config']]()
+    configuration <- type |> processor[['get.config']]()
 
     # Then
-    configuration |> validate[['Preset.Config']]() |> expect.no.error()
+    configuration |> validate[['preset.config']]() |> expect.no.error()
   })
   it("then a manual configuration is returned if type is Manual",{
     skip_if_not(environment == 'local')
@@ -85,10 +85,10 @@ describe("When type |> process[['Get.Config']]()",{
     type <- 'Manual'
 
     # When
-    configuration <- type |> processor[['Get.Config']]()
+    configuration <- type |> processor[['get.config']]()
 
     # Then
-    configuration |> validate[['Get.Manual.Config']]() |> expect.no.error()
+    configuration |> validate[['manual.config']]() |> expect.no.error()
   })
   it("then a preset configuration is returned if not type is provided",{
     skip_if_not(environment == 'local')
@@ -101,9 +101,9 @@ describe("When type |> process[['Get.Config']]()",{
       ODBC.Configuration.Processor()
 
     # When
-    configuration <- processor[['Get.Config']]()
+    configuration <- processor[['get.config']]()
 
     # Then
-    configuration |> validate[['Preset.Config']]() |> expect.no.error()
+    configuration |> validate[['preset.config']]() |> expect.no.error()
   })
 })

@@ -4,37 +4,47 @@ describe('Todo.Model',{
   })
 })
 
-describe("When model <- Todo.Model()",{
-  it("then model is an empty data.frame",{
+describe("When todo <- task |> Todo.Model()",{
+  it("then todo is a data.frame",{
+    # Given 
+    task <- 'Task'
+
     # When
-    model <- Todo.Model()
+    todo <- task |> Todo.Model()
 
     # Then
-    model |> expect.data.frame()
-    model |> expect.empty()
+    todo |> expect.data.frame()
   })
-  it("then model has 'id' column of type character",{
+  it("then todo has 'id' column",{
+    # Given 
+    task <- 'Task'
+
     # When
-    model <- Todo.Model()
+    todo <- task |> Todo.Model()
 
     # Then
-    model[['id']] |> expect.exist()
-    model[['id']] |> expect.character()
+    todo[['id']] |> expect.exist()
   })
-  it("then model has 'task' column of type character",{
+  it("then todo has 'task' columns with value task",{
+    # Given 
+    task <- 'Task'
+
     # When
-    model <- Todo.Model()
+    todo <- task |> Todo.Model()
 
     # Then
-    model[['task']] |> expect.exist()
-    model[['task']] |> expect.character()
+    todo[['task']] |> expect.exist()
+    todo[['task']] |> expect.equal(task)
   })
-  it("then model has 'status' column of type character",{
+  it("then todo has 'status' column with default value new",{
+    # Given 
+    task <- 'Task'
+
     # When
-    model <- Todo.Model()
+    todo <- task |> Todo.Model()
 
     # Then
-    model[['status']] |> expect.exist()
-    model[['status']] |> expect.character()
+    todo[['status']] |> expect.exist()
+    todo[['status']] |> expect.equal('New')
   })
 })

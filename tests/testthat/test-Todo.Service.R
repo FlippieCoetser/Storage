@@ -12,69 +12,69 @@ describe("When services <- Todo.Service()",{
     # Then
     services |> expect.list()
   })
-  it("then services contains 'Add' service",{
+  it("then services contains 'add' service",{
     # When
     services <- Todo.Service()
 
     # Then
-    services[['Add']] |> expect.exist()
+    services[['add']] |> expect.exist()
   })
-  it("then services contains 'Retrieve' service",{
+  it("then services contains 'retrieve' service",{
     # When
     services <- Todo.Service()
 
     # Then
-    services[['Retrieve']] |> expect.exist()
+    services[['retrieve']] |> expect.exist()
   })
-  it("then services contains 'RetrieveWhereId' service",{
+  it("then services contains 'retrieve.where.id' service",{
     # When
     services <- Todo.Service()
 
     # Then
-    services[['RetrieveWhereId']] |> expect.exist()
+    services[['retrieve.where.id']] |> expect.exist()
   })
-  it("then services contains 'Modify' service",{
+  it("then services contains 'modify' service",{
     # When
     services <- Todo.Service()
 
     # Then
-    services[['Modify']] |> expect.exist()
+    services[['modify']] |> expect.exist()
   })
-  it("then services contains 'Remove' service",{
+  it("then services contains 'remove' service",{
     # When
     services <- Todo.Service()
 
     # Then
-    services[['Remove']] |> expect.exist()
+    services[['remove']] |> expect.exist()
   })
 })
 
-describe("When todo |> service[['Add']]()",{
+describe("When todo |> service[['add']]()",{
   it("then todo is added inserted into memory.storage",{
     # Given
     storage <- configuration |> Storage.Orchestrator('memory')
 
-    Todo.Mock.Data |> storage[['Seed.Table']]('Todo')
+    Todos |> storage[['seed.table']]('Todo')
 
     broker  <- storage |> Todo.Broker()
     service <- broker |> Todo.Service()
 
-    new.todo <- 'Task' |> Todo()
+    new.todo <- 'Task' |> Todo.Model()
 
     expected.todo <- new.todo
     
     # When
-    new.todo |> service[['Add']]()
+    new.todo |> service[['add']]()
 
     # Then
-    actual.todo <- new.todo[['id']] |> broker[['SelectWhereId']]()
+    actual.todo <- new.todo[['id']] |> broker[['select.where.Id']]()
     actual.todo |> expect.equal.data(expected.todo)
   })
   it("then an exception is thrown if todo has no id",{
     # Given
     storage <- configuration |> Storage.Orchestrator('memory')
 
-    Todo.Mock.Data |> storage[['Seed.Table']]('Todo')
+    Todos |> storage[['seed.table']]('Todo')
 
     broker  <- storage |> Todo.Broker()
     service <- broker |> Todo.Service()
@@ -86,13 +86,13 @@ describe("When todo |> service[['Add']]()",{
     )
 
     # Then
-    new.todo |> service[['Add']]() |> expect.error()
+    new.todo |> service[['add']]() |> expect.error()
   })
   it("then an exception is thrown if todo has no task",{
     # Given
     storage <- configuration |> Storage.Orchestrator('memory')
 
-    Todo.Mock.Data |> storage[['Seed.Table']]('Todo')
+    Todos |> storage[['seed.table']]('Todo')
 
     broker  <- storage |> Todo.Broker()
     service <- broker |> Todo.Service()
@@ -104,13 +104,13 @@ describe("When todo |> service[['Add']]()",{
     )
 
     # Then
-    new.todo |> service[['Add']]() |> expect.error()
+    new.todo |> service[['add']]() |> expect.error()
   })
   it("then an exception is thrown if todo has no status",{
     # Given
     storage <- configuration |> Storage.Orchestrator('memory')
 
-    Todo.Mock.Data |> storage[['Seed.Table']]('Todo')
+    Todos |> storage[['seed.table']]('Todo')
 
     broker  <- storage |> Todo.Broker()
     service <- broker |> Todo.Service()
@@ -122,47 +122,47 @@ describe("When todo |> service[['Add']]()",{
     )
 
     # Then
-    new.todo |> service[['Add']]() |> expect.error()
+    new.todo |> service[['add']]() |> expect.error()
   })
 })
 
-describe("When service[['Retrieve']]()",{
+describe("When service[['retrieve']]()",{
   it("then all todos are returned from memory.storage",{
     # Given
     storage <- configuration |> Storage.Orchestrator('memory')
 
-    Todo.Mock.Data |> storage[['Seed.Table']]('Todo')
+    Todos |> storage[['seed.table']]('Todo')
 
     broker  <- storage |> Todo.Broker()
     service <- broker |> Todo.Service()
 
-    expected.todos <- broker[['Select']]()
+    expected.todos <- broker[['select']]()
 
     # When
-    actual.todos <- service[['Retrieve']]()
+    actual.todos <- service[['retrieve']]()
 
     # Then
     actual.todos |> expect.equal.data(expected.todos)
   })
 })
 
-describe("When id |> service[['RetrieveWhereId']]()",{
+describe("When id |> service[['retrieve.where.id']]()",{
   it("then todo is returned from memory.storage",{
     # Given
     storage <- configuration |> Storage.Orchestrator('memory')
 
-    Todo.Mock.Data |> storage[['Seed.Table']]('Todo')
+    Todos |> storage[['seed.table']]('Todo')
 
     broker  <- storage |> Todo.Broker()
     service <- broker |> Todo.Service()
 
-    expected.todos <- broker[['Select']]()
+    expected.todos <- broker[['select']]()
     expected.todo <- expected.todos |> tail(1)
 
     id <- expected.todo[['id']]
 
     # When
-    actual.todo <- id |> service[['RetrieveWhereId']]()
+    actual.todo <- id |> service[['retrieve.where.id']]()
 
     # Then
     actual.todo |> expect.equal.data(expected.todo)
@@ -171,7 +171,7 @@ describe("When id |> service[['RetrieveWhereId']]()",{
     # Given
     storage <- configuration |> Storage.Orchestrator('memory')
 
-    Todo.Mock.Data |> storage[['Seed.Table']]('Todo')
+    Todos |> storage[['seed.table']]('Todo')
 
     broker  <- storage |> Todo.Broker()
     service <- broker |> Todo.Service()
@@ -179,38 +179,38 @@ describe("When id |> service[['RetrieveWhereId']]()",{
     id <- NULL
 
     # Then
-    id |> service[['RetrieveWhereId']]() |> expect.error()
+    id |> service[['retrieve.where.id']]() |> expect.error()
   })
 })
 
-describe("When todo |> service[['Modify']]()",{
+describe("When todo |> service[['modify']]()",{
   it("then todo is updated in memory.storage",{
     # Given
     storage <- configuration |> Storage.Orchestrator('memory')
 
-    Todo.Mock.Data |> storage[['Seed.Table']]('Todo')
+    Todos |> storage[['seed.table']]('Todo')
 
     broker  <- storage |> Todo.Broker()
     service <- broker |> Todo.Service()
 
-    expected.todos <- broker[['Select']]()
+    expected.todos <- broker[['select']]()
     expected.todo  <- expected.todos |> tail(1)
     expected.todo[['task']] <- "Updated"
 
     id <- expected.todo[['id']]
 
     # When
-    expected.todo |> service[['Modify']]()
+    expected.todo |> service[['modify']]()
 
     # Then
-    actual.todo <- id |> service[['RetrieveWhereId']]()
+    actual.todo <- id |> service[['retrieve.where.id']]()
     actual.todo |> expect.equal.data(expected.todo)
   })
   it("then an exception is thrown if todo has no id",{
     # Given
     storage <- configuration |> Storage.Orchestrator('memory')
 
-    Todo.Mock.Data |> storage[['Seed.Table']]('Todo')
+    Todos |> storage[['seed.table']]('Todo')
 
     broker  <- storage |> Todo.Broker()
     service <- broker |> Todo.Service()
@@ -222,13 +222,13 @@ describe("When todo |> service[['Modify']]()",{
     )
 
     # Then
-    todo |> service[['Modify']]() |> expect.error()
+    todo |> service[['modify']]() |> expect.error()
   })
   it("then an exception is thrown if todo has not task",{
     # Given
     storage <- configuration |> Storage.Orchestrator('memory')
 
-    Todo.Mock.Data |> storage[['Seed.Table']]('Todo')
+    Todos |> storage[['seed.table']]('Todo')
 
     broker  <- storage |> Todo.Broker()
     service <- broker |> Todo.Service()
@@ -240,38 +240,38 @@ describe("When todo |> service[['Modify']]()",{
     )
 
     # Then
-    todo |> service[['Modify']]() |> expect.error()
+    todo |> service[['modify']]() |> expect.error()
   })
 })
 
-describe("When id |> service[['Remove']]()",{
+describe("When id |> service[['remove']]()",{
   it("then todo is deleted from memory.storage",{
     # Given
     storage <- configuration |> Storage.Orchestrator('memory')
 
-    Todo.Mock.Data |> storage[['Seed.Table']]('Todo')
+    Todos |> storage[['seed.table']]('Todo')
 
     broker  <- storage |> Todo.Broker()
     service <- broker |> Todo.Service()
 
-    expected.todos <- broker[['Select']]()
+    expected.todos <- broker[['select']]()
     expected.todo  <- expected.todos |> tail(1)
     expected.count <- 0
 
     id <- expected.todo[['id']]
 
     # When
-    id |> service[['Remove']]()
+    id |> service[['remove']]()
 
     # Then
-    actual.todo <- id |> broker[['SelectWhereId']]()
+    actual.todo <- id |> broker[['select.where.Id']]()
     actual.todo |> expect.rows(expected.count)
   })
   it("then an exception is thrown if id null",{
     # Given
     storage <- configuration |> Storage.Orchestrator('memory')
 
-    Todo.Mock.Data |> storage[['Seed.Table']]('Todo')
+    Todos |> storage[['seed.table']]('Todo')
 
     broker  <- storage |> Todo.Broker()
     service <- broker |> Todo.Service()
@@ -279,6 +279,6 @@ describe("When id |> service[['Remove']]()",{
     id <- NULL
 
     # Then
-    id |> service[['Remove']]() |> expect.error()
+    id |> service[['remove']]() |> expect.error()
   })
 })

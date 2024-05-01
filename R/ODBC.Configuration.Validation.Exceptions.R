@@ -1,79 +1,79 @@
-ODBC.Configuration.Exceptions <- \() {
+ODBC.Configuration.Validation.Exceptions <- \() {
   exceptions <- list()
-  exceptions[['Config.Invalid']]     <- \(invoke) {
+  exceptions[['config.invalid']]     <- \(invoke) {
     if(invoke) {
       stop("Invalid ODBC configuration. Provide valid Preset or Manual configuration.", call. = FALSE)
     }
   }
   exceptions[['Configuration']]      <- \(error) {
-    'DSN'      |> grepl(error) |> exceptions[['Dsn.Not.Found']]()
-    'DRIVER'   |> grepl(error) |> exceptions[['Driver.Not.Found']]()
-    'SERVER'   |> grepl(error) |> exceptions[['Server.Not.Found']]()
-    'DATABASE' |> grepl(error) |> exceptions[['Database.Not.Found']]()
-    'UID'      |> grepl(error) |> exceptions[['Uid.Not.Found']]()
-    'PWD'      |> grepl(error) |> exceptions[['Pwd.Not.Found']]()
+    'DSN'      |> grepl(error) |> exceptions[['DSN.not.found']]()
+    'DRIVER'   |> grepl(error) |> exceptions[['DRIVER.not.found']]()
+    'SERVER'   |> grepl(error) |> exceptions[['SERVER.not.found']]()
+    'DATABASE' |> grepl(error) |> exceptions[['DATABASE.not.found']]()
+    'UID'      |> grepl(error) |> exceptions[['UID.not.found']]()
+    'PWD'      |> grepl(error) |> exceptions[['PWD.not.found']]()
   }
-  exceptions[['Dsn.Not.Found']]      <- \(invoke) {
+  exceptions[['DSN.not.found']]      <- \(invoke) {
     if(invoke) {
       stop("No DSN environment variable not found in .Renviron Configuration file.", call. = FALSE)
     }
   }
-  exceptions[['Driver.Not.Found']]   <- \(invoke) {
+  exceptions[['DRIVER.not.found']]   <- \(invoke) {
     if(invoke) {
       stop("No DRIVER environment variable not found in .Renviron Configuration file.", call. = FALSE)
     }
   }
-  exceptions[['Server.Not.Found']]   <- \(invoke) {
+  exceptions[['SERVER.not.found']]   <- \(invoke) {
     if(invoke) {
       stop("No SERVER environment variable not found in .Renviron Configuration file.", call. = FALSE)
     }
   }
-  exceptions[['Database.Not.Found']] <- \(invoke) {
+  exceptions[['DATABASE.not.found']] <- \(invoke) {
     if(invoke) {
       stop("No DATABASE environment variable not found in .Renviron Configuration file.", call. = FALSE)
     }
   }
-  exceptions[['Uid.Not.Found']]      <- \(invoke) {
+  exceptions[['UID.not.found']]      <- \(invoke) {
     if(invoke) {
       stop("No UID environment variable not found in .Renviron Configuration file.", call. = FALSE)
     }
   }
-  exceptions[['Pwd.Not.Found']]      <- \(invoke) {
+  exceptions[['PWD.not.found']]      <- \(invoke) {
     if(invoke) {
       stop("No PWD environment variable not found in .Renviron Configuration file.", call. = FALSE)
     }
   }
-  exceptions[['Drv.NULL']]           <- \(invoke) {
+  exceptions[['drv.NULL']]           <- \(invoke) {
     if(invoke) {
       stop("drv is NULL. Valid configuration requires a drv.", call. = FALSE)
     }
   }
-  exceptions[['Dsn.NULL']]           <- \(invoke) {
+  exceptions[['dsn.NULL']]           <- \(invoke) {
     if(invoke) {
       stop("dsn is NULL. Valid configuration requires a dsn.", call. = FALSE)
     }
   }
-  exceptions[['Driver.NULL']]        <- \(invoke) {
+  exceptions[['driver.NULL']]        <- \(invoke) {
     if(invoke) {
       stop("driver is NULL. Valid configuration requires a driver.", call. = FALSE)
     }
   }
-  exceptions[['Server.NULL']]        <- \(invoke) {
+  exceptions[['server.NULL']]        <- \(invoke) {
     if(invoke) {
       stop("server is NULL. Valid configuration requires a server.", call. = FALSE)
     }
   }
-  exceptions[['Database.NULL']]      <- \(invoke) {
+  exceptions[['database.NULL']]      <- \(invoke) {
     if(invoke) {
       stop("database is NULL. Valid configuration requires a database.", call. = FALSE)
     }
   }
-  exceptions[['Uid.NULL']]           <- \(invoke) {
+  exceptions[['uid.NULL']]           <- \(invoke) {
     if(invoke) {
       stop("uid is NULL. Valid configuration requires a uid.", call. = FALSE)
     }
   }
-  exceptions[['Pwd.NULL']]           <- \(invoke) {
+  exceptions[['pwd.NULL']]           <- \(invoke) {
     if(invoke) {
       stop("pwd is NULL. Valid configuration requires a pwd.", call. = FALSE)
     }

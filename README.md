@@ -10,35 +10,35 @@ Below is an overview of the different functions available on each of the compone
 
 Two utility functions are provided:
 
-1. `Open.Config.File`  
+1. `open.config.file`  
    Opens the `.Renviron` file in your IDE. This function only works when using either VS Code or RStudio.
 
-2. `Get.Config`  
-   Retrieves the configuration parameters from your local `.Renviron` file. By default a preset configuration is assumed when an OS DSN has been set up. A preset type configuration assumes a `DSN`, `UID` and `PWD` variables have been defined in the `.Renviron` file. If no OS DSN has been set up, `Get.Config` can be invoked with `type = 'Manual'` flag. When retrieving configuration parameters using the `type = 'Manual'` flag it is assumed `DRIVER`, `SERVER`, `DATABASE`, `UID`, `PWD` variables have been defined in the `.Renviron` file.
+2. `get.config`  
+   Retrieves the configuration parameters from your local `.Renviron` file. By default a preset configuration is assumed when an OS DSN has been set up. A preset type configuration assumes a `DSN`, `UID` and `PWD` variables have been defined in the `.Renviron` file. If no OS DSN has been set up, `get.config` can be invoked with `type = 'Manual'` flag. When retrieving configuration parameters using the `type = 'Manual'` flag it is assumed `DRIVER`, `SERVER`, `DATABASE`, `UID`, `PWD` variables have been defined in the `.Renviron` file.
 
 ## Storage Component
 
 Six functions are provided, five of which are common data operations and one function to execute custom queries:
 
-1. `Add`
-2. `Retrieve`
-3. `RetrieveWhereId`
-4. `Modify`
-5. `Remove`
+1. `add`
+2. `retrieve`
+3. `retrieve.where.id`
+4. `modify`
+5. `remove`
 
-Custom data operations can be added using the `Execute.Query` function. The `Execute.Query` function takes a SQL `query`, passed in as a character data type, and returns a data frame.
+Custom data operations can be added using the `execute.query` function. The `execute.query` function takes a SQL `query`, passed in as a character data type, and returns a data frame.
 
-Lastly, the `RetrieveWhereId` and `Modify` operations assumes the data model has an `id` attribute. The `id` attribute is used to uniquely identify a record in the data store.
+Lastly, the `retrieve.where.id` and `modify` operations assumes the data model has an `id` attribute. The `id` attribute is used to uniquely identify a record in the data store.
 
 ## Todo Data Service
 
 Five functions are provided:
 
-1. `Add`
-2. `Retrieve`
-3. `RetrieveWhereId`
-4. `Modify`
-5. `Remove`
+1. `add`
+2. `retrieve`
+3. `retrieve.where.id`
+4. `modify`
+5. `remove`
 
 The `Todo.Service` is an example of how to use the `Storage` component. The `Todo.Service` is a simple data service that performs CRUD operations on a `Todo` data model.
 
@@ -139,10 +139,10 @@ storage <- configuration |> Storage::Storage(type = 'memory')
 odbc.configurator <- Storage::ODBC.Configurator()
 ```
 
-2. Retrieve the configuration parameters from the local `.Renviron` file
+2. retrieve the configuration parameters from the local `.Renviron` file
 
 ```r
-configuration <- odbc.configurator[['Get.Config']]()
+configuration <- odbc.configurator[['get.config']]()
 ```
 
 3. Create a new instance of `Storage` component.
@@ -165,7 +165,7 @@ todos <- data.frame(
   status = c('New','New','Done')
 )
 
-todos |> storage[['Seed.Table']](table)
+todos |> storage[['seed.table']](table)
 ```
 
 2. select a `storage` instance based on your desired data store and create a new `Todo.Service` instance
@@ -185,18 +185,18 @@ todo <- 'Task' |> Todo()
 2. Add the `todo` into the data store
 
 ```r
-todo |> todo.service[['Add']]()
+todo |> todo.service[['add']]()
 ```
 
-### Retrieve Todos
+### retrieve Todos
 
-1. Retrieve all `todos` in the data store
+1. retrieve all `todos` in the data store
 
 ```r
-todos <- todo.service[['Retrieve']]()
+todos <- todo.service[['retrieve']]()
 ```
 
-### Retrieve Todo Where Id
+### retrieve Todo Where Id
 
 1. Use the `todo` created in a previous step and extract its `id`
 
@@ -204,13 +204,13 @@ todos <- todo.service[['Retrieve']]()
 id   <- todo[['id']]
 ```
 
-2. Retrieve the `todo` with the extracted `id`
+2. retrieve the `todo` with the extracted `id`
 
 ```r
-todo <- id |> todo.service[['RetrieveWhereId']]()
+todo <- id |> todo.service[['retrieve.where.id']]()
 ```
 
-### Modify Todo
+### modify Todo
 
 1. Use the `todo` retrieved in the previous step and update its `status`
 
@@ -218,13 +218,13 @@ todo <- id |> todo.service[['RetrieveWhereId']]()
 todo[['status']] <- "Done"
 ```
 
-2. Modify the `todo` in the data store
+2. modify the `todo` in the data store
 
 ```r
-todo |> todo.service[['Modify']]()
+todo |> todo.service[['modify']]()
 ```
 
-### Remove Todo
+### remove Todo
 
 1. Use the `todo` retrieved in the previous step and extract its `id`
 
@@ -232,8 +232,8 @@ todo |> todo.service[['Modify']]()
 id <- todo[['id']]
 ```
 
-2. Remove the `todo` with the extracted `id`
+2. remove the `todo` with the extracted `id`
 
 ```r
-id |> todo.service[['Remove']]()
+id |> todo.service[['remove']]()
 ```

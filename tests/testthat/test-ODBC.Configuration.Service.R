@@ -12,36 +12,36 @@ describe("When services <- broker |> ODBC.Configuration.Service()",{
     # Then
     services |> expect.list()
   })
-  it("then services contains Open.Config.File service",{
+  it("then services contains open.config.file service",{
     # When
     services <- ODBC.Configuration.Service()
 
     # Then
-    services[['Open.Config.File']] |> expect.function()
+    services[['open.config.file']] |> expect.function()
   })
-  it("then services contains Get.Preset.Config service",{
+  it("then services contains get.preset.config service",{
     # When
     services <- ODBC.Configuration.Service()
 
     # Then
-    services[['Get.Preset.Config']] |> expect.function()
+    services[['get.preset.config']] |> expect.function()
   })
-  it("then services contains Get.Manual.Config service",{
+  it("then services contains get.manual.config service",{
     # When
     services <- ODBC.Configuration.Service()
 
     # Then
-    services[['Get.Manual.Config']] |> expect.function()
+    services[['get.manual.config']] |> expect.function()
   })
 })
 
-describe("When service[['Open.Config.File']]()",{
-  it("then broker[['Open.Config.File']]() is called once",{
+describe("When service[['open.config.file']]()",{
+  it("then broker[['open.config.file']]() is called once",{
     # Given
     call.count <- 0
 
     broker  <- ODBC.Configuration.Broker()
-    broker[['Open.Config.File']] <- \() {
+    broker[['open.config.file']] <- \() {
       call.count <<- call.count + 1
     }
     service <- broker |> ODBC.Configuration.Service()
@@ -52,14 +52,14 @@ describe("When service[['Open.Config.File']]()",{
     call.count |> expect.equal(before.call.count)
 
     # When
-    service[['Open.Config.File']]()
+    service[['open.config.file']]()
 
     # Then
     call.count |> expect.equal(after.call.count)
   })  
 })
 
-describe("When configuration <- service[['Get.Preset.Config']]()",{
+describe("When configuration <- service[['get.preset.config']]()",{
   it("then configuration is a list",{
     skip_if_not(environment == 'local')
     # Given
@@ -67,7 +67,7 @@ describe("When configuration <- service[['Get.Preset.Config']]()",{
     service <- broker |> ODBC.Configuration.Service()
 
     # When
-    configuration <- service[['Get.Preset.Config']]()
+    configuration <- service[['get.preset.config']]()
 
     # Then
     configuration |> expect.list()
@@ -79,7 +79,7 @@ describe("When configuration <- service[['Get.Preset.Config']]()",{
     service <- broker |> ODBC.Configuration.Service()
 
     # When
-    configuration <- service[['Get.Preset.Config']]()
+    configuration <- service[['get.preset.config']]()
 
     # Then
     configuration[['drv']] |> expect.exist()
@@ -91,7 +91,7 @@ describe("When configuration <- service[['Get.Preset.Config']]()",{
     service <- broker |> ODBC.Configuration.Service()
 
     # When
-    configuration <- service[['Get.Preset.Config']]()
+    configuration <- service[['get.preset.config']]()
 
     # Then
     configuration[['dsn']] |> expect.character()
@@ -103,7 +103,7 @@ describe("When configuration <- service[['Get.Preset.Config']]()",{
     service <- broker |> ODBC.Configuration.Service()
 
     # When
-    configuration <- service[['Get.Preset.Config']]()
+    configuration <- service[['get.preset.config']]()
 
     # Then
     configuration[['uid']] |> expect.character()
@@ -115,14 +115,14 @@ describe("When configuration <- service[['Get.Preset.Config']]()",{
     service <- broker |> ODBC.Configuration.Service()
 
     # When
-    configuration <- service[['Get.Preset.Config']]()
+    configuration <- service[['get.preset.config']]()
 
     # Then
     configuration[['pwd']] |> expect.character()
   })
 })
 
-describe("When configuration <- service[['Get.Manual.Config']]()",{
+describe("When configuration <- service[['get.manual.config']]()",{
   it("then configuration is a list",{
     skip_if_not(environment == 'local')
     # Given
@@ -130,7 +130,7 @@ describe("When configuration <- service[['Get.Manual.Config']]()",{
     service <- broker |> ODBC.Configuration.Service()
 
     # When
-    configuration <- service[['Get.Manual.Config']]()
+    configuration <- service[['get.manual.config']]()
 
     # Then
     configuration |> expect.list()
@@ -142,7 +142,7 @@ describe("When configuration <- service[['Get.Manual.Config']]()",{
     service <- broker |> ODBC.Configuration.Service()
 
     # When
-    configuration <- service[['Get.Manual.Config']]()
+    configuration <- service[['get.manual.config']]()
 
     # Then
     configuration[['drv']] |> expect.exist()
@@ -154,7 +154,7 @@ describe("When configuration <- service[['Get.Manual.Config']]()",{
     service <- broker |> ODBC.Configuration.Service()
 
     # When
-    configuration <- service[['Get.Manual.Config']]()
+    configuration <- service[['get.manual.config']]()
 
     # Then
     configuration[['driver']] |> expect.character()
@@ -166,7 +166,7 @@ describe("When configuration <- service[['Get.Manual.Config']]()",{
     service <- broker |> ODBC.Configuration.Service()
 
     # When
-    configuration <- service[['Get.Manual.Config']]()
+    configuration <- service[['get.manual.config']]()
 
     # Then
     configuration[['server']] |> expect.character()
@@ -178,7 +178,7 @@ describe("When configuration <- service[['Get.Manual.Config']]()",{
     service <- broker |> ODBC.Configuration.Service()
 
     # When
-    configuration <- service[['Get.Manual.Config']]()
+    configuration <- service[['get.manual.config']]()
 
     # Then
     configuration[['database']] |> expect.character()
@@ -190,7 +190,7 @@ describe("When configuration <- service[['Get.Manual.Config']]()",{
     service <- broker |> ODBC.Configuration.Service()
 
     # When
-    configuration <- service[['Get.Manual.Config']]()
+    configuration <- service[['get.manual.config']]()
 
     # Then
     configuration[['uid']] |> expect.character()
@@ -202,7 +202,7 @@ describe("When configuration <- service[['Get.Manual.Config']]()",{
     service <- broker |> ODBC.Configuration.Service()
 
     # When
-    configuration <- service[['Get.Manual.Config']]()
+    configuration <- service[['get.manual.config']]()
 
     # Then
     configuration[['pwd']] |> expect.character()

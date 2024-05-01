@@ -1,12 +1,12 @@
 ODBC.Configuration.Processor <- \(service) {
   processes <- list()
-  processes[['Open.Config.File']] <- \() {
-    service[['Open.Config.File']]()
+  processes[['open.config.file']] <- \() {
+    service[['open.config.file']]()
   }
-  processes[['Get.Config']]       <- \(type = 'Preset') {
+  processes[['get.config']]       <- \(type = 'Preset') {
     configuration <- list()
-    configuration[['Preset']] <- \() service[['Get.Preset.Config']]()
-    configuration[['Manual']] <- \() service[['Get.Manual.Config']]()
+    configuration[['Preset']] <- \() service[['get.preset.config']]()
+    configuration[['Manual']] <- \() service[['get.manual.config']]()
     configuration[[type]]()
   }
   return(processes)

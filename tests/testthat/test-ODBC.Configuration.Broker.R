@@ -12,37 +12,38 @@ describe("When operations <- ODBC.Configuration.Broker()",{
     # Then
     operations |> expect.list()
   })
-  it("then operations contains Open.Config.File operation",{
+  it("then operations contains open.config.file operation",{
     # When
     operations <- ODBC.Configuration.Broker()
 
     # Then
-    operations[['Open.Config.File']] |> expect.exist()
+    operations[['open.config.file']] |> expect.exist()
   })
-  it("then operations contains Get.Preset.Config operation",{
+  it("then operations contains get.preset.config operation",{
     # When
     operations <- ODBC.Configuration.Broker()
 
     # Then
-    operations[['Get.Preset.Config']] |> expect.exist()
+    operations[['get.preset.config']] |> expect.exist()
   })
-  it("then operations contains Get.Manual.Config operation",{
+  it("then operations contains get.manual.config operation",{
     # When
     operations <- ODBC.Configuration.Broker()
 
     # Then
-    operations[['Get.Manual.Config']] |> expect.exist()
+    operations[['get.manual.config']] |> expect.exist()
   })
 })
 
-describe("When configuration <- operation[['Get.Preset.Config']]()",{
+describe("When configuration <- operation[['get.preset.config']]()",{
   it("then configuration is a list",{
     skip_if_not(environment == 'local')
     # Given
+
     operations <- ODBC.Configuration.Broker()
 
     # When
-    configuration <- operations[['Get.Preset.Config']]()
+    configuration <- operations[['get.preset.config']]()
 
     # Then
     configuration |> expect.list()
@@ -53,7 +54,7 @@ describe("When configuration <- operation[['Get.Preset.Config']]()",{
     operations <- ODBC.Configuration.Broker()
 
     # When
-    configuration <- operations[['Get.Preset.Config']]()
+    configuration <- operations[['get.preset.config']]()
 
     # Then
     configuration[['drv']] |> expect.exist()
@@ -64,7 +65,7 @@ describe("When configuration <- operation[['Get.Preset.Config']]()",{
     operations <- ODBC.Configuration.Broker()
 
     # When
-    configuration <- operations[['Get.Preset.Config']]()
+    configuration <- operations[['get.preset.config']]()
 
     # Then
     configuration[['dsn']] |> expect.exist()
@@ -75,7 +76,7 @@ describe("When configuration <- operation[['Get.Preset.Config']]()",{
     operations <- ODBC.Configuration.Broker()
 
     # When
-    configuration <- operations[['Get.Preset.Config']]()
+    configuration <- operations[['get.preset.config']]()
 
     # Then
     configuration[['uid']] |> expect.exist()
@@ -86,7 +87,7 @@ describe("When configuration <- operation[['Get.Preset.Config']]()",{
     operations <- ODBC.Configuration.Broker()
 
     # When
-    configuration <- operations[['Get.Preset.Config']]()
+    configuration <- operations[['get.preset.config']]()
 
     # Then
     configuration[['pwd']] |> expect.exist()
@@ -94,70 +95,70 @@ describe("When configuration <- operation[['Get.Preset.Config']]()",{
   it("then an exception is thrown is no DSN found in .Renviron",{
     skip_if_not(environment == 'local')
     # Given
-    environment <- Environment::Environment()
+    environment <- Environment::Configurator()
     operation  <- ODBC.Configuration.Broker()
 
     expect.error <- "No DSN environment variable not found in .Renviron Configuration file."
 
-    cache <- 'DSN' |> environment[['Get.Env.Variable']]()
+    cache <- 'DSN' |> environment[['get.env.variable']]()
 
     # When
-    'DSN' |> environment[['Clear.Env.Variable']]()
+    'DSN' |> environment[['clear.env.variable']]()
 
     # Then
-    operation[['Get.Preset.Config']]() |> expect.error(expect.error)
+    operation[['get.preset.config']]() |> expect.error(expect.error)
 
     # Then
-    'DSN' |> environment[['Cache.Env.Variable']](cache)
+    'DSN' |> environment[['cache.env.variable']](cache)
   })
   it("then an exception is thrown is no UID found in .Renviron",{
     skip_if_not(environment == 'local')
     # Given
-    environment <- Environment::Environment()
+    environment <- Environment::Configurator()
     operation  <- ODBC.Configuration.Broker()
 
     expect.error <- "No UID environment variable not found in .Renviron Configuration file."
 
-    cache <- 'UID' |> environment[['Get.Env.Variable']]()
+    cache <- 'UID' |> environment[['get.env.variable']]()
 
     # When
-    'UID' |> environment[['Clear.Env.Variable']]()
+    'UID' |> environment[['clear.env.variable']]()
 
     # Then
-    operation[['Get.Preset.Config']]() |> expect.error(expect.error)
+    operation[['get.preset.config']]() |> expect.error(expect.error)
 
     # Then
-    'UID' |> environment[['Cache.Env.Variable']](cache)
+    'UID' |> environment[['cache.env.variable']](cache)
   })
   it("then an exception is thrown is no PWD found in .Renviron",{
     skip_if_not(environment == 'local')
     # Given
-    environment <- Environment::Environment()
+    environment <- Environment::Configurator()
     operation  <- ODBC.Configuration.Broker()
 
     expect.error <- "No PWD environment variable not found in .Renviron Configuration file."
 
-    cache <- 'PWD' |> environment[['Get.Env.Variable']]()
+    cache <- 'PWD' |> environment[['get.env.variable']]()
 
     # When
-    'PWD' |> environment[['Clear.Env.Variable']]()
+    'PWD' |> environment[['clear.env.variable']]()
 
     # Then
-    operation[['Get.Preset.Config']]() |> expect.error(expect.error)
+    operation[['get.preset.config']]() |> expect.error(expect.error)
 
     # Then
-    'PWD' |> environment[['Cache.Env.Variable']](cache)
+    'PWD' |> environment[['cache.env.variable']](cache)
   })
 })
 
-describe("When configuration <- operation[['Get.Manual.Config']]()",{
+describe("When configuration <- operation[['get.manual.config']]()",{
   it("then configuration is a list",{
     skip_if_not(environment == 'local')
     # Given
     operations <- ODBC.Configuration.Broker()
 
     # When
-    configuration <- operations[['Get.Manual.Config']]()
+    configuration <- operations[['get.manual.config']]()
 
     # Then
     configuration |> expect.list()
@@ -168,7 +169,7 @@ describe("When configuration <- operation[['Get.Manual.Config']]()",{
     operations <- ODBC.Configuration.Broker()
 
     # When
-    configuration <- operations[['Get.Manual.Config']]()
+    configuration <- operations[['get.manual.config']]()
 
     # Then
     configuration[['drv']] |> expect.exist()
@@ -179,7 +180,7 @@ describe("When configuration <- operation[['Get.Manual.Config']]()",{
     operations <- ODBC.Configuration.Broker()
 
     # When
-    configuration <- operations[['Get.Manual.Config']]()
+    configuration <- operations[['get.manual.config']]()
 
     # Then
     configuration[['driver']] |> expect.exist()
@@ -190,7 +191,7 @@ describe("When configuration <- operation[['Get.Manual.Config']]()",{
     operations <- ODBC.Configuration.Broker()
 
     # When
-    configuration <- operations[['Get.Manual.Config']]()
+    configuration <- operations[['get.manual.config']]()
 
     # Then
     configuration[['server']] |> expect.exist()
@@ -201,7 +202,7 @@ describe("When configuration <- operation[['Get.Manual.Config']]()",{
     operations <- ODBC.Configuration.Broker()
 
     # When
-    configuration <- operations[['Get.Manual.Config']]()
+    configuration <- operations[['get.manual.config']]()
 
     # Then
     configuration[['database']] |> expect.exist()
@@ -212,7 +213,7 @@ describe("When configuration <- operation[['Get.Manual.Config']]()",{
     operations <- ODBC.Configuration.Broker()
 
     # When
-    configuration <- operations[['Get.Manual.Config']]()
+    configuration <- operations[['get.manual.config']]()
 
     # Then
     configuration[['uid']] |> expect.exist()
@@ -223,7 +224,7 @@ describe("When configuration <- operation[['Get.Manual.Config']]()",{
     operations <- ODBC.Configuration.Broker()
 
     # When
-    configuration <- operations[['Get.Manual.Config']]()
+    configuration <- operations[['get.manual.config']]()
 
     # Then
     configuration[['pwd']] |> expect.exist()
@@ -231,96 +232,96 @@ describe("When configuration <- operation[['Get.Manual.Config']]()",{
   it("then an exception is thrown is no DRIVER found in .Renviron",{
     skip_if_not(environment == 'local')
     # Given
-    environment <- Environment::Environment()
+    environment <- Environment::Configurator()
     operation  <- ODBC.Configuration.Broker()
 
     expect.error <- "No DRIVER environment variable not found in .Renviron Configuration file."
 
-    cache <- 'DRIVER' |> environment[['Get.Env.Variable']]()
+    cache <- 'DRIVER' |> environment[['get.env.variable']]()
 
     # When
-    'DRIVER' |> environment[['Clear.Env.Variable']]()
+    'DRIVER' |> environment[['clear.env.variable']]()
 
     # Then
-    operation[['Get.Manual.Config']]() |> expect.error(expect.error)
+    operation[['get.manual.config']]() |> expect.error(expect.error)
 
     # Then
-    'DRIVER' |> environment[['Cache.Env.Variable']](cache)
+    'DRIVER' |> environment[['cache.env.variable']](cache)
   })
   it("then an exception is thrown is no SERVER found in .Renviron",{
     skip_if_not(environment == 'local')
     # Given
-    environment <- Environment::Environment()
+    environment <- Environment::Configurator()
     operation  <- ODBC.Configuration.Broker()
 
     expect.error <- "No SERVER environment variable not found in .Renviron Configuration file."
 
-    cache <- 'SERVER' |> environment[['Get.Env.Variable']]()
+    cache <- 'SERVER' |> environment[['get.env.variable']]()
 
     # When
-    'SERVER' |> environment[['Clear.Env.Variable']]()
+    'SERVER' |> environment[['clear.env.variable']]()
 
     # Then
-    operation[['Get.Manual.Config']]() |> expect.error(expect.error)
+    operation[['get.manual.config']]() |> expect.error(expect.error)
 
     # Then
-    'SERVER' |> environment[['Cache.Env.Variable']](cache)
+    'SERVER' |> environment[['cache.env.variable']](cache)
   })
   it("then an exception is thrown is no DATABASE found in .Renviron",{
     skip_if_not(environment == 'local')
     # Given
-    environment <- Environment::Environment()
+    environment <- Environment::Configurator()
     operation  <- ODBC.Configuration.Broker()
 
     expect.error <- "No DATABASE environment variable not found in .Renviron Configuration file."
 
-    cache <- 'DATABASE' |> environment[['Get.Env.Variable']]()
+    cache <- 'DATABASE' |> environment[['get.env.variable']]()
 
     # When
-    'DATABASE' |> environment[['Clear.Env.Variable']]()
+    'DATABASE' |> environment[['clear.env.variable']]()
 
     # Then
-    operation[['Get.Manual.Config']]() |> expect.error(expect.error)
+    operation[['get.manual.config']]() |> expect.error(expect.error)
 
     # Then
-    'DATABASE' |> environment[['Cache.Env.Variable']](cache)
+    'DATABASE' |> environment[['cache.env.variable']](cache)
   })
   it("then an exception is thrown is no UID found in .Renviron",{
     skip_if_not(environment == 'local')
     # Given
-    environment <- Environment::Environment()
+    environment <- Environment::Configurator()
     operation  <- ODBC.Configuration.Broker()
 
     expect.error <- "No UID environment variable not found in .Renviron Configuration file."
 
-    cache <- 'UID' |> environment[['Get.Env.Variable']]()
+    cache <- 'UID' |> environment[['get.env.variable']]()
 
     # When
-    'UID' |> environment[['Clear.Env.Variable']]()
+    'UID' |> environment[['clear.env.variable']]()
 
     # Then
-    operation[['Get.Manual.Config']]() |> expect.error(expect.error)
+    operation[['get.manual.config']]() |> expect.error(expect.error)
 
     # Then
-    'UID' |> environment[['Cache.Env.Variable']](cache)
+    'UID' |> environment[['cache.env.variable']](cache)
   })
   it("then an exception is thrown is no PWD found in .Renviron",{
     skip_if_not(environment == 'local')
     # Given
-    environment <- Environment::Environment()
+    environment <- Environment::Configurator()
     operation  <- ODBC.Configuration.Broker()
 
     expect.error <- "No PWD environment variable not found in .Renviron Configuration file."
 
-    cache <- 'PWD' |> environment[['Get.Env.Variable']]()
+    cache <- 'PWD' |> environment[['get.env.variable']]()
 
     # When
-    'PWD' |> environment[['Clear.Env.Variable']]()
+    'PWD' |> environment[['clear.env.variable']]()
 
     # Then
-    operation[['Get.Manual.Config']]() |> expect.error(expect.error)
+    operation[['get.manual.config']]() |> expect.error(expect.error)
 
     # Then
-    'PWD' |> environment[['Cache.Env.Variable']](cache)
+    'PWD' |> environment[['cache.env.variable']](cache)
   })
 })

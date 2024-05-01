@@ -1,5 +1,5 @@
-Todo.Model.Validator <- \() {
-  exception <- Todo.Model.Exceptions()
+Todo.Validator <- \() {
+  exception <- Todo.Validation.Exceptions()
 
   validations <- list()
   validations[['Todo']]       <- \(todo) { 

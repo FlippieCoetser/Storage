@@ -12,128 +12,128 @@ describe("When operations <- Memory.Storage.Broker()",{
     # Then
     operations |> expect.list()
   })
-  it("then operations contains 'Create.Table' operation",{
+  it("then operations contains 'create.table' operation",{
     # When
     operations <- Memory.Storage.Broker()
 
     # Then
-    operations[['Create.Table']] |> expect.exist()
+    operations[['create.table']] |> expect.exist()
   })
-  it("then operations contains 'Seed.Table' operation",{
+  it("then operations contains 'seed.table' operation",{
     # When
     operations <- Memory.Storage.Broker()
 
     # Then
-    operations[['Seed.Table']] |> expect.exist()
+    operations[['seed.table']] |> expect.exist()
   })
-  it("then operations contains 'Get.Tables' operation",{
+  it("then operations contains 'get.tables' operation",{
     # When
     operations <- Memory.Storage.Broker()
 
     # Then
-    operations[['Get.Tables']] |> expect.exist()
+    operations[['get.tables']] |> expect.exist()
   })
-  it("then operations contains 'Execute.Query' operation",{
+  it("then operations contains 'execute.query' operation",{
     # When
     operations <- Memory.Storage.Broker()
 
     # Then
-    operations[['Execute.Query']] |> expect.exist()
+    operations[['execute.query']] |> expect.exist()
   })
-  it("then operations contains 'Insert' operation",{
+  it("then operations contains 'insert' operation",{
     # When
     operations <- Memory.Storage.Broker()
 
     # Then
-    operations[['Insert']] |> expect.exist()
+    operations[['insert']] |> expect.exist()
   })
-  it("then operations contains 'Select' operation",{
+  it("then operations contains 'select' operation",{
     # When
     operations <- Memory.Storage.Broker()
 
     # Then
-    operations[['Select']] |> expect.exist()
+    operations[['select']] |> expect.exist()
   })
-  it("then operations contains 'SelectWhereId' operation",{
+  it("then operations contains 'select.where.Id' operation",{
     # When
     operations <- Memory.Storage.Broker()
 
     # Then
-    operations[['SelectWhereId']] |> expect.exist()
+    operations[['select.where.Id']] |> expect.exist()
   })
-  it("then operations contains 'Update' operation",{
+  it("then operations contains 'update' operation",{
     # When
     operations <- Memory.Storage.Broker()
 
     # Then
-    operations[['Update']] |> expect.exist()
+    operations[['update']] |> expect.exist()
   })
-  it("then operations contains 'Delete' operation",{
+  it("then operations contains 'delete' operation",{
     # When
     operations <- Memory.Storage.Broker()
 
     # Then
-    operations[['Delete']] |> expect.exist()
+    operations[['delete']] |> expect.exist()
   })
 })
 
-describe("When model |> operation[['Create.Table']](table)",{
+describe("When model |> operation[['create.table']](table)",{
   it("then table is created in memory",{
     # Given
     operation <- Memory.Storage.Broker()
 
-    model <- Todo.Model()
+    model <- Todo.Fields()
     table <- 'Todo'
 
     expected.tables <- data.frame(name = table)
 
     # When
-    model |> operation[['Create.Table']](table)
+    model |> operation[['create.table']](table)
 
     # Then
-    operation[['Get.Tables']]() |> expect.equal(expected.tables)
+    operation[['get.tables']]() |> expect.equal(expected.tables)
   })
 })
 
-describe("when entities |> operation[['Seed.Table']](table)",{
+describe("when entities |> operation[['seed.table']](table)",{
   it("then entities are inserted into table in memory",{
     # Given
     operation <- Memory.Storage.Broker()
 
     table <- 'Todo'
 
-    seed.entities     <- Todo.Mock.Data
+    seed.entities     <- Todos
     expected.entities <- seed.entities
 
     # When
-    seed.entities |> operation[['Seed.Table']](table)
+    seed.entities |> operation[['seed.table']](table)
 
     # Then
-    actual.entities <- table |> operation[['Select']]()
+    actual.entities <- table |> operation[['select']]()
     actual.entities |> expect.equal.data(expected.entities)
   })
 })
 
-describe("when operation[['Get.Tables']]()",{
+describe("when operation[['get.tables']]()",{
   it("then returns data.frame with table names if data in memory has one or more table",{
     # Given
     operation <- Memory.Storage.Broker()
 
     table <- 'Todo'
 
-    Todo.Mock.Data |> operation[['Seed.Table']](table)
+    Todos |> operation[['seed.table']](table)
 
     expected.table.names <- data.frame(name = table)
 
     # When
-    actual.table.names <- operation[['Get.Tables']]()
+    actual.table.names <- operation[['get.tables']]()
 
     # Then
     actual.table.names |> expect.equal(expected.table.names)
   })
 })
 
-describe("when query |> operation[['Execute.Query']]()",{
+describe("when query |> operation[['execute.query']]()",{
   it("then an empty data frame is returned",{
     # Given
     operation <- Memory.Storage.Broker()
@@ -141,90 +141,90 @@ describe("when query |> operation[['Execute.Query']]()",{
     query   <- "SELECT 1"
 
     # When
-    results <- query |> operation[['Execute.Query']]()
+    results <- query |> operation[['execute.query']]()
 
     # Then
     results |> expect.data.frame()
   })
 })
 
-describe("when entity |> operation[['Insert']](table)",{
+describe("when entity |> operation[['insert']](table)",{
   it("then entity is inserted into memory data",{
     # Given
     operation <- Memory.Storage.Broker()
 
     table <- 'Todo'
 
-    Todo.Mock.Data |> operation[['Seed.Table']](table)
+    Todos |> operation[['seed.table']](table)
 
-    new.entity <- 'Task' |> Todo()
+    new.entity <- 'Task' |> Todo.Model()
     id         <- new.entity[['id']]
 
     expected.entity <- new.entity
 
     # When
-    new.entity |> operation[['Insert']](table)
+    new.entity |> operation[['insert']](table)
 
     # Then
-    actual.entity <- id |> operation[['SelectWhereId']](table)
+    actual.entity <- id |> operation[['select.where.Id']](table)
     actual.entity |> expect.equal.data(expected.entity)
 
-    id |> operation[['Delete']](table)
+    id |> operation[['delete']](table)
   })
 })
 
-describe("when table |> operation[['Select']]()",{
+describe("when table |> operation[['select']]()",{
   it("then all entities are returned from memory data",{
     # Given
     operation <- Memory.Storage.Broker()
 
     table <- 'Todo'
 
-    Todo.Mock.Data |> operation[['Seed.Table']](table)
+    Todos |> operation[['seed.table']](table)
 
-    expected.entities <- Todo.Mock.Data
+    expected.entities <- Todos
 
     # When
-    actual.entities <- table |> operation[['Select']]()
+    actual.entities <- table |> operation[['select']]()
 
     # Then
     actual.entities |> expect.equal.data(expected.entities)
   })
 })
 
-describe("when id |> operation[['SelectWhereId']](table)",{
+describe("when id |> operation[['select.where.Id']](table)",{
   it("then entity is returned from memory data",{
     # Given
     operation <- Memory.Storage.Broker()
 
     table <- 'Todo'
 
-    Todo.Mock.Data |> operation[['Seed.Table']](table)
+    Todos |> operation[['seed.table']](table)
 
-    existing.entity <- Todo.Mock.Data |> tail(1)
+    existing.entity <- Todos |> tail(1)
 
     expected.entity <- existing.entity
     id              <- existing.entity[['id']]
 
     # When
-    actual.entity <- id |> operation[['SelectWhereId']](table)
+    actual.entity <- id |> operation[['select.where.Id']](table)
 
     # Then
     actual.entity |> expect.equal.data(expected.entity)
   })
 })
 
-describe("when entity |> operation[['Update']](table)",{
+describe("when entity |> operation[['update']](table)",{
   it("then entity is updated in table in memory data",{
     # Given
     operation <- Memory.Storage.Broker()
 
     table <- 'Todo'
 
-    Todo.Mock.Data |> operation[['Seed.Table']](table)
+    Todos |> operation[['seed.table']](table)
 
-    new.entity <- 'Task' |> Todo()
-    new.entity |> operation[['Insert']](table)
+    new.entity <- 'Task' |> Todo.Model()
+    new.entity |> operation[['insert']](table)
 
     id <- new.entity[['id']]
 
@@ -234,36 +234,36 @@ describe("when entity |> operation[['Update']](table)",{
     expected.entity <- updated.entity
 
     # When
-    updated.entity |> operation[['Update']](table)
+    updated.entity |> operation[['update']](table)
 
     # Then
-    actual.entity <- id |> operation[['SelectWhereId']](table)
+    actual.entity <- id |> operation[['select.where.Id']](table)
     actual.entity |> expect.equal.data(expected.entity)
 
-    id |> operation[['Delete']](table)
+    id |> operation[['delete']](table)
   })
 })
 
-describe("when id |> operation[['Delete']](table)",{
+describe("when id |> operation[['delete']](table)",{
   it("then entity with matching id is deleted from table in memory data if exist",{
     # Given
     operation <- Memory.Storage.Broker()
 
     table <- 'Todo'
 
-    Todo.Mock.Data |> operation[['Seed.Table']](table)
+    Todos |> operation[['seed.table']](table)
 
-    new.entity <- 'Task' |> Todo()
-    new.entity |> operation[['Insert']](table)
+    new.entity <- 'Task' |> Todo.Model()
+    new.entity |> operation[['insert']](table)
     id <- new.entity[['id']]
 
-    expected.entities <- Todo.Mock.Data
+    expected.entities <- Todos
 
     # When
-    id |> operation[['Delete']](table)
+    id |> operation[['delete']](table)
 
     # Then
-    actual.entities <- table |> operation[['Select']]()
+    actual.entities <- table |> operation[['select']]()
     actual.entities |> expect.equal.data(expected.entities)
   })
 })

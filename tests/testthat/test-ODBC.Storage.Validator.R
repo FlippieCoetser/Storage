@@ -47,12 +47,12 @@ describe("When validators <- ODBC.Storage.Validator()",{
     # Then
     validators[["Id"]] |> expect.exist()
   })
-  it("then validators contains 'Is.Existing.Table' validator",{
+  it("then validators contains 'is.existing.table' validator",{
     # Given
     validators <- ODBC.Storage.Validator()
 
     # Then
-    validators[["Is.Existing.Table"]] |> expect.exist()
+    validators[["is.existing.table"]] |> expect.exist()
   })
 })
 
@@ -226,7 +226,7 @@ describe("When id |> validate[['Id']]()",{
   })
 })
 
-describe("When table |> validate[['Is.Existing.Table']](name)",{
+describe("When table |> validate[['is.existing.table']](name)",{
   it("then no exception is thrown if table is not empty data.frame",{
     # Given
     validator <- ODBC.Storage.Validator()
@@ -234,7 +234,7 @@ describe("When table |> validate[['Is.Existing.Table']](name)",{
     table <- data.frame(name = 'Todo')
     
     # Then
-    table |> validator[['Is.Existing.Table']]() |> expect.no.error()
+    table |> validator[['is.existing.table']]() |> expect.no.error()
   })
   it("then an exception is thrown if table is empty data.frame",{
     # Given
@@ -243,9 +243,9 @@ describe("When table |> validate[['Is.Existing.Table']](name)",{
     empty.table <- data.frame()
     name <- 'Invalid'
     
-    expected.error <- 'ODBC.Storage: Table.Invalid: Invalid is not a valid table.'
+    expected.error <- 'ODBC.Storage: table.invalid: Invalid is not a valid table.'
     
     # Then
-    empty.table |> validator[['Is.Existing.Table']](name) |> expect.error(expected.error)
+    empty.table |> validator[['is.existing.table']](name) |> expect.error(expected.error)
   })
 })

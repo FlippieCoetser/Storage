@@ -5,12 +5,12 @@
 #' 
 #' @usage NULL
 #' @returns A `list` of functions: 
-#' * `Execute.Query(query)`
-#' * `Add(entity, table)`
-#' * `Retrieve(table, fields)`
-#' * `RetrieveWhereId(id, table, fields)`
-#' * `Modify(entity, table)`
-#' * `Remove(id, table)`
+#' * `execute.query(query)`
+#' * `add(entity, table)`
+#' * `retrieve(table, fields)`
+#' * `retrieve.where.id(id, table, fields)`
+#' * `modify(entity, table)`
+#' * `remove(id, table)`
 #' @export
 Storage <- Storage.Orchestrator
 

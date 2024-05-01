@@ -6,11 +6,11 @@
 #' 
 #' @usage NULL
 #' @returns A `list` of functions: 
-#' * `Insert(todo)`
-#' * `Select(...)`
-#' * `SelectWhereId(id)`
-#' * `Update(todo)`
-#' * `Delete(id)`
+#' * `insert(todo)`
+#' * `select(...)`
+#' * `select.where.Id(id)`
+#' * `update(todo)`
+#' * `delete(id)`
 #' @export
 Todo.Broker <- \(storage) {
   sql.utilities <- Query::SQL.Utilities()
@@ -24,20 +24,20 @@ Todo.Broker <- \(storage) {
   table <- 'Todo'
 
   operations <- list()
-  operations[['Insert']]        <- \(todo) {
-    todo |> storage[['Add']](table)
+  operations[['insert']]        <- \(todo) {
+    todo |> storage[['add']](table)
   }
-  operations[['Select']]        <- \(...)  {
-    table |> storage[['Retrieve']](fields)
+  operations[['select']]        <- \(...)  {
+    table |> storage[['retrieve']](fields)
   }
-  operations[['SelectWhereId']] <- \(id)   {
-    id |> storage[['RetrieveWhereId']](table, fields)
+  operations[['select.where.Id']] <- \(id)   {
+    id |> storage[['retrieve.where.id']](table, fields)
   }
-  operations[['Update']]        <- \(todo) {
-    todo |> storage[['Modify']](table)
+  operations[['update']]        <- \(todo) {
+    todo |> storage[['modify']](table)
   }
-  operations[['Delete']]        <- \(id)   {
-    id |> storage[['Remove']](table)
+  operations[['delete']]        <- \(id)   {
+    id |> storage[['remove']](table)
   }
   return(operations)
 }

@@ -8,66 +8,66 @@ describe("When orchestrations <- configuration |> Storage.Orchestrator()",{
   it("then orchestrations is a list",{
     skip_if_not(environment == 'local')
     # When
-    orchestrations <- configurator[["Get.Config"]]() |> Storage.Orchestrator()
+    orchestrations <- configurator[["get.config"]]() |> Storage.Orchestrator()
 
     # Then
     orchestrations |> expect.list()
   })
-  it("then orchestrations contains 'Seed.Table' orchestration",{
+  it("then orchestrations contains 'seed.table' orchestration",{
     skip_if_not(environment == 'local')
     # When
-    orchestrations <- configurator[["Get.Config"]]() |> Storage.Orchestrator()
+    orchestrations <- configurator[["get.config"]]() |> Storage.Orchestrator()
 
     # Then
-    orchestrations[['Seed.Table']] |> expect.exist()
+    orchestrations[['seed.table']] |> expect.exist()
   })
-  it("then orchestrations contains 'Execute.Query' orchestration",{
+  it("then orchestrations contains 'execute.query' orchestration",{
     skip_if_not(environment == 'local')
     # When
-    orchestrations <- configurator[["Get.Config"]]() |> Storage.Orchestrator()
+    orchestrations <- configurator[["get.config"]]() |> Storage.Orchestrator()
 
     # Then
-    orchestrations[['Execute.Query']] |> expect.exist()
+    orchestrations[['execute.query']] |> expect.exist()
   })
-  it("then orchestrations contains 'Add' orchestration",{
+  it("then orchestrations contains 'add' orchestration",{
     skip_if_not(environment == 'local')
     # When
-    orchestrations <- configurator[["Get.Config"]]() |> Storage.Orchestrator()
+    orchestrations <- configurator[["get.config"]]() |> Storage.Orchestrator()
 
     # Then
-    orchestrations[['Add']] |> expect.exist()
+    orchestrations[['add']] |> expect.exist()
   })
-  it("then orchestrations contains 'Retrieve' orchestration",{
+  it("then orchestrations contains 'retrieve' orchestration",{
     skip_if_not(environment == 'local')
     # When
-    orchestrations <- configurator[["Get.Config"]]() |> Storage.Orchestrator()
+    orchestrations <- configurator[["get.config"]]() |> Storage.Orchestrator()
 
     # Then
-    orchestrations[['Retrieve']] |> expect.exist()
+    orchestrations[['retrieve']] |> expect.exist()
   })
-  it("then orchestrations contains 'RetrieveWhereId' orchestration",{
+  it("then orchestrations contains 'retrieve.where.id' orchestration",{
     skip_if_not(environment == 'local')
     # When
-    orchestrations <- configurator[["Get.Config"]]() |> Storage.Orchestrator()
+    orchestrations <- configurator[["get.config"]]() |> Storage.Orchestrator()
 
     # Then
-    orchestrations[['RetrieveWhereId']] |> expect.exist()
+    orchestrations[['retrieve.where.id']] |> expect.exist()
   })
-  it("then orchestrations contains 'Modify' orchestration",{
+  it("then orchestrations contains 'modify' orchestration",{
     skip_if_not(environment == 'local')
     # When
-    orchestrations <- configurator[["Get.Config"]]() |> Storage.Orchestrator()
+    orchestrations <- configurator[["get.config"]]() |> Storage.Orchestrator()
 
     # Then
-    orchestrations[['Modify']] |> expect.exist()
+    orchestrations[['modify']] |> expect.exist()
   })
-  it("then orchestrations contains 'Remove' orchestration",{
+  it("then orchestrations contains 'remove' orchestration",{
     skip_if_not(environment == 'local')
     # When
-    orchestrations <- configurator[["Get.Config"]]() |> Storage.Orchestrator()
+    orchestrations <- configurator[["get.config"]]() |> Storage.Orchestrator()
 
     # Then
-    orchestrations[['Remove']] |> expect.exist()
+    orchestrations[['remove']] |> expect.exist()
   })
 })
 
@@ -82,41 +82,41 @@ describe("When configuration |> Storage.Orchestration()",{
   })
 })
 
-describe("when query |> orchestrate[['Execute.Query']]()",{
+describe("when query |> orchestrate[['execute.query']]()",{
   it("then an exception is thrown if orchestration service instantiated with type equal memory",{
     # Given
     type <- 'memory'
     orchestrate <- configuration |> Storage.Orchestrator(type)
 
-    expected.error <- 'Memory.Storage: Not.Implemented.'
+    expected.error <- 'Memory.Storage: not.implemented.'
 
     # When
     query <- "SELECT 1"
 
     # Then
-    query |> orchestrate[['Execute.Query']]() |> expect.error(expected.error)
+    query |> orchestrate[['execute.query']]() |> expect.error(expected.error)
   })
   it("then no exception if thrown if orchestration service instantiated with type equal ODBC",{
     skip_if_not(environment == 'local')
     # Given
     type <- 'odbc'
-    orchestrate <- configurator[["Get.Config"]]() |> Storage.Orchestrator(type)
+    orchestrate <- configurator[["get.config"]]() |> Storage.Orchestrator(type)
 
     # When
     query <- "SELECT 1"
 
     # Then
-    query |> orchestrate[['Execute.Query']]() |> expect.no.error()
+    query |> orchestrate[['execute.query']]() |> expect.no.error()
   })
   it("then no exception is thrown if orchestration service instantiated with no type provided",{
     skip_if_not(environment == 'local')
     # Given
-    orchestrate <- configurator[["Get.Config"]]() |> Storage.Orchestrator()
+    orchestrate <- configurator[["get.config"]]() |> Storage.Orchestrator()
 
     # When
     query <- "SELECT 1"
 
     # Then
-    query |> orchestrate[['Execute.Query']]() |> expect.no.error()
+    query |> orchestrate[['execute.query']]() |> expect.no.error()
   })
 })
