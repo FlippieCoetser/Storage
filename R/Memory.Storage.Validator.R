@@ -29,7 +29,7 @@ Memory.Storage.Validator <- \() {
     id |> 
       validators[['is.not.NULL']]('id') |>
       validators[['is.character']]()    |>
-      validators[['is.UUID']]('id')
+      validators[['is.UUID']]()
   }
   validators[['not.implemented']]    <- \(input) {
     input |> exception[['not.implemented']]()

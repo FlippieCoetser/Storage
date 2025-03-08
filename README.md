@@ -133,6 +133,8 @@ storage <- configuration |> Storage::Storage(type = 'memory')
 
 ### ODBC Data Store
 
+> Note: Two types of configuration sets are support for `odbc` data stores: `Preset` and `Manual`. Where `Preset` require additional operating system configuration
+
 1. Create a new instance of `ODBC.Configurator`
 
 ```r

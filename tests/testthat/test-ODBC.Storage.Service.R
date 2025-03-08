@@ -354,7 +354,7 @@ describe("When id |> service[['retrieve.where.id']](table, fields)",{
 
     services <- broker |> ODBC.Storage.Service()
 
-    expected.error <- "Identifier.Invalid: 'id' is not a valid UUID."
+    expected.error <- "Identifier.Invalid: 'a' is not a valid UUID."
 
     # When
     id <- 'a'
@@ -604,7 +604,7 @@ describe("When id |> service[['remove']](table)",{
 
     services <- broker |> ODBC.Storage.Service()
 
-    expected.error <- "Identifier.Invalid: 'id' is not a valid UUID."
+    expected.error <- "Identifier.Invalid: 'a' is not a valid UUID."
 
     # When
     id <- 'a'

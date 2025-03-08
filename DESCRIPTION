@@ -1,6 +1,6 @@
 Package: Storage
 Title: Data Access Layer
-Version: 0.0.1.0003
+Version: 0.0.1.0004
 Authors@R: 
     person(given = "Flippie",
            family = "Coetser",
@@ -21,7 +21,7 @@ Imports:
     odbc,
     uuid
 Remotes: 
-    FlippieCoetser/Validate,
+    scalable-software/Validate,
     FlippieCoetser/Environment,
     FlippieCoetser/Query
 Suggests: 

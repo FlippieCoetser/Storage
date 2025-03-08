@@ -484,7 +484,7 @@ describe("When id |> service[['retrieve.where.id']](table, fields)",{
       Memory.Storage.Broker() |> 
       Memory.Storage.Service()
 
-    expected.error <- "Identifier.Invalid: 'id' is not a valid UUID."
+    expected.error <- "Identifier.Invalid: 'InvalidId' is not a valid UUID."
 
     # Then
     'InvalidId' |> service[['retrieve.where.id']](table, fields) |> expect.error(expected.error)
@@ -708,7 +708,7 @@ describe("when id |> service[['remove']](table)",{
       Memory.Storage.Broker() |> 
       Memory.Storage.Service()
     
-    expected.error <- "Identifier.Invalid: 'id' is not a valid UUID."
+    expected.error <- "Identifier.Invalid: 'InvalidId' is not a valid UUID."
 
     # Then
     'InvalidId' |> service[['remove']](table) |> expect.error(expected.error)
