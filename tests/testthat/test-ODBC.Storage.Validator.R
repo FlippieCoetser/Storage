@@ -206,7 +206,7 @@ describe("When id |> validate[['Id']]()",{
     # Given
     validate <- ODBC.Storage.Validator()
     
-    expected.error <- "Identifier.Invalid: 'id' is not a valid UUID."
+    expected.error <- "Identifier.Invalid: '' is not a valid UUID."
     
     # When
     input <- ''
