@@ -325,6 +325,8 @@ describe("When entity |> service[['add']](table)",{
     service  <- 
       Memory.Storage.Broker() |> 
       Memory.Storage.Service()
+
+    table <- 'Todo'
        
     Todos |> service[['seed.table']](table)
 
@@ -388,6 +390,8 @@ describe("When table |> service[['retrieve']](fields)",{
     broker  <- Memory.Storage.Broker()
     service <- broker        |> Memory.Storage.Service()
 
+    table <- 'Todo'
+
     Todos |> service[['seed.table']](table)
 
     expected.entities <- Todos
@@ -426,6 +430,7 @@ describe("When table |> service[['retrieve']](fields)",{
       Memory.Storage.Broker() |> 
       Memory.Storage.Service()
 
+    table <- 'Todo'
     Todos |> service[['seed.table']](table)
 
     invalid.table <- 'table.invalid'
@@ -442,6 +447,8 @@ describe("When id |> service[['retrieve.where.id']](table, fields)",{
     # Given
     broker  <- Memory.Storage.Broker()
     service <- broker        |> Memory.Storage.Service()
+
+    table <- 'Todo'
 
     Todos |> service[['seed.table']](table)
 
@@ -523,6 +530,8 @@ describe("When id |> service[['retrieve.where.id']](table, fields)",{
       Memory.Storage.Broker() |> 
       Memory.Storage.Service()
 
+    table <- 'Todo'
+
     Todos |> service[['seed.table']](table)
 
     existing.entity <- Todos |> tail(1)
@@ -543,6 +552,7 @@ describe("When entity |> service[['modify']](table)",{
     broker  <- Memory.Storage.Broker()
     service <- broker |> Memory.Storage.Service()
 
+    table <- 'Todo'
     Todos |> service[['seed.table']](table)
 
     new.entity <- 'Task' |> Todo.Model()
@@ -627,6 +637,8 @@ describe("When entity |> service[['modify']](table)",{
       Memory.Storage.Broker() |>
       Memory.Storage.Service()
 
+    table <- 'Todo'
+
     Todos |> service[['seed.table']](table)
 
     new.entity <- 'Task' |> Todo.Model()
@@ -641,6 +653,8 @@ describe("When entity |> service[['modify']](table)",{
     service <- 
       Memory.Storage.Broker() |> 
       Memory.Storage.Service()
+
+    table <- 'Todo'
 
     Todos |> service[['seed.table']](table)
 
@@ -664,6 +678,8 @@ describe("when id |> service[['remove']](table)",{
     # Given
     broker  <- Memory.Storage.Broker()
     service <- broker |> Memory.Storage.Service()
+
+    table <- 'Todo'
 
     Todos |> service[['seed.table']](table)
 
@@ -718,6 +734,8 @@ describe("when id |> service[['remove']](table)",{
     broker  <- Memory.Storage.Broker()
     service <- broker |> Memory.Storage.Service()
 
+    table <- 'Todo'
+
     Todos |> service[['seed.table']](table)
 
     new.entity <- 'Task' |> Todo.Model()
@@ -734,6 +752,8 @@ describe("when id |> service[['remove']](table)",{
     # Given
     broker  <- Memory.Storage.Broker()
     service <- broker |> Memory.Storage.Service()
+
+    table <- 'Todo'
 
     Todos |> service[['seed.table']](table)
 
@@ -752,6 +772,8 @@ describe("when id |> service[['remove']](table)",{
     service <- 
       Memory.Storage.Broker() |> 
       Memory.Storage.Service()
+
+    table <- 'Todo'
 
     Todos |> service[['seed.table']](table)
 

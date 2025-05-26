@@ -37,7 +37,7 @@ describe("When operations <- ODBC.Configuration.Broker()",{
 
 describe("When configuration <- operation[['get.preset.config']]()",{
   it("then configuration is a list",{
-    skip_if_not(environment == 'local')
+    skip_if_not(test.environment == 'local')
     # Given
 
     operations <- ODBC.Configuration.Broker()
@@ -49,7 +49,7 @@ describe("When configuration <- operation[['get.preset.config']]()",{
     configuration |> expect.list()
   })
   it("then configuration contains drv parameter",{
-    skip_if_not(environment == 'local')
+    skip_if_not(test.environment == 'local')
     # Given
     operations <- ODBC.Configuration.Broker()
 
@@ -60,7 +60,7 @@ describe("When configuration <- operation[['get.preset.config']]()",{
     configuration[['drv']] |> expect.exist()
   })
   it("then configuration contains dsn parameter",{
-    skip_if_not(environment == 'local')
+    skip_if_not(test.environment == 'local')
     # Given
     operations <- ODBC.Configuration.Broker()
 
@@ -71,7 +71,7 @@ describe("When configuration <- operation[['get.preset.config']]()",{
     configuration[['dsn']] |> expect.exist()
   })
   it("then configuration contains uid parameter",{
-    skip_if_not(environment == 'local')
+    skip_if_not(test.environment == 'local')
     # Given
     operations <- ODBC.Configuration.Broker()
 
@@ -82,7 +82,7 @@ describe("When configuration <- operation[['get.preset.config']]()",{
     configuration[['uid']] |> expect.exist()
   })
   it("then configuration contains pwd parameter",{
-    skip_if_not(environment == 'local')
+    skip_if_not(test.environment == 'local')
     # Given
     operations <- ODBC.Configuration.Broker()
 
@@ -93,7 +93,7 @@ describe("When configuration <- operation[['get.preset.config']]()",{
     configuration[['pwd']] |> expect.exist()
   })
   it("then an exception is thrown is no DSN found in .Renviron",{
-    skip_if_not(environment == 'local')
+    skip_if_not(test.environment == 'local')
     # Given
     environment <- Environment::Configurator()
     operation  <- ODBC.Configuration.Broker()
@@ -112,7 +112,7 @@ describe("When configuration <- operation[['get.preset.config']]()",{
     'DSN' |> environment[['cache.env.variable']](cache)
   })
   it("then an exception is thrown is no UID found in .Renviron",{
-    skip_if_not(environment == 'local')
+    skip_if_not(test.environment == 'local')
     # Given
     environment <- Environment::Configurator()
     operation  <- ODBC.Configuration.Broker()
@@ -131,7 +131,7 @@ describe("When configuration <- operation[['get.preset.config']]()",{
     'UID' |> environment[['cache.env.variable']](cache)
   })
   it("then an exception is thrown is no PWD found in .Renviron",{
-    skip_if_not(environment == 'local')
+    skip_if_not(test.environment == 'local')
     # Given
     environment <- Environment::Configurator()
     operation  <- ODBC.Configuration.Broker()
@@ -153,7 +153,7 @@ describe("When configuration <- operation[['get.preset.config']]()",{
 
 describe("When configuration <- operation[['get.manual.config']]()",{
   it("then configuration is a list",{
-    skip_if_not(environment == 'local')
+    skip_if_not(test.environment == 'local')
     # Given
     operations <- ODBC.Configuration.Broker()
 
@@ -164,7 +164,7 @@ describe("When configuration <- operation[['get.manual.config']]()",{
     configuration |> expect.list()
   })
   it("then configuration contains drv parameter",{
-    skip_if_not(environment == 'local')
+    skip_if_not(test.environment == 'local')
     # Given
     operations <- ODBC.Configuration.Broker()
 
@@ -175,7 +175,7 @@ describe("When configuration <- operation[['get.manual.config']]()",{
     configuration[['drv']] |> expect.exist()
   })
   it("then configuration contains driver parameter",{
-    skip_if_not(environment == 'local')
+    skip_if_not(test.environment == 'local')
     # Given
     operations <- ODBC.Configuration.Broker()
 
@@ -186,7 +186,7 @@ describe("When configuration <- operation[['get.manual.config']]()",{
     configuration[['driver']] |> expect.exist()
   })
   it("then configuration contains server parameter",{
-    skip_if_not(environment == 'local')
+    skip_if_not(test.environment == 'local')
     # Given
     operations <- ODBC.Configuration.Broker()
 
@@ -197,7 +197,7 @@ describe("When configuration <- operation[['get.manual.config']]()",{
     configuration[['server']] |> expect.exist()
   })
   it("then configuration contains database parameter",{
-    skip_if_not(environment == 'local')
+    skip_if_not(test.environment == 'local')
     # Given
     operations <- ODBC.Configuration.Broker()
 
@@ -208,7 +208,7 @@ describe("When configuration <- operation[['get.manual.config']]()",{
     configuration[['database']] |> expect.exist()
   })
   it("then configuration contains uid parameter",{
-    skip_if_not(environment == 'local')
+    skip_if_not(test.environment == 'local')
     # Given
     operations <- ODBC.Configuration.Broker()
 
@@ -219,7 +219,7 @@ describe("When configuration <- operation[['get.manual.config']]()",{
     configuration[['uid']] |> expect.exist()
   })
   it("then configuration contains pwd parameter",{
-    skip_if_not(environment == 'local')
+    skip_if_not(test.environment == 'local')
     # Given
     operations <- ODBC.Configuration.Broker()
 
@@ -230,7 +230,7 @@ describe("When configuration <- operation[['get.manual.config']]()",{
     configuration[['pwd']] |> expect.exist()
   })
   it("then an exception is thrown is no DRIVER found in .Renviron",{
-    skip_if_not(environment == 'local')
+    skip_if_not(test.environment == 'local')
     # Given
     environment <- Environment::Configurator()
     operation  <- ODBC.Configuration.Broker()
@@ -249,7 +249,7 @@ describe("When configuration <- operation[['get.manual.config']]()",{
     'DRIVER' |> environment[['cache.env.variable']](cache)
   })
   it("then an exception is thrown is no SERVER found in .Renviron",{
-    skip_if_not(environment == 'local')
+    skip_if_not(test.environment == 'local')
     # Given
     environment <- Environment::Configurator()
     operation  <- ODBC.Configuration.Broker()
@@ -268,7 +268,7 @@ describe("When configuration <- operation[['get.manual.config']]()",{
     'SERVER' |> environment[['cache.env.variable']](cache)
   })
   it("then an exception is thrown is no DATABASE found in .Renviron",{
-    skip_if_not(environment == 'local')
+    skip_if_not(test.environment == 'local')
     # Given
     environment <- Environment::Configurator()
     operation  <- ODBC.Configuration.Broker()
@@ -287,7 +287,7 @@ describe("When configuration <- operation[['get.manual.config']]()",{
     'DATABASE' |> environment[['cache.env.variable']](cache)
   })
   it("then an exception is thrown is no UID found in .Renviron",{
-    skip_if_not(environment == 'local')
+    skip_if_not(test.environment == 'local')
     # Given
     environment <- Environment::Configurator()
     operation  <- ODBC.Configuration.Broker()
@@ -306,7 +306,7 @@ describe("When configuration <- operation[['get.manual.config']]()",{
     'UID' |> environment[['cache.env.variable']](cache)
   })
   it("then an exception is thrown is no PWD found in .Renviron",{
-    skip_if_not(environment == 'local')
+    skip_if_not(test.environment == 'local')
     # Given
     environment <- Environment::Configurator()
     operation  <- ODBC.Configuration.Broker()

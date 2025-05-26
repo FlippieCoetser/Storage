@@ -1,4 +1,4 @@
-environment <- 'ENVIRONMENT' |> Sys.getenv() |> tryCatch(error = \(e) return('other')) 
+test.environment <- 'ENVIRONMENT' |> Sys.getenv() |> tryCatch(error = \(e) return('other')) 
 
 readRenviron(path.expand("~/.Renviron"))
 

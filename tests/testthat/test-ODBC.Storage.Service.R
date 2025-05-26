@@ -96,7 +96,7 @@ describe("When query |> service[['execute.query']]()",{
 
 describe("When entity |> service[['add']](table)",{
   it("then entity is added to storage",{
-    skip_if_not(environment == 'local')
+    skip_if_not(test.environment == 'local')
     # Given
     broker <- configurator[['get.config']]() |> ODBC.Storage.Broker()
 
@@ -106,6 +106,8 @@ describe("When entity |> service[['add']](table)",{
 
     expected.entity <- entity
     expected.table  <- table
+
+    table <- 'Todo'
 
     # When
     entity |> services[['add']](table)
@@ -125,6 +127,8 @@ describe("When entity |> service[['add']](table)",{
 
     expected.error <- "Argument.NULL: 'entity' cannot not be NULL."
 
+    table <- 'Todo'
+
     # When
     entity <- NULL
 
@@ -140,6 +144,8 @@ describe("When entity |> service[['add']](table)",{
 
     expected.error <- "Type.Mismatch: Got 'list' but expected 'data.frame'."
 
+    table <- 'Todo'
+
     # When
     entity <- list()
 
@@ -154,6 +160,8 @@ describe("When entity |> service[['add']](table)",{
     services <- broker |> ODBC.Storage.Service()
 
     expected.error <- "Rows.Invalid: Got 0 rows but expected 1 rows."
+
+    table <- 'Todo'
 
     # When
     entity <- data.frame()
@@ -196,13 +204,15 @@ describe("When entity |> service[['add']](table)",{
     entity |> services[['add']](table) |> expect.error(expected.error)
   })
   it("then an exception is thrown if entity is not new",{
-    skip_if_not(environment == 'local')
+    skip_if_not(test.environment == 'local')
     # Given
     broker <- configurator[["get.config"]]() |> ODBC.Storage.Broker()
 
     services <- broker |> ODBC.Storage.Service()
 
     expected.error <- "ODBC.Storage: key.violation: Duplicate Primary Key not allowed."
+
+    table <- 'Todo'
 
     entities <- broker[['select']](table, fields) 
 
@@ -213,7 +223,7 @@ describe("When entity |> service[['add']](table)",{
     entity |> services[['add']](table) |> expect.error(expected.error)
   })
   it("then an exception is thrown if table is invalid",{
-    skip_if_not(environment == 'local')
+    skip_if_not(test.environment == 'local')
     # Given
     broker <- configurator[["get.config"]]() |> ODBC.Storage.Broker()
 
@@ -227,6 +237,8 @@ describe("When entity |> service[['add']](table)",{
       Status = 'New'
     )
 
+    table <- 'Todo'
+
     # When
     table <- 'Invalid'
 
@@ -237,11 +249,13 @@ describe("When entity |> service[['add']](table)",{
 
 describe("When table |> service[['retrieve']](fields)",{
   it("then a data.frame is returned from storage",{
-    skip_if_not(environment == 'local')
+    skip_if_not(test.environment == 'local')
     # Given
     broker <- configurator[["get.config"]]() |> ODBC.Storage.Broker()
 
     services <- broker |> ODBC.Storage.Service()
+
+    table <- 'Todo'
 
     # When
     retrieved.entities <- table |> services[['retrieve']](fields)
@@ -282,7 +296,7 @@ describe("When table |> service[['retrieve']](fields)",{
 
   })
   it("then an exception is thrown if table is invalid",{
-    skip_if_not(environment == 'local')
+    skip_if_not(test.environment == 'local')
     # Given
     broker <- configurator[["get.config"]]() |> ODBC.Storage.Broker()
 
@@ -298,11 +312,13 @@ describe("When table |> service[['retrieve']](fields)",{
 
 describe("When id |> service[['retrieve.where.id']](table, fields)",{
   it("then entity wit id is returned from storage",{
-    skip_if_not(environment == 'local')
+    skip_if_not(test.environment == 'local')
     # Given
     broker <- configurator[["get.config"]]() |> ODBC.Storage.Broker()
 
     services <- broker |> ODBC.Storage.Service()
+
+    table <- 'Todo'
     
     existing.entities <- table |> broker[['select']](fields)
     existing.entity   <- existing.entities |> tail(1)
@@ -326,6 +342,8 @@ describe("When id |> service[['retrieve.where.id']](table, fields)",{
 
     expected.error <- "Argument.NULL: 'id' cannot not be NULL."
 
+    table <- 'Todo'
+
     # When
     id <- NULL
 
@@ -340,6 +358,8 @@ describe("When id |> service[['retrieve.where.id']](table, fields)",{
     services <- broker |> ODBC.Storage.Service()
 
     expected.error <- "Type.Mismatch: Got 'list' but expected 'character'."
+
+    table <- 'Todo'
 
     # When
     id <- list()
@@ -356,11 +376,13 @@ describe("When id |> service[['retrieve.where.id']](table, fields)",{
 
     expected.error <- "Identifier.Invalid: 'a' is not a valid UUID."
 
+    table <- 'Todo'
+
     # When
     id <- 'a'
 
     # Then
-    id |> services[['retrieve.where.id']](table, list()) |> expect.error(expected.error)
+    id |> services[['retrieve.where.id']](table) |> expect.error(expected.error)
   })
   it("then an exception is thrown if table is NULL",{
     # Given
@@ -397,7 +419,7 @@ describe("When id |> service[['retrieve.where.id']](table, fields)",{
     id |> services[['retrieve.where.id']](table, list()) |> expect.error(expected.error)
   })
   it("then an exception is thrown if table is invalid",{
-    skip_if_not(environment == 'local')
+    skip_if_not(test.environment == 'local')
     # Given
     broker <- configurator[["get.config"]]() |> ODBC.Storage.Broker()
 
@@ -415,11 +437,13 @@ describe("When id |> service[['retrieve.where.id']](table, fields)",{
 
 describe("When entity |> service[['modify']](table)",{
   it("then entity with matching Id is updated in storage",{
-    skip_if_not(environment == 'local')
+    skip_if_not(test.environment == 'local')
     # Given
     broker <- configurator[["get.config"]]() |> ODBC.Storage.Broker()
 
     services <- broker |> ODBC.Storage.Service()
+
+    table <- 'Todo'
 
     new.entity <- 'Task' |> Todo.Model()
     new.entity |> broker[['insert']](table)
@@ -428,6 +452,8 @@ describe("When entity |> service[['modify']](table)",{
     updated.entity[['status']] <- 'Updated'
 
     expected.entity <- updated.entity
+
+
 
     # When
     updated.entity |> services[['modify']](table)
@@ -447,6 +473,8 @@ describe("When entity |> service[['modify']](table)",{
 
     expected.error <- "Argument.NULL: 'entity' cannot not be NULL."
 
+    table <- 'Todo'
+
     # When
     entity <- NULL
 
@@ -462,6 +490,8 @@ describe("When entity |> service[['modify']](table)",{
 
     expected.error <- "Type.Mismatch: Got 'list' but expected 'data.frame'."
 
+    table <- 'Todo'
+
     # When
     entity <- list()
 
@@ -476,6 +506,8 @@ describe("When entity |> service[['modify']](table)",{
     services <- broker |> ODBC.Storage.Service()
 
     expected.error <- "Rows.Invalid: Got 0 rows but expected 1 rows."
+
+    table <- 'Todo'
 
     # When
     entity <- data.frame()
@@ -518,7 +550,7 @@ describe("When entity |> service[['modify']](table)",{
     entity |> services[['modify']](table) |> expect.error(expected.error)
   })
   it("then an exception is thrown if table is invalid",{
-    skip_if_not(environment == 'local')
+    skip_if_not(test.environment == 'local')
     # Given
     broker <- configurator[["get.config"]]() |> ODBC.Storage.Broker()
 
@@ -542,7 +574,7 @@ describe("When entity |> service[['modify']](table)",{
 
 describe("When id |> service[['remove']](table)",{
   it("then entity with matching id is delete from storage",{
-    skip_if_not(environment == 'local')
+    skip_if_not(test.environment == 'local')
     # Given
     broker <- configurator[["get.config"]]() |> ODBC.Storage.Broker()
 
@@ -553,6 +585,8 @@ describe("When id |> service[['remove']](table)",{
       Task = 'Task',
       Status = 'New'
     )
+
+    table <- 'Todo'
 
     new.entity |> broker[['insert']](table)
 
@@ -576,6 +610,8 @@ describe("When id |> service[['remove']](table)",{
 
     expected.error <- "Argument.NULL: 'id' cannot not be NULL."
 
+    table <- 'Todo'
+
     # When
     id <- NULL
 
@@ -591,6 +627,8 @@ describe("When id |> service[['remove']](table)",{
 
     expected.error <- "Type.Mismatch: Got 'list' but expected 'character'."
 
+    table <- 'Todo'
+
     # When
     id <- list()
 
@@ -605,6 +643,8 @@ describe("When id |> service[['remove']](table)",{
     services <- broker |> ODBC.Storage.Service()
 
     expected.error <- "Identifier.Invalid: 'a' is not a valid UUID."
+
+    table <- 'Todo'
 
     # When
     id <- 'a'
@@ -647,7 +687,7 @@ describe("When id |> service[['remove']](table)",{
     id |> services[['remove']](table) |> expect.error(expected.error)
   })
   it("then an exception is thrown if table is invalid",{
-    skip_if_not(environment == 'local')
+    skip_if_not(test.environment == 'local')
     # Given
     broker <- configurator[["get.config"]]() |> ODBC.Storage.Broker()
 

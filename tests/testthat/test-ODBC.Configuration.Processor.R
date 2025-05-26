@@ -55,7 +55,7 @@ describe("When process[['open.config.file']]()",{
 
 describe("When type |> process[['get.config']]()",{
   it("then a preset configuration is returned if type is Preset",{
-    skip_if_not(environment == 'local')
+    skip_if_not(test.environment == 'local')
     # Given
     validate <- ODBC.Configuration.Validator()
 
@@ -73,7 +73,7 @@ describe("When type |> process[['get.config']]()",{
     configuration |> validate[['preset.config']]() |> expect.no.error()
   })
   it("then a manual configuration is returned if type is Manual",{
-    skip_if_not(environment == 'local')
+    skip_if_not(test.environment == 'local')
     # Given
     validate <- ODBC.Configuration.Validator()
 
@@ -91,7 +91,7 @@ describe("When type |> process[['get.config']]()",{
     configuration |> validate[['manual.config']]() |> expect.no.error()
   })
   it("then a preset configuration is returned if not type is provided",{
-    skip_if_not(environment == 'local')
+    skip_if_not(test.environment == 'local')
     # Given
     validate <- ODBC.Configuration.Validator()
 

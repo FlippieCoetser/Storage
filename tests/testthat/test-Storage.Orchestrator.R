@@ -6,7 +6,7 @@ describe('Storage.Orchestrator',{
 
 describe("When orchestrations <- configuration |> Storage.Orchestrator()",{
   it("then orchestrations is a list",{
-    skip_if_not(environment == 'local')
+    skip_if_not(test.environment == 'local')
     # When
     orchestrations <- configurator[["get.config"]]() |> Storage.Orchestrator()
 
@@ -14,7 +14,7 @@ describe("When orchestrations <- configuration |> Storage.Orchestrator()",{
     orchestrations |> expect.list()
   })
   it("then orchestrations contains 'seed.table' orchestration",{
-    skip_if_not(environment == 'local')
+    skip_if_not(test.environment == 'local')
     # When
     orchestrations <- configurator[["get.config"]]() |> Storage.Orchestrator()
 
@@ -22,7 +22,7 @@ describe("When orchestrations <- configuration |> Storage.Orchestrator()",{
     orchestrations[['seed.table']] |> expect.exist()
   })
   it("then orchestrations contains 'execute.query' orchestration",{
-    skip_if_not(environment == 'local')
+    skip_if_not(test.environment == 'local')
     # When
     orchestrations <- configurator[["get.config"]]() |> Storage.Orchestrator()
 
@@ -30,7 +30,7 @@ describe("When orchestrations <- configuration |> Storage.Orchestrator()",{
     orchestrations[['execute.query']] |> expect.exist()
   })
   it("then orchestrations contains 'add' orchestration",{
-    skip_if_not(environment == 'local')
+    skip_if_not(test.environment == 'local')
     # When
     orchestrations <- configurator[["get.config"]]() |> Storage.Orchestrator()
 
@@ -38,7 +38,7 @@ describe("When orchestrations <- configuration |> Storage.Orchestrator()",{
     orchestrations[['add']] |> expect.exist()
   })
   it("then orchestrations contains 'retrieve' orchestration",{
-    skip_if_not(environment == 'local')
+    skip_if_not(test.environment == 'local')
     # When
     orchestrations <- configurator[["get.config"]]() |> Storage.Orchestrator()
 
@@ -46,7 +46,7 @@ describe("When orchestrations <- configuration |> Storage.Orchestrator()",{
     orchestrations[['retrieve']] |> expect.exist()
   })
   it("then orchestrations contains 'retrieve.where.id' orchestration",{
-    skip_if_not(environment == 'local')
+    skip_if_not(test.environment == 'local')
     # When
     orchestrations <- configurator[["get.config"]]() |> Storage.Orchestrator()
 
@@ -54,7 +54,7 @@ describe("When orchestrations <- configuration |> Storage.Orchestrator()",{
     orchestrations[['retrieve.where.id']] |> expect.exist()
   })
   it("then orchestrations contains 'modify' orchestration",{
-    skip_if_not(environment == 'local')
+    skip_if_not(test.environment == 'local')
     # When
     orchestrations <- configurator[["get.config"]]() |> Storage.Orchestrator()
 
@@ -62,7 +62,7 @@ describe("When orchestrations <- configuration |> Storage.Orchestrator()",{
     orchestrations[['modify']] |> expect.exist()
   })
   it("then orchestrations contains 'remove' orchestration",{
-    skip_if_not(environment == 'local')
+    skip_if_not(test.environment == 'local')
     # When
     orchestrations <- configurator[["get.config"]]() |> Storage.Orchestrator()
 
@@ -97,7 +97,7 @@ describe("when query |> orchestrate[['execute.query']]()",{
     query |> orchestrate[['execute.query']]() |> expect.error(expected.error)
   })
   it("then no exception if thrown if orchestration service instantiated with type equal ODBC",{
-    skip_if_not(environment == 'local')
+    skip_if_not(test.environment == 'local')
     # Given
     type <- 'odbc'
     orchestrate <- configurator[["get.config"]]() |> Storage.Orchestrator(type)
@@ -109,7 +109,7 @@ describe("when query |> orchestrate[['execute.query']]()",{
     query |> orchestrate[['execute.query']]() |> expect.no.error()
   })
   it("then no exception is thrown if orchestration service instantiated with no type provided",{
-    skip_if_not(environment == 'local')
+    skip_if_not(test.environment == 'local')
     # Given
     orchestrate <- configurator[["get.config"]]() |> Storage.Orchestrator()
 

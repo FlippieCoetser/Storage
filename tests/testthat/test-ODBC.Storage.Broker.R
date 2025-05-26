@@ -65,7 +65,7 @@ describe("When operations <- configuration |> ODBC.Storage.Broker()",{
 
 describe("when query |> operate[['execute.query']]()",{
   it("then no exception is thrown is query is valid",{
-    skip_if_not(environment == 'local')
+    skip_if_not(test.environment == 'local')
     # Given
     operate <- configurator[["get.config"]]() |> ODBC.Storage.Broker()
 
@@ -75,7 +75,7 @@ describe("when query |> operate[['execute.query']]()",{
     query |> operate[['execute.query']]() |> expect.no.error()
   })
   it("then a data.frame is returned if query is valid",{
-    skip_if_not(environment == 'local')
+    skip_if_not(test.environment == 'local')
     # Given
     operate <- configurator[["get.config"]]() |> ODBC.Storage.Broker()
 
@@ -91,7 +91,7 @@ describe("when query |> operate[['execute.query']]()",{
 
 describe("when operate[['get.tables']]()",{
   it("then a data.frame containing tables names is returned",{
-    skip_if_not(environment == 'local')
+    skip_if_not(test.environment == 'local')
     # Given
     operate <- configurator[["get.config"]]() |> ODBC.Storage.Broker()
 
@@ -105,11 +105,12 @@ describe("when operate[['get.tables']]()",{
 
 describe("When table |> operate[['select']]()",{
   it("then a data.frame is returned if table exist in storage",{
-    skip_if_not(environment == 'local')
+    skip_if_not(test.environment == 'local')
     # Given
     operate <- configurator[["get.config"]]() |> ODBC.Storage.Broker()
 
     # When
+    table <- 'Todo'
     entities <- table |> operate[['select']]() 
     
     # Then
@@ -119,11 +120,12 @@ describe("When table |> operate[['select']]()",{
 
 describe("When table |> operate[['select']](fields)",{
   it("then a data.frame is returned if table exist in storage",{
-    skip_if_not(environment == 'local')
+    skip_if_not(test.environment == 'local')
     # Given
     operate <- configurator[["get.config"]]() |> ODBC.Storage.Broker()
 
     # When
+    table <- 'Todo'
     entities <- table |> operate[['select']](fields) 
     
     # Then
@@ -133,10 +135,11 @@ describe("When table |> operate[['select']](fields)",{
 
 describe("When id |> operate[['select.where.Id']](table)",{
   it("then a data.frame is returned if table exist in storage",{
-    skip_if_not(environment == 'local')
+    skip_if_not(test.environment == 'local')
     # Given
     operate <- configurator[["get.config"]]() |> ODBC.Storage.Broker()
 
+    table <- 'Todo'
     existing.entities <- table |> operate[['select']]()
     existing.entity   <- existing.entities |> tail(1)
 
@@ -152,10 +155,11 @@ describe("When id |> operate[['select.where.Id']](table)",{
 
 describe("When id |> operate[['select.where.Id']](table, fields)",{
   it("then a data.frame is returned if table exist in storage",{
-    skip_if_not(environment == 'local')
+    skip_if_not(test.environment == 'local')
     # Given
     operate <- configurator[["get.config"]]() |> ODBC.Storage.Broker()
 
+    table <- 'Todo'
     existing.entities <- table |> operate[['select']]()
     existing.entity   <- existing.entities |> tail(1)
 

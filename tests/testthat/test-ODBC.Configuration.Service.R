@@ -61,7 +61,7 @@ describe("When service[['open.config.file']]()",{
 
 describe("When configuration <- service[['get.preset.config']]()",{
   it("then configuration is a list",{
-    skip_if_not(environment == 'local')
+    skip_if_not(test.environment == 'local')
     # Given
     broker  <- ODBC.Configuration.Broker()
     service <- broker |> ODBC.Configuration.Service()
@@ -73,7 +73,7 @@ describe("When configuration <- service[['get.preset.config']]()",{
     configuration |> expect.list()
   })
   it("then configuration contains drv",{
-    skip_if_not(environment == 'local')
+    skip_if_not(test.environment == 'local')
     # Given
     broker  <- ODBC.Configuration.Broker()
     service <- broker |> ODBC.Configuration.Service()
@@ -85,7 +85,7 @@ describe("When configuration <- service[['get.preset.config']]()",{
     configuration[['drv']] |> expect.exist()
   })
   it("then configuration contains dsn",{
-    skip_if_not(environment == 'local')
+    skip_if_not(test.environment == 'local')
     # Given
     broker  <- ODBC.Configuration.Broker()
     service <- broker |> ODBC.Configuration.Service()
@@ -97,7 +97,7 @@ describe("When configuration <- service[['get.preset.config']]()",{
     configuration[['dsn']] |> expect.character()
   })
   it("then configuration contains uid",{
-    skip_if_not(environment == 'local')
+    skip_if_not(test.environment == 'local')
     # Given
     broker  <- ODBC.Configuration.Broker()
     service <- broker |> ODBC.Configuration.Service()
@@ -109,7 +109,7 @@ describe("When configuration <- service[['get.preset.config']]()",{
     configuration[['uid']] |> expect.character()
   })
   it("then configuration contains pwd",{
-    skip_if_not(environment == 'local')
+    skip_if_not(test.environment == 'local')
     # Given
     broker  <- ODBC.Configuration.Broker()
     service <- broker |> ODBC.Configuration.Service()
@@ -124,7 +124,7 @@ describe("When configuration <- service[['get.preset.config']]()",{
 
 describe("When configuration <- service[['get.manual.config']]()",{
   it("then configuration is a list",{
-    skip_if_not(environment == 'local')
+    skip_if_not(test.environment == 'local')
     # Given
     broker  <- ODBC.Configuration.Broker()
     service <- broker |> ODBC.Configuration.Service()
@@ -136,7 +136,7 @@ describe("When configuration <- service[['get.manual.config']]()",{
     configuration |> expect.list()
   })
   it("then configuration contains drv",{
-    skip_if_not(environment == 'local')
+    skip_if_not(test.environment == 'local')
     # Given
     broker  <- ODBC.Configuration.Broker()
     service <- broker |> ODBC.Configuration.Service()
@@ -148,7 +148,7 @@ describe("When configuration <- service[['get.manual.config']]()",{
     configuration[['drv']] |> expect.exist()
   })
   it("then configuration contains driver",{
-    skip_if_not(environment == 'local')
+    skip_if_not(test.environment == 'local')
     # Given
     broker  <- ODBC.Configuration.Broker()
     service <- broker |> ODBC.Configuration.Service()
@@ -160,7 +160,7 @@ describe("When configuration <- service[['get.manual.config']]()",{
     configuration[['driver']] |> expect.character()
   })
   it("then configuration contains server",{
-    skip_if_not(environment == 'local')
+    skip_if_not(test.environment == 'local')
     # Given
     broker  <- ODBC.Configuration.Broker()
     service <- broker |> ODBC.Configuration.Service()
@@ -172,7 +172,7 @@ describe("When configuration <- service[['get.manual.config']]()",{
     configuration[['server']] |> expect.character()
   })
   it("then configuration contains database",{
-    skip_if_not(environment == 'local')
+    skip_if_not(test.environment == 'local')
     # Given
     broker  <- ODBC.Configuration.Broker()
     service <- broker |> ODBC.Configuration.Service()
@@ -184,7 +184,7 @@ describe("When configuration <- service[['get.manual.config']]()",{
     configuration[['database']] |> expect.character()
   })
   it("then configuration contains uid",{
-    skip_if_not(environment == 'local')
+    skip_if_not(test.environment == 'local')
     # Given
     broker  <- ODBC.Configuration.Broker()
     service <- broker |> ODBC.Configuration.Service()
@@ -196,7 +196,7 @@ describe("When configuration <- service[['get.manual.config']]()",{
     configuration[['uid']] |> expect.character()
   })
   it("then configuration contains pwd",{
-    skip_if_not(environment == 'local')
+    skip_if_not(test.environment == 'local')
     # Given
     broker  <- ODBC.Configuration.Broker()
     service <- broker |> ODBC.Configuration.Service()

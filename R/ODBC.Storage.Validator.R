@@ -22,7 +22,7 @@ ODBC.Storage.Validator <- \() {
     id |> 
       validators[['is.not.NULL']]('id') |>
       validators[['is.character']]()    |>
-      validators[['is.UUID']]()
+      validators[['is.UUID']](id)
   }
   validators[['is.existing.table']] <- \(table, name = NULL) {
     table |> validators[['has.one.row']]() |> 

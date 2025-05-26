@@ -51,7 +51,7 @@ describe("When operations <- storage |> Todo.Broker()",{
 
 describe("When todo |> operations[['insert']]()",{
   it("then todo is inserted into odbc.storage",{
-    skip_if_not(environment == 'local')
+    skip_if_not(test.environment == 'local')
     # Given
     storage    <- configurator[["get.config"]]() |> Storage.Orchestrator('odbc')
     operations <- storage |> Todo.Broker()
@@ -95,7 +95,7 @@ describe("When todo |> operations[['insert']]()",{
 
 describe("When operations[['select']]()",{
   it("then all todos in odbc.storage is returned",{
-    skip_if_not(environment == 'local')
+    skip_if_not(test.environment == 'local')
     # Given
     storage    <- configurator[["get.config"]]() |> Storage.Orchestrator('odbc')
     operations <- storage |> Todo.Broker()
@@ -127,7 +127,7 @@ describe("When operations[['select']]()",{
 
 describe("When id |> operations[['select.where.Id']]()",{
   it("then todo with id equal id is returned from odbc.storage",{
-    skip_if_not(environment == 'local')
+    skip_if_not(test.environment == 'local')
     # Given
     storage    <- configurator[["get.config"]]() |> Storage.Orchestrator('odbc')
     operations <- storage |> Todo.Broker()
@@ -167,7 +167,7 @@ describe("When id |> operations[['select.where.Id']]()",{
 
 describe("When todo |> operations[['update']]()",{
   it("then todo in odbc.storage is updated",{
-    skip_if_not(environment == 'local')
+    skip_if_not(test.environment == 'local')
     # Given
     storage    <- configurator[["get.config"]]() |> Storage.Orchestrator('odbc')
     operations <- storage |> Todo.Broker()
@@ -223,7 +223,7 @@ describe("When todo |> operations[['update']]()",{
 
 describe("When id |> operations[['delete']]()",{
   it("then todo with id are removed from odbc.storage",{
-    skip_if_not(environment == 'local')
+    skip_if_not(test.environment == 'local')
     # Given
     storage    <- configurator[["get.config"]]() |> Storage.Orchestrator('odbc')
     operations <- storage |> Todo.Broker()
